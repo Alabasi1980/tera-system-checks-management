@@ -129,6 +129,7 @@
 | TASK-0005 | Closed ✅ | المراجعة الأمنية المستقلة لـ TASK-0004 — SecurityAgent: PASS ✅. لا Blocker. |
 | TASK-0006 | Closed ✅ | تحضير مواصفات التنفيذ — workflow-rules.md + screen-spec-s03.md |
 | TASK-0007 | Closed ✅ | SEC fixes (001+002) + شاشة إدارة البنوك S03 |
+| TASK-0008 | Closed ✅ | شاشة إدارة الجهات S04 — Parties module (actions.ts + page.tsx) |
 | ISSUE-0003 | Resolved ✅ | Secret exposure cleaned |
 | ISSUE-0004 | Resolved ✅ | SEC-001 User Enumeration — fixed in TASK-0007 |
 | ISSUE-0005 | Resolved ✅ | SEC-002 Logout cookie — fixed in TASK-0007 |
@@ -138,7 +139,7 @@
 | ISSUE-0005 (SEC-002) | Resolved ✅ | تم إصلاحه — خصائص Cookie للـ Logout |
 | ISSUE-0003 (Secret Exposure) | Resolved ✅ | تم تنظيف التسرب في prisma.config.ts + تحديث قواعد المنظومة — راجع ISSUES_AND_GAPS.md |
 | DEC-0004 (Secret Handling Rules) | Active ✅ | قواعد إلزامية جديدة للأسرار في Pre-Execution Gate و Post-Execution Review Gate و handbacks |
-| DEC-0011 (requireAdmin Defense in Depth) | Active ✅ | `requireAdmin()` مضافة في `lib/auth.ts`. جميع Banks Server Actions تتحقق من صلاحية ADMIN قبل التنفيذ. النمط سيطبق على كل الـ Server Actions الجديدة (Parties, Users, Checks). |
+| DEC-0011 (requireAdmin Defense in Depth) | Active ✅ | `requireAdmin()` مضافة في `lib/auth.ts`. جميع Banks و Parties Server Actions تتحقق من صلاحية ADMIN قبل التنفيذ. النمط سيطبق على Users و Checks عند بنائها. |
 
 ---
 
@@ -152,6 +153,7 @@ TASK-0001 (Scaffold) — **مغلق** ✅.
 TASK-0002 (Prisma Data Models) — **مغلق** ✅.
 TASK-0003 (Database + Migration) — **مغلق** ✅.
 TASK-0004 (Auth + Roles) — **مغلق** ✅.
+TASK-0008 (Parties S04) — **مغلق** ✅.
 ⚠️ **Security Remediation**: TASK-0003 كشف عن تسرب كلمة مرور حقيقية في fallback داخل `prisma.config.ts`. تم التنظيف وتحديث قواعد المنظومة بالكامل. راجع ISSUE-0003 و DEC-0004.
 **إلزامية:** قبل أي TASK جديدة، يجب مراجعة PROJECT_STATE.md و PROJECT_RULES.md.
 
@@ -160,7 +162,7 @@ TASK-0004 (Auth + Roles) — **مغلق** ✅.
 ## 10. آخر تحديث
 
 | البند | القيمة |
-|---|---|
+|---|---|---|
 | Updated By | Tera Agent / Project Owner |
-| Update Reason | TASK-0007 closed ✅. SEC fixes applied. Banks screen S03 built. Enhanced Post-Execution Review Gate passed ✅. Defense-in-depth upgrade: `requireAdmin()` added to all Banks Server Actions (create/update/delete/list). Pattern set for all future actions. |
-| Next Step | TASK-0008 — شاشة إدارة الجهات (S04) — EngineeringAgent أولاً (actions.ts), ثم FrontendAgent (page.tsx) |
+| Update Reason | TASK-0008 closed ✅. Parties screen S04 built (actions.ts + page.tsx). Exact same pattern as Banks S03. requireAdmin() pattern applied. Build PASS. |
+| Next Step | الرجوع للصفحة الرئيسية — إضافة رابط `/parties` في الشريط الجانبي أو الصفحة الرئيسية بعد اعتماد المستخدم |

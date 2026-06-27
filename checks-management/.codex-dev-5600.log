@@ -1,0 +1,24 @@
+
+> checks-management@0.1.0 dev
+> next dev --port 5600
+
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://localhost:5600
+- Network:       http://192.168.1.103:5600
+- Environments: .env
+✓ Ready in 1643ms
+Creating turbopack project {
+  dir: 'C:\\Users\\Fares\\Downloads\\Test App\\checks-management',
+  testMode: true
+}
+
+ GET / 200 in 1390ms (next.js: 572ms, proxy.ts: 310ms, application-code: 509ms)
+ GET / 200 in 235ms (next.js: 18ms, proxy.ts: 62ms, application-code: 155ms)
+ GET /login?redirect=%2F 200 in 401ms (next.js: 158ms, proxy.ts: 11ms, application-code: 232ms)
+ GET /banks 200 in 1763ms (next.js: 1555ms, proxy.ts: 23ms, application-code: 184ms)
+ POST /banks 200 in 704ms (next.js: 19ms, proxy.ts: 19ms, application-code: 665ms)
+  └─ ƒ listBanks() in 387ms app/banks/actions.ts
+ GET /layout 404 in 1015ms (next.js: 845ms, proxy.ts: 25ms, application-code: 145ms)
+ GET /layout 404 in 651ms (next.js: 254ms, proxy.ts: 173ms, application-code: 224ms)
+ GET /layout 404 in 536ms (next.js: 84ms, proxy.ts: 23ms, application-code: 430ms)
+ GET /layout 404 in 769ms (next.js: 221ms, proxy.ts: 20ms, application-code: 528ms)

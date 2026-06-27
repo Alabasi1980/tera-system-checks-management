@@ -25,8 +25,8 @@ For any new session in this project:
 | Size | Small MVP |
 | Runtime | OpenCode |
 | Approved Tech | Next.js + TypeScript + PostgreSQL + Prisma |
-| Current Phase | Phase 4 active - Banks Screen S03 complete |
-| Next Task | `TASK-0008` - Parties Screen (S04) |
+| Current Phase | Phase 4 active - Parties Screen S04 complete |
+| Next Task | Main page integration — add `/parties` and `/banks` nav links |
 | Current Lead Agent | `Tera Agent` |
 | Expected Execution Agents | `EngineeringAgent` + `FrontendAgent` |
 
@@ -39,6 +39,7 @@ For any new session in this project:
 - `TASK-0005` - SecurityAgent independent security review of TASK-0004
 - `TASK-0006` - Preparation: workflow-rules.md + screen-spec-s03.md
 - `TASK-0007` - SEC-001 + SEC-002 fixes + Banks Screen S03
+- `TASK-0008` - Parties Screen S04 — actions.ts + page.tsx
 
 ## Recent System Changes
 
