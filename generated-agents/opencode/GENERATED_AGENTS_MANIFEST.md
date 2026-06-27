@@ -64,15 +64,17 @@
 | سبب التوليد | مطلوب قبل التنفيذ لضبط المهام، النتائج، المراجعات، المشاكل، الفجوات، والقرارات داخل `project-control/` |
 | الملفات المسموح بكتابتها | `project-control/TASK_REGISTRY.md`, `project-control/PROJECT_ACTIVITY_LOG.md`, `project-control/ISSUES_AND_GAPS.md`, `project-control/DECISIONS_LOG.md`, `project-control/tasks/*.md` |
 
-### 6. EngineeringAgent
+### 6. EngineeringAgent (مُحدّث — بعد التقسيم)
 
 | البند | القيمة |
 |---|---|
 | الملف | `generated-agents/opencode/EngineeringAgent.md` |
 | المعرف | `ENGINEERING_AGENT` |
 | الفئة | أساسي |
-| سبب التوليد | تم توليده عند بدء مرحلة التنفيذ البرمجي، لتنفيذ أول مهمة: Scaffold مشروع Next.js + ربط PostgreSQL + إعداد Prisma |
-| الملفات المسموح بكتابتها | ملفات التطبيق حسب التفويض (تحدد في TASK-ID). لا يكتب في `project-preparation/`, `tera-system/`, `project-control/`, `generated-agents/` |
+| الدور بعد التقسيم | **Backend + Logic فقط** — Server Actions, Prisma, Business Logic, Auth, Middleware, DB, Config |
+| سبب التوليد | تم توليده عند بدء مرحلة التنفيذ البرمجي. لاحقًا تم تحديثه (2026-06-27) ليكون مسؤولاً عن الخلفية والمنطق فقط، وإزالة مسؤولية UI/Styling لصالح FrontendAgent. |
+| الملفات المسموح بكتابتها | `actions.ts`, `lib/`, `prisma/`, `middleware.ts`, `.ts` files (وليس `.tsx`). **ممنوع: `page.tsx`, `.css`, `.tsx` files** |
+| يعمل مع | FrontendAgent — EngineeringAgent ينتج actions.ts، FrontendAgent يبني page.tsx فوقه |
 
 ### 7. SecurityAgent
 
@@ -86,33 +88,86 @@
 
 ---
 
+## العملاء الذين تم توليدهم في الدفعة الثانية (2026-06-27)
+
+### 8. QAAndAcceptanceAgent
+
+| البند | القيمة |
+|---|---|
+| الملف | `generated-agents/opencode/QAAndAcceptanceAgent.md` |
+| المعرف | `QA_ACCEPTANCE_AGENT` |
+| الفئة | أساسي |
+| سبب التوليد | ضروري لمراجعة شاشة الشيكات (S02) الأكثر تعقيدًا، وللاختبارات المستقلة بعد كل مهمة تنفيذية، وللتسليم النهائي. يسمح بتوزيع العمل: بينما EngineeringAgent ينفذ شاشة جديدة، يراجع QAAndAcceptanceAgent الشاشة السابقة. |
+| الملفات المسموح بكتابتها | لا يكتب افتراضيًا. يسلّم تقرير مراجعة إلى Tera فقط. قد يحدّث `project-preparation/10_TESTING_AND_ACCEPTANCE.md` بتفويض صريح. |
+
+### 9. DocumentationHandoverAgent
+
+| البند | القيمة |
+|---|---|
+| الملف | `generated-agents/opencode/DocumentationHandoverAgent.md` |
+| المعرف | `DOC_HANDOVER_AGENT` |
+| الفئة | أساسي |
+| سبب التوليد | ضروري لتجهيز مستندات التسليم، دليل المستخدم، وتعليمات التشغيل قبل التسليم النهائي. يمكن العمل بالتوازي مع EngineeringAgent في المراحل المتأخرة. |
+| الملفات المسموح بكتابتها | `project-preparation/11_DELIVERY_AND_HANDOVER.md`, `project-preparation/30_USER_MANUAL_DRAFT.md`, `project-preparation/31_MAINTENANCE_AND_SUPPORT.md` (بتفويض صريح) |
+
+### 10. ReportingAnalyticsAgent
+
+| البند | القيمة |
+|---|---|
+| الملف | `generated-agents/opencode/ReportingAnalyticsAgent.md` |
+| المعرف | `REPORTING_ANALYTICS_AGENT` |
+| الفئة | مشروط |
+| سبب التوليد | مفيد لتصميم تقرير كشف الشيكات وتحديد هيكله (فلاتر، أعمدة، صلاحيات) قبل أن ينفذه EngineeringAgent. يتيح توزيع العمل: ReportingAnalyticsAgent يصمم التقرير بالتوازي مع مهام EngineeringAgent الأخرى. |
+| الملفات المسموح بكتابتها | `project-preparation/13_REPORTS_AND_DASHBOARDS.md`, `project-preparation/18_IMPORT_EXPORT_DATA.md` (بتفويض صريح) |
+
+---
+
+## العملاء الذين تم توليدهم في الدفعة الثالثة — تقسيم Backend/UI (2026-06-27)
+
+### 11. FrontendAgent (جديد — واجهة المستخدم)
+
+| البند | القيمة |
+|---|---|
+| الملف | `generated-agents/opencode/FrontendAgent.md` |
+| المعرف | `FRONTEND_AGENT` |
+| الفئة | أساسي |
+| سبب التوليد | تقسيم مسؤولية EngineeringAgent إلى عميلين: EngineeringAgent (Backend/Logic) + FrontendAgent (UI/Styling). FrontendAgent مسؤول عن كل page.tsx، CSS، RTL، Modal، Toast، واتساق التصميم عبر جميع الشاشات وفق `28_UI_UX_GUIDELINES.md`. |
+| الملفات المسموح بكتابتها | `app/*/page.tsx`, `app/*/layout.tsx`, `app/globals.css`, `.css` / `.module.css` files. **ممنوع: `actions.ts`, `lib/`, `prisma/`, `middleware.ts`** |
+| يعمل مع | EngineeringAgent — EngineeringAgent ينتج actions.ts (Server Actions + Business Logic)، FrontendAgent يبني page.tsx فوقه ويربط الواجهة بالخلفية |
+| متى يستخدم | بعد أن ينتج EngineeringAgent ملف actions.ts لشاشة معينة، أو عند تعديل/توحيد واجهة قائمة |
+
+---
+
 ## العملاء الذين لم يتم توليدهم — مع السبب
 
 | العميل | سبب عدم التوليد الآن |
 |---|---|
-| `SolutionArchitectureAgent` | لم يتم توليده؛ ملف `08_TECHNICAL_ARCHITECTURE.md` موجود وتم تثبيت القرار التقني، ولا حاجة لتفعيله الآن |
-| `EngineeringAgent` | ✅ تم توليده — انظر أعلاه |
-| `QAAndAcceptanceAgent` | لم يتم توليده؛ ملف `10_TESTING_AND_ACCEPTANCE.md` موجود، ويتم توليده لاحقًا عند بدء مراجعات الاختبار الفعلية |
-| `DocumentationHandoverAgent` | مطلوب قبل التسليم النهائي فقط |
-| `SecurityAgent` | ✅ تم تفعيله لاحقًا داخل `.opencode/agents/SecurityAgent.md` بعد TASK-0004 بسبب Auth/JWT/Secrets/Middleware وقرار DEC-0006 |
-| `IntegrationAgent` | لا يوجد تكاملات خارجية في النسخة الأولى |
-| `DevOpsDeploymentAgent` | لا يوجد نشر فعلي في هذه المرحلة |
-| `PerformanceAgent` | تطبيق صغير — لا متطلبات أداء خاصة |
-| `ComplianceAgent` | لا متطلبات قانونية أو تنظيمية |
-| `ReportingAnalyticsAgent` | التقارير بسيطة (كشف واحد) — يمكن تغطيتها ضمن UIUX |
-| `MaintenanceMigrationAgent` | لا يوجد نظام قائم أو ترحيل بيانات |
+| `IntegrationAgent` | لا يوجد تكاملات خارجية في النسخة الأولى من MVP. |
+| `DevOpsDeploymentAgent` | لا يوجد نشر فعلي أو CI/CD في هذه المرحلة. |
+| `PerformanceAgent` | تطبيق صغير — لا متطلبات أداء خاصة. |
+| `ComplianceAgent` | لا متطلبات قانونية أو تنظيمية. |
+| `MaintenanceMigrationAgent` | لا يوجد نظام قائم أو ترحيل بيانات. |
+| `SolutionArchitectureAgent` | ملف `08_TECHNICAL_ARCHITECTURE.md` موجود والقرارات التقنية مستقرة. لا حاجة لتفعيله الآن. |
+
+✅ **جميع العملاء التاليين تم توليدهم مسبقًا:**  
+`RequirementsScopeAgent`, `BusinessWorkflowAgent`, `DataDesignAgent`, `UIUXStructureAgent`, `ProjectControlAgent`, `EngineeringAgent`, `SecurityAgent` (مفعّل), `QAAndAcceptanceAgent`, `DocumentationHandoverAgent`, `ReportingAnalyticsAgent`, `FrontendAgent`
+
+✅ **العملاء المثبتون فعليًا داخل `.opencode/agents/` بعد DEC-0009:**  
+`tera`, `EngineeringAgent`, `FrontendAgent`, `ProjectControlAgent`, `SecurityAgent`, `QAAndAcceptanceAgent`, `BusinessWorkflowAgent`, `UIUXStructureAgent`, `ReportingAnalyticsAgent`, `DocumentationHandoverAgent`
+
+⏸️ **مولدون لكن غير مثبتين حاليًا:**  
+`RequirementsScopeAgent`, `DataDesignAgent` — لا توجد حاجة نشطة الآن لتغيير النطاق أو إعادة تصميم البيانات.
 
 ---
 
 ## ملاحظات إضافية
 
-- تم توليد العملاء التحليلية و`ProjectControlAgent` في مجلد `generated-agents/opencode/` — صيغة الملفات مناسبة لبيئة OpenCode.
-- العملاء الحاليون داخل `generated-agents/opencode/` هم **عملاء مولدون للمراجعة والتجهيز فقط**، وليسوا عملاء OpenCode فعّالين بعد.
-- لا يصبح هؤلاء العملاء فعّالين داخل OpenCode إلا بعد مراجعتهم واعتمادهم ثم نسخهم إلى `.opencode/agents/`.
-- لا يتم نقل أي عميل إلى `.opencode/agents/` إلا عند وجود حاجة فعلية لاستخدامه.
-- يمكن استخدام هذه الملفات كمرجع لتفويض المهام لكل عميل فرعي لاحقًا، لكنها لا تعمل كعملاء نشطين من هذا المجلد.
-- قبل التنفيذ البرمجي يجب توليد أو تفعيل `EngineeringAgent` فقط، مع تفعيل `ProjectControlAgent` عند الحاجة لتحديث سجلات `project-control/`.
-- العملاء الآخرون مثل `QAAndAcceptanceAgent` و`DocumentationHandoverAgent` يؤجلون إلى مراحلهم الفعلية.
+- تم توليد العملاء في مجلد `generated-agents/opencode/` كنسخ مرجعية/تحضيرية مناسبة لـ OpenCode.
+- بعد DEC-0009، تم تثبيت مجموعة مختارة داخل `.opencode/agents/` لاستخدامها مباشرة في المهام القادمة.
+- لا يعني وجود نسخة في `generated-agents/opencode/` أنها نشطة تلقائيًا؛ النسخة النشطة هي الموجودة داخل `.opencode/agents/`.
+- لا يتم نقل أي عميل إضافي إلى `.opencode/agents/` إلا عند وجود حاجة فعلية لاستخدامه.
+- يمكن استخدام ملفات `generated-agents/opencode/` كمرجع لتحديث أو إعادة توليد العملاء النشطين لاحقًا.
+- `RequirementsScopeAgent` و`DataDesignAgent` بقيا مولدين فقط لأن النطاق ونموذج البيانات مستقران حاليًا.
 - لا يجوز لأي عميل فرعي تعديل الملفات المملوكة لعميل آخر دون توجيه صريح من Tera Agent.
 - قبل نقل أي عميل إلى `.opencode/agents/` يجب تضييق `Allowed Sources` و `Allowed Write Targets` حسب المرحلة والمهمة.
 - عملاء التحليل لا يقرأون كود التطبيق إلا بتصريح صريح من Tera Agent.
@@ -124,3 +179,14 @@
 - `ProjectControlAgent` لا يقرر ولا ينفذ ولا يغلق المهام بنفسه؛ دوره توثيق السجلات تحت قرار Tera فقط.
 - كل تسليم من عميل فرعي يجب أن يوثق داخل `project-control/tasks/[TASK-ID].md` قبل تحويل المهمة إلى `Accepted` أو `Closed`.
 - إذا لم يكن العميل الفرعي مفوضًا بالكتابة داخل `project-control/`، فيجب على Tera أو `ProjectControlAgent` تسجيل التسليم فور استلامه.
+
+### Unified Activation Policy
+
+- Tera identifies:
+  - sub-agents needed now
+  - sub-agents likely needed later
+- All new sub-agents start as `Generated Draft` inside `generated-agents/opencode/`.
+- A generated sub-agent is not active until it is copied into `.opencode/agents/`.
+- Before activation, Tera must narrow `Allowed Sources`, narrow `Allowed Write Targets`, confirm non-overlap with current active agents, and record the activation reason.
+- Tera may generate an additional sub-agent later whenever a missing specialization, review bottleneck, or useful parallelization opportunity appears.
+- After copying a newly activated sub-agent into `.opencode/agents/`, Tera must ask the user to restart the current environment so the activation becomes effective.

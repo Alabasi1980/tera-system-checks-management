@@ -149,6 +149,32 @@ The manifest must explain:
 
 Do not generate all sub-agents by default.
 
+Generated sub-agents follow this lifecycle:
+
+1. `Generated Draft`
+   - lives in `generated-agents/opencode/`
+2. `Activated`
+   - copied into `.opencode/agents/` only after Tera specializes it for the current phase and task pattern
+3. `Inactive`
+   - remains only as a generated draft or is left unused until a real need appears
+
+Important activation rule:
+
+```text
+Do not assume that only already-active agents are available.
+```
+
+If Tera detects a missing specialization, review bottleneck, or useful parallelization opportunity, it may generate an additional sub-agent later.
+
+Before moving any generated sub-agent into `.opencode/agents/`, Tera must:
+
+- narrow `Allowed Sources`
+- narrow `Allowed Write Targets`
+- confirm non-overlap with the current active agents
+- record why this agent is being activated now
+
+After copying a newly activated sub-agent into `.opencode/agents/`, Tera must ask the user to restart the current OpenCode environment so the agent becomes active correctly.
+
 ---
 
 ## 4. First Action in Any New Project
@@ -181,14 +207,16 @@ project-preparation/TERA_PROJECT_DECISION.md
 project-preparation/
 ```
 
-7. Decide whether sub-agents are needed now.
-8. If needed, generate only the required sub-agents inside:
+7. Decide which sub-agents are needed now and which are likely needed later.
+8. If needed, generate only the required draft sub-agents inside:
 
 ```text
 generated-agents/opencode/
 ```
 
-9. Wait for user approval before application implementation.
+9. Activate inside `.opencode/agents/` only the agents that are actually needed for the current approved work.
+10. If a new activation happens, ask the user to restart the current environment.
+11. Wait for user approval before application implementation.
 
 ---
 
@@ -200,6 +228,7 @@ You must not:
 * Modify files inside `tera-system/`.
 * Create all preparation files automatically.
 * Create all sub-agents automatically.
+* Assume the currently active agent set is the only possible agent set.
 * Add features not requested by the user.
 * Expand project scope without an explicit decision.
 * Ignore `project-preparation/PROJECT_RULES.md` when it exists.

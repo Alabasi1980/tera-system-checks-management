@@ -38,8 +38,15 @@ For any new session in this project:
 - `TASK-0004` — Authentication + Roles (login, JWT, middleware, seed)
 - `TASK-0005` — SecurityAgent independent security review of TASK-0004 (PASS ✅, Closed)
 - `TASK-0006` — Preparation: workflow-rules.md + screen-spec-s03.md (Closed ✅)
-- `ISSUE-0004` — SEC-001 (User Enumeration) — Resolved ✅ in TASK-0007
-- `ISSUE-0005` — SEC-002 (Logout cookie flags) — Resolved ✅ in TASK-0007
+- `TASK-0007` — SEC-001 + SEC-002 fixes + Banks Screen S03 (Closed ✅)
+- `ISSUE-0004` — SEC-001 (User Enumeration) — Resolved ✅
+- `ISSUE-0005` — SEC-002 (Logout cookie flags) — Resolved ✅
+
+## Recent System Changes
+
+- `2026-06-27`: **EngineeringAgent refactored** — split into EngineeringAgent (Backend/Logic) + FrontendAgent (UI/Styling)
+- `2026-06-27`: **FrontendAgent created** — responsible for all page.tsx, components, CSS, RTL, enforcing 28_UI_UX_GUIDELINES.md
+- `2026-06-27`: **QAAndAcceptanceAgent, DocumentationHandoverAgent, ReportingAnalyticsAgent** — pre-generated for future phases
 
 ## Active Rules You Must Not Miss
 
@@ -51,6 +58,9 @@ For any new session in this project:
 - Post-execution review must also inspect the core `project-control/` files, not only application code.
 - If a secret appears in any task file, log, report, or control record, the task cannot PASS review.
 - After each implementation task, decide whether `ProjectControlAgent`, `SecurityAgent`, or `QAAndAcceptanceAgent` must perform an independent follow-up review.
+- Do not assume that only the currently active sub-agents are available; Tera may generate an additional agent later when needed.
+- New sub-agents start in `generated-agents/opencode/` and become active only after specialization plus copy into `.opencode/agents/`.
+- After activating a new sub-agent in `.opencode/agents/`, Tera must ask for environment restart.
 - Project-control IDs must stay unique and sequential.
 - Use only the smallest relevant context for the current task.
 
@@ -60,13 +70,17 @@ For any new session in this project:
 - `DEC-0005` — `TERA_ACTIVE_CONTEXT.md` is now the first startup file for ongoing sessions.
 - `DEC-0006` — SecurityAgent independent review required before next phase ✅ (fulfilled — TASK-0005 complete).
 - `DEC-0007` — Post-execution review must inspect core `project-control` files and include an explicit independent-review decision when relevant.
+- `DEC-0008` — EngineeringAgent split into Backend/Logic; FrontendAgent owns UI/Styling.
+- `DEC-0009` — Selected generated agents are now active in `.opencode/agents/` for faster delegation.
+- `DEC-0010` — Unified sub-agent lifecycle: needed now vs likely later, draft first, activate only after specialization, restart after activation.
 - `ISSUE-0003` — Secret exposure incident from TASK-0003 was resolved; do not reintroduce secrets into docs or config fallbacks.
 
 ## Available Sub-Agents
 
 | Agent | Use |
 |---|---|
-| `EngineeringAgent` | Implementation tasks inside `checks-management/` after gate approval |
+| `EngineeringAgent` | Backend/Logic: actions.ts, Prisma, Auth, Middleware, DB, Config (NOT UI) |
+| `FrontendAgent` | UI/Styling: page.tsx, components, CSS, RTL, enforcing 28_UI_UX_GUIDELINES.md |
 | `ProjectControlAgent` | Updating task/log/decision/issue records under Tera direction |
 | `SecurityAgent` | Independent follow-up review for Auth, Secrets, Permissions, Middleware, and Config tasks |
 | `QAAndAcceptanceAgent` | Independent follow-up review for UI, Workflow, and acceptance checks |
@@ -74,6 +88,12 @@ For any new session in this project:
 | `BusinessWorkflowAgent` | Workflow review only when business process changes |
 | `DataDesignAgent` | Data review only when schema/business data design changes |
 | `UIUXStructureAgent` | UI structure review only when screen/design scope changes |
+| `DocumentationHandoverAgent` | Delivery documentation, user manual, deployment notes |
+| `ReportingAnalyticsAgent` | Report specifications (e.g., check register/kashf) before EngineeringAgent implements |
+
+Activation note:
+- The list above shows the currently active agents only.
+- Tera may activate additional agents later if a real need appears.
 
 ## Read Next Only If Needed
 

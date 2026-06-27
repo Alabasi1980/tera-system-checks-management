@@ -37,6 +37,7 @@
 | Readiness Review مكتمل — المشروع جاهز للتنفيذ | `tera-system/TeraAgent.md` | مكتمل |
 | EngineeringAgent مولّد في `generated-agents/opencode/EngineeringAgent.md` | أمر المستخدم | مكتمل |
 | لا يتم نقل العملاء الفرعيين إلى `.opencode/agents/` إلا عند الحاجة | `tera-system/TeraAgent.md` | معتمد |
+| دورة العملاء الفرعيين الموحدة: `Generated Draft` ثم `Activated` ثم `Inactive` عند الحاجة | `tera-system/TeraAgent.md` / `.opencode/agents/tera.md` | معتمد |
 | `tera-system/` مرجع نظامي read-only أثناء التنفيذ | `.opencode/agents/tera.md` | معتمد |
 
 ---
@@ -66,14 +67,18 @@
 | العميل | الحالة | ملاحظة |
 |---|---|---|
 | `Tera Agent` | مفعل داخل `.opencode/agents/tera.md` | Primary Agent |
-| `EngineeringAgent` | مولّد داخل `generated-agents/opencode/EngineeringAgent.md` | غير مفعل في `.opencode/agents/` — يُستخدم في المهام البرمجية عند تفويض Tera |
+| `EngineeringAgent` | مفعل داخل `.opencode/agents/EngineeringAgent.md` | **مُحدّث** — Backend/Logic فقط (actions.ts, Prisma, Auth, Middleware, Config). لا يكتب UI. |
+| `FrontendAgent` | مفعل داخل `.opencode/agents/FrontendAgent.md` | **جديد** — واجهة المستخدم (page.tsx, CSS, RTL, Modal, Toast). يعمل مع EngineeringAgent. |
 | `RequirementsScopeAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للمراجعة والتجهيز فقط |
-| `BusinessWorkflowAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للمراجعة والتجهيز فقط |
+| `BusinessWorkflowAgent` | مفعل داخل `.opencode/agents/BusinessWorkflowAgent.md` | جاهز لمراجعة Workflow الشيكات قبل S02 |
 | `DataDesignAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للمراجعة والتجهيز فقط |
-| `UIUXStructureAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للمراجعة والتجهيز فقط |
-| `ProjectControlAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للتحديثات الإدارية لـ `project-control/` |
+| `UIUXStructureAgent` | مفعل داخل `.opencode/agents/UIUXStructureAgent.md` | جاهز لتدقيق مواصفات الشاشات قبل FrontendAgent |
+| `ProjectControlAgent` | مفعل داخل `.opencode/agents/ProjectControlAgent.md` | جاهز للتحديثات الإدارية لـ `project-control/` |
 | `SecurityAgent` | مفعل داخل `.opencode/agents/SecurityAgent.md` | **مفعّل** — أنجز TASK-0005 (Security Review) بنجاح ✅ |
-| عملاء آخرون | غير مولدين | سيولّدون عند الحاجة في مراحلهم |
+| `QAAndAcceptanceAgent` | مفعل داخل `.opencode/agents/QAAndAcceptanceAgent.md` | جاهز للمراجعة المستقلة بعد المهام التنفيذية، خاصة شاشة الشيكات S02 |
+| `DocumentationHandoverAgent` | مفعل داخل `.opencode/agents/DocumentationHandoverAgent.md` | جاهز للتسليم والتوثيق النهائي |
+| `ReportingAnalyticsAgent` | مفعل داخل `.opencode/agents/ReportingAnalyticsAgent.md` | جاهز لتصميم تقرير كشف الشيكات |
+| عملاء آخرون | غير مولدين | `IntegrationAgent`, `DevOpsDeploymentAgent`, `PerformanceAgent`, `ComplianceAgent`, `MaintenanceMigrationAgent`, `SolutionArchitectureAgent` — لا حاجة حالياً |
 
 ---
 
@@ -154,5 +159,5 @@ TASK-0004 (Auth + Roles) — **مغلق** ✅.
 | البند | القيمة |
 |---|---|
 | Updated By | Tera Agent / Project Owner |
-| Update Reason | TASK-0007 complete. SEC fixes applied. Banks screen S03 built. Issues 0004/0005 resolved. | |
+| Update Reason | TASK-0007 complete. SEC fixes applied. Banks screen S03 built. Issues 0004/0005 resolved. Enhanced Post-Execution Review Gate passed ✅. Selected generated agents activated inside `.opencode/agents/`; EngineeringAgent active prompt replaced with Backend/Logic-only version; FrontendAgent and review/support agents active. | |
 | Next Step | TASK-0008 — شاشة إدارة الجهات (S04) — EngineeringAgent |
