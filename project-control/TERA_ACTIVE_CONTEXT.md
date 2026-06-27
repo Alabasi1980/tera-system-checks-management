@@ -25,8 +25,8 @@ For any new session in this project:
 | Size | Small MVP |
 | Runtime | OpenCode |
 | Approved Tech | Next.js + TypeScript + PostgreSQL + Prisma |
-| Current Phase | Phase 3 (Authentication) complete; ready for Phase 4 (Checks Screen) |
-| Next Task | `TASK-0005` — Checks Management Screen |
+| Current Phase | Phase 3 complete ✅ (Auth + Security Review); ready for Phase 4 (Checks Screen) |
+| Next Task | `TASK-0006` — Checks Management Screen (Phase 4) |
 | Current Lead Agent | `Tera Agent` |
 | Expected Execution Agent | `EngineeringAgent` |
 
@@ -36,6 +36,9 @@ For any new session in this project:
 - `TASK-0002` — Prisma data models
 - `TASK-0003` — Local database creation + first Prisma migration
 - `TASK-0004` — Authentication + Roles (login, JWT, middleware, seed)
+- `TASK-0005` — SecurityAgent independent security review of TASK-0004 (PASS ✅, Closed)
+- `ISSUE-0004` — SEC-001 (User Enumeration) planned fix within TASK-0006
+- `ISSUE-0005` — SEC-002 (Logout cookie flags) planned fix within TASK-0006
 
 ## Active Rules You Must Not Miss
 
@@ -54,7 +57,8 @@ For any new session in this project:
 
 - `DEC-0004` — Secret handling and redaction rules are active across the system.
 - `DEC-0005` — `TERA_ACTIVE_CONTEXT.md` is now the first startup file for ongoing sessions.
-- `DEC-0006` — Post-execution review must inspect core `project-control` files and include an explicit independent-review decision when relevant.
+- `DEC-0006` — SecurityAgent independent review required before next phase ✅ (fulfilled — TASK-0005 complete).
+- `DEC-0007` — Post-execution review must inspect core `project-control` files and include an explicit independent-review decision when relevant.
 - `ISSUE-0003` — Secret exposure incident from TASK-0003 was resolved; do not reintroduce secrets into docs or config fallbacks.
 
 ## Available Sub-Agents
@@ -72,7 +76,7 @@ For any new session in this project:
 
 ## Read Next Only If Needed
 
-- Current task details: `project-control/tasks/TASK-0004.md`
+- Current task details: `project-control/tasks/TASK-0005.md` (Security Review) or next task `project-control/tasks/TASK-0006.md`
 - Compact official project memory: `project-control/PROJECT_STATE.md`
 - Active rules: `project-preparation/PROJECT_RULES.md`
 - Plan details: `project-preparation/09_IMPLEMENTATION_PLAN.md`

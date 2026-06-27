@@ -31,4 +31,5 @@ Closed
 | TASK-0002 | إنشاء Prisma Data Models (users, banks, parties, checks) | EngineeringAgent | Phase 2 — Data Model | Closed | `project-control/tasks/TASK-0002.md` | 2026-06-27 |
 | TASK-0003 | إنشاء قاعدة البيانات checks_management + أول Migration | EngineeringAgent | Phase 3 — Database Setup | Closed | `project-control/tasks/TASK-0003.md` | 2026-06-27 |
 | TASK-0004 | إعداد المصادقة والصلاحيات (Authentication + Roles) | EngineeringAgent | Phase 3 — Authentication | Closed | `project-control/tasks/TASK-0004.md` | 2026-06-27 |
+| TASK-0005 | المراجعة الأمنية المستقلة لـ TASK-0004 (Authentication + Roles) | SecurityAgent | Phase 3 — Security Review | Closed | `project-control/tasks/TASK-0005.md` | 2026-06-27 |
 

@@ -19,7 +19,7 @@
 | اسم المشروع | تطبيق إدارة الشيكات |
 | نوع المشروع | تطبيق ويب مستقل |
 | حجم المشروع | صغير / MVP |
-| المرحلة الحالية | Phase 3 (Authentication) مكتمل ✅ — TASK-0004 (Login + JWT + Middleware + Roles + Seed) مغلق. مستعد للمرحلة 4. |
+| المرحلة الحالية | Phase 3 مكتمل ✅ — TASK-0004 (Auth) + TASK-0005 (Security Review). SecurityAgent: PASS ✅. مستعد لـ Phase 4 (شاشة إدارة الشيكات = TASK-0006). |
 | بيئة التشغيل | OpenCode |
 | التقنية المعتمدة | Next.js + TypeScript + PostgreSQL + Prisma |
 | مصدر التفاصيل | `project-preparation/` |
@@ -72,6 +72,7 @@
 | `DataDesignAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للمراجعة والتجهيز فقط |
 | `UIUXStructureAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للمراجعة والتجهيز فقط |
 | `ProjectControlAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للتحديثات الإدارية لـ `project-control/` |
+| `SecurityAgent` | مفعل داخل `.opencode/agents/SecurityAgent.md` | **مفعّل** — أنجز TASK-0005 (Security Review) بنجاح ✅ |
 | عملاء آخرون | غير مولدين | سيولّدون عند الحاجة في مراحلهم |
 
 ---
@@ -118,6 +119,7 @@
 | TASK-0002 | Closed ✅ | Prisma Data Models — 4 models + prisma.config.ts |
 | TASK-0003 | Closed ✅ | إنشاء قاعدة البيانات checks_management + أول Migration عبر `prisma migrate dev` (PostgreSQL 18 + Prisma 7.8.0) |
 | TASK-0004 | Closed ✅ | إعداد المصادقة والصلاحيات — Login + JWT + Middleware + Seed (Admin/User roles) |
+| TASK-0005 | Closed ✅ | المراجعة الأمنية المستقلة لـ TASK-0004 — SecurityAgent: PASS ✅. لا Blocker. |
 | ISSUE-0003 (Secret Exposure) | Resolved ✅ | تم تنظيف التسرب في prisma.config.ts + تحديث قواعد المنظومة — راجع ISSUES_AND_GAPS.md |
 | DEC-0004 (Secret Handling Rules) | Active ✅ | قواعد إلزامية جديدة للأسرار في Pre-Execution Gate و Post-Execution Review Gate و handbacks |
 
@@ -143,5 +145,5 @@ TASK-0004 (Auth + Roles) — **مغلق** ✅.
 | البند | القيمة |
 |---|---|
 | Updated By | Tera Agent / Project Owner |
-| Update Reason | TASK-0004 closed. Auth system implemented: JWT login, middleware, Admin/User roles, seed script. Build passes. Post-Execution Review second pass completed — minor project-control fixes applied. |
-| Next Step | مستعد لـ TASK-0005 — شاشة إدارة الشيكات (Phase 4) بعد معالجة Layout RTL |
+| Update Reason | TASK-0005 (Security Review) complete. SecurityAgent reviewed 21 files, found 4 findings (1 Low, 3 Info), no blockers. PASS ✅. | |
+| Next Step | إصلاح SEC-001 (توحيد رسالة الخطأ) و SEC-002 (خصائص Cookie في logout action) ضمن TASK-0006 (Phase 4 — شاشة إدارة الشيكات) |

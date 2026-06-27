@@ -74,6 +74,16 @@
 | سبب التوليد | تم توليده عند بدء مرحلة التنفيذ البرمجي، لتنفيذ أول مهمة: Scaffold مشروع Next.js + ربط PostgreSQL + إعداد Prisma |
 | الملفات المسموح بكتابتها | ملفات التطبيق حسب التفويض (تحدد في TASK-ID). لا يكتب في `project-preparation/`, `tera-system/`, `project-control/`, `generated-agents/` |
 
+### 7. SecurityAgent
+
+| البند | القيمة |
+|---|---|
+| الملف | `.opencode/agents/SecurityAgent.md` |
+| المعرف | `SECURITY_AGENT` |
+| الفئة | مشروط / مراجعة أمنية |
+| سبب التفعيل | أصبح مطلوبًا بعد TASK-0004 لأن المهمة تشمل Auth/JWT/Passwords/Middleware/Permissions، وبعد ظهور ISSUE-0003 المتعلق بتسرب أسرار وتحديث قواعد Post-Execution Review. |
+| الملفات المسموح بكتابتها | لا يكتب افتراضيًا. يسلّم تقرير مراجعة إلى Tera فقط؛ يسجل Tera أو ProjectControlAgent التقرير في `project-control/` عند الحاجة. |
+
 ---
 
 ## العملاء الذين لم يتم توليدهم — مع السبب
@@ -84,7 +94,7 @@
 | `EngineeringAgent` | ✅ تم توليده — انظر أعلاه |
 | `QAAndAcceptanceAgent` | لم يتم توليده؛ ملف `10_TESTING_AND_ACCEPTANCE.md` موجود، ويتم توليده لاحقًا عند بدء مراجعات الاختبار الفعلية |
 | `DocumentationHandoverAgent` | مطلوب قبل التسليم النهائي فقط |
-| `SecurityAgent` | لا يوجد بيانات حساسة أو صلاحيات معقدة أو متطلبات أمنية متقدمة |
+| `SecurityAgent` | ✅ تم تفعيله لاحقًا داخل `.opencode/agents/SecurityAgent.md` بعد TASK-0004 بسبب Auth/JWT/Secrets/Middleware وقرار DEC-0006 |
 | `IntegrationAgent` | لا يوجد تكاملات خارجية في النسخة الأولى |
 | `DevOpsDeploymentAgent` | لا يوجد نشر فعلي في هذه المرحلة |
 | `PerformanceAgent` | تطبيق صغير — لا متطلبات أداء خاصة |
