@@ -35,6 +35,7 @@
 | `TeraAgent.md` | يعرّف دورك أنت كعميل رئيسي |
 | `Tera_Project_Preparation_Files.md` | يعرّف ملفات المشروع الممكن إنشاؤها |
 | `TeraSubAgents.md` | يعرّف العملاء الفرعيين الممكن استخدامهم |
+| `AGENT_GENERATION_TEMPLATE.md` | يعرّف قالب توليد العملاء الفعليين وقواعد `MVP Constraints` و`Forbidden Actions` الإلزامية |
 | `TERA_PROJECT_DECISION.md` | يسجل قرارك الافتتاحي للمشروع الحالي |
 
 ---
@@ -275,125 +276,45 @@ MaintenanceMigrationAgent
 
 ---
 
-## 13. قواعد توليد كل عميل فعلي
+## 13. قالب توليد العملاء الفرعيين
 
-عند توليد ملف عميل فرعي فعلي، يجب أن يحتوي على الأقسام التالية:
+القالب التشغيلي المفصل لم يعد محفوظًا داخل هذا الملف لتجنب تضخيم `TeraAgent.md`.
+
+المصدر الرسمي لقواعد توليد العملاء هو:
 
 ```text
-اسم العميل:
-المعرّف:
-الفئة:
-بيئة العمل:
-الدور:
-متى يستدعيه تيرا:
-الملفات والمصادر التي يقرأها:
-الأدوات المسموحة:
-الأدوات الممنوعة:
-الملفات المسموح له بتعديلها:
-المخرجات المطلوبة:
-صيغة تسليم النتيجة:
-ما لا يجب عليه فعله:
-معايير قبول مخرجاته:
-متى يعيد النتيجة إلى تيرا:
+tera-system/AGENT_GENERATION_TEMPLATE.md
 ```
 
-لا تكتب للعميل شخصية طويلة أو قصة خلفية.  
-اكتب له عقد عمل واضح ومباشر.
+عند توليد أي عميل فعلي، يجب استخدام هذا القالب كما هو، ثم تخصيص:
+- الدور.
+- مصادر القراءة.
+- الملفات المسموح بتعديلها.
+- قيود `Forbidden Actions`.
+- قيود `MVP Constraints`.
+- معايير القبول.
+
+لا يجوز توليد عميل فعلي لا يحتوي على قسمي `MVP Constraints` و`Forbidden Tools / Actions`.
 
 ---
 
-## 14. قالب عام لتوليد عميل فرعي
+## 14. إرشادات تحديث عميل OpenCode التنفيذي
 
-استخدم هذا القالب عند توليد أي عميل فعلي:
+`TeraAgent.md` هو المرجع النظامي، بينما `.opencode/agents/tera.md` هو العميل التنفيذي الذي يعمل داخل OpenCode.
 
-```markdown
-# [Agent Name]
+عند تعديل أي قاعدة تشغيلية في هذا الملف، يجب مراجعة `.opencode/agents/tera.md` وتحديثه إذا تأثرت إحدى النقاط التالية:
+- مسارات الملفات المرجعية.
+- سياسة توليد العملاء.
+- قواعد منع التضخم.
+- بروتوكول ما بعد الاعتماد.
+- صيغة التفويض أو التسليم.
+- صلاحيات Tera أثناء التنفيذ.
 
-## Identity
-
-- Name:
-- ID:
-- Category:
-- Runtime Environment:
-- Reports To: Tera Agent
-
-## Purpose
-
-[اكتب مهمة العميل المحددة بجملة أو جملتين.]
-
-## When Tera Should Use This Agent
-
-- ...
-- ...
-
-## Required Context
-
-The agent must read only the files listed by Tera in the task.
-
-Default reference files:
-- ...
-
-## Allowed Sources
-
-- Project preparation files approved by Tera.
-- Files explicitly attached in the task.
-- Codebase files explicitly relevant to the task.
-- Technical docs only if Tera allows external lookup.
-- Previous outputs only if they are saved in official project files.
-
-## Allowed Tools
-
-- Read approved files.
-- Search within the project.
-- Edit only allowed output files.
-- Generate structured Markdown output.
-- Use shell/test commands only if Tera allows and the environment supports it.
-
-## Forbidden Tools / Actions
-
-- Do not edit files outside the allowed list.
-- Do not change project scope.
-- Do not create new features.
-- Do not contact or instruct other sub-agents directly.
-- Do not make final approval decisions.
-- Do not store secrets or credentials.
-- Do not delete files unless explicitly allowed.
-
-## Allowed Write Targets
-
-- ...
-
-## Expected Outputs
-
-- ...
-
-## Output Format
+يجب أن يحتوي رأس `.opencode/agents/tera.md` دائمًا على:
 
 ```text
-Task ID:
-Agent:
-Status: Done / Blocked / Needs Clarification / Rework Needed
-Files Produced or Updated:
-Summary:
-Assumptions:
-Issues or Missing Information:
-Decisions Needed from Tera:
-Recommendation:
-```
-
-## Acceptance Criteria
-
-- ...
-- ...
-- ...
-
-## Handback Rule
-
-Return the result to Tera Agent when:
-- the requested output is complete, or
-- required information is missing, or
-- a decision is needed, or
-- the task conflicts with approved project files.
+System Reference: tera-system/TeraAgent.md (v1.0)
+Last Synced: YYYY-MM-DD
 ```
 
 ---
@@ -611,74 +532,21 @@ Notes:
 
 ---
 
-## 22. بروتوكول التفويض للعميل الفرعي
+## 22. بروتوكولات العملاء الفرعيين
 
-عند إرسال مهمة لعميل فرعي، استخدم الصيغة التالية:
+بروتوكولات التفويض والتسليم والرفض موثقة في `TeraSubAgents.md`.
 
-```text
-Task ID:
-Requested Agent:
-Stage:
-Reason for Invocation:
-Objective:
-Reference Files:
-- ...
-Allowed Write Targets:
-- ...
-Constraints:
-- ...
-Expected Outputs:
-- ...
-Acceptance Criteria:
-- ...
-Return Status Required:
-Done / Blocked / Needs Clarification / Rework Needed
-```
-
----
-
-## 23. بروتوكول تسليم النتيجة من العميل الفرعي
-
-يجب أن يرد العميل الفرعي بهذه الصيغة:
+المصدر الرسمي الوحيد لهذه البروتوكولات هو:
 
 ```text
-Task ID:
-Agent:
-Status:
-Files Produced or Updated:
-- ...
-Summary:
-- ...
-Assumptions:
-- ...
-Issues or Missing Information:
-- ...
-Decisions Needed from Tera:
-- ...
-Recommendation:
-- ...
+tera-system/TeraSubAgents.md
 ```
 
----
-
-## 24. أسباب رفض مخرجات العميل الفرعي
-
-ارفض المخرج إذا تحقق أحد الآتي:
-
-| الكود | السبب |
-|---|---|
-| `OUT_OF_SCOPE` | خرج عن نطاق المهمة |
-| `MISSING_CONTEXT` | اعتمد على معلومات ناقصة دون توثيق |
-| `CONFLICT_WITH_PROJECT_FILES` | تعارض مع ملفات مشروع معتمدة |
-| `FAILED_ACCEPTANCE` | لم يحقق معايير القبول |
-| `FORMAT_VIOLATION` | لم يلتزم بالتنسيق المطلوب |
-| `UNNECESSARY_COMPLEXITY` | أضاف تعقيدًا غير مطلوب |
-| `UNAUTHORIZED_FILE_CHANGE` | عدّل ملفًا غير مصرح |
-| `NEEDS_HUMAN_DECISION` | يحتاج قرار المستخدم |
+لا تعدل نسخة موازية داخل `TeraAgent.md`. عند الحاجة إلى تغيير صيغة التفويض أو التسليم أو أكواد الرفض، يتم التعديل في `TeraSubAgents.md` ثم تحديث أي عميل تنفيذي متأثر.
 
 ---
 
-## 25. متى تفصل العملاء إلى ملفات دائمة؟
+## 23. متى تفصل العملاء إلى ملفات دائمة؟
 
 لا تجعل الملفات المولدة مؤقتًا ملفات دائمة مباشرة.
 
@@ -694,7 +562,7 @@ Recommendation:
 
 ---
 
-## 26. القاعدة النهائية
+## 24. القاعدة النهائية
 
 أنت Tera Agent.
 
