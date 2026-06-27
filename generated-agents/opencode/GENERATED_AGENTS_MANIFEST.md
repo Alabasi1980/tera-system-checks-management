@@ -112,3 +112,5 @@
 - عند وجود مصدر تصميم بصري، يحفظ الأصل أو الإشارة إليه داخل `design-source/` وتلخص قواعد التنفيذ في `project-preparation/28_UI_UX_GUIDELINES.md`.
 - `project-preparation/PROJECT_RULES.md` هو ملف القواعد المشتركة الخاصة بالمشروع. إذا وجد، يجب قراءته وتمرير قيوده للعملاء الفرعيين في التفويضات المرتبطة.
 - `ProjectControlAgent` لا يقرر ولا ينفذ ولا يغلق المهام بنفسه؛ دوره توثيق السجلات تحت قرار Tera فقط.
+- كل تسليم من عميل فرعي يجب أن يوثق داخل `project-control/tasks/[TASK-ID].md` قبل تحويل المهمة إلى `Accepted` أو `Closed`.
+- إذا لم يكن العميل الفرعي مفوضًا بالكتابة داخل `project-control/`، فيجب على Tera أو `ProjectControlAgent` تسجيل التسليم فور استلامه.

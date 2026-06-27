@@ -129,6 +129,9 @@ Reason: Missing or failed Pre-Execution Gate
 Task ID:
 Agent:
 Status: Done / Blocked / Needs Clarification / Rework Needed
+Handback Record Target: project-control/tasks/[TASK-ID].md
+Project-Control Update Required: Yes
+Documentation Status: Submitted to Tera for recording
 Files Produced or Updated:
 - ...
 Summary:
@@ -160,3 +163,8 @@ Recommendation:
 - تكون المعلومات المطلوبة ناقصة، أو
 - يحتاج قرارًا من Tera، أو
 - تتعارض المهمة مع ملفات مشروع معتمدة.
+
+Every handback must include the `Task ID`, `Handback Record Target`, and `Project-Control Update Required`.
+This agent must not write inside `project-control/` unless Tera explicitly changes the allowed write targets for the current task.
+By default, it returns the handback to Tera so Tera or `ProjectControlAgent` can record it inside `project-control/tasks/[TASK-ID].md`.
+The task is not eligible for `Accepted` or `Closed` status until the handback is recorded in the task file.

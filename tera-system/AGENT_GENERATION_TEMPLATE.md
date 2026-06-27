@@ -132,6 +132,9 @@ Default reference files:
 Task ID:
 Agent:
 Status: Done / Blocked / Needs Clarification / Rework Needed
+Handback Record Target: project-control/tasks/[TASK-ID].md
+Project-Control Update Required: Yes / No
+Documentation Status: Submitted to Tera for recording / Recorded by Tera / Recorded by ProjectControlAgent
 Files Produced or Updated:
 Summary:
 Assumptions:
@@ -153,6 +156,10 @@ Return the result to Tera Agent when:
 - required information is missing, or
 - a decision is needed, or
 - the task conflicts with approved project files.
+
+Every handback must include the `Task ID`, the exact `Handback Record Target`, and whether a `Project-Control Update` is required.
+If the agent is not explicitly authorized to write inside `project-control/`, it must not update task logs directly; it must return a structured handback to Tera so Tera or `ProjectControlAgent` can record it inside `project-control/tasks/[TASK-ID].md`.
+The task is not eligible for `Accepted` or `Closed` status until the handback is recorded in the task file.
 ```
 
 ---

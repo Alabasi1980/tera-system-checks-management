@@ -95,18 +95,17 @@
 |---|---|---|
 | Readiness Review | مكتمل ✅ | المشروع جاهز للتنفيذ — راجع تقرير المراجعة |
 | EngineeringAgent | مولّد ✅ | جاهز للتفويض بعد اجتياز TASK-ID لبوابة Pre-Execution Gate |
-| لم يتم بدء التنفيذ البرمجي | Open | لا يبدأ قبل TASK-ID معتمدة وصريحة من Tera |
+| TASK-0001 | Accepted ✅ | Scaffold Next.js + Prisma + .env.example — مكتمل |
 
 ---
 
 ## 8. آخر ملخص سياق
 
-Readiness Review مكتمل ✅ — المشروع جاهز للتنفيز.
+Readiness Review مكتمل ✅ — المشروع جاهز للتنفيذ.
 جميع ملفات التحضير (00–10 + 28) معتمدة.
 EngineeringAgent مولّد وجاهز للتفويض.
-أول مهمة مقترحة: TASK-0001 — Scaffold تقني صغير.
-قبل تفويض EngineeringAgent، يجب أن يجتاز TASK-0001 بوابة Pre-Execution Gate.
-النطاق الافتراضي الآمن لأول مهمة Next.js + Prisma: Scaffold Next.js + TypeScript + تثبيت Prisma + إنشاء `.env.example` فقط، بدون Prisma models، بدون db push، بدون migration، وبدون اختبار اتصال فعلي.
+TASK-0001 (Scaffold Next.js + Prisma + .env.example) — **مكتمل ومقبول** ✅.
+الخطوة التالية: إنشاء TASK-0002 (Prisma Data Models).
 
 ---
 
@@ -115,5 +114,5 @@ EngineeringAgent مولّد وجاهز للتفويض.
 | البند | القيمة |
 |---|---|
 | Updated By | Tera Agent |
-| Update Reason | Readiness Review مكتمل — EngineeringAgent مولّد — تحديث حالة المشروع |
-| Next Step | إنشاء TASK-0001، تشغيل Pre-Execution Gate، ثم عرض المهمة المصححة للاعتماد قبل التفويض |
+| Update Reason | TASK-0001 مكتمل ومقبول |
+| Next Step | اقتراح TASK-0002 — Prisma Data Models |

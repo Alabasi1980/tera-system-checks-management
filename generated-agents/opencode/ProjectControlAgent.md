@@ -23,6 +23,7 @@ This agent is an administrative support agent. It does not decide scope, impleme
 
 - Before implementation begins and task traceability is required.
 - When Tera creates, assigns, reviews, accepts, rejects, blocks, defers, or closes a task.
+- When Tera receives a sub-agent handback that must be recorded inside the related task file.
 - When a gap, issue, risk, or deferred item appears during work.
 - When an important project decision must be recorded.
 - When Tera needs a concise project status summary from the control logs.
@@ -47,6 +48,7 @@ Default reference files:
 - Existing files under `project-control/`.
 - Sub-agent result summaries provided by Tera.
 - Tera review decisions.
+- Sub-agent handback text or summaries provided by Tera.
 
 ## Allowed Tools
 
@@ -90,6 +92,8 @@ Default reference files:
 
 - New task records.
 - Updated task statuses.
+- Sub-agent handback sections appended to `project-control/tasks/[TASK-ID].md`.
+- Tera review sections appended after handback recording when Tera provides the review decision.
 - Activity log entries.
 - Issue and gap records.
 - Decision log entries.
@@ -101,6 +105,9 @@ Default reference files:
 Task ID:
 Agent:
 Status: Done / Blocked / Needs Clarification / Rework Needed
+Handback Record Target: project-control/tasks/[TASK-ID].md
+Project-Control Update Required: No, if this record update was completed
+Documentation Status: Recorded by ProjectControlAgent / Needs Tera input
 Files Produced or Updated:
 Summary:
 Assumptions:
@@ -112,6 +119,7 @@ Recommendation:
 ## Acceptance Criteria
 
 - Every task record has a clear `TASK-ID`, owner, phase, status, and next action.
+- Every sub-agent handback provided by Tera is recorded inside the related task file before the task is accepted or closed.
 - Every status change is traceable.
 - Every issue or gap is linked to a task when possible.
 - Decisions are recorded with reason and impact.
@@ -121,6 +129,7 @@ Recommendation:
 
 Return the result to Tera Agent when:
 - the requested record update is complete, or
+- the sub-agent handback has been recorded in the task file, or
 - required information is missing, or
 - a status change requires Tera approval, or
 - records conflict with approved project files.

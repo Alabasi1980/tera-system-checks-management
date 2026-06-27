@@ -468,6 +468,8 @@ Tera must:
 - Assign the next smallest safe implementation task to the proper sub-agent.
 - Ensure each task has clear inputs, outputs, boundaries, and acceptance criteria.
 - Prevent the sub-agent from implementing beyond the approved task.
+- Record each sub-agent handback inside `project-control/tasks/[TASK-ID].md` before review or acceptance.
+- Record the handback documentation event in `project-control/PROJECT_ACTIVITY_LOG.md`.
 - Review the sub-agent output before moving to the next task.
 - Update task status after review.
 - Record issues, gaps, deferred items, and decisions in `project-control/`.
@@ -500,9 +502,18 @@ The default rule is:
 - Tera asks for approval only after the gate passes.
 - Tera assigns the next task.
 - Sub-agent executes.
+- Tera or `ProjectControlAgent` records the sub-agent handback in `project-control/tasks/[TASK-ID].md`.
+- Tera records the handback documentation event in `project-control/PROJECT_ACTIVITY_LOG.md`.
 - Tera reviews.
 - Tera updates `project-control/`.
 - Tera reports.
+
+Handback recording rule:
+
+- A sub-agent result must not remain only in chat.
+- A task with an unrecorded handback may stay `Submitted`, but must not become `Accepted` or `Closed`.
+- If the sub-agent is not authorized to write inside `project-control/`, Tera or `ProjectControlAgent` records the handback.
+- The task file must include a clear section such as `Sub-Agent Handback` and, after review, `Tera Review`.
 - Tera proceeds only within the approved phase and approved scope.
 
 ---

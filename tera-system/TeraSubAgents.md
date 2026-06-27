@@ -883,6 +883,12 @@ Done / Blocked / Needs Clarification / Rework Needed
 Task ID:
 العميل:
 الحالة:
+Handback Record Target:
+- project-control/tasks/[TASK-ID].md
+Project-Control Update Required:
+- Yes
+Documentation Status:
+- Submitted to Tera for recording / Recorded by Tera / Recorded by ProjectControlAgent
 الملفات المنتجة أو المعدلة:
 - ...
 ملخص ما تم:
@@ -896,6 +902,16 @@ Task ID:
 توصية العميل:
 - ...
 ```
+
+قاعدة إلزامية:
+
+- لا يُعتبر تسليم أي عميل فرعي مكتملًا إذا بقي في المحادثة فقط.
+- يجب أن يرتبط كل تسليم بـ `TASK-ID`.
+- يجب أن يحدد العميل في التسليم ملف التسجيل المستهدف: `project-control/tasks/[TASK-ID].md`.
+- إذا لم يكن العميل مفوضًا بالكتابة داخل `project-control/`، فيجب أن يضع `Project-Control Update Required: Yes` ويعيد التسليم إلى Tera.
+- بعد استلام التسليم، يجب على Tera أو `ProjectControlAgent` توثيق نص التسليم أو ملخصه الدقيق داخل ملف المهمة قبل قبول النتيجة أو إغلاقها.
+- يجب تسجيل حدث التوثيق في `project-control/PROJECT_ACTIVITY_LOG.md`.
+- إذا لم يتم توثيق التسليم داخل ملف المهمة، تكون حالة المهمة `Submitted` فقط ولا يجوز تحويلها إلى `Accepted` أو `Closed`.
 
 ---
 
