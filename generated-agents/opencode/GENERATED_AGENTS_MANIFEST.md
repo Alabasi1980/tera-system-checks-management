@@ -52,7 +52,7 @@
 | المعرف | `UI_UX_STRUCTURE_AGENT` |
 | الفئة | أساسي |
 | سبب التوليد | ضروري لتحديد الشاشات المطلوبة وهيكل الواجهة وعلاقتها بالصلاحيات ومسارات العمل |
-| الملفات المسموح بكتابتها | `07_SCREENS_AND_UI_STRUCTURE.md` |
+| الملفات المسموح بكتابتها | `07_SCREENS_AND_UI_STRUCTURE.md`, `28_UI_UX_GUIDELINES.md` (بتفويض صريح من Tera عند وجود مصدر تصميم أو طلب Style Guide) |
 
 ---
 
@@ -87,3 +87,5 @@
 - عملاء التحليل لا يقرأون كود التطبيق إلا بتصريح صريح من Tera Agent.
 - يجب ألا ينشئ `BusinessWorkflowAgent` الملف `12_BUSINESS_RULES.md` إلا إذا وافق Tera صراحة على إنشاء هذا الملف.
 - ✅ قواعد `MVP Constraints` مضمّنة في كل عميل مولد عبر `AGENT_GENERATION_TEMPLATE.md`.
+- قبل تنفيذ أي واجهة، يجب أن يحسم Tera مصدر التصميم البصري: تصميم افتراضي من Tera، ملفات Style من المستخدم، أو مرجع خارجي مثل `getdesign.md`.
+- عند وجود مصدر تصميم بصري، يحفظ الأصل أو الإشارة إليه داخل `design-source/` وتلخص قواعد التنفيذ في `project-preparation/28_UI_UX_GUIDELINES.md`.

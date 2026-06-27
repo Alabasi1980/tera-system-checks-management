@@ -331,6 +331,73 @@ Tera must not move to the next phase without explicit user approval.
 
 ---
 
+### UI Design Source Protocol
+
+Tera must not allow random or inconsistent UI styling.
+
+Before any UI implementation, Tera must decide the UI design source with the user.
+
+Supported UI design source modes:
+
+1. Tera-Decided Design
+   - Used when the user has no specific design.
+   - Tera asks a small number of clear design questions when needed:
+     - Formal/simple/modern/administrative dashboard?
+     - Primary color or brand identity?
+     - Light only or Light/Dark?
+     - RTL, LTR, or both?
+   - If the user does not provide preferences, Tera uses a clean minimal administrative UI.
+
+2. User-Provided Style Files
+   - Used when the user provides CSS, theme files, design tokens, screenshots, or UI guidelines.
+   - Tera stores or references them under `design-source/`.
+   - Implementation agents must follow them and must not invent conflicting styles.
+
+3. External Design Spec
+   - Used when the user provides a design specification such as `getdesign.md` output or Figma analysis.
+   - Tera stores the raw design spec under `design-source/`.
+   - Tera summarizes the applicable UI rules in `project-preparation/28_UI_UX_GUIDELINES.md`.
+
+If any visual design source exists, or if the user asks for a specific look, Tera must create or update:
+
+```text
+project-preparation/28_UI_UX_GUIDELINES.md
+```
+
+If visual styling will be implemented, the final approved design source must be documented in `project-preparation/28_UI_UX_GUIDELINES.md`, even for small MVP projects.
+
+`07_SCREENS_AND_UI_STRUCTURE.md` may describe screen structure, but it must not replace the approved UI style guide when styling decisions are required.
+
+Final separation rule:
+
+```text
+07_SCREENS_AND_UI_STRUCTURE.md = screen structure
+28_UI_UX_GUIDELINES.md = approved UI style guide
+design-source/ = raw design source files
+```
+
+This file must define:
+
+* Design source mode.
+* Colors.
+* Typography.
+* Layout and spacing principles.
+* Component style rules.
+* Buttons, inputs, tables, forms, messages, and alerts.
+* RTL/LTR rules if relevant.
+* Styling that is not allowed.
+* How implementation agents must apply the design.
+
+Engineering agents must not invent new colors, spacing systems, component styles, or visual patterns unless Tera explicitly approves them.
+
+Default rule:
+
+```text
+No UI implementation before UI design source is decided.
+```
+
+---
+
 ### Execution Orchestration Protocol
 
 When the project reaches the approved implementation phase, Tera must act as the execution manager, not as a passive assistant.

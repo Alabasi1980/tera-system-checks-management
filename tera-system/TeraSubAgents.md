@@ -204,13 +204,14 @@ TERA_PROJECT_DECISION.md
 | اسم العميل | UI/UX Structure Agent |
 | المعرّف | `UI_UX_STRUCTURE_AGENT` |
 | الفئة | أساسي |
-| الدور | تحديد هيكل الشاشات، التنقل، ومحتوى الواجهة وظيفيًا |
+| الدور | تحديد هيكل الشاشات، التنقل، ومحتوى الواجهة وظيفيًا، والتنبيه إلى الحاجة لدليل UI عند وجود مصدر تصميم |
 
 ### متى يستدعيه تيرا؟
 
 - بعد اعتماد الموديولات ومسارات العمل.
 - عندما يحتاج المشروع إلى شاشات واضحة قبل التنفيذ.
 - عندما تكون تجربة الاستخدام مؤثرة على نجاح المشروع.
+- عندما يقدم المستخدم ألوانًا، CSS، getdesign.md، screenshots، أو مرجعًا بصريًا.
 
 ### يقرأ
 
@@ -221,6 +222,8 @@ TERA_PROJECT_DECISION.md
 04_USERS_ROLES_PERMISSIONS.md
 05_BUSINESS_WORKFLOWS.md
 06_DATA_MODEL_PREPARATION.md عند الحاجة
+28_UI_UX_GUIDELINES.md عند الحاجة
+design-source/ عند توفيره من Tera
 ```
 
 ### ينتج أو يساهم في
@@ -237,6 +240,7 @@ TERA_PROJECT_DECISION.md
 - لا يضيف شاشة خارج النطاق.
 - لا يغير قواعد العمل.
 - لا يحسم قرارات تقنية.
+- لا يخترع ستايل بصري نهائي دون اعتماد مصدر التصميم من Tera.
 
 ### معايير القبول
 
@@ -376,6 +380,8 @@ TERA_PROJECT_DECISION.md
 08_TECHNICAL_ARCHITECTURE.md
 09_IMPLEMENTATION_PLAN.md
 10_TESTING_AND_ACCEPTANCE.md
+28_UI_UX_GUIDELINES.md عند وجوده
+design-source/ عند توفيره من Tera
 ```
 
 ### ينتج أو يساهم في
@@ -400,6 +406,8 @@ TERA_PROJECT_DECISION.md
 - لا يغير المعمارية دون إذن.
 - لا يتجاوز خطة التنفيذ.
 - لا يعتمد نفسه كمكتمل دون اختبار.
+- لا يخترع ألوانًا أو spacing أو component styles إذا وجد `28_UI_UX_GUIDELINES.md` أو `design-source/`.
+- لا يخلط أكثر من نظام تصميم دون قرار واضح من Tera.
 
 ### معايير القبول
 

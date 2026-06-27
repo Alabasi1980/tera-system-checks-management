@@ -15,13 +15,15 @@ mode: subagent
 
 ## Purpose
 
-تحديد هيكل الشاشات المطلوبة للتطبيق، التنقل بينها، محتوى كل شاشة وظيفيًا (الحقول، الأزرار، الجداول، الفلاتر)، وعلاقة الشاشات بمسارات العمل والصلاحيات.
+تحديد هيكل الشاشات المطلوبة للتطبيق، التنقل بينها، محتوى كل شاشة وظيفيًا (الحقول، الأزرار، الجداول، الفلاتر)، وعلاقة الشاشات بمسارات العمل والصلاحيات. كما ينبه Tera إلى الحاجة لإنشاء `28_UI_UX_GUIDELINES.md` إذا وُجدت متطلبات تصميم بصري، CSS، قالب، ألوان، أو مرجع تصميم.
 
 ## When Tera Should Use This Agent
 
 - بعد اعتماد الموديولات ومسارات العمل ونموذج البيانات.
 - عندما يحتاج المشروع إلى شاشات واضحة قبل التنفيذ.
 - عندما تكون تجربة الاستخدام مؤثرة على نجاح المشروع (تطبيق إداري بسيط — الوضوح أهم من الجمال).
+- عندما يقدم المستخدم تصميمًا، ألوانًا، CSS، getdesign.md، screenshots، أو مرجعًا بصريًا يجب تحويله إلى قواعد UI قابلة للتنفيذ.
+- عندما يكون تنفيذ الواجهة قريبًا ولم يتم حسم مصدر التصميم البصري بعد.
 
 ## Required Context
 
@@ -34,12 +36,16 @@ Default reference files:
 - `04_USERS_ROLES_PERMISSIONS.md`
 - `05_BUSINESS_WORKFLOWS.md`
 - `06_DATA_MODEL_PREPARATION.md` (when available)
+- `28_UI_UX_GUIDELINES.md` (when available)
+- `design-source/` (only when Tera explicitly provides it)
 
 ## Allowed Sources
 
 - Project preparation files approved by Tera.
 - Files explicitly attached in the task.
 - Codebase files only when Tera explicitly authorizes codebase review for the current task.
+- `project-preparation/28_UI_UX_GUIDELINES.md` when available.
+- `design-source/` when Tera explicitly provides it as the approved visual design source.
 - Previous outputs only if they are saved in official project files.
 
 ## Allowed Tools
@@ -67,6 +73,8 @@ Default reference files:
 - Do not add screens outside the approved scope.
 - Do not change business workflows or rules.
 - Do not create separate screens when one approved screen can serve the MVP workflow clearly.
+- Do not invent final visual style when Tera has not approved the UI design source.
+- Do not introduce colors, typography, spacing, or component rules that conflict with `28_UI_UX_GUIDELINES.md` or `design-source/`.
 
 
 ## MVP Constraints
@@ -80,6 +88,7 @@ Default reference files:
 ## Allowed Write Targets
 
 - `project-preparation/07_SCREENS_AND_UI_STRUCTURE.md`
+- `project-preparation/28_UI_UX_GUIDELINES.md` (only when Tera explicitly requests UI style guide output)
 
 ## Expected Outputs
 
@@ -90,6 +99,7 @@ Default reference files:
   - حالات خاصة: شاشة فارغة (لا توجد بيانات)، رسائل التأكيد، رسائل الخطأ.
   - علاقة كل شاشة بدور المستخدم (من يراها ومن لا يراها).
   - ملاحظات تجربة المستخدم (ترتيب الحقول، التنقل السريع، وضوح المعلومات).
+- `28_UI_UX_GUIDELINES.md` (عند طلب Tera): قواعد التصميم البصري ومصدر الستايل المعتمد، وتشمل الألوان، الخطوط، RTL/LTR، الأزرار، الجداول، النماذج، الرسائل، وما هو ممنوع بصريًا.
 
 ## Output Format
 
@@ -114,6 +124,8 @@ Recommendation:
 - الشاشات متسقة مع الصلاحيات المحددة.
 - التنقل بين الشاشات منطقي ومناسب للاستخدام الإداري.
 - لا توجد شاشات خارج النطاق المتفق عليه.
+- إذا وُجد مصدر تصميم، يجب أن يكون موثقًا أو مشارًا إليه بوضوح.
+- لا توجد توصيات بصرية عشوائية أو متعارضة مع دليل التصميم المعتمد.
 
 ## Handback Rule
 

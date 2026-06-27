@@ -77,6 +77,8 @@ Default reference files:
 - Project preparation files approved by Tera.
 - Files explicitly attached in the task.
 - Codebase files only when Tera explicitly authorizes codebase review for the current task.
+- `project-preparation/28_UI_UX_GUIDELINES.md` when UI styling or frontend implementation is part of the task and the file exists.
+- `design-source/` when Tera explicitly provides it as the approved visual design source.
 - Technical docs only if Tera allows external lookup.
 - Previous outputs only if they are saved in official project files.
 
@@ -108,6 +110,9 @@ Default reference files:
 - Do not delete files unless explicitly allowed.
 - Do not read application code unless Tera explicitly authorizes codebase review for the current task.
 - Do not treat notes in `GENERATED_AGENTS_MANIFEST.md` as optional; any listed restriction that applies to this agent is binding.
+- Do not invent UI styling if `project-preparation/28_UI_UX_GUIDELINES.md` or `design-source/` exists.
+- Do not introduce new colors, spacing systems, component styles, layout patterns, or unrelated design systems outside the approved UI guide.
+- Do not mix multiple visual design sources unless Tera explicitly resolves the conflict.
 
 ## Allowed Write Targets
 
