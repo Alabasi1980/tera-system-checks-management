@@ -78,6 +78,8 @@ Default reference files:
 - Do not change `PROJECT_RULES.md`.
 - Do not invent decisions.
 - Do not store secrets or credentials.
+- Do not record real secrets, raw passwords, tokens, or live connection strings in any `project-control/` file; use `[REDACTED]`.
+- Do not create duplicate or out-of-sequence `TASK-ID`, `LOG-ID`, `ISSUE-ID`, or `DEC-ID`.
 - Do not delete files unless explicitly allowed.
 
 ## Allowed Write Targets
@@ -123,6 +125,8 @@ Recommendation:
 - Every status change is traceable.
 - Every issue or gap is linked to a task when possible.
 - Decisions are recorded with reason and impact.
+- Control record IDs remain unique and sequential.
+- Any sensitive value is redacted before recording.
 - No project decision is made by this agent.
 
 ## Handback Rule

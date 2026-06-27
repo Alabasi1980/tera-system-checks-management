@@ -110,6 +110,8 @@ Default reference files:
 - Do not contact or instruct other sub-agents directly.
 - Do not make final approval decisions.
 - Do not store secrets or credentials.
+- Do not write real secrets in outputs, handbacks, task files, logs, command transcripts, or config/code fallback values.
+- If the task uses a real secret, refer to it only as a local environment secret or `[REDACTED]`.
 - Do not delete files unless explicitly allowed.
 - Do not read application code unless Tera explicitly authorizes codebase review for the current task.
 - Do not treat notes in `GENERATED_AGENTS_MANIFEST.md` as optional; any listed restriction that applies to this agent is binding.
@@ -136,6 +138,7 @@ Status: Done / Blocked / Needs Clarification / Rework Needed
 Handback Record Target: project-control/tasks/[TASK-ID].md
 Project-Control Update Required: Yes / No
 Documentation Status: Submitted to Tera for recording / Recorded by Tera / Recorded by ProjectControlAgent
+Secrets Handling: No secrets used / Local secret used and redacted
 Files Produced or Updated:
 Summary:
 Assumptions:
@@ -161,6 +164,7 @@ Return the result to Tera Agent when:
 Every handback must include the `Task ID`, the exact `Handback Record Target`, and whether a `Project-Control Update` is required.
 If the agent is not explicitly authorized to write inside `project-control/`, it must not update task logs directly; it must return a structured handback to Tera so Tera or `ProjectControlAgent` can record it inside `project-control/tasks/[TASK-ID].md`.
 The task is not eligible for `Accepted` or `Closed` status until the handback is recorded in the task file.
+If the task used secrets, the handback must redact them and must not repeat any live password, token, or full real connection string.
 ```
 
 ---

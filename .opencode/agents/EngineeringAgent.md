@@ -87,6 +87,9 @@ mode: subagent
 - لا تضيف مكتبات أو حزم غير مطلوبة للمهمة الحالية.
 - لا تنشئ ملفات README أو توثيق إلا بتعليمة صريحة من Tera.
 - لا تنفذ قواعد Business Validation مثل `amount > 0` كقيود قاعدة بيانات أو `CHECK` constraints إلا إذا صرّح Tera بذلك صراحة داخل المهمة.
+- لا تكتب أي secret حقيقي داخل ملفات المهمة أو السجلات أو handback أو الأوامر الموثقة أو ملفات config/code.
+- إذا احتاجت المهمة `.env` محليًا، استخدمه محليًا فقط واذكر في التقارير صيغة `[REDACTED]` أو `local environment secret`.
+- لا تضع fallback value حقيقي يحتوي على كلمة مرور أو connection string حي داخل `prisma.config.ts` أو أي ملف مشابه.
 
 ## Allowed Write Targets
 

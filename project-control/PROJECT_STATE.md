@@ -19,7 +19,7 @@
 | اسم المشروع | تطبيق إدارة الشيكات |
 | نوع المشروع | تطبيق ويب مستقل |
 | حجم المشروع | صغير / MVP |
-| المرحلة الحالية | Readiness Review مكتمل — EngineeringAgent مولّد — بانتظار أول TASK-ID تنفيذي |
+| المرحلة الحالية | Phase 3 (Database Setup) مكتمل ✅ — TASK-0001 (Scaffold) ✅, TASK-0002 (Data Models) ✅, TASK-0003 (Migration) ✅ — بانتظار Phase 4 |
 | بيئة التشغيل | OpenCode |
 | التقنية المعتمدة | Next.js + TypeScript + PostgreSQL + Prisma |
 | مصدر التفاصيل | `project-preparation/` |
@@ -116,6 +116,9 @@
 | EngineeringAgent | مولّد ✅ | جاهز للتفويض بعد اجتياز TASK-ID لبوابة Pre-Execution Gate |
 | TASK-0001 | Closed ✅ | Scaffold Next.js + Prisma + .env.example |
 | TASK-0002 | Closed ✅ | Prisma Data Models — 4 models + prisma.config.ts |
+| TASK-0003 | Closed ✅ | إنشاء قاعدة البيانات checks_management + أول Migration عبر `prisma migrate dev` (PostgreSQL 18 + Prisma 7.8.0) |
+| ISSUE-0003 (Secret Exposure) | Resolved ✅ | تم تنظيف التسرب في prisma.config.ts + تحديث قواعد المنظومة — راجع ISSUES_AND_GAPS.md |
+| DEC-0004 (Secret Handling Rules) | Active ✅ | قواعد إلزامية جديدة للأسرار في Pre-Execution Gate و Post-Execution Review Gate و handbacks |
 
 ---
 
@@ -127,7 +130,9 @@ Readiness Review مكتمل ✅ — المشروع جاهز للتنفيذ.
 EngineeringAgent مولّد وجاهز للتفويض.
 TASK-0001 (Scaffold) — **مغلق** ✅.
 TASK-0002 (Prisma Data Models) — **مغلق** ✅.
-المرحلة 1 و 2 مكتملتان.
+TASK-0003 (Database + Migration) — **مغلق** ✅.
+المراحل 1 و 2 و 3 مكتملة.
+⚠️ **Security Remediation**: TASK-0003 كشف عن تسرب كلمة مرور حقيقية في fallback داخل `prisma.config.ts`. تم التنظيف وتحديث قواعد المنظومة بالكامل. راجع ISSUE-0003 و DEC-0004.
 **إلزامية:** قبل أي TASK جديدة، يجب مراجعة PROJECT_STATE.md و PROJECT_RULES.md.
 
 ---
@@ -136,6 +141,6 @@ TASK-0002 (Prisma Data Models) — **مغلق** ✅.
 
 | البند | القيمة |
 |---|---|
-| Updated By | Tera Agent |
-| Update Reason | إضافة قواعد Rules Review Gate وتحديث PROJECT_STATE.md |
-| Next Step | اقتراح TASK-0003 — أول migration (db push) |
+| Updated By | Tera Agent / Project Owner |
+| Update Reason | TASK-0003 Security Remediation: secret exposure cleaned in prisma.config.ts. System rules updated with secret handling, redaction, SECRET_EXPOSURE rejection code. Pre/Post-Execution Gates strengthened. |
+| Next Step | تقييم الجاهزية لـ TASK-0004 — حسب خطة التنفيذ (Phase 3: المصادقة والصلاحيات) |

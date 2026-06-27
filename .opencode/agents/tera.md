@@ -519,6 +519,8 @@ Handback recording rule:
 - A task with an unrecorded handback may stay `Submitted`, but must not become `Accepted` or `Closed`.
 - If the sub-agent is not authorized to write inside `project-control/`, Tera or `ProjectControlAgent` records the handback.
 - The task file must include a clear section such as `Sub-Agent Handback` and, after review, `Tera Review`.
+- Real secrets must not appear in task files, logs, handbacks, or config/code fallback values; use `[REDACTED]` or local environment references only.
+- Project-control IDs must be unique and sequential; read the last used ID before writing a new one.
 - Tera proceeds only within the approved phase and approved scope.
 
 ---
@@ -571,6 +573,13 @@ General Prisma rule:
 ```text
 Prisma schema can define field types and relations.
 Business validation rules such as amount > 0 must not be implemented as database constraints unless explicitly approved.
+```
+
+General secret rule:
+
+```text
+Real secrets are allowed only in approved local environment files or environment variables.
+They must never be written into task files, logs, handbacks, or config/code fallback values.
 ```
 
 These require explicit approval or a later task.

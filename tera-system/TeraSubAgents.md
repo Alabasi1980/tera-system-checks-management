@@ -913,6 +913,8 @@ Documentation Status:
 - بعد استلام التسليم، يجب على Tera أو `ProjectControlAgent` توثيق نص التسليم أو ملخصه الدقيق داخل ملف المهمة قبل قبول النتيجة أو إغلاقها.
 - بعد توثيق التسليم، ينفذ Tera وحده `Post-Execution Review Gate` على الناتج الفعلي قبل أي قبول أو إغلاق.
 - لا يعتمد Tera على تقرير العميل الفرعي وحده في الحكم على نجاح المهمة التنفيذية.
+- إذا استخدمت المهمة secret حقيقيًا، يجب أن يكون handback بصيغة redacted فقط، مثل `[REDACTED]` أو `local environment secret`.
+- يمنع على أي عميل فرعي إعادة كتابة كلمة مرور أو token أو connection string حقيقي داخل handback أو task file أو سجل.
 - إذا ظهرت مخالفات بعد التنفيذ، تعاد المهمة إلى `Needs Fix` أو `Blocked` أو تبقى `Submitted` بحسب نتيجة المراجعة.
 - يجب تسجيل حدث التوثيق في `project-control/PROJECT_ACTIVITY_LOG.md`.
 - إذا لم يتم توثيق التسليم داخل ملف المهمة، تكون حالة المهمة `Submitted` فقط ولا يجوز تحويلها إلى `Accepted` أو `Closed`.
@@ -930,6 +932,7 @@ Documentation Status:
 | `FORMAT_VIOLATION` | لم يلتزم بالتنسيق المطلوب |
 | `UNNECESSARY_COMPLEXITY` | أضاف تعقيدًا غير مطلوب |
 | `FAILED_PRE_EXECUTION_GATE` | المهمة لم تجتز بوابة ما قبل التنفيذ أو لا تحتوي نتيجتها |
+| `SECRET_EXPOSURE` | احتوى التسليم أو المخرجات على secret حقيقي أو قيمة حساسة غير منقحة |
 | `NEEDS_HUMAN_DECISION` | يحتاج قرارًا من صاحب المشروع |
 
 ---

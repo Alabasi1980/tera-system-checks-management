@@ -80,16 +80,17 @@ BLOCKED
 | 7 | هل تضيف Auth أو Roles أو Sessions دون طلب صريح؟ | No |
 | 8 | هل تضيف Prisma models أو جداول دون أن تكون مهمة Data Schema؟ | No |
 | 9 | هل تنفذ migration أو `db push` دون أن تكون مهمة قاعدة بيانات معتمدة؟ | No |
-| 10 | هل تنشئ ملف `.env` بقيم تشغيل فعلية بدل `.env.example`؟ | No |
-| 11 | هل تضيف مكتبات غير مطلوبة مباشرة للمهمة؟ | No |
-| 12 | هل تكتب خارج Allowed Write Targets؟ | No |
-| 13 | هل تعدل `tera-system/` أو `project-preparation/` أثناء التنفيذ؟ | No |
-| 14 | هل الأوامر المقترحة تحتاج موافقة المستخدم قبل التنفيذ؟ | Yes إذا كانت مؤثرة |
-| 15 | هل تم فحص الآثار الجانبية لكل أمر Shell / CLI مقترح؟ | Yes |
-| 16 | هل يوجد أمر ينشئ ملفًا أو يعدل ملفًا أو يشغل توليد كود خارج نطاق المهمة؟ | No |
-| 17 | هل يوجد تناقض بين القيود والمخرجات أو Allowed Write Targets؟ | No |
-| 18 | هل معايير القبول قابلة للاختبار بوضوح؟ | Yes |
-| 19 | هل يوجد مسار تراجع آمن إذا فشل التنفيذ؟ | Yes |
+| 10 | هل تنشئ `.env` فعليًا خارج مهمة محلية معتمدة أو دون خطة Secret Handling واضحة؟ | No |
+| 11 | هل ستظهر أي secrets حقيقية في ملف مهمة أو سجل أو handback أو ملف config/code؟ | No |
+| 12 | هل تضيف مكتبات غير مطلوبة مباشرة للمهمة؟ | No |
+| 13 | هل تكتب خارج Allowed Write Targets؟ | No |
+| 14 | هل تعدل `tera-system/` أو `project-preparation/` أثناء التنفيذ؟ | No |
+| 15 | هل الأوامر المقترحة تحتاج موافقة المستخدم قبل التنفيذ؟ | Yes إذا كانت مؤثرة |
+| 16 | هل تم فحص الآثار الجانبية لكل أمر Shell / CLI مقترح؟ | Yes |
+| 17 | هل يوجد أمر ينشئ ملفًا أو يعدل ملفًا أو يشغل توليد كود خارج نطاق المهمة؟ | No |
+| 18 | هل يوجد تناقض بين القيود والمخرجات أو Allowed Write Targets؟ | No |
+| 19 | هل معايير القبول قابلة للاختبار بوضوح؟ | Yes |
+| 20 | هل يوجد مسار تراجع آمن إذا فشل التنفيذ؟ | Yes |
 
 إذا فشل أي بند، يجب على Tera تصحيح المهمة قبل عرضها.
 
@@ -183,6 +184,53 @@ Deferred / Proposed Next Task
   - اختبار اتصال قاعدة البيانات
   إلا إذا كانت المهمة مخصصة لذلك ومعتمدة صراحة.
 
+### Secret Handling and Redaction Rule
+
+الأسرار الحقيقية مثل كلمات المرور، مفاتيح API، رموز الوصول، وسلاسل الاتصال الحقيقية يسمح بها فقط في:
+
+- `.env`
+- `.env.local`
+- متغيرات البيئة المحلية
+- مخزن أسرار محلي يوافق عليه المستخدم صراحة
+
+ويمنع منعًا باتًا ظهورها داخل:
+
+- `project-control/`
+- `project-preparation/`
+- `generated-agents/`
+- `tera-system/`
+- ملفات `TASK-*.md`
+- `PROJECT_ACTIVITY_LOG.md`
+- `DECISIONS_LOG.md`
+- `ISSUES_AND_GAPS.md`
+- نصوص handback
+- أوامر موثقة داخل المهام
+- ملفات الكود أو config مثل `prisma.config.ts`
+- أي fallback value داخل الكود أو الإعدادات
+
+إذا احتاجت المهمة سرًا حقيقيًا، يجب على Tera أن يكتب الخطة بصيغة مرجعية فقط، مثل:
+
+```text
+Use local environment secret.
+Create/update .env locally with DATABASE_URL from user-provided secret.
+```
+
+ولا يجوز كتابة السر نفسه داخل ملف المهمة أو السجل أو التقرير.
+
+عند توثيق سلسلة اتصال أو أمر يستخدم سرًا، يجب استخدام صيغة redacted فقط، مثل:
+
+```text
+postgresql://postgres:[REDACTED]@localhost:5432/checks_management
+```
+
+القاعدة الأساسية:
+
+```text
+Any real secret outside approved local environment files = gate failure.
+```
+
+ويعتبر وجود fallback حقيقي داخل ملفات config/code مخالفة مباشرة، حتى لو كان الملف محليًا.
+
 ### قاعدة التعارض الداخلي
 
 إذا احتوت المهمة على قيد ومخرج يتعارضان، يجب أن تفشل البوابة.
@@ -265,16 +313,19 @@ Blocked
 | 7 | هل توجد إعدادات CSS أو UI غير مطلوبة؟ | No |
 | 8 | هل تم إدخال Tailwind أو Bootstrap أو مكتبة UI دون موافقة؟ | No |
 | 9 | هل توجد Dark Mode classes أو Theme غير مطابق لـ `28_UI_UX_GUIDELINES.md`؟ | No |
-| 10 | هل تم إنشاء `.env` فعلي بدل `.env.example`؟ | No |
-| 11 | هل يحتوي Prisma schema على models غير مصرح بها؟ | No |
-| 12 | هل تم تحويل قواعد Business Validation إلى database constraints دون موافقة صريحة؟ | No |
-| 13 | هل تم تشغيل `db push` أو `migrate` أو `generate` دون تفويض؟ | No |
-| 14 | هل تم إنشاء API أو Route دون أن تكون المهمة API؟ | No |
-| 15 | هل تم إنشاء Auth أو Roles أو Sessions دون تفويض؟ | No |
-| 16 | هل تم الالتزام بمعايير القبول؟ | Yes |
-| 17 | هل المخرجات قابلة للتشغيل أو الاختبار؟ | Yes |
-| 18 | هل توجد آثار جانبية من أوامر CLI لم تكن متوقعة؟ | No |
-| 19 | هل تم تحديث سجل المهمة والسجلات الإدارية بشكل صحيح؟ | Yes |
+| 10 | هل تم إنشاء `.env` فعلي خارج مهمة محلية معتمدة أو دون ضوابط الأسرار؟ | No |
+| 11 | هل ظهرت أي secrets حقيقية داخل ملفات المهمة أو السجلات أو handback؟ | No |
+| 12 | هل ظهرت أي secrets حقيقية داخل code/config أو fallback values؟ | No |
+| 13 | هل تم توثيق الأوامر وقيم الاتصال بصيغة redacted فقط؟ | Yes |
+| 14 | هل يحتوي Prisma schema على models غير مصرح بها؟ | No |
+| 15 | هل تم تحويل قواعد Business Validation إلى database constraints دون موافقة صريحة؟ | No |
+| 16 | هل تم تشغيل `db push` أو `migrate` أو `generate` دون تفويض؟ | No |
+| 17 | هل تم إنشاء API أو Route دون أن تكون المهمة API؟ | No |
+| 18 | هل تم إنشاء Auth أو Roles أو Sessions دون تفويض؟ | No |
+| 19 | هل تم الالتزام بمعايير القبول؟ | Yes |
+| 20 | هل المخرجات قابلة للتشغيل أو الاختبار؟ | Yes |
+| 21 | هل توجد آثار جانبية من أوامر CLI لم تكن متوقعة؟ | No |
+| 22 | هل تم تحديث سجل المهمة والسجلات الإدارية بشكل صحيح وبدون IDs مكررة؟ | Yes |
 
 ### نتائج البوابة
 
@@ -289,6 +340,8 @@ BLOCKED
 - `PASS`: المخرجات مطابقة للنطاق ومعايير القبول، ولا توجد آثار جانبية غير مصرح بها.
 - `NEEDS_FIX`: ظهرت مخالفات قابلة للإصلاح ضمن نفس المهمة.
 - `BLOCKED`: ظهرت مشكلة لا يمكن إصلاحها دون قرار من المستخدم أو تعديل نطاق المهمة.
+
+لا يجوز أن تحصل المهمة على `PASS` إذا ظهر أي secret حقيقي خارج ملفات البيئة المحلية المعتمدة.
 
 ### قاعدة `NEEDS_FIX`
 
@@ -377,12 +430,14 @@ The task cannot PASS if forbidden package traces remain in lockfiles or source c
 | No unauthorized files deleted | PASS / FAIL | ... |
 | No unauthorized packages added | PASS / FAIL | ... |
 | No unauthorized UI/CSS/theme changes | PASS / FAIL | ... |
-| No `.env` real secrets created | PASS / FAIL | ... |
+| No real secrets outside approved local environment files | PASS / FAIL | ... |
+| Secrets redacted in docs/logs/config references | PASS / FAIL | ... |
 | No unauthorized Prisma models/migrations | PASS / FAIL | ... |
 | No unapproved business validation moved to DB constraints | PASS / FAIL | ... |
 | No unauthorized API/Auth created | PASS / FAIL | ... |
 | Acceptance criteria satisfied | PASS / FAIL | ... |
 | CLI side effects reviewed | PASS / FAIL | ... |
+| No duplicate project-control IDs created | PASS / FAIL | ... |
 
 Gate Status: PASS / NEEDS_FIX / BLOCKED
 
@@ -486,7 +541,8 @@ datasource db {
 | No API unless explicitly requested | PASS / FAIL | ... |
 | No Auth unless explicitly requested | PASS / FAIL | ... |
 | No schema/migration unless explicitly requested | PASS / FAIL | ... |
-| No real secrets or `.env` values | PASS / FAIL | ... |
+| No real secrets outside approved local environment files | PASS / FAIL | ... |
+| Secret handling plan documented and redacted | PASS / FAIL | ... |
 | CLI side effects checked | PASS / FAIL | ... |
 | No internal contradiction between constraints and outputs | PASS / FAIL | ... |
 | Allowed Write Targets are narrow | PASS / FAIL | ... |
