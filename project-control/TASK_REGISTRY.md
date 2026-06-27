@@ -28,4 +28,5 @@ Closed
 |---|---|---|---|---|---|---|
 | TASK-0000 | Initialize Project Control Layer | Tera Agent | System Setup | Closed | `project-control/` | 2026-06-27 |
 | TASK-0001 | Scaffold Next.js + TypeScript + Prisma + .env.example | EngineeringAgent | Phase 1 — Technical Foundation | Closed | `project-control/tasks/TASK-0001.md` | 2026-06-27 |
+| TASK-0002 | إنشاء Prisma Data Models (users, banks, parties, checks) | EngineeringAgent | Phase 2 — Data Model | Closed | `project-control/tasks/TASK-0002.md` | 2026-06-27 |
 

@@ -76,7 +76,25 @@
 
 ---
 
-## 6. سياسة السياق الحالية
+## 6. القواعد الإلزامية (PROJECT_RULES.md)
+
+`project-preparation/PROJECT_RULES.md` هو **مرجع إلزامي** يجب مراجعته قبل:
+- إنشاء أي TASK جديدة.
+- تنفيذ أو تفويض أي TASK لعميل فرعي.
+- أي قرار تصميم أو نطاق أو تقني.
+
+يحتوي `PROJECT_RULES.md` حاليًا على قواعد في 4 أقسام:
+1. القواعد العامة
+2. تتبع المهام (Traceability)
+3. مراجعة القواعد قبل التنفيذ (Rules Review Gate)
+4. إدارة قاعدة البيانات (Database Migrations)
+
+**لا يجوز الاعتماد على ذاكرة المحادثة بدل قراءة `PROJECT_RULES.md`.**  
+يجب أن يحتوي كل ملف TASK على قسم `Context Check` يوضح الملفات المرجعية التي راجعها Tera.
+
+---
+
+## 7. سياسة السياق الحالية
 
 | البند | القرار |
 |---|---|
@@ -90,31 +108,34 @@
 
 ---
 
-## 7. المخاطر أو الفجوات المفتوحة
+## 8. المخاطر أو الفجوات المفتوحة
 
 | البند | الحالة | الإجراء |
 |---|---|---|
 | Readiness Review | مكتمل ✅ | المشروع جاهز للتنفيذ — راجع تقرير المراجعة |
 | EngineeringAgent | مولّد ✅ | جاهز للتفويض بعد اجتياز TASK-ID لبوابة Pre-Execution Gate |
-| TASK-0001 | Closed ✅ | Scaffold Next.js + Prisma + .env.example — Post-Execution Gate PASS |
+| TASK-0001 | Closed ✅ | Scaffold Next.js + Prisma + .env.example |
+| TASK-0002 | Closed ✅ | Prisma Data Models — 4 models + prisma.config.ts |
 
 ---
 
-## 8. آخر ملخص سياق
+## 9. آخر ملخص سياق
 
 Readiness Review مكتمل ✅ — المشروع جاهز للتنفيذ.
 جميع ملفات التحضير (00–10 + 28) معتمدة.
+`project-preparation/PROJECT_RULES.md` معتمد بــ 4 أقسام من القواعد.
 EngineeringAgent مولّد وجاهز للتفويض.
-TASK-0001 (Scaffold Next.js + Prisma + .env.example) — **مغلق** ✅ بعد Post-Execution Review Gate PASS.
-قاعدة التنفيذ الحالية: لا تقبل أي مهمة تنفيذية إلا بعد `Pre-Execution Gate: PASS` ثم `Post-Execution Review Gate: PASS`.
-الخطوة التالية: TASK-0002 (Prisma Data Models) — مقترح وبانتظار الاعتماد.
+TASK-0001 (Scaffold) — **مغلق** ✅.
+TASK-0002 (Prisma Data Models) — **مغلق** ✅.
+المرحلة 1 و 2 مكتملتان.
+**إلزامية:** قبل أي TASK جديدة، يجب مراجعة PROJECT_STATE.md و PROJECT_RULES.md.
 
 ---
 
-## 9. آخر تحديث
+## 10. آخر تحديث
 
 | البند | القيمة |
 |---|---|
 | Updated By | Tera Agent |
-| Update Reason | TASK-0001 مغلق — Post-Execution Review PASS |
-| Next Step | اقتراح TASK-0002 — Prisma Data Models بانتظار الاعتماد |
+| Update Reason | إضافة قواعد Rules Review Gate وتحديث PROJECT_STATE.md |
+| Next Step | اقتراح TASK-0003 — أول migration (db push) |
