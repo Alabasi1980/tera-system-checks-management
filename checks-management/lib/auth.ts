@@ -64,3 +64,26 @@ export async function getSession(): Promise<{
 
   return verifyToken(token)
 }
+
+/**
+ * التحقق من أن المستخدم الحالي مسجل وله دور ADMIN.
+ * تُستدعى في بداية أي Server Action تتطلب صلاحية Admin.
+ * توفر Defense in Depth بالإضافة إلى حماية Middleware.
+ */
+export async function requireAdmin(): Promise<{
+  userId: number
+  username: string
+  role: string
+} | { error: string }> {
+  const session = await getSession()
+
+  if (!session) {
+    return { error: 'يجب تسجيل الدخول أولاً' }
+  }
+
+  if (session.role !== 'ADMIN') {
+    return { error: 'ليس لديك صلاحية للقيام بهذه العملية' }
+  }
+
+  return session
+}

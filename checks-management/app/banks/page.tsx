@@ -348,7 +348,11 @@ export default function BanksPage() {
     setLoading(true)
     try {
       const data = await listBanks()
-      setBanks(data)
+      if (Array.isArray(data)) {
+        setBanks(data)
+      } else {
+        showToast(data.error, 'error')
+      }
     } catch {
       showToast('حدث خطأ أثناء تحميل البيانات', 'error')
     } finally {

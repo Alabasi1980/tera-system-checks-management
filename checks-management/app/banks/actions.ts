@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
+import { requireAdmin } from '@/lib/auth'
 
 export type BankItem = {
   id: number
@@ -20,7 +21,10 @@ export type BankFormData = {
   notes?: string
 }
 
-export async function listBanks(): Promise<BankItem[]> {
+export async function listBanks(): Promise<BankItem[] | { error: string }> {
+  const session = await requireAdmin()
+  if ('error' in session) return session
+
   const banks = await prisma.bank.findMany({
     orderBy: { name: 'asc' },
     include: { _count: { select: { checks: true } } },
@@ -40,6 +44,9 @@ export async function listBanks(): Promise<BankItem[]> {
 export async function createBank(
   data: BankFormData
 ): Promise<{ success: true } | { error: string }> {
+  const session = await requireAdmin()
+  if ('error' in session) return session
+
   const existing = await prisma.bank.findFirst({
     where: { name: data.name },
   })
@@ -65,6 +72,9 @@ export async function updateBank(
   id: number,
   data: BankFormData
 ): Promise<{ success: true } | { error: string }> {
+  const session = await requireAdmin()
+  if ('error' in session) return session
+
   const existing = await prisma.bank.findFirst({
     where: { name: data.name, id: { not: id } },
   })
@@ -90,6 +100,9 @@ export async function updateBank(
 export async function deleteBank(
   id: number
 ): Promise<{ success: true } | { error: string }> {
+  const session = await requireAdmin()
+  if ('error' in session) return session
+
   const checkCount = await prisma.check.count({
     where: { bankId: id },
   })

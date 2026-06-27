@@ -47,6 +47,7 @@ For any new session in this project:
 - `2026-06-27`: **EngineeringAgent refactored** — split into EngineeringAgent (Backend/Logic) + FrontendAgent (UI/Styling)
 - `2026-06-27`: **FrontendAgent created** — responsible for all page.tsx, components, CSS, RTL, enforcing 28_UI_UX_GUIDELINES.md
 - `2026-06-27`: **QAAndAcceptanceAgent, DocumentationHandoverAgent, ReportingAnalyticsAgent** — pre-generated for future phases
+- `2026-06-27`: **Defense-in-depth upgrade** — `requireAdmin()` added to `lib/auth.ts`; all Banks Server Actions now verify ADMIN role before executing. Pattern for all future actions.
 
 ## Active Rules You Must Not Miss
 
@@ -73,6 +74,7 @@ For any new session in this project:
 - `DEC-0008` — EngineeringAgent split into Backend/Logic; FrontendAgent owns UI/Styling.
 - `DEC-0009` — Selected generated agents are now active in `.opencode/agents/` for faster delegation.
 - `DEC-0010` — Unified sub-agent lifecycle: needed now vs likely later, draft first, activate only after specialization, restart after activation.
+- `DEC-0011` — `requireAdmin()` added to all Banks Server Actions for defense in depth. Pattern applies to all future actions.
 - `ISSUE-0003` — Secret exposure incident from TASK-0003 was resolved; do not reintroduce secrets into docs or config fallbacks.
 
 ## Available Sub-Agents

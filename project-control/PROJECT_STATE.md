@@ -136,6 +136,7 @@
 | ISSUE-0005 (SEC-002) | Resolved ✅ | تم إصلاحه — خصائص Cookie للـ Logout |
 | ISSUE-0003 (Secret Exposure) | Resolved ✅ | تم تنظيف التسرب في prisma.config.ts + تحديث قواعد المنظومة — راجع ISSUES_AND_GAPS.md |
 | DEC-0004 (Secret Handling Rules) | Active ✅ | قواعد إلزامية جديدة للأسرار في Pre-Execution Gate و Post-Execution Review Gate و handbacks |
+| DEC-0011 (requireAdmin Defense in Depth) | Active ✅ | `requireAdmin()` مضافة في `lib/auth.ts`. جميع Banks Server Actions تتحقق من صلاحية ADMIN قبل التنفيذ. النمط سيطبق على كل الـ Server Actions الجديدة (Parties, Users, Checks). |
 
 ---
 
@@ -159,5 +160,5 @@ TASK-0004 (Auth + Roles) — **مغلق** ✅.
 | البند | القيمة |
 |---|---|
 | Updated By | Tera Agent / Project Owner |
-| Update Reason | TASK-0007 complete. SEC fixes applied. Banks screen S03 built. Issues 0004/0005 resolved. Enhanced Post-Execution Review Gate passed ✅. Selected generated agents activated inside `.opencode/agents/`; EngineeringAgent active prompt replaced with Backend/Logic-only version; FrontendAgent and review/support agents active. | |
-| Next Step | TASK-0008 — شاشة إدارة الجهات (S04) — EngineeringAgent |
+| Update Reason | TASK-0007 closed ✅. SEC fixes applied. Banks screen S03 built. Enhanced Post-Execution Review Gate passed ✅. Defense-in-depth upgrade: `requireAdmin()` added to all Banks Server Actions (create/update/delete/list). Pattern set for all future actions. |
+| Next Step | TASK-0008 — شاشة إدارة الجهات (S04) — EngineeringAgent أولاً (actions.ts), ثم FrontendAgent (page.tsx) |
