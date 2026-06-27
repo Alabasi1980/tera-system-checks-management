@@ -439,6 +439,7 @@ design-source/ عند توفيره من Tera
 - قبل قبول أي مرحلة.
 - بعد تنفيذ أي موديول أو ميزة.
 - قبل التسليم النهائي.
+- بعد أي مهمة تنفيذية تشمل UI أو Workflow أو Acceptance Criteria وتحتاج مراجعة مستقلة بعد التنفيذ.
 
 ### يقرأ
 
@@ -450,6 +451,8 @@ design-source/ عند توفيره من Tera
 05_BUSINESS_WORKFLOWS.md
 07_SCREENS_AND_UI_STRUCTURE.md
 09_IMPLEMENTATION_PLAN.md
+project-control/tasks/[TASK-ID].md عند تكليفه بمراجعة قبول مهمة منفذة
+project-control/PROJECT_ACTIVITY_LOG.md عند الحاجة لتتبع اختبار أو مراجعة قبول
 ```
 
 ### ينتج أو يساهم في
@@ -466,6 +469,7 @@ design-source/ عند توفيره من Tera
 - لا يكتب إصلاحات برمجية.
 - لا يقرر جاهزية التسليم وحده.
 - لا ينفذ مراجعة أمنية متخصصة بدل SecurityAgent.
+- لا يقبل المهمة بنفسه؛ يعيد تقرير المراجعة إلى Tera فقط.
 
 ### معايير القبول
 
@@ -539,7 +543,7 @@ design-source/ عند توفيره من Tera
 |---|---|
 | المعرّف | `SECURITY_AGENT` |
 | الفئة | مشروط |
-| شرط الاستدعاء | بيانات حساسة، صلاحيات متقدمة، مدفوعات، إنترنت عام، حسابات إدارية مهمة |
+| شرط الاستدعاء | بيانات حساسة، أسرار، Auth، Permissions، Middleware، Config، صلاحيات متقدمة، مدفوعات، إنترنت عام، حسابات إدارية مهمة |
 
 ### يقرأ
 
@@ -548,6 +552,11 @@ design-source/ عند توفيره من Tera
 08_TECHNICAL_ARCHITECTURE.md
 15_SECURITY_AND_ACCESS_CONTROL.md
 20_API_CONTRACTS.md
+project-control/tasks/[TASK-ID].md عند مراجعة مهمة منفذة
+project-control/PROJECT_ACTIVITY_LOG.md عند الحاجة
+project-control/ISSUES_AND_GAPS.md عند وجود حادثة أو فجوة أمنية
+project-control/DECISIONS_LOG.md عند الحاجة
+project-control/TERA_ACTIVE_CONTEXT.md إذا كان موجودًا وطلبه Tera
 ```
 
 ### يساهم في
@@ -563,6 +572,9 @@ design-source/ عند توفيره من Tera
 - لا يستبدل QA.
 - لا يغير UX إلا إذا وُجد خطر أمني.
 - لا يقرر تعطيل ميزة دون رفع القرار لتيرا.
+- لا يقبل المهمة بنفسه؛ يسلّم نتيجة المراجعة إلى Tera فقط.
+- عند مراجعة السجلات أو ملفات المهمة، يجب أن يراجع أيضًا النصوص التي أنشأها Tera نفسه، وليس فقط ملفات الكود التي أنشأها EngineeringAgent.
+- عند توثيق أي حادثة Secret Exposure أو ملاحظة أمنية، يجب استخدام `[REDACTED]` فقط وعدم إعادة كتابة القيمة المسرّبة.
 
 ---
 
@@ -787,8 +799,10 @@ project-control/
 ```text
 project-control/TASK_REGISTRY.md
 project-control/PROJECT_ACTIVITY_LOG.md
+project-control/PROJECT_STATE.md
 project-control/ISSUES_AND_GAPS.md
 project-control/DECISIONS_LOG.md
+project-control/TERA_ACTIVE_CONTEXT.md
 project-control/tasks/
 ```
 
@@ -802,6 +816,8 @@ project-control/tasks/
 - لا يغلق مهمة أو مشكلة دون قرار Tera.
 - لا يعطي مهام للعملاء مباشرة.
 - لا يغير حالة مهمة إلى `Accepted` أو `Closed` إلا بعد مراجعة Tera.
+- عند تكليفه بمراجعة بعد التنفيذ، يجب أن يراجع أيضًا السجلات أو الملفات التي أنشأها أو حدّثها Tera نفسه.
+- يمنع كتابة أي قيمة سرية فعلية داخل سجلات `project-control/` حتى عند وصف حادثة أمنية؛ يستخدم `[REDACTED]` فقط.
 
 ### معايير القبول
 
@@ -810,6 +826,7 @@ project-control/tasks/
 - كل مشكلة أو فجوة لها حالة واضحة.
 - كل قرار مهم مسجل في `DECISIONS_LOG.md`.
 - سجل النشاط يوضح آخر نقطة وصل إليها المشروع.
+- مراجعات الاتساق تشمل السجلات التي كتبها Tera نفسه ولا تستثنيها.
 
 ---
 

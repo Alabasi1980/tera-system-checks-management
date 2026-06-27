@@ -112,6 +112,7 @@ Default reference files:
 - Do not store secrets or credentials.
 - Do not write real secrets in outputs, handbacks, task files, logs, command transcripts, or config/code fallback values.
 - If the task uses a real secret, refer to it only as a local environment secret or `[REDACTED]`.
+- Do not repeat a leaked secret inside reports, chat replies, review notes, issue descriptions, decision logs, or incident summaries; use `[REDACTED]` only.
 - Do not delete files unless explicitly allowed.
 - Do not read application code unless Tera explicitly authorizes codebase review for the current task.
 - Do not treat notes in `GENERATED_AGENTS_MANIFEST.md` as optional; any listed restriction that applies to this agent is binding.
@@ -165,6 +166,7 @@ Every handback must include the `Task ID`, the exact `Handback Record Target`, a
 If the agent is not explicitly authorized to write inside `project-control/`, it must not update task logs directly; it must return a structured handback to Tera so Tera or `ProjectControlAgent` can record it inside `project-control/tasks/[TASK-ID].md`.
 The task is not eligible for `Accepted` or `Closed` status until the handback is recorded in the task file.
 If the task used secrets, the handback must redact them and must not repeat any live password, token, or full real connection string.
+If the task involved a security incident or secret exposure, the handback must describe it without repeating the leaked value and must use `[REDACTED]` only.
 ```
 
 ---

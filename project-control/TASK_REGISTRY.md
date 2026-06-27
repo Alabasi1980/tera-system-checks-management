@@ -30,4 +30,5 @@ Closed
 | TASK-0001 | Scaffold Next.js + TypeScript + Prisma + .env.example | EngineeringAgent | Phase 1 — Technical Foundation | Closed | `project-control/tasks/TASK-0001.md` | 2026-06-27 |
 | TASK-0002 | إنشاء Prisma Data Models (users, banks, parties, checks) | EngineeringAgent | Phase 2 — Data Model | Closed | `project-control/tasks/TASK-0002.md` | 2026-06-27 |
 | TASK-0003 | إنشاء قاعدة البيانات checks_management + أول Migration | EngineeringAgent | Phase 3 — Database Setup | Closed | `project-control/tasks/TASK-0003.md` | 2026-06-27 |
+| TASK-0004 | إعداد المصادقة والصلاحيات (Authentication + Roles) | EngineeringAgent | Phase 3 — Authentication | Closed | `project-control/tasks/TASK-0004.md` | 2026-06-27 |
 

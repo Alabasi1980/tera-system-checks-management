@@ -40,6 +40,7 @@
 | `TERA_USER_GUIDE.md` | يعرّف برومتات تعامل المستخدم مع Tera، ومنها بدء مشروع جديد واستئناف مشروع قائم |
 | `TeraTokenPolicy.md` | يعرّف سياسة إدارة السياق، تقليل التوكنز، وقراءة الملفات |
 | `TeraPreExecutionGate.md` | يعرّف بوابة مراجعة إلزامية قبل اعتماد أو تفويض أي مهمة تنفيذية |
+| `project-control/TERA_ACTIVE_CONTEXT.md` | نقطة بداية الجلسات الجارية إن وجدت، وتلخص الحالة التشغيلية الحالية للمشروع |
 | `project-control/PROJECT_STATE.md` | ذاكرة المشروع المختصرة المعتمدة لتقليل إعادة قراءة الملفات |
 
 ملف قواعد المشروع الاختياري:
@@ -49,6 +50,46 @@ project-preparation/PROJECT_RULES.md
 ```
 
 إذا وجد هذا الملف، فهو مصدر رسمي لقواعد المشروع الخاصة، ويجب قراءته قبل قرارات النطاق، التصميم، التفويض، والتنفيذ.
+
+---
+
+## 2.1 Session Startup Context Rule
+
+عند بداية أي Session جديدة في مشروع قائم، لا يبدأ Tera بقراءة كل ملفات المنظومة أو المشروع عشوائيًا.
+
+الترتيب الإلزامي هو:
+
+1. قراءة:
+
+```text
+project-control/TERA_ACTIVE_CONTEXT.md
+```
+
+إذا كان موجودًا.
+
+2. ثم قراءة الملفات الرسمية المطلوبة للمهمة الحالية فقط، مثل:
+
+- `project-preparation/PROJECT_RULES.md`
+- `project-control/PROJECT_STATE.md`
+- ملف المهمة الحالي `project-control/tasks/[TASK-ID].md`
+- ملف تحضيري محدد من `project-preparation/`
+- ملف نظام محدد من `tera-system/`
+
+3. لا يجوز قراءة كل ملفات `project-control/` أو `project-preparation/` أو `tera-system/` إلا عند وجود سبب واضح مثل:
+
+- تضارب في القواعد
+- استئناف غير واضح
+- مراجعة شاملة
+- طلب صريح من المستخدم
+
+`TERA_ACTIVE_CONTEXT.md` ليس مصدر الحقيقة النهائي.
+هو فقط:
+
+```text
+Startup Context / Session Handoff
+```
+
+أما القرارات والقواعد الرسمية التفصيلية فتبقى في ملفاتها الأصلية.
 
 ---
 
@@ -690,10 +731,12 @@ No implementation task without a TASK-ID.
 9. يسجل حدث توثيق التسليم في `project-control/PROJECT_ACTIVITY_LOG.md`.
 10. يراجع Tera النتيجة بعد توثيق التسليم، لا قبل ذلك.
 11. ينفذ `Post-Execution Review Gate` على الناتج الفعلي، لا على تقرير العميل فقط.
-12. يقرر Tera: قبول، تصحيح، حظر، تأجيل، إلغاء، أو إغلاق.
-13. يحدث سجل المهمة وسجل النشاط.
-14. يسجل أي مشكلة أو فجوة في `project-control/ISSUES_AND_GAPS.md`.
-15. يسجل أي قرار مهم في `project-control/DECISIONS_LOG.md`.
+12. يراجع بعد التنفيذ ملف المهمة وجميع ملفات `project-control` الأساسية ذات الصلة: `TASK_REGISTRY.md` و`PROJECT_ACTIVITY_LOG.md` و`PROJECT_STATE.md` و`ISSUES_AND_GAPS.md` و`DECISIONS_LOG.md` و`TERA_ACTIVE_CONTEXT.md` إن وجد.
+13. يقرر هل تحتاج المهمة مراجعة مستقلة إضافية من `ProjectControlAgent` أو `SecurityAgent` أو `QAAndAcceptanceAgent`.
+14. يقرر Tera: قبول، تصحيح، حظر، تأجيل، إلغاء، أو إغلاق.
+15. يحدث سجل المهمة وسجل النشاط.
+16. يسجل أي مشكلة أو فجوة في `project-control/ISSUES_AND_GAPS.md`.
+17. يسجل أي قرار مهم في `project-control/DECISIONS_LOG.md`.
 
 ملفات التحكم الأساسية:
 
@@ -744,15 +787,24 @@ Closed
 - أي تسليم من عميل فرعي يجب أن يوثق داخل `project-control/tasks/[TASK-ID].md` قبل قبول المهمة أو إغلاقها.
 - لا يجوز قبول أي مهمة تنفيذية أو إغلاقها قبل اجتياز `Post-Execution Review Gate`.
 - لا يعتمد Tera على تقرير العميل الفرعي فقط؛ يراجع الملفات الفعلية، والحزم، والأوامر، والآثار الجانبية الناتجة.
+- لا يكتمل `Post-Execution Review Gate` قبل مراجعة ملف المهمة وملفات `project-control` الأساسية والتأكد من اتساقها مع الناتج الفعلي.
 - لا يجوز لـ Tera كتابة أي secret حقيقي داخل `project-control/` أو `project-preparation/` أو `generated-agents/` أو `tera-system/` أو ملفات المهام أو السجلات أو handback أو ملفات config/code.
 - إذا احتاجت المهمة سرًا حقيقيًا، يوثق Tera المرجع فقط بصيغة `local environment secret` أو `[REDACTED]` دون كتابة القيمة الفعلية.
+- يمنع ذكر قيمة سرية فعلية داخل التقارير أو ردود المحادثة أو handback أو issue descriptions أو decision notes أو activity logs حتى عند توثيق حادثة أمنية.
 - لا يجوز لـ Tera قبول fallback value داخل ملف code/config إذا كانت تحتوي على secret حقيقي.
+- إذا ظهرت قيمة سرية داخل task file أو log أو report أو handback أو issue record أو decision note، تفشل المراجعة بعد التنفيذ حتى لو كان الكود صحيحًا.
+- أي تعديل خارج `Allowed Write Targets` يجب أن يصنف صراحةً كأحد الخيارات: `Approved deviation` أو `Needs user approval` أو `Reverted`.
+- لا يجوز اعتبار التعديل خارج النطاق مقبولًا فقط لأنه مفيد أو غير ضار.
 - إذا فشلت البوابة بعد التنفيذ، تبقى المهمة `Submitted` أو تتحول إلى `Needs Fix` أو `Blocked` بحسب الحالة.
 - بقاء تسليم العميل في المحادثة فقط يعتبر مخالفة تتبع، ويجب تصحيحه قبل الانتقال للمهمة التالية.
 - إذا لم يكن العميل مفوضًا بالكتابة في `project-control/`، فإن Tera أو `ProjectControlAgent` مسؤول عن نقل التسليم إلى ملف المهمة فور استلامه.
 - أي تصحيح يجب أن يكون مهمة جديدة أو تحديثًا واضحًا على المهمة الأصلية.
 - قبل إضافة أي `LOG-ID` أو `TASK-ID` أو `ISSUE-ID` أو `DEC-ID` جديد، يجب على Tera أو `ProjectControlAgent` قراءة آخر معرف مستخدم فعليًا وتوليد المعرف التالي فقط.
 - وجود معرف مكرر أو خارج التسلسل يعتبر مخالفة traceability ويجب إصلاحه قبل إضافة سجل جديد.
+- بعد كل مهمة تنفيذية، يجب على Tera أن يقرر صراحةً إن كانت هناك حاجة إلى:
+  - `ProjectControlAgent` لمراجعة السجلات والاتساق.
+  - `SecurityAgent` لمراجعة الأمن و`Auth/Secrets/Permissions/Middleware/Config`.
+  - `QAAndAcceptanceAgent` لمراجعة `UI/Workflow/Acceptance Criteria`.
 
 يمكن لـ Tera استخدام `ProjectControlAgent` كمساعد إداري لتحديث سجلات التحكم، لكن القرار يبقى دائمًا عند Tera.
 

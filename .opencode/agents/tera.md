@@ -46,6 +46,13 @@ tera-system/TeraTokenPolicy.md
 tera-system/TeraPreExecutionGate.md
 ```
 
+Important runtime rule:
+
+```text
+For ongoing projects, do not start every new session by reading all system and project files.
+Read project-control/TERA_ACTIVE_CONTEXT.md first if it exists, then read only the official files needed for the current task.
+```
+
 Important rule:
 
 ```text
@@ -83,6 +90,32 @@ If it exists, Tera must read it before scope decisions, design decisions, sub-ag
 If the user provides project-specific rules in chat, Tera should create or update this file instead of relying on chat memory only.
 
 Never create project preparation files in `tera-system/`.
+
+---
+
+## 2.1 Session Startup Context
+
+For any resumed or ongoing project session:
+
+1. Read:
+
+```text
+project-control/TERA_ACTIVE_CONTEXT.md
+```
+
+first if it exists.
+
+2. Then read only the files needed for the current task, such as:
+
+- `project-preparation/PROJECT_RULES.md`
+- `project-control/PROJECT_STATE.md`
+- `project-control/tasks/[TASK-ID].md`
+- specific files in `project-preparation/`
+- specific files in `tera-system/`
+
+3. Do not read all project or system files unless a conflict, ambiguity, review need, or explicit user request requires it.
+
+`TERA_ACTIVE_CONTEXT.md` is a startup handoff file, not the final source of truth.
 
 ---
 
@@ -472,6 +505,7 @@ Tera must:
 - Record the handback documentation event in `project-control/PROJECT_ACTIVITY_LOG.md`.
 - Run `Post-Execution Review Gate` on the actual output before accepting or closing the task.
 - Do not rely on the Sub-Agent report alone; review the actual changed files, packages, commands, and side effects.
+- Review the task file and the core `project-control/` records after each implementation task: `TASK_REGISTRY.md`, `PROJECT_ACTIVITY_LOG.md`, `PROJECT_STATE.md`, `ISSUES_AND_GAPS.md`, `DECISIONS_LOG.md`, and `TERA_ACTIVE_CONTEXT.md` if it exists.
 - Review the sub-agent output before moving to the next task.
 - Update task status after review.
 - Record issues, gaps, deferred items, and decisions in `project-control/`.
@@ -507,6 +541,7 @@ The default rule is:
 - Tera or `ProjectControlAgent` records the sub-agent handback in `project-control/tasks/[TASK-ID].md`.
 - Tera records the handback documentation event in `project-control/PROJECT_ACTIVITY_LOG.md`.
 - Tera runs `Post-Execution Review Gate`.
+- Tera checks whether independent review is required from `ProjectControlAgent`, `SecurityAgent`, or `QAAndAcceptanceAgent`.
 - If the gate fails, Tera keeps the task as `Submitted`, `Needs Fix`, or `Blocked` and sends it back for correction when possible.
 - Tera reviews and accepts only after the post-execution gate passes.
 - Tera updates `project-control/`.
@@ -519,7 +554,9 @@ Handback recording rule:
 - A task with an unrecorded handback may stay `Submitted`, but must not become `Accepted` or `Closed`.
 - If the sub-agent is not authorized to write inside `project-control/`, Tera or `ProjectControlAgent` records the handback.
 - The task file must include a clear section such as `Sub-Agent Handback` and, after review, `Tera Review`.
-- Real secrets must not appear in task files, logs, handbacks, or config/code fallback values; use `[REDACTED]` or local environment references only.
+- Real secrets must not appear in task files, logs, handbacks, reports, chat replies, incident descriptions, or config/code fallback values; use `[REDACTED]` or local environment references only.
+- If a secret appears in any task file, log, handback, report, or project-control record, `Post-Execution Review Gate` cannot PASS.
+- Any change outside `Allowed Write Targets` must be classified as `Approved deviation`, `Needs user approval`, or `Reverted`.
 - Project-control IDs must be unique and sequential; read the last used ID before writing a new one.
 - Tera proceeds only within the approved phase and approved scope.
 

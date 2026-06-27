@@ -20,10 +20,10 @@
 
 لا يُسمح لـ Tera Agent أو أي Sub-Agent باستخدام **Full Context** افتراضيًا.
 
-السياق الافتراضي لأي مهمة هو:
+السياق الافتراضي لأي مهمة أو Session جارية هو:
 
 ```text
-Task Context + PROJECT_STATE.md + الملفات المحددة صراحة في التفويض
+TERA_ACTIVE_CONTEXT.md (if exists) + Task Context + الملفات المحددة صراحة في التفويض
 ```
 
 أي قراءة كاملة لعدة ملفات أو لكل المشروع تحتاج سببًا واضحًا وقد تحتاج موافقة المستخدم.
@@ -36,6 +36,7 @@ Task Context + PROJECT_STATE.md + الملفات المحددة صراحة في 
 
 | المصدر | الاستخدام |
 |---|---|
+| `project-control/TERA_ACTIVE_CONTEXT.md` | نقطة البداية المختصرة للجلسات الجارية واستئناف العمل |
 | `project-control/PROJECT_STATE.md` | الذاكرة المختصرة المعتمدة للمشروع |
 | `project-preparation/TERA_PROJECT_DECISION.md` | قرار المشروع الافتتاحي |
 | `project-preparation/PROJECT_RULES.md` | قواعد المشروع الخاصة عند وجودها |
@@ -234,6 +235,41 @@ project-control/PROJECT_STATE.md
 
 هذا الملف يجب أن يبقى مختصرًا.  
 لا يتحول إلى سجل تفصيلي طويل؛ التفاصيل تبقى في ملفاتها الرسمية.
+
+---
+
+## 13.1 TERA_ACTIVE_CONTEXT.md
+
+إذا وجد الملف:
+
+```text
+project-control/TERA_ACTIVE_CONTEXT.md
+```
+
+فيجب أن يكون نقطة البداية الأولى لأي Session جديدة في مشروع قائم.
+
+وظيفته:
+
+- تلخيص الحالة التشغيلية الحالية
+- تلخيص القواعد النشطة
+- توضيح آخر المهام المغلقة والمهمة التالية
+- توجيه Tera إلى الملفات التي يجب قراءتها عند الحاجة فقط
+
+قيوده:
+
+- لا يحتوي أسرارًا
+- لا يحتوي سجلات كاملة
+- لا يحتوي تفاصيل تنفيذ طويلة
+- لا يصبح نسخة من `PROJECT_STATE.md` أو `PROJECT_ACTIVITY_LOG.md`
+- يحدث بعد كل Task مهمة أو عند إغلاق مرحلة
+
+القاعدة:
+
+```text
+TERA_ACTIVE_CONTEXT.md = startup handoff
+PROJECT_STATE.md = official compact project memory
+Other files = detailed source of truth when needed
+```
 
 ---
 

@@ -19,7 +19,7 @@
 | اسم المشروع | تطبيق إدارة الشيكات |
 | نوع المشروع | تطبيق ويب مستقل |
 | حجم المشروع | صغير / MVP |
-| المرحلة الحالية | Phase 3 (Database Setup) مكتمل ✅ — TASK-0001 (Scaffold) ✅, TASK-0002 (Data Models) ✅, TASK-0003 (Migration) ✅ — بانتظار Phase 4 |
+| المرحلة الحالية | Phase 3 (Authentication) مكتمل ✅ — TASK-0004 (Login + JWT + Middleware + Roles + Seed) مغلق. مستعد للمرحلة 4. |
 | بيئة التشغيل | OpenCode |
 | التقنية المعتمدة | Next.js + TypeScript + PostgreSQL + Prisma |
 | مصدر التفاصيل | `project-preparation/` |
@@ -104,7 +104,7 @@
 | وضع العمل قبل التنفيذ | Plan Mode |
 | Build Mode | يحتاج موافقة صريحة |
 | Pre-Execution Gate | إلزامي قبل أي تفويض أو تنفيذ |
-| Post-Execution Review Gate | إلزامي بعد كل مهمة تنفيذية قبل `Accepted` أو `Closed` |
+| Post-Execution Review Gate | إلزامي بعد كل مهمة تنفيذية قبل `Accepted` أو `Closed`، ويشمل مراجعة ملفات `project-control` الأساسية وفحص السجلات لأي Secret Exposure أو خلل اتساق |
 
 ---
 
@@ -117,6 +117,7 @@
 | TASK-0001 | Closed ✅ | Scaffold Next.js + Prisma + .env.example |
 | TASK-0002 | Closed ✅ | Prisma Data Models — 4 models + prisma.config.ts |
 | TASK-0003 | Closed ✅ | إنشاء قاعدة البيانات checks_management + أول Migration عبر `prisma migrate dev` (PostgreSQL 18 + Prisma 7.8.0) |
+| TASK-0004 | Closed ✅ | إعداد المصادقة والصلاحيات — Login + JWT + Middleware + Seed (Admin/User roles) |
 | ISSUE-0003 (Secret Exposure) | Resolved ✅ | تم تنظيف التسرب في prisma.config.ts + تحديث قواعد المنظومة — راجع ISSUES_AND_GAPS.md |
 | DEC-0004 (Secret Handling Rules) | Active ✅ | قواعد إلزامية جديدة للأسرار في Pre-Execution Gate و Post-Execution Review Gate و handbacks |
 
@@ -131,7 +132,7 @@ EngineeringAgent مولّد وجاهز للتفويض.
 TASK-0001 (Scaffold) — **مغلق** ✅.
 TASK-0002 (Prisma Data Models) — **مغلق** ✅.
 TASK-0003 (Database + Migration) — **مغلق** ✅.
-المراحل 1 و 2 و 3 مكتملة.
+TASK-0004 (Auth + Roles) — **مغلق** ✅.
 ⚠️ **Security Remediation**: TASK-0003 كشف عن تسرب كلمة مرور حقيقية في fallback داخل `prisma.config.ts`. تم التنظيف وتحديث قواعد المنظومة بالكامل. راجع ISSUE-0003 و DEC-0004.
 **إلزامية:** قبل أي TASK جديدة، يجب مراجعة PROJECT_STATE.md و PROJECT_RULES.md.
 
@@ -142,5 +143,5 @@ TASK-0003 (Database + Migration) — **مغلق** ✅.
 | البند | القيمة |
 |---|---|
 | Updated By | Tera Agent / Project Owner |
-| Update Reason | TASK-0003 Security Remediation: secret exposure cleaned in prisma.config.ts. System rules updated with secret handling, redaction, SECRET_EXPOSURE rejection code. Pre/Post-Execution Gates strengthened. |
-| Next Step | تقييم الجاهزية لـ TASK-0004 — حسب خطة التنفيذ (Phase 3: المصادقة والصلاحيات) |
+| Update Reason | TASK-0004 closed. Auth system implemented: JWT login, middleware, Admin/User roles, seed script. Build passes. Post-Execution Review second pass completed — minor project-control fixes applied. |
+| Next Step | مستعد لـ TASK-0005 — شاشة إدارة الشيكات (Phase 4) بعد معالجة Layout RTL |

@@ -217,11 +217,23 @@ Create/update .env locally with DATABASE_URL from user-provided secret.
 
 ولا يجوز كتابة السر نفسه داخل ملف المهمة أو السجل أو التقرير.
 
+ويمتد هذا المنع أيضًا إلى:
+
+- ردود المحادثة.
+- handback texts.
+- review notes.
+- incident descriptions.
+- activity logs.
+- decision logs.
+- post-task summaries.
+
 عند توثيق سلسلة اتصال أو أمر يستخدم سرًا، يجب استخدام صيغة redacted فقط، مثل:
 
 ```text
 postgresql://postgres:[REDACTED]@localhost:5432/checks_management
 ```
+
+وعند توثيق أي حادثة `Secret Exposure` أو حادثة أمنية مشابهة، يمنع تكرار القيمة المسرّبة نهائيًا في أي ملف أو تقرير أو handback أو log أو رد محادثة. يجب استخدام `[REDACTED]` فقط حتى عند وصف الحادثة نفسها.
 
 القاعدة الأساسية:
 
@@ -325,7 +337,36 @@ Blocked
 | 19 | هل تم الالتزام بمعايير القبول؟ | Yes |
 | 20 | هل المخرجات قابلة للتشغيل أو الاختبار؟ | Yes |
 | 21 | هل توجد آثار جانبية من أوامر CLI لم تكن متوقعة؟ | No |
-| 22 | هل تم تحديث سجل المهمة والسجلات الإدارية بشكل صحيح وبدون IDs مكررة؟ | Yes |
+| 22 | هل تم تحديث ملف المهمة والسجلات الإدارية الأساسية بشكل صحيح وبدون IDs مكررة؟ | Yes |
+| 23 | هل تمت مراجعة `project-control/TASK_REGISTRY.md` بعد التنفيذ؟ | Yes |
+| 24 | هل تمت مراجعة `project-control/PROJECT_ACTIVITY_LOG.md` بعد التنفيذ؟ | Yes |
+| 25 | هل تمت مراجعة `project-control/PROJECT_STATE.md` بعد التنفيذ؟ | Yes |
+| 26 | هل تمت مراجعة `project-control/ISSUES_AND_GAPS.md` بعد التنفيذ؟ | Yes |
+| 27 | هل تمت مراجعة `project-control/DECISIONS_LOG.md` وملف المهمة نفسه بعد التنفيذ؟ | Yes |
+| 28 | هل تمت مراجعة `project-control/TERA_ACTIVE_CONTEXT.md` إذا كان موجودًا؟ | Yes / N/A |
+| 29 | هل تم تصنيف أي تعديل خارج Allowed Write Targets إلى `Approved deviation` أو `Needs user approval` أو `Reverted`؟ | Yes / N/A |
+| 30 | هل قرر Tera بوضوح إن كانت المهمة تحتاج مراجعة مستقلة من `ProjectControlAgent` أو `SecurityAgent` أو `QAAndAcceptanceAgent`؟ | Yes |
+
+### Control Files Review Rule
+
+بعد كل مهمة تنفيذية، لا يكتفي Tera بمراجعة الكود أو الملفات المتغيرة فقط.
+يجب عليه مراجعة ملفات التحكم الأساسية التالية أيضًا قبل قبول المهمة:
+
+- `project-control/TASK_REGISTRY.md`
+- `project-control/PROJECT_ACTIVITY_LOG.md`
+- `project-control/PROJECT_STATE.md`
+- `project-control/ISSUES_AND_GAPS.md`
+- `project-control/DECISIONS_LOG.md`
+- `project-control/tasks/[TASK-ID].md`
+- `project-control/TERA_ACTIVE_CONTEXT.md` إذا كان موجودًا
+
+والغرض من هذه المراجعة هو التأكد من:
+
+- عدم وجود IDs مكررة أو غير متسلسلة.
+- عدم وجود تسريب أسرار داخل السجلات أو ملفات المهام.
+- عدم وجود تناقض بين حالة المهمة والسجل والنشاط والقرارات.
+- عدم بقاء handback أو review أو incident description بصياغة غير منقحة.
+- عدم وجود فجوة توثيقية بين ما نُفذ فعليًا وما سُجِّل إداريًا.
 
 ### نتائج البوابة
 
@@ -342,6 +383,20 @@ BLOCKED
 - `BLOCKED`: ظهرت مشكلة لا يمكن إصلاحها دون قرار من المستخدم أو تعديل نطاق المهمة.
 
 لا يجوز أن تحصل المهمة على `PASS` إذا ظهر أي secret حقيقي خارج ملفات البيئة المحلية المعتمدة.
+وإذا ظهرت قيمة سرية داخل task file أو log أو report أو handback أو issue record أو decision note، فإن نتيجة `Post-Execution Review Gate` تصبح `NEEDS_FIX` أو `BLOCKED` حتى لو كان الكود نفسه صحيحًا.
+
+### Allowed Write Target Deviation Rule
+
+أي تعديل خارج `Allowed Write Targets` يجب أن يُصنَّف صراحةً كأحد الخيارات التالية:
+
+```text
+Approved deviation
+Needs user approval
+Reverted
+```
+
+ولا يجوز اعتبار التعديل مقبولًا فقط لأنه "مفيد" أو "غير ضار".
+إذا لم يُصنَّف الانحراف بوضوح، فلا يجوز أن تحصل المهمة على `PASS`.
 
 ### قاعدة `NEEDS_FIX`
 
@@ -365,6 +420,16 @@ Root Cause: Tera delegation used create-next-app without --no-tailwind, causing 
 ```
 
 ثم يضيف Tera توصية عملية لتجنب تكرار الخطأ في المهام القادمة.
+
+### Independent Review Decision Rule
+
+بعد كل مهمة تنفيذية، يجب على Tera أن يقرر صراحةً هل تحتاج المهمة مراجعة مستقلة إضافية قبل القبول النهائي:
+
+- `ProjectControlAgent` عندما تكون الحاجة إلى مراجعة السجلات، الاتساق، التسلسل، أو اكتمال التوثيق.
+- `SecurityAgent` عندما تشمل المهمة `Auth`, `Secrets`, `Permissions`, `Middleware`, `Config`, أو أي سلوك أمني مشابه.
+- `QAAndAcceptanceAgent` عندما تشمل المهمة `UI`, `Workflow`, أو `Acceptance Criteria` تحتاج تحققًا وظيفيًا مستقلًا.
+
+إذا قرر Tera أن المراجعة المستقلة غير مطلوبة، يجب أن يذكر السبب داخل نتيجة المراجعة بعد التنفيذ.
 
 ### قاعدة خاصة بمهام Scaffold
 
@@ -437,7 +502,11 @@ The task cannot PASS if forbidden package traces remain in lockfiles or source c
 | No unauthorized API/Auth created | PASS / FAIL | ... |
 | Acceptance criteria satisfied | PASS / FAIL | ... |
 | CLI side effects reviewed | PASS / FAIL | ... |
+| Task file and core project-control records reviewed | PASS / FAIL | ... |
+| No secret leakage in task files/logs/reports/handbacks | PASS / FAIL | ... |
 | No duplicate project-control IDs created | PASS / FAIL | ... |
+| Any out-of-target changes classified | PASS / FAIL / N/A | ... |
+| Independent review decision recorded | PASS / FAIL | ... |
 
 Gate Status: PASS / NEEDS_FIX / BLOCKED
 
@@ -446,6 +515,14 @@ Root Cause if failed:
 
 Required Action:
 - ...
+
+Independent Review:
+- ProjectControlAgent: Required / Not Required
+- SecurityAgent: Required / Not Required
+- QAAndAcceptanceAgent: Required / Not Required
+
+Deviation Classification:
+- Approved deviation / Needs user approval / Reverted / N/A
 ```
 
 ---
