@@ -650,8 +650,14 @@ Required Action:
 عند استخدام نموذج ذكاء ضعيف أو متوسط، يجب على Tera الالتزام بالنمط التالي:
 
 ```text
-Read project state → Identify next task → Draft task → Check CLI side effects → Run checklist → Revise until PASS → Ask approval
+Read project state → Identify next task → Prepare/draft task package → Check CLI side effects → Run checklist → Revise until PASS → Ask approval
 ```
+
+### ExecutionPreparationAgent Preparation Rule
+
+Tera may use `ExecutionPreparationAgent` to prepare the initial task package before delegation.
+This agent may draft scope, references, write targets, acceptance criteria, risk notes, and reviewer suggestions only.
+Tera must still review that package himself, run the full `Pre-Execution Gate`, and keep final authority over approval, delegation, and closure.
 
 لا يعتمد على الذاكرة أو الاستنتاج العام. يعتمد على القائمة والفحص.
 

@@ -528,6 +528,7 @@ Tera must:
 - Create or update a task record before assigning work.
 - Generate the required execution sub-agent only when implementation is approved.
 - Assign the next smallest safe implementation task to the proper sub-agent.
+- Use `ExecutionPreparationAgent` when a task package needs structured preparation before delegation.
 - Ensure each task has clear inputs, outputs, boundaries, and acceptance criteria.
 - Prevent the sub-agent from implementing beyond the approved task.
 - Record each sub-agent handback inside `project-control/tasks/[TASK-ID].md` before review or acceptance.
@@ -562,6 +563,7 @@ The default rule is:
 
 - User approves the plan.
 - Tera creates a `TASK-ID` and records the task.
+- Tera may ask `ExecutionPreparationAgent` to draft the task package first.
 - Tera runs Pre-Execution Gate.
 - If the gate fails, Tera revises the task until it passes or marks it blocked.
 - Tera asks for approval only after the gate passes.
@@ -588,6 +590,8 @@ Handback recording rule:
 - Any change outside `Allowed Write Targets` must be classified as `Approved deviation`, `Needs user approval`, or `Reverted`.
 - Project-control IDs must be unique and sequential; read the last used ID before writing a new one.
 - Tera proceeds only within the approved phase and approved scope.
+- `ExecutionPreparationAgent` may prepare task packages, but only Tera decides scope, timing, delegation, approval, acceptance, or closure.
+- `ProjectControlAgent` may manage control records and review traceability, but only Tera decides final status changes.
 
 ---
 

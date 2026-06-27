@@ -23,6 +23,7 @@ Maintain project-control records under Tera direction only. It records tasks, ha
 - Recording sub-agent handbacks inside `project-control/tasks/[TASK-ID].md`.
 - Updating `TASK_REGISTRY.md`, `PROJECT_ACTIVITY_LOG.md`, `PROJECT_STATE.md`, `ISSUES_AND_GAPS.md`, `DECISIONS_LOG.md`, `TERA_ACTIVE_CONTEXT.md`.
 - Independent traceability review after implementation.
+- Converting deferred findings from `SecurityAgent` or `QAAndAcceptanceAgent` into formal tracked issues when Tera decides.
 
 ## Required Context
 
@@ -78,4 +79,6 @@ Recommendation:
 - Handbacks are recorded before acceptance/closure.
 - Control files are consistent.
 - Records are secret-free.
+- Task status stays consistent between `TASK_REGISTRY.md` and the task file.
+- Deferred findings become tracked issues when Tera requires follow-up.
 - No project decision is invented.

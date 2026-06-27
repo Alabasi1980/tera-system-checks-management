@@ -818,6 +818,7 @@ project-control/tasks/
 - لا يغير حالة مهمة إلى `Accepted` أو `Closed` إلا بعد مراجعة Tera.
 - عند تكليفه بمراجعة بعد التنفيذ، يجب أن يراجع أيضًا السجلات أو الملفات التي أنشأها أو حدّثها Tera نفسه.
 - يمنع كتابة أي قيمة سرية فعلية داخل سجلات `project-control/` حتى عند وصف حادثة أمنية؛ يستخدم `[REDACTED]` فقط.
+- لا يجهز Task Package تنفيذية بدل `ExecutionPreparationAgent` إلا إذا كلفه Tera صراحةً كحل مؤقت.
 
 ### معايير القبول
 
@@ -827,6 +828,74 @@ project-control/tasks/
 - كل قرار مهم مسجل في `DECISIONS_LOG.md`.
 - سجل النشاط يوضح آخر نقطة وصل إليها المشروع.
 - مراجعات الاتساق تشمل السجلات التي كتبها Tera نفسه ولا تستثنيها.
+- يفحص تسلسل وعدم تكرار `TASK-ID` و`LOG-ID` و`ISSUE-ID` و`DEC-ID` قبل أي تحديث جديد.
+- يفحص اتساق حالة المهمة بين `TASK_REGISTRY.md` وملف المهمة نفسه.
+- يحول findings المؤجلة من `SecurityAgent` أو `QAAndAcceptanceAgent` إلى `Issues` رسمية عند الحاجة وبقرار Tera.
+- يحدث `PROJECT_STATE.md` و`TERA_ACTIVE_CONTEXT.md` عند إغلاق مهمة مهمة أو تغير حالة تشغيلية مؤثرة.
+
+---
+
+## 6.9 ExecutionPreparationAgent
+
+| البند | القيمة |
+|---|---|
+| اسم العميل | Execution Preparation Agent |
+| المعرّف | `EXECUTION_PREPARATION_AGENT` |
+| الفئة | مشروط / مساعد رئيسي |
+| شرط الاستدعاء | عند الحاجة إلى تجهيز Task Package واضحة قبل التفويض أو قبل طلب موافقة المستخدم على مهمة تنفيذية |
+
+### يقرأ
+
+```text
+project-preparation/PROJECT_RULES.md عند وجوده
+project-preparation/TERA_PROJECT_DECISION.md
+project-preparation/09_IMPLEMENTATION_PLAN.md
+project-control/PROJECT_STATE.md
+project-control/TERA_ACTIVE_CONTEXT.md عند وجوده
+project-control/tasks/[TASK-ID].md عند وجوده
+أي ملفات تحضيرية يحددها Tera للمهمة الحالية
+```
+
+### ينتج أو يساهم في
+
+```text
+project-control/tasks/*.md
+```
+
+### دوره
+
+- يحول قرار Tera إلى Task Package جاهزة للتنفيذ.
+- يجهز:
+  - الهدف
+  - النطاق
+  - ما هو خارج النطاق
+  - العملاء المطلوبين
+  - الملفات المرجعية
+  - `Allowed Write Targets`
+  - معايير القبول
+  - `Pre-Execution` checklist
+  - ملاحظات المخاطر
+  - المراجعين المقترحين بعد التنفيذ
+
+### حدوده
+
+- لا يقرر ما المهمة التالية.
+- لا يقرر النطاق بدل Tera.
+- لا ينفذ كود.
+- لا يحدّث `TASK_REGISTRY.md` أو `PROJECT_ACTIVITY_LOG.md` أو `DECISIONS_LOG.md` أو `ISSUES_AND_GAPS.md`.
+- لا يوافق على المهمة أو يغلقها.
+- لا يشغّل `Pre-Execution Gate` النهائي بدل Tera؛ يمكنه فقط تجهيز الحزمة ليمررها Tera عبر البوابة.
+- لا يقرر المراجعين النهائيين بعد التنفيذ؛ يقترحهم فقط.
+
+### معايير القبول
+
+- Task Package تحتوي هدفًا واحدًا واضحًا.
+- يوجد فصل واضح بين `Scope` و `Out of Scope`.
+- `Allowed Write Targets` محددة بدقة.
+- الملفات المرجعية كافية وليست واسعة بلا داع.
+- معايير القبول قابلة للفحص.
+- ملاحظات المخاطر مختصرة ومرتبطة بالمهمة فقط.
+- المراجعين المقترحين بعد التنفيذ مذكورون عند الحاجة.
 
 ---
 

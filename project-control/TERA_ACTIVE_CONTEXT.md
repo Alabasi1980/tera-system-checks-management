@@ -25,29 +25,26 @@ For any new session in this project:
 | Size | Small MVP |
 | Runtime | OpenCode |
 | Approved Tech | Next.js + TypeScript + PostgreSQL + Prisma |
-| Current Phase | Phase 4 active — Banks Screen S03 complete ✅ |
-| Next Task | `TASK-0008` — Parties Screen (S04) |
+| Current Phase | Phase 4 active - Banks Screen S03 complete |
+| Next Task | `TASK-0008` - Parties Screen (S04) |
 | Current Lead Agent | `Tera Agent` |
-| Expected Execution Agent | `EngineeringAgent` |
+| Expected Execution Agents | `EngineeringAgent` + `FrontendAgent` |
 
 ## Last Closed Tasks
 
-- `TASK-0001` — Scaffold Next.js + TypeScript + Prisma + `.env.example`
-- `TASK-0002` — Prisma data models
-- `TASK-0003` — Local database creation + first Prisma migration
-- `TASK-0004` — Authentication + Roles (login, JWT, middleware, seed)
-- `TASK-0005` — SecurityAgent independent security review of TASK-0004 (PASS ✅, Closed)
-- `TASK-0006` — Preparation: workflow-rules.md + screen-spec-s03.md (Closed ✅)
-- `TASK-0007` — SEC-001 + SEC-002 fixes + Banks Screen S03 (Closed ✅)
-- `ISSUE-0004` — SEC-001 (User Enumeration) — Resolved ✅
-- `ISSUE-0005` — SEC-002 (Logout cookie flags) — Resolved ✅
+- `TASK-0001` - Scaffold Next.js + TypeScript + Prisma + `.env.example`
+- `TASK-0002` - Prisma data models
+- `TASK-0003` - Local database creation + first Prisma migration
+- `TASK-0004` - Authentication + Roles
+- `TASK-0005` - SecurityAgent independent security review of TASK-0004
+- `TASK-0006` - Preparation: workflow-rules.md + screen-spec-s03.md
+- `TASK-0007` - SEC-001 + SEC-002 fixes + Banks Screen S03
 
 ## Recent System Changes
 
-- `2026-06-27`: **EngineeringAgent refactored** — split into EngineeringAgent (Backend/Logic) + FrontendAgent (UI/Styling)
-- `2026-06-27`: **FrontendAgent created** — responsible for all page.tsx, components, CSS, RTL, enforcing 28_UI_UX_GUIDELINES.md
-- `2026-06-27`: **QAAndAcceptanceAgent, DocumentationHandoverAgent, ReportingAnalyticsAgent** — pre-generated for future phases
-- `2026-06-27`: **Defense-in-depth upgrade** — `requireAdmin()` added to `lib/auth.ts`; all Banks Server Actions now verify ADMIN role before executing. Pattern for all future actions.
+- `2026-06-27`: EngineeringAgent split into EngineeringAgent (Backend/Logic) + FrontendAgent (UI/Styling)
+- `2026-06-27`: Unified sub-agent lifecycle: draft first, activate on need, restart after activation
+- `2026-06-27`: Minimal support layer added: `ProjectControlAgent` + `ExecutionPreparationAgent`
 
 ## Active Rules You Must Not Miss
 
@@ -55,56 +52,56 @@ For any new session in this project:
 - `Pre-Execution Gate: PASS` is required before any implementation delegation.
 - `Post-Execution Review Gate` is required before `Accepted` or `Closed`.
 - Real secrets are allowed only in approved local environment files or local environment variables.
-- Never write real secrets into task files, logs, handbacks, or config/code fallback values.
+- Never write real secrets into task files, logs, handbacks, reports, or config/code fallback values.
 - Post-execution review must also inspect the core `project-control/` files, not only application code.
 - If a secret appears in any task file, log, report, or control record, the task cannot PASS review.
 - After each implementation task, decide whether `ProjectControlAgent`, `SecurityAgent`, or `QAAndAcceptanceAgent` must perform an independent follow-up review.
 - Do not assume that only the currently active sub-agents are available; Tera may generate an additional agent later when needed.
 - New sub-agents start in `generated-agents/opencode/` and become active only after specialization plus copy into `.opencode/agents/`.
 - After activating a new sub-agent in `.opencode/agents/`, Tera must ask for environment restart.
+- `ExecutionPreparationAgent` may prepare task packages, but only Tera decides scope, timing, delegation, acceptance, or closure.
+- `ProjectControlAgent` may manage control records and traceability checks, but only Tera decides final status changes.
 - Project-control IDs must stay unique and sequential.
 - Use only the smallest relevant context for the current task.
 
 ## Active Decisions / Important Notes
 
-- `DEC-0004` — Secret handling and redaction rules are active across the system.
-- `DEC-0005` — `TERA_ACTIVE_CONTEXT.md` is now the first startup file for ongoing sessions.
-- `DEC-0006` — SecurityAgent independent review required before next phase ✅ (fulfilled — TASK-0005 complete).
-- `DEC-0007` — Post-execution review must inspect core `project-control` files and include an explicit independent-review decision when relevant.
-- `DEC-0008` — EngineeringAgent split into Backend/Logic; FrontendAgent owns UI/Styling.
-- `DEC-0009` — Selected generated agents are now active in `.opencode/agents/` for faster delegation.
-- `DEC-0010` — Unified sub-agent lifecycle: needed now vs likely later, draft first, activate only after specialization, restart after activation.
-- `DEC-0011` — `requireAdmin()` added to all Banks Server Actions for defense in depth. Pattern applies to all future actions.
-- `ISSUE-0003` — Secret exposure incident from TASK-0003 was resolved; do not reintroduce secrets into docs or config fallbacks.
+- `DEC-0004` - Secret handling and redaction rules are active across the system.
+- `DEC-0005` - `TERA_ACTIVE_CONTEXT.md` is the startup file for ongoing sessions.
+- `DEC-0007` - Post-execution review must inspect core `project-control` files and include an explicit independent-review decision when relevant.
+- `DEC-0008` - EngineeringAgent split into Backend/Logic; FrontendAgent owns UI/Styling.
+- `DEC-0010` - Unified sub-agent lifecycle: needed now vs likely later, draft first, activate only after specialization, restart after activation.
+- `DEC-0011` - `requireAdmin()` pattern is active for future Server Actions.
+- `DEC-0012` - Tera now uses a minimal support layer: `ProjectControlAgent` for control records and `ExecutionPreparationAgent` for task-package preparation.
+- `ISSUE-0003` - Secret exposure incident from TASK-0003 was resolved; do not reintroduce secrets into docs or config fallbacks.
 
 ## Available Sub-Agents
 
 | Agent | Use |
 |---|---|
-| `EngineeringAgent` | Backend/Logic: actions.ts, Prisma, Auth, Middleware, DB, Config (NOT UI) |
-| `FrontendAgent` | UI/Styling: page.tsx, components, CSS, RTL, enforcing 28_UI_UX_GUIDELINES.md |
+| `EngineeringAgent` | Backend/Logic: actions.ts, Prisma, Auth, Middleware, DB, Config |
+| `FrontendAgent` | UI/Styling: page.tsx, components, CSS, RTL |
 | `ProjectControlAgent` | Updating task/log/decision/issue records under Tera direction |
+| `ExecutionPreparationAgent` | Preparing task packages before Tera review, gating, and delegation |
 | `SecurityAgent` | Independent follow-up review for Auth, Secrets, Permissions, Middleware, and Config tasks |
 | `QAAndAcceptanceAgent` | Independent follow-up review for UI, Workflow, and acceptance checks |
-| `RequirementsScopeAgent` | Scope review only when scope changes |
 | `BusinessWorkflowAgent` | Workflow review only when business process changes |
-| `DataDesignAgent` | Data review only when schema/business data design changes |
 | `UIUXStructureAgent` | UI structure review only when screen/design scope changes |
-| `DocumentationHandoverAgent` | Delivery documentation, user manual, deployment notes |
-| `ReportingAnalyticsAgent` | Report specifications (e.g., check register/kashf) before EngineeringAgent implements |
+| `ReportingAnalyticsAgent` | Report specifications before implementation |
+| `DocumentationHandoverAgent` | Delivery documentation and final handover |
 
 Activation note:
 - The list above shows the currently active agents only.
 - Tera may activate additional agents later if a real need appears.
+- `PlanningCoordinatorAgent` remains deferred for larger phases or larger projects.
 
 ## Read Next Only If Needed
 
-- Current task details: `project-control/tasks/TASK-0007.md` (Banks Screen) or next task `project-control/tasks/TASK-0008.md` (Parties Screen)
+- Current task details: `project-control/tasks/TASK-0008.md`
 - Compact official project memory: `project-control/PROJECT_STATE.md`
 - Active rules: `project-preparation/PROJECT_RULES.md`
 - Plan details: `project-preparation/09_IMPLEMENTATION_PLAN.md`
-- Auth/roles requirements: `project-preparation/04_USERS_ROLES_PERMISSIONS.md`
-- UI/login guidance: `project-preparation/07_SCREENS_AND_UI_STRUCTURE.md`
+- UI structure: `project-preparation/07_SCREENS_AND_UI_STRUCTURE.md`
 - UI style guide: `project-preparation/28_UI_UX_GUIDELINES.md`
 - System execution rules: `tera-system/TeraPreExecutionGate.md`
 

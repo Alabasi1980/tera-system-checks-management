@@ -38,6 +38,7 @@
 | EngineeringAgent مولّد في `generated-agents/opencode/EngineeringAgent.md` | أمر المستخدم | مكتمل |
 | لا يتم نقل العملاء الفرعيين إلى `.opencode/agents/` إلا عند الحاجة | `tera-system/TeraAgent.md` | معتمد |
 | دورة العملاء الفرعيين الموحدة: `Generated Draft` ثم `Activated` ثم `Inactive` عند الحاجة | `tera-system/TeraAgent.md` / `.opencode/agents/tera.md` | معتمد |
+| تقليل حمل Tera عبر `ProjectControlAgent` و`ExecutionPreparationAgent` فقط | `tera-system/TeraAgent.md` / `tera-system/TeraSubAgents.md` | معتمد |
 | `tera-system/` مرجع نظامي read-only أثناء التنفيذ | `.opencode/agents/tera.md` | معتمد |
 
 ---
@@ -74,6 +75,7 @@
 | `DataDesignAgent` | مولّد داخل `generated-agents/opencode/` | غير مفعل — للمراجعة والتجهيز فقط |
 | `UIUXStructureAgent` | مفعل داخل `.opencode/agents/UIUXStructureAgent.md` | جاهز لتدقيق مواصفات الشاشات قبل FrontendAgent |
 | `ProjectControlAgent` | مفعل داخل `.opencode/agents/ProjectControlAgent.md` | جاهز للتحديثات الإدارية لـ `project-control/` |
+| `ExecutionPreparationAgent` | مفعل داخل `.opencode/agents/ExecutionPreparationAgent.md` | جديد - يجهز Task Package قبل تفويض التنفيذ، دون قرار أو تنفيذ كود |
 | `SecurityAgent` | مفعل داخل `.opencode/agents/SecurityAgent.md` | **مفعّل** — أنجز TASK-0005 (Security Review) بنجاح ✅ |
 | `QAAndAcceptanceAgent` | مفعل داخل `.opencode/agents/QAAndAcceptanceAgent.md` | جاهز للمراجعة المستقلة بعد المهام التنفيذية، خاصة شاشة الشيكات S02 |
 | `DocumentationHandoverAgent` | مفعل داخل `.opencode/agents/DocumentationHandoverAgent.md` | جاهز للتسليم والتوثيق النهائي |

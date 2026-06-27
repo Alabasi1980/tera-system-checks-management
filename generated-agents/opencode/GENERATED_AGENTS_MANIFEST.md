@@ -136,6 +136,17 @@
 | يعمل مع | EngineeringAgent — EngineeringAgent ينتج actions.ts (Server Actions + Business Logic)، FrontendAgent يبني page.tsx فوقه ويربط الواجهة بالخلفية |
 | متى يستخدم | بعد أن ينتج EngineeringAgent ملف actions.ts لشاشة معينة، أو عند تعديل/توحيد واجهة قائمة |
 
+### 12. ExecutionPreparationAgent
+
+| البند | القيمة |
+|---|---|
+| الملف | `generated-agents/opencode/ExecutionPreparationAgent.md` |
+| المعرّف | `EXECUTION_PREPARATION_AGENT` |
+| الفئة | مشروط / مساعد رئيسي |
+| سبب التوليد | مطلوب لتخفيف الحمل المتكرر عن Tera في تجهيز Task Packages قبل التنفيذ، خاصة مع المهام الأثقل القادمة. يحول قرار Tera إلى حزمة مهمة واضحة جاهزة للمراجعة والبوابة والتفويض، دون أن يقرر أو ينفذ كودًا. |
+| الملفات المسموح بكتابتها | `project-control/tasks/*.md` فقط |
+| الحالة الحالية | مفعّل داخل `.opencode/agents/ExecutionPreparationAgent.md` |
+
 ---
 
 ## العملاء الذين لم يتم توليدهم — مع السبب
@@ -150,10 +161,10 @@
 | `SolutionArchitectureAgent` | ملف `08_TECHNICAL_ARCHITECTURE.md` موجود والقرارات التقنية مستقرة. لا حاجة لتفعيله الآن. |
 
 ✅ **جميع العملاء التاليين تم توليدهم مسبقًا:**  
-`RequirementsScopeAgent`, `BusinessWorkflowAgent`, `DataDesignAgent`, `UIUXStructureAgent`, `ProjectControlAgent`, `EngineeringAgent`, `SecurityAgent` (مفعّل), `QAAndAcceptanceAgent`, `DocumentationHandoverAgent`, `ReportingAnalyticsAgent`, `FrontendAgent`
+`RequirementsScopeAgent`, `BusinessWorkflowAgent`, `DataDesignAgent`, `UIUXStructureAgent`, `ProjectControlAgent`, `EngineeringAgent`, `SecurityAgent` (مفعّل), `QAAndAcceptanceAgent`, `DocumentationHandoverAgent`, `ReportingAnalyticsAgent`, `FrontendAgent`, `ExecutionPreparationAgent`
 
 ✅ **العملاء المثبتون فعليًا داخل `.opencode/agents/` بعد DEC-0009:**  
-`tera`, `EngineeringAgent`, `FrontendAgent`, `ProjectControlAgent`, `SecurityAgent`, `QAAndAcceptanceAgent`, `BusinessWorkflowAgent`, `UIUXStructureAgent`, `ReportingAnalyticsAgent`, `DocumentationHandoverAgent`
+`tera`, `EngineeringAgent`, `FrontendAgent`, `ProjectControlAgent`, `ExecutionPreparationAgent`, `SecurityAgent`, `QAAndAcceptanceAgent`, `BusinessWorkflowAgent`, `UIUXStructureAgent`, `ReportingAnalyticsAgent`, `DocumentationHandoverAgent`
 
 ⏸️ **مولدون لكن غير مثبتين حاليًا:**  
 `RequirementsScopeAgent`, `DataDesignAgent` — لا توجد حاجة نشطة الآن لتغيير النطاق أو إعادة تصميم البيانات.
@@ -190,3 +201,5 @@
 - Before activation, Tera must narrow `Allowed Sources`, narrow `Allowed Write Targets`, confirm non-overlap with current active agents, and record the activation reason.
 - Tera may generate an additional sub-agent later whenever a missing specialization, review bottleneck, or useful parallelization opportunity appears.
 - After copying a newly activated sub-agent into `.opencode/agents/`, Tera must ask the user to restart the current environment so the activation becomes effective.
+- The current minimal support layer around Tera is limited to `ProjectControlAgent` and `ExecutionPreparationAgent`.
+- `PlanningCoordinatorAgent` remains deferred for larger phases or larger projects.

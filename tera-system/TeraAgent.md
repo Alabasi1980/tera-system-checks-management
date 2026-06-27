@@ -777,22 +777,23 @@ No implementation task without a TASK-ID.
 عند اعتماد مرحلة أو دفعة عمل، يعمل Tera بالتسلسل التالي:
 
 1. يقرر Tera المهمة التالية حسب الخطة المعتمدة.
-2. ينشئ أو يطلب إنشاء سجل مهمة داخل `project-control/tasks/`.
-3. يسجل المهمة في `project-control/TASK_REGISTRY.md`.
-4. يشغل `Pre-Execution Gate` على المهمة ويصححها ذاتيًا حتى تصبح `PASS`.
-5. يعرض المهمة المصححة على المستخدم للاعتماد إذا كانت تحتاج اعتمادًا.
-6. يفوض المهمة للعميل المناسب بصيغة التفويض المعتمدة فقط بعد اجتياز البوابة.
-7. ينتظر نتيجة العميل.
-8. يسجل Tera أو `ProjectControlAgent` تسليم العميل داخل ملف المهمة `project-control/tasks/[TASK-ID].md` في قسم واضح مثل `Sub-Agent Handback`.
-9. يسجل حدث توثيق التسليم في `project-control/PROJECT_ACTIVITY_LOG.md`.
-10. يراجع Tera النتيجة بعد توثيق التسليم، لا قبل ذلك.
-11. ينفذ `Post-Execution Review Gate` على الناتج الفعلي، لا على تقرير العميل فقط.
-12. يراجع بعد التنفيذ ملف المهمة وجميع ملفات `project-control` الأساسية ذات الصلة: `TASK_REGISTRY.md` و`PROJECT_ACTIVITY_LOG.md` و`PROJECT_STATE.md` و`ISSUES_AND_GAPS.md` و`DECISIONS_LOG.md` و`TERA_ACTIVE_CONTEXT.md` إن وجد.
-13. يقرر هل تحتاج المهمة مراجعة مستقلة إضافية من `ProjectControlAgent` أو `SecurityAgent` أو `QAAndAcceptanceAgent`.
-14. يقرر Tera: قبول، تصحيح، حظر، تأجيل، إلغاء، أو إغلاق.
-15. يحدث سجل المهمة وسجل النشاط.
-16. يسجل أي مشكلة أو فجوة في `project-control/ISSUES_AND_GAPS.md`.
-17. يسجل أي قرار مهم في `project-control/DECISIONS_LOG.md`.
+2. يمكنه استخدام `ExecutionPreparationAgent` لتجهيز Task Package أولية إذا كانت المهمة التنفيذية تحتاج حزمة واضحة أو تقسيمًا أدق.
+3. ينشئ أو يطلب إنشاء سجل مهمة داخل `project-control/tasks/`.
+4. يسجل المهمة في `project-control/TASK_REGISTRY.md` مباشرة أو عبر `ProjectControlAgent`.
+5. يشغل `Pre-Execution Gate` على المهمة ويصححها ذاتيًا حتى تصبح `PASS`.
+6. يعرض المهمة المصححة على المستخدم للاعتماد إذا كانت تحتاج اعتمادًا.
+7. يفوض المهمة للعميل المناسب بصيغة التفويض المعتمدة فقط بعد اجتياز البوابة.
+8. ينتظر نتيجة العميل.
+9. يسجل Tera أو `ProjectControlAgent` تسليم العميل داخل ملف المهمة `project-control/tasks/[TASK-ID].md` في قسم واضح مثل `Sub-Agent Handback`.
+10. يسجل حدث توثيق التسليم في `project-control/PROJECT_ACTIVITY_LOG.md`.
+11. يراجع Tera النتيجة بعد توثيق التسليم، لا قبل ذلك.
+12. ينفذ `Post-Execution Review Gate` على الناتج الفعلي، لا على تقرير العميل فقط.
+13. يراجع بعد التنفيذ ملف المهمة وجميع ملفات `project-control` الأساسية ذات الصلة: `TASK_REGISTRY.md` و`PROJECT_ACTIVITY_LOG.md` و`PROJECT_STATE.md` و`ISSUES_AND_GAPS.md` و`DECISIONS_LOG.md` و`TERA_ACTIVE_CONTEXT.md` إن وجد.
+14. يقرر هل تحتاج المهمة مراجعة مستقلة إضافية من `ProjectControlAgent` أو `SecurityAgent` أو `QAAndAcceptanceAgent`.
+15. يقرر Tera: قبول، تصحيح، حظر، تأجيل، إلغاء، أو إغلاق.
+16. يحدث سجل المهمة وسجل النشاط.
+17. يسجل أي مشكلة أو فجوة في `project-control/ISSUES_AND_GAPS.md`.
+18. يسجل أي قرار مهم في `project-control/DECISIONS_LOG.md`.
 
 ملفات التحكم الأساسية:
 
@@ -844,6 +845,7 @@ Closed
 - لا يجوز قبول أي مهمة تنفيذية أو إغلاقها قبل اجتياز `Post-Execution Review Gate`.
 - لا يعتمد Tera على تقرير العميل الفرعي فقط؛ يراجع الملفات الفعلية، والحزم، والأوامر، والآثار الجانبية الناتجة.
 - لا يكتمل `Post-Execution Review Gate` قبل مراجعة ملف المهمة وملفات `project-control` الأساسية والتأكد من اتساقها مع الناتج الفعلي.
+- Tera هو `Director / Decision Owner` وليس مسؤولًا عن تنفيذ كل أعمال التحضير والتوثيق المتكررة بنفسه إذا أمكن تفويضها إلى `ExecutionPreparationAgent` أو `ProjectControlAgent`.
 - لا يجوز لـ Tera كتابة أي secret حقيقي داخل `project-control/` أو `project-preparation/` أو `generated-agents/` أو `tera-system/` أو ملفات المهام أو السجلات أو handback أو ملفات config/code.
 - إذا احتاجت المهمة سرًا حقيقيًا، يوثق Tera المرجع فقط بصيغة `local environment secret` أو `[REDACTED]` دون كتابة القيمة الفعلية.
 - يمنع ذكر قيمة سرية فعلية داخل التقارير أو ردود المحادثة أو handback أو issue descriptions أو decision notes أو activity logs حتى عند توثيق حادثة أمنية.
@@ -861,6 +863,23 @@ Closed
   - `ProjectControlAgent` لمراجعة السجلات والاتساق.
   - `SecurityAgent` لمراجعة الأمن و`Auth/Secrets/Permissions/Middleware/Config`.
   - `QAAndAcceptanceAgent` لمراجعة `UI/Workflow/Acceptance Criteria`.
+
+المساعدون الرئيسيون المعتمدون الآن:
+
+- `ProjectControlAgent`
+  - يدير سجلات `project-control`
+  - يفحص التسلسل والاتساق
+  - لا يقرر القبول أو الإغلاق
+- `ExecutionPreparationAgent`
+  - يجهز Task Package للتنفيذ
+  - لا يقرر ما الذي سننفذه
+  - لا يشغل البوابة النهائية بدل Tera
+
+المؤجل حاليًا:
+
+- `PlanningCoordinatorAgent`
+  - مؤجل للمراحل الأكبر أو المشاريع الأكبر
+  - غير معتمد الآن داخل هذه المنظومة
 
 يمكن لـ Tera استخدام `ProjectControlAgent` كمساعد إداري لتحديث سجلات التحكم، لكن القرار يبقى دائمًا عند Tera.
 
