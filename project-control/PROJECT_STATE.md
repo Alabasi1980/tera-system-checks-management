@@ -120,7 +120,15 @@
 | TASK-0003 | Closed ✅ | إنشاء قاعدة البيانات checks_management + أول Migration عبر `prisma migrate dev` (PostgreSQL 18 + Prisma 7.8.0) |
 | TASK-0004 | Closed ✅ | إعداد المصادقة والصلاحيات — Login + JWT + Middleware + Seed (Admin/User roles) |
 | TASK-0005 | Closed ✅ | المراجعة الأمنية المستقلة لـ TASK-0004 — SecurityAgent: PASS ✅. لا Blocker. |
+| TASK-0006 | Closed ✅ | تحضير مواصفات التنفيذ — workflow-rules.md + screen-spec-s03.md |
+| TASK-0007 | Closed ✅ | SEC fixes (001+002) + شاشة إدارة البنوك S03 |
+| ISSUE-0003 | Resolved ✅ | Secret exposure cleaned |
+| ISSUE-0004 | Resolved ✅ | SEC-001 User Enumeration — fixed in TASK-0007 |
+| ISSUE-0005 | Resolved ✅ | SEC-002 Logout cookie — fixed in TASK-0007 |
 | TASK-0006 | Closed ✅ | تحضير مواصفات التنفيذ — workflow-rules.md + screen-spec-s03.md. جاهز لـ TASK-0007. |
+| TASK-0007 | Closed ✅ | SEC fixes (001+002) + شاشة إدارة البنوك S03. Build PASS. |
+| ISSUE-0004 (SEC-001) | Resolved ✅ | تم إصلاحه — رسالة خطأ موحدة |
+| ISSUE-0005 (SEC-002) | Resolved ✅ | تم إصلاحه — خصائص Cookie للـ Logout |
 | ISSUE-0003 (Secret Exposure) | Resolved ✅ | تم تنظيف التسرب في prisma.config.ts + تحديث قواعد المنظومة — راجع ISSUES_AND_GAPS.md |
 | DEC-0004 (Secret Handling Rules) | Active ✅ | قواعد إلزامية جديدة للأسرار في Pre-Execution Gate و Post-Execution Review Gate و handbacks |
 
@@ -146,5 +154,5 @@ TASK-0004 (Auth + Roles) — **مغلق** ✅.
 | البند | القيمة |
 |---|---|
 | Updated By | Tera Agent / Project Owner |
-| Update Reason | TASK-0006 (Preparation) complete. workflow-rules.md and screen-spec-s03.md ready. | |
-| Next Step | TASK-0007 — SEC fixes (001+002) + شاشة إدارة البنوك (S03) — EngineeringAgent |
+| Update Reason | TASK-0007 complete. SEC fixes applied. Banks screen S03 built. Issues 0004/0005 resolved. | |
+| Next Step | TASK-0008 — شاشة إدارة الجهات (S04) — EngineeringAgent |

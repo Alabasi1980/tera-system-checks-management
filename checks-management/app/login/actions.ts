@@ -25,7 +25,8 @@ export async function login(
   }
 
   if (!user.isActive) {
-    return { error: 'هذا الحساب غير نشط. الرجاء التواصل مع المشرف' }
+    console.log(`Login failed: user '${username}' is inactive`)
+    return { error: 'اسم المستخدم أو كلمة المرور غير صحيحة' }
   }
 
   const isValid = await verifyPassword(password, user.passwordHash)

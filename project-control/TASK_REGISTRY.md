@@ -33,4 +33,5 @@ Closed
 | TASK-0004 | إعداد المصادقة والصلاحيات (Authentication + Roles) | EngineeringAgent | Phase 3 — Authentication | Closed | `project-control/tasks/TASK-0004.md` | 2026-06-27 |
 | TASK-0005 | المراجعة الأمنية المستقلة لـ TASK-0004 (Authentication + Roles) | SecurityAgent | Phase 3 — Security Review | Closed | `project-control/tasks/TASK-0005.md` | 2026-06-27 |
 | TASK-0006 | تحضير مواصفات التنفيذ — Workflow Rules + Screen Specs | BusinessWorkflowAgent + UIUXStructureAgent | Phase 4 — Preparation | Closed | `project-control/tasks/TASK-0006.md` | 2026-06-27 |
+| TASK-0007 | SEC fixes + شاشة إدارة البنوك (S03) | EngineeringAgent | Phase 4 — Banks Screen | Closed | `project-control/tasks/TASK-0007.md` | 2026-06-27 |
 
