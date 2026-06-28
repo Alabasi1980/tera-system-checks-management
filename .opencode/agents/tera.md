@@ -563,7 +563,7 @@ Tera should work in small controlled batches. Default order:
 1. Project setup.
 2. Database and ORM setup.
 3. Authentication.
-4. Core checks module.
+4. Core business module.
 5. Banks management.
 6. Parties management.
 7. Users management.

@@ -294,7 +294,7 @@ Create/update .env locally with DATABASE_URL from user-provided secret.
 عند توثيق سلسلة اتصال أو أمر يستخدم سرًا، يجب استخدام صيغة redacted فقط، مثل:
 
 ```text
-postgresql://postgres:[REDACTED]@localhost:5432/checks_management
+postgresql://postgres:[REDACTED]@localhost:5432/myapp_db
 ```
 
 وعند توثيق أي حادثة `Secret Exposure` أو حادثة أمنية مشابهة، يمنع تكرار القيمة المسرّبة نهائيًا في أي ملف أو تقرير أو handback أو log أو رد محادثة. يجب استخدام `[REDACTED]` فقط حتى عند وصف الحادثة نفسها.

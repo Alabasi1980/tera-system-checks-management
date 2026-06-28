@@ -380,7 +380,7 @@ EngineeringAgent
 1. Project setup.
 2. Database and ORM.
 3. Authentication.
-4. Checks module.
+4. Core business module.
 5. Banks.
 6. Parties.
 7. Users.
