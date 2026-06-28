@@ -25,8 +25,8 @@ For any new session in this project:
 | Size | Small MVP |
 | Runtime | OpenCode |
 | Approved Tech | Next.js + TypeScript + PostgreSQL + Prisma |
-| Current Phase | Phase 4 active - Parties Screen S04 complete |
-| Next Task | Main page integration — add `/parties` and `/banks` nav links |
+| Current Phase | Phase 4 complete - Parties + Main Page built |
+| Next Task | شاشة الشيكات (S02) أو شاشة المستخدمين (S05) — حسب الأولوية |
 | Current Lead Agent | `Tera Agent` |
 | Expected Execution Agents | `EngineeringAgent` + `FrontendAgent` |
 
@@ -40,12 +40,14 @@ For any new session in this project:
 - `TASK-0006` - Preparation: workflow-rules.md + screen-spec-s03.md
 - `TASK-0007` - SEC-001 + SEC-002 fixes + Banks Screen S03
 - `TASK-0008` - Parties Screen S04 — actions.ts + page.tsx
+- `TASK-0009` - Main Navigation Hub — page.tsx + layout.tsx + actions.ts
 
 ## Recent System Changes
 
 - `2026-06-27`: EngineeringAgent split into EngineeringAgent (Backend/Logic) + FrontendAgent (UI/Styling)
 - `2026-06-27`: Unified sub-agent lifecycle: draft first, activate on need, restart after activation
 - `2026-06-27`: Minimal support layer added: `ProjectControlAgent` + `ExecutionPreparationAgent`
+- `2026-06-27`: TASK-0008 (Parties S04) + TASK-0009 (Main Nav Hub) completed. requireAdmin() extended to Parties. Root page replaced with RTL navigation hub.
 
 ## Active Rules You Must Not Miss
 

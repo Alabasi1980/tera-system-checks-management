@@ -35,4 +35,5 @@ Closed
 | TASK-0006 | تحضير مواصفات التنفيذ — Workflow Rules + Screen Specs | BusinessWorkflowAgent + UIUXStructureAgent | Phase 4 — Preparation | Closed | `project-control/tasks/TASK-0006.md` | 2026-06-27 |
 | TASK-0007 | SEC fixes + شاشة إدارة البنوك (S03) | EngineeringAgent | Phase 4 — Banks Screen | Closed | `project-control/tasks/TASK-0007.md` | 2026-06-27 |
 | TASK-0008 | شاشة إدارة الجهات (Parties Screen S04) | EngineeringAgent + FrontendAgent | Phase 4 — Parties Screen | Closed | `project-control/tasks/TASK-0008.md` | 2026-06-27 |
+| TASK-0009 | الصفحة الرئيسية Navigation Hub | FrontendAgent | Phase 4 — Main Page | Closed | `project-control/tasks/TASK-0009.md` | 2026-06-27 |
 

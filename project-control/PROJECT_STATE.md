@@ -130,6 +130,7 @@
 | TASK-0006 | Closed ✅ | تحضير مواصفات التنفيذ — workflow-rules.md + screen-spec-s03.md |
 | TASK-0007 | Closed ✅ | SEC fixes (001+002) + شاشة إدارة البنوك S03 |
 | TASK-0008 | Closed ✅ | شاشة إدارة الجهات S04 — Parties module (actions.ts + page.tsx) |
+| TASK-0009 | Closed ✅ | الصفحة الرئيسية Navigation Hub — بطاقات تنقل للبنوك والجهات + قيد الإنشاء للشيكات والمستخدمين |
 | ISSUE-0003 | Resolved ✅ | Secret exposure cleaned |
 | ISSUE-0004 | Resolved ✅ | SEC-001 User Enumeration — fixed in TASK-0007 |
 | ISSUE-0005 | Resolved ✅ | SEC-002 Logout cookie — fixed in TASK-0007 |
@@ -154,6 +155,7 @@ TASK-0002 (Prisma Data Models) — **مغلق** ✅.
 TASK-0003 (Database + Migration) — **مغلق** ✅.
 TASK-0004 (Auth + Roles) — **مغلق** ✅.
 TASK-0008 (Parties S04) — **مغلق** ✅.
+TASK-0009 (Main Page) — **مغلق** ✅.
 ⚠️ **Security Remediation**: TASK-0003 كشف عن تسرب كلمة مرور حقيقية في fallback داخل `prisma.config.ts`. تم التنظيف وتحديث قواعد المنظومة بالكامل. راجع ISSUE-0003 و DEC-0004.
 **إلزامية:** قبل أي TASK جديدة، يجب مراجعة PROJECT_STATE.md و PROJECT_RULES.md.
 
@@ -164,5 +166,5 @@ TASK-0008 (Parties S04) — **مغلق** ✅.
 | البند | القيمة |
 |---|---|---|
 | Updated By | Tera Agent / Project Owner |
-| Update Reason | TASK-0008 closed ✅. Parties screen S04 built (actions.ts + page.tsx). Exact same pattern as Banks S03. requireAdmin() pattern applied. Build PASS. |
-| Next Step | الرجوع للصفحة الرئيسية — إضافة رابط `/parties` في الشريط الجانبي أو الصفحة الرئيسية بعد اعتماد المستخدم |
+| Update Reason | TASK-0008 + TASK-0009 closed ✅. Parties screen (S04) and Main Navigation Hub completed. Build PASS. |
+| Next Step | شاشة الشيكات (S02) — الوحدة الرئيسية للتطبيق، أو شاشة المستخدمين (S05) — حسب الأولوية |
