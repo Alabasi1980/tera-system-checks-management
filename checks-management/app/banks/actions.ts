@@ -21,6 +21,41 @@ export type BankFormData = {
   notes?: string
 }
 
+type NormalizedBankData = {
+  name: string
+  branch: string | null
+  accountNumber: string | null
+  notes: string | null
+}
+
+function trimValue(value: string | undefined): string {
+  return typeof value === 'string' ? value.trim() : ''
+}
+
+function validateBankData(
+  data: BankFormData
+): NormalizedBankData | { error: string } {
+  const name = trimValue(data.name)
+  const branch = trimValue(data.branch)
+  const accountNumber = trimValue(data.accountNumber)
+  const notes = trimValue(data.notes)
+
+  if (!name) return { error: 'اسم البنك مطلوب' }
+  if (name.length > 100) return { error: 'اسم البنك يجب ألا يتجاوز 100 حرف' }
+  if (branch.length > 100) return { error: 'الفرع يجب ألا يتجاوز 100 حرف' }
+  if (accountNumber.length > 50) {
+    return { error: 'رقم الحساب يجب ألا يتجاوز 50 حرف' }
+  }
+  if (notes.length > 500) return { error: 'الملاحظات يجب ألا تتجاوز 500 حرف' }
+
+  return {
+    name,
+    branch: branch || null,
+    accountNumber: accountNumber || null,
+    notes: notes || null,
+  }
+}
+
 export async function listBanks(): Promise<BankItem[] | { error: string }> {
   const session = await requireAdmin()
   if ('error' in session) return session
@@ -47,8 +82,11 @@ export async function createBank(
   const session = await requireAdmin()
   if ('error' in session) return session
 
+  const validated = validateBankData(data)
+  if ('error' in validated) return validated
+
   const existing = await prisma.bank.findFirst({
-    where: { name: data.name },
+    where: { name: validated.name },
   })
 
   if (existing) {
@@ -57,10 +95,10 @@ export async function createBank(
 
   await prisma.bank.create({
     data: {
-      name: data.name,
-      branch: data.branch || null,
-      accountNumber: data.accountNumber || null,
-      notes: data.notes || null,
+      name: validated.name,
+      branch: validated.branch,
+      accountNumber: validated.accountNumber,
+      notes: validated.notes,
     },
   })
 
@@ -75,8 +113,11 @@ export async function updateBank(
   const session = await requireAdmin()
   if ('error' in session) return session
 
+  const validated = validateBankData(data)
+  if ('error' in validated) return validated
+
   const existing = await prisma.bank.findFirst({
-    where: { name: data.name, id: { not: id } },
+    where: { name: validated.name, id: { not: id } },
   })
 
   if (existing) {
@@ -86,10 +127,10 @@ export async function updateBank(
   await prisma.bank.update({
     where: { id },
     data: {
-      name: data.name,
-      branch: data.branch || null,
-      accountNumber: data.accountNumber || null,
-      notes: data.notes || null,
+      name: validated.name,
+      branch: validated.branch,
+      accountNumber: validated.accountNumber,
+      notes: validated.notes,
     },
   })
 

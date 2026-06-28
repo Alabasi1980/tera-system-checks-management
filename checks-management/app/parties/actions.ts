@@ -19,6 +19,35 @@ export type PartyFormData = {
   notes?: string
 }
 
+type NormalizedPartyData = {
+  name: string
+  phone: string | null
+  notes: string | null
+}
+
+function trimValue(value: string | undefined): string {
+  return typeof value === 'string' ? value.trim() : ''
+}
+
+function validatePartyData(
+  data: PartyFormData
+): NormalizedPartyData | { error: string } {
+  const name = trimValue(data.name)
+  const phone = trimValue(data.phone)
+  const notes = trimValue(data.notes)
+
+  if (!name) return { error: 'اسم الجهة مطلوب' }
+  if (name.length > 100) return { error: 'اسم الجهة يجب ألا يتجاوز 100 حرف' }
+  if (phone.length > 50) return { error: 'رقم الهاتف يجب ألا يتجاوز 50 حرف' }
+  if (notes.length > 500) return { error: 'الملاحظات يجب ألا تتجاوز 500 حرف' }
+
+  return {
+    name,
+    phone: phone || null,
+    notes: notes || null,
+  }
+}
+
 export async function listParties(): Promise<PartyItem[] | { error: string }> {
   const session = await requireAdmin()
   if ('error' in session) return session
@@ -44,11 +73,14 @@ export async function createParty(
   const session = await requireAdmin()
   if ('error' in session) return session
 
+  const validated = validatePartyData(data)
+  if ('error' in validated) return validated
+
   await prisma.party.create({
     data: {
-      name: data.name,
-      phone: data.phone || null,
-      notes: data.notes || null,
+      name: validated.name,
+      phone: validated.phone,
+      notes: validated.notes,
     },
   })
 
@@ -63,12 +95,15 @@ export async function updateParty(
   const session = await requireAdmin()
   if ('error' in session) return session
 
+  const validated = validatePartyData(data)
+  if ('error' in validated) return validated
+
   await prisma.party.update({
     where: { id },
     data: {
-      name: data.name,
-      phone: data.phone || null,
-      notes: data.notes || null,
+      name: validated.name,
+      phone: validated.phone,
+      notes: validated.notes,
     },
   })
 

@@ -37,3 +37,4 @@ Closed
 | TASK-0008 | شاشة إدارة الجهات (Parties Screen S04) | EngineeringAgent + FrontendAgent | Phase 4 — Parties Screen | Closed | `project-control/tasks/TASK-0008.md` | 2026-06-27 |
 | TASK-0009 | الصفحة الرئيسية Navigation Hub | FrontendAgent | Phase 4 — Main Page | Closed | `project-control/tasks/TASK-0009.md` | 2026-06-27 |
 | TASK-0010 | Periodic Quality Review after TASK-0009 | QualityReviewCoordinatorAgent | Phase 4 — Quality Review | Closed | `project-control/tasks/TASK-0010.md` | 2026-06-28 |
+| TASK-0011 | Fix ISSUE-0006: Server-side validation for Banks/Parties actions | EngineeringAgent | Phase 4 — Validation Fix | Closed | `project-control/tasks/TASK-0011.md` | 2026-06-28 |

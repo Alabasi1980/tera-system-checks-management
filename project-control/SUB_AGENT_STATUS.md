@@ -40,9 +40,9 @@ Later tasks may refine the status, but this file starts from the first stable mu
 
 | Agent | Status | Usage | Load | Quality | Last Used | Current Decision | Notes |
 |---|---|---|---|---|---|---|---|
-| `EngineeringAgent` | Active | High | Medium | Good | `TASK-0008` | Keep as primary execution specialist | نفذ TASK-0001 إلى TASK-0004 ثم TASK-0007 وشارك في TASK-0008. مخرجاته مستقرة بعد ضبط قواعد الأمن و`requireAdmin()`. |
+| `EngineeringAgent` | Active | High | Medium | Good | `TASK-0011` | Keep as primary execution specialist | نفذ TASK-0001 إلى TASK-0004 ثم TASK-0007 وشارك في TASK-0008 وأنجز TASK-0011. أصلح validation/normalization بشكل صحيح مع الحفاظ على `requireAdmin()`. |
 | `FrontendAgent` | Active | High | Medium | Good | `TASK-0009` | Keep as primary UI execution specialist | استخدم فعليًا في TASK-0008 وTASK-0009 بعد فصل الواجهة عن EngineeringAgent. الأداء جيد، مع حاجة مستقبلية لمراقبة اتساق الواجهة مع زيادة الشاشات. |
-| `ProjectControlAgent` | Underused | Low | Low | Not Evaluated | None | Increase usage in larger execution batches | المنظومة اعتمدته، لكن Tera ما زال ينفذ كثيرًا من تحديثات `project-control` يدويًا. |
+| `ProjectControlAgent` | Underused | Low | Low | Good | `TASK-0011` | Increase usage in larger execution batches | استخدم في TASK-0011 لتحديث سجلات `project-control` وإغلاق ISSUE-0006 تحت توجيه Tera. |
 | `ExecutionPreparationAgent` | Idle | None | None | Not Evaluated | None | Keep ready for large or multi-agent tasks | مفعّل لكن لم يدخل دورة تنفيذ فعلية بعد. |
 | `QualityReviewCoordinatorAgent` | Conditional | Low | Low | Good | `TASK-0010` | Keep for periodic reviews after phases or quality-drift signals | استخدم فعليًا في TASK-0010 وقدم مراجعة مفيدة بدون تعديل ملفات أو تضخيم نطاق. |
 | `SecurityAgent` | Critical Specialist | Low | Low | Good | `TASK-0005` | Keep as conditional security specialist | استُخدم بوضوح في TASK-0005 وأنتج findings مفيدة بدون تضخم. |
@@ -61,5 +61,5 @@ Later tasks may refine the status, but this file starts from the first stable mu
 - Keep `SecurityAgent` as a conditional specialist, not a default reviewer.
 - Keep `QAAndAcceptanceAgent` ready for the checks screen and workflow-heavy phases.
 - Keep idle agents available without forcing activation or unnecessary work.
-- Require a small EngineeringAgent fix for `ISSUE-0006` before starting Checks S02.
+- `ISSUE-0006` fix completed in `TASK-0011`; prepare Checks S02 task package with `ExecutionPreparationAgent` before implementation.
 - Keep UI component/style extraction deferred until after S02 or S05 unless duplication causes bugs.

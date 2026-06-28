@@ -25,8 +25,8 @@ For any new session in this project:
 | Size | Small MVP |
 | Runtime | OpenCode |
 | Approved Tech | Next.js + TypeScript + PostgreSQL + Prisma |
-| Current Phase | Phase 4 complete - Parties + Main Page built |
-| Next Task | Fix ISSUE-0006 server-side validation before Checks S02 |
+| Current Phase | Phase 4 — validation fix complete; TASK-0011 closed |
+| Next Task | Prepare Checks S02 task package with ExecutionPreparationAgent before implementation |
 | Current Lead Agent | `Tera Agent` |
 | Expected Execution Agents | `EngineeringAgent` + `FrontendAgent` |
 
@@ -42,6 +42,7 @@ For any new session in this project:
 - `TASK-0008` - Parties Screen S04 — actions.ts + page.tsx
 - `TASK-0009` - Main Navigation Hub — page.tsx + layout.tsx + actions.ts
 - `TASK-0010` - Periodic Quality Review — QualityReviewCoordinatorAgent report
+- `TASK-0011` - ISSUE-0006 fix — server-side validation/normalization in Banks/Parties actions
 
 ## Recent System Changes
 
@@ -51,6 +52,7 @@ For any new session in this project:
 - `2026-06-27`: TASK-0008 (Parties S04) + TASK-0009 (Main Nav Hub) completed. requireAdmin() extended to Parties. Root page replaced with RTL navigation hub.
 - `2026-06-28`: `QualityReviewCoordinatorAgent` added and activated for periodic cross-domain quality reviews before larger phases, before release, or when quality debt signals appear.
 - `2026-06-28`: Tera role refined as `Primary Project Orchestrator / Decision Owner` with explicit helper-agent trigger rules and anti-over-delegation rules.
+- `2026-06-28`: TASK-0011 closed. ISSUE-0006 resolved; `npm run build` PASS. SecurityAgent and QAAndAcceptanceAgent not required for this backend-only validation fix per Tera decision.
 
 ## Active Rules You Must Not Miss
 
@@ -87,7 +89,7 @@ For any new session in this project:
 - `DEC-0013` - `QualityReviewCoordinatorAgent` is active for periodic cross-domain quality reviews; it coordinates findings only and does not replace specialist reviewers.
 - `DEC-0014` - Tera is fixed as `Primary Project Orchestrator / Decision Owner`; helper agents are trigger-based, over-delegation is disallowed, and temp dev logs are cleanup-required before new work.
 - `SUB_AGENT_STATUS.md` is the lightweight manager review for sub-agent usage, load, quality, and update need.
-- `ISSUE-0006` - Planned: add server-side validation to Banks/Parties actions before Checks S02.
+- `ISSUE-0006` - Resolved in TASK-0011: server-side validation/normalization added to Banks/Parties actions before Checks S02.
 - `ISSUE-0003` - Secret exposure incident from TASK-0003 was resolved; do not reintroduce secrets into docs or config fallbacks.
 
 ## Available Sub-Agents
@@ -114,7 +116,7 @@ Activation note:
 
 ## Read Next Only If Needed
 
-- Latest implementation details: `project-control/tasks/TASK-0009.md`
+- Latest implementation details: `project-control/tasks/TASK-0011.md`
 - Compact official project memory: `project-control/PROJECT_STATE.md`
 - Sub-agent health snapshot: `project-control/SUB_AGENT_STATUS.md`
 - Active rules: `project-preparation/PROJECT_RULES.md`

@@ -19,7 +19,7 @@
 | اسم المشروع | تطبيق إدارة الشيكات |
 | نوع المشروع | تطبيق ويب مستقل |
 | حجم المشروع | صغير / MVP |
-| المرحلة الحالية | Phase 3 مكتمل ✅ — TASK-0004 (Auth) + TASK-0005 (Security Review). SecurityAgent: PASS ✅. مستعد لـ Phase 4 (شاشة إدارة الشيكات = TASK-0006). |
+| المرحلة الحالية | Phase 4 — TASK-0011 closed ✅. ISSUE-0006 resolved. Next: prepare Checks S02 task package with ExecutionPreparationAgent before implementation. |
 | بيئة التشغيل | OpenCode |
 | التقنية المعتمدة | Next.js + TypeScript + PostgreSQL + Prisma |
 | مصدر التفاصيل | `project-preparation/` |
@@ -135,7 +135,8 @@
 | TASK-0008 | Closed ✅ | شاشة إدارة الجهات S04 — Parties module (actions.ts + page.tsx) |
 | TASK-0009 | Closed ✅ | الصفحة الرئيسية Navigation Hub — بطاقات تنقل للبنوك والجهات + قيد الإنشاء للشيكات والمستخدمين |
 | TASK-0010 | Closed ✅ | مراجعة جودة دورية خفيفة بعد TASK-0009 — QualityReviewCoordinatorAgent |
-| ISSUE-0006 | Planned | Server-side validation missing in Banks/Parties actions — يجب إصلاحه قبل Checks S02 |
+| TASK-0011 | Closed ✅ | إصلاح ISSUE-0006 — server-side validation/normalization في Banks/Parties Server Actions. Build PASS. |
+| ISSUE-0006 | Resolved ✅ | Server-side validation gap fixed in TASK-0011 before Checks S02 |
 | ISSUE-0003 | Resolved ✅ | Secret exposure cleaned |
 | ISSUE-0004 | Resolved ✅ | SEC-001 User Enumeration — fixed in TASK-0007 |
 | ISSUE-0005 | Resolved ✅ | SEC-002 Logout cookie — fixed in TASK-0007 |
@@ -151,17 +152,11 @@
 
 ## 9. آخر ملخص سياق
 
-Readiness Review مكتمل ✅ — المشروع جاهز للتنفيذ.
-جميع ملفات التحضير (00–10 + 28) معتمدة.
-`project-preparation/PROJECT_RULES.md` معتمد بــ 4 أقسام من القواعد.
-EngineeringAgent مولّد وجاهز للتفويض.
-TASK-0001 (Scaffold) — **مغلق** ✅.
-TASK-0002 (Prisma Data Models) — **مغلق** ✅.
-TASK-0003 (Database + Migration) — **مغلق** ✅.
-TASK-0004 (Auth + Roles) — **مغلق** ✅.
-TASK-0008 (Parties S04) — **مغلق** ✅.
-TASK-0009 (Main Page) — **مغلق** ✅.
-⚠️ **Security Remediation**: TASK-0003 كشف عن تسرب كلمة مرور حقيقية في fallback داخل `prisma.config.ts`. تم التنظيف وتحديث قواعد المنظومة بالكامل. راجع ISSUE-0003 و DEC-0004.
+TASK-0011 مغلق ✅ — ISSUE-0006 تم حله بإضافة server-side validation/normalization في Banks/Parties Server Actions.
+Build verification: `npm run build` PASS.
+Tera قرر أن SecurityAgent غير مطلوب الآن لأن التغيير لم يمس auth/session/JWT/secrets/permissions/middleware/config و`requireAdmin()` بقي أول خطوة.
+Tera قرر أن QAAndAcceptanceAgent غير مطلوب لهذه المهمة لأنها backend-only validation fix.
+الخطوة التالية: تجهيز Task Package لشاشة الشيكات S02 بواسطة ExecutionPreparationAgent قبل التنفيذ.
 **إلزامية:** قبل أي TASK جديدة، يجب مراجعة PROJECT_STATE.md و PROJECT_RULES.md.
 
 ---
@@ -170,6 +165,6 @@ TASK-0009 (Main Page) — **مغلق** ✅.
 
 | البند | القيمة |
 |---|---|---|
-| Updated By | Tera Agent / Project Owner |
-| Update Reason | TASK-0008 + TASK-0009 closed ✅. Parties screen (S04) and Main Navigation Hub completed. Build PASS. |
-| Next Step | إصلاح ISSUE-0006 أولًا، ثم شاشة الشيكات (S02) أو شاشة المستخدمين (S05) حسب الأولوية |
+| Updated By | ProjectControlAgent under Tera direction |
+| Update Reason | TASK-0011 closed ✅. ISSUE-0006 resolved. Build PASS. |
+| Next Step | Prepare Checks S02 task package with ExecutionPreparationAgent before implementation. |
