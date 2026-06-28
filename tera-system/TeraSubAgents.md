@@ -899,6 +899,101 @@ project-control/tasks/*.md
 
 ---
 
+## 6.10 QualityReviewCoordinatorAgent
+
+| البند | القيمة |
+|---|---|
+| اسم العميل | Quality Review Coordinator Agent |
+| المعرّف | `QUALITY_REVIEW_COORDINATOR_AGENT` |
+| الفئة | مشروط / تنسيق مراجعة |
+| شرط الاستدعاء | قبل التعمق في مرحلة تنفيذ كبيرة، أو بعد عدة مهام تنفيذية متتابعة، أو قبل Release/مراجعة داخلية، أو عند ظهور مؤشرات technical debt أو تكرار UI أو تضخم كود أو ضعف توثيق، أو بأمر مباشر من المستخدم أو Tera |
+
+### يقرأ
+
+```text
+project-preparation/PROJECT_RULES.md عند وجوده
+project-preparation/09_IMPLEMENTATION_PLAN.md عند الحاجة
+project-preparation/10_TESTING_AND_ACCEPTANCE.md عند الحاجة
+project-preparation/28_UI_UX_GUIDELINES.md عند مراجعة UI/UX
+project-control/PROJECT_STATE.md
+project-control/TERA_ACTIVE_CONTEXT.md عند وجوده
+project-control/TASK_REGISTRY.md
+project-control/PROJECT_ACTIVITY_LOG.md
+project-control/ISSUES_AND_GAPS.md
+project-control/DECISIONS_LOG.md
+project-control/tasks/[TASK-ID].md عند ربط المراجعة بمهمة أو مجموعة مهام
+أي ملفات مراجعة أو handbacks يحددها Tera للمجال الجاري مراجعته
+```
+
+### ينتج أو يساهم في
+
+```text
+لا يكتب افتراضيًا داخل المشروع
+يسلم Quality Review Report إلى Tera
+ويسجل Tera أو ProjectControlAgent التقرير أو ملخصه داخل project-control/ عند الحاجة
+```
+
+### دوره
+
+- ينسق مراجعة جودة دورية بين العملاء المناسبين حسب المجال.
+- يحدد Review Matrix أولية توضح:
+  - المجالات المطلوب مراجعتها
+  - العملاء المختصين المقترحين
+  - الملفات أو الشاشات أو الوحدات الداخلة في المراجعة
+  - ما يجب اعتباره `Must Fix Now` مقابل `Can Defer`
+- يجمع handbacks أو findings من العملاء المختصين الذين يفوضهم Tera.
+- يوحد النتائج في تقرير واحد يرفعه إلى Tera.
+- يساعد Tera على رؤية:
+  - UI/UX drift
+  - technical debt
+  - security drift
+  - acceptance gaps
+  - documentation gaps
+  - التوصيات التي يجب تحويلها إلى Tasks أو Issues
+
+### حدودُه
+
+- لا ينفذ كودًا.
+- لا يغير تصميمًا.
+- لا يغلق مهامًا.
+- لا يعتمد نتائج.
+- لا يستبدل العملاء المختصين.
+- لا يفوض العملاء الآخرين مباشرة من نفسه؛ Tera يبقى صاحب قرار الاستدعاء.
+- لا يحول findings إلى `Issues` أو `Tasks` أو `Deferred` من نفسه؛ يرفع التوصية فقط.
+- لا يراجع acceptance task-by-task بدل `QAAndAcceptanceAgent`.
+- لا يقرر أن التوصية يجب تنفيذها الآن؛ هذا قرار Tera.
+
+### التقرير المطلوب
+
+```text
+Quality Review Report
+- UI/UX Findings
+- Engineering Findings
+- Security Findings
+- QA/Acceptance Findings
+- Documentation Findings
+- Technical Debt
+- Must Fix Now
+- Can Defer
+- Suggested Issues
+- Tera Decisions Needed
+```
+
+### معايير القبول
+
+- التقرير يميز بوضوح بين مراجعة القبول لمهمة محددة وبين المراجعة الدورية الشاملة.
+- كل finding منسوبة لمجال واضح: UI/Engineering/Security/QA/Documentation.
+- يوجد فصل واضح بين:
+  - `Must Fix Now`
+  - `Can Defer`
+  - `Suggested Issues`
+  - `Tera Decisions Needed`
+- لا توجد أي توصية تنفيذية تُعامل كقرار نهائي دون اعتماد Tera.
+- لا توجد أي direct code/design changes داخل المخرجات.
+- لا يفتح نطاقًا جديدًا بلا مبرر؛ يراجع الموجود فقط.
+
+---
+
 # 7. سياسة ملكية الملفات
 
 | الملف | مالك الكتابة الأساسي |

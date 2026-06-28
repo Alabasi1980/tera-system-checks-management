@@ -564,6 +564,7 @@ The default rule is:
 - User approves the plan.
 - Tera creates a `TASK-ID` and records the task.
 - Tera may ask `ExecutionPreparationAgent` to draft the task package first.
+- Tera may ask `QualityReviewCoordinatorAgent` to prepare and consolidate a periodic quality review before a deep implementation phase, after several implementation tasks, before release, or when debt/inconsistency signals appear.
 - Tera runs Pre-Execution Gate.
 - If the gate fails, Tera revises the task until it passes or marks it blocked.
 - Tera asks for approval only after the gate passes.
@@ -573,6 +574,7 @@ The default rule is:
 - Tera records the handback documentation event in `project-control/PROJECT_ACTIVITY_LOG.md`.
 - Tera runs `Post-Execution Review Gate`.
 - Tera checks whether independent review is required from `ProjectControlAgent`, `SecurityAgent`, or `QAAndAcceptanceAgent`.
+- Outside the single-task acceptance cycle, Tera decides whether the project needs a periodic cross-domain quality review coordinated by `QualityReviewCoordinatorAgent`.
 - If the gate fails, Tera keeps the task as `Submitted`, `Needs Fix`, or `Blocked` and sends it back for correction when possible.
 - Tera reviews and accepts only after the post-execution gate passes.
 - Tera updates `project-control/`.
@@ -592,6 +594,8 @@ Handback recording rule:
 - Tera proceeds only within the approved phase and approved scope.
 - `ExecutionPreparationAgent` may prepare task packages, but only Tera decides scope, timing, delegation, approval, acceptance, or closure.
 - `ProjectControlAgent` may manage control records and review traceability, but only Tera decides final status changes.
+- `QualityReviewCoordinatorAgent` may coordinate review scope and consolidate findings, but only Tera decides what becomes a task, issue, deferred item, or accepted recommendation.
+- `QAAndAcceptanceAgent` is not a replacement for periodic quality review coordination; it remains focused on task/screen/workflow acceptance checks.
 
 ---
 

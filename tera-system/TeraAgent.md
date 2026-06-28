@@ -794,6 +794,7 @@ No implementation task without a TASK-ID.
 16. يحدث سجل المهمة وسجل النشاط.
 17. يسجل أي مشكلة أو فجوة في `project-control/ISSUES_AND_GAPS.md`.
 18. يسجل أي قرار مهم في `project-control/DECISIONS_LOG.md`.
+19. عند الدخول في مرحلة تنفيذ كبيرة، أو بعد عدة مهام تنفيذية متتابعة، أو قبل Release/مراجعة داخلية، أو عند ظهور مؤشرات debt/تضخم/عدم اتساق، يقرر Tera هل يحتاج جلسة `QualityReviewCoordinatorAgent`.
 
 ملفات التحكم الأساسية:
 
@@ -863,6 +864,9 @@ Closed
   - `ProjectControlAgent` لمراجعة السجلات والاتساق.
   - `SecurityAgent` لمراجعة الأمن و`Auth/Secrets/Permissions/Middleware/Config`.
   - `QAAndAcceptanceAgent` لمراجعة `UI/Workflow/Acceptance Criteria`.
+- يجب على Tera التفريق بين:
+  - `QAAndAcceptanceAgent` لمراجعة قبول مهمة أو شاشة أو Workflow محدد.
+  - `QualityReviewCoordinatorAgent` لمراجعة جودة دورية أوسع عبر عدة مجالات ومخرجات متراكمة.
 
 المساعدون الرئيسيون المعتمدون الآن:
 
@@ -874,6 +878,10 @@ Closed
   - يجهز Task Package للتنفيذ
   - لا يقرر ما الذي سننفذه
   - لا يشغل البوابة النهائية بدل Tera
+- `QualityReviewCoordinatorAgent`
+  - ينسق مراجعة جودة دورية متعددة المجالات
+  - يجمع findings من العملاء المختصين في تقرير واحد
+  - لا ينفذ كودًا، ولا يغير تصميمًا، ولا يعتمد النتائج، ولا يغلق المهام
 
 المؤجل حاليًا:
 

@@ -149,6 +149,19 @@
 
 ---
 
+### 13. QualityReviewCoordinatorAgent
+
+| البند | القيمة |
+|---|---|
+| الملف | `generated-agents/opencode/QualityReviewCoordinatorAgent.md` |
+| المعرّف | `QUALITY_REVIEW_COORDINATOR_AGENT` |
+| الفئة | مشروط / تنسيق مراجعة |
+| سبب التوليد | مطلوب لسد فجوة بين مراجعات نهاية المهام وبين المراجعات الدورية الأوسع. ينسق مراجعات جودة عبر UI/Engineering/Security/QA/Documentation قبل التعمق في مراحل كبيرة أو قبل Release أو عند ظهور debt/inconsistency signals، ثم يجمعها في تقرير واحد يرفعه إلى Tera. |
+| الملفات المسموح بكتابتها | لا يكتب افتراضيًا داخل المشروع؛ يسلّم Quality Review Report إلى Tera، ويقوم Tera أو ProjectControlAgent بتوثيقه عند الحاجة |
+| الحالة الحالية | مفعّل داخل `.opencode/agents/QualityReviewCoordinatorAgent.md` |
+
+---
+
 ## العملاء الذين لم يتم توليدهم — مع السبب
 
 | العميل | سبب عدم التوليد الآن |
@@ -161,10 +174,10 @@
 | `SolutionArchitectureAgent` | ملف `08_TECHNICAL_ARCHITECTURE.md` موجود والقرارات التقنية مستقرة. لا حاجة لتفعيله الآن. |
 
 ✅ **جميع العملاء التاليين تم توليدهم مسبقًا:**  
-`RequirementsScopeAgent`, `BusinessWorkflowAgent`, `DataDesignAgent`, `UIUXStructureAgent`, `ProjectControlAgent`, `EngineeringAgent`, `SecurityAgent` (مفعّل), `QAAndAcceptanceAgent`, `DocumentationHandoverAgent`, `ReportingAnalyticsAgent`, `FrontendAgent`, `ExecutionPreparationAgent`
+`RequirementsScopeAgent`, `BusinessWorkflowAgent`, `DataDesignAgent`, `UIUXStructureAgent`, `ProjectControlAgent`, `EngineeringAgent`, `SecurityAgent` (مفعّل), `QAAndAcceptanceAgent`, `DocumentationHandoverAgent`, `ReportingAnalyticsAgent`, `FrontendAgent`, `ExecutionPreparationAgent`, `QualityReviewCoordinatorAgent`
 
 ✅ **العملاء المثبتون فعليًا داخل `.opencode/agents/` بعد DEC-0009:**  
-`tera`, `EngineeringAgent`, `FrontendAgent`, `ProjectControlAgent`, `ExecutionPreparationAgent`, `SecurityAgent`, `QAAndAcceptanceAgent`, `BusinessWorkflowAgent`, `UIUXStructureAgent`, `ReportingAnalyticsAgent`, `DocumentationHandoverAgent`
+`tera`, `EngineeringAgent`, `FrontendAgent`, `ProjectControlAgent`, `ExecutionPreparationAgent`, `QualityReviewCoordinatorAgent`, `SecurityAgent`, `QAAndAcceptanceAgent`, `BusinessWorkflowAgent`, `UIUXStructureAgent`, `ReportingAnalyticsAgent`, `DocumentationHandoverAgent`
 
 ⏸️ **مولدون لكن غير مثبتين حاليًا:**  
 `RequirementsScopeAgent`, `DataDesignAgent` — لا توجد حاجة نشطة الآن لتغيير النطاق أو إعادة تصميم البيانات.
@@ -190,6 +203,7 @@
 - `ProjectControlAgent` لا يقرر ولا ينفذ ولا يغلق المهام بنفسه؛ دوره توثيق السجلات تحت قرار Tera فقط.
 - كل تسليم من عميل فرعي يجب أن يوثق داخل `project-control/tasks/[TASK-ID].md` قبل تحويل المهمة إلى `Accepted` أو `Closed`.
 - إذا لم يكن العميل الفرعي مفوضًا بالكتابة داخل `project-control/`، فيجب على Tera أو `ProjectControlAgent` تسجيل التسليم فور استلامه.
+- `QualityReviewCoordinatorAgent` لا يستبدل `QAAndAcceptanceAgent`; الأول للمراجعة الدورية متعددة المجالات، والثاني لمراجعة قبول مهمة/شاشة/Workflow محدد.
 
 ### Unified Activation Policy
 
@@ -202,4 +216,5 @@
 - Tera may generate an additional sub-agent later whenever a missing specialization, review bottleneck, or useful parallelization opportunity appears.
 - After copying a newly activated sub-agent into `.opencode/agents/`, Tera must ask the user to restart the current environment so the activation becomes effective.
 - The current minimal support layer around Tera is limited to `ProjectControlAgent` and `ExecutionPreparationAgent`.
+- `QualityReviewCoordinatorAgent` is an optional review-coordination layer, not a planning layer and not a replacement for specialist review agents.
 - `PlanningCoordinatorAgent` remains deferred for larger phases or larger projects.

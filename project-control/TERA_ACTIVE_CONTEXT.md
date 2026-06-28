@@ -48,6 +48,7 @@ For any new session in this project:
 - `2026-06-27`: Unified sub-agent lifecycle: draft first, activate on need, restart after activation
 - `2026-06-27`: Minimal support layer added: `ProjectControlAgent` + `ExecutionPreparationAgent`
 - `2026-06-27`: TASK-0008 (Parties S04) + TASK-0009 (Main Nav Hub) completed. requireAdmin() extended to Parties. Root page replaced with RTL navigation hub.
+- `2026-06-28`: `QualityReviewCoordinatorAgent` added and activated for periodic cross-domain quality reviews before larger phases, before release, or when quality debt signals appear.
 
 ## Active Rules You Must Not Miss
 
@@ -59,11 +60,13 @@ For any new session in this project:
 - Post-execution review must also inspect the core `project-control/` files, not only application code.
 - If a secret appears in any task file, log, report, or control record, the task cannot PASS review.
 - After each implementation task, decide whether `ProjectControlAgent`, `SecurityAgent`, or `QAAndAcceptanceAgent` must perform an independent follow-up review.
+- Distinguish between task acceptance review and periodic quality review: `QAAndAcceptanceAgent` checks task/screen/workflow acceptance, while `QualityReviewCoordinatorAgent` coordinates broader periodic quality reviews across multiple domains.
 - Do not assume that only the currently active sub-agents are available; Tera may generate an additional agent later when needed.
 - New sub-agents start in `generated-agents/opencode/` and become active only after specialization plus copy into `.opencode/agents/`.
 - After activating a new sub-agent in `.opencode/agents/`, Tera must ask for environment restart.
 - `ExecutionPreparationAgent` may prepare task packages, but only Tera decides scope, timing, delegation, acceptance, or closure.
 - `ProjectControlAgent` may manage control records and traceability checks, but only Tera decides final status changes.
+- `QualityReviewCoordinatorAgent` may coordinate review scope and consolidate specialist findings, but only Tera decides what becomes a task, issue, deferred item, or accepted recommendation.
 - Project-control IDs must stay unique and sequential.
 - Use only the smallest relevant context for the current task.
 
@@ -76,6 +79,7 @@ For any new session in this project:
 - `DEC-0010` - Unified sub-agent lifecycle: needed now vs likely later, draft first, activate only after specialization, restart after activation.
 - `DEC-0011` - `requireAdmin()` pattern is active for future Server Actions.
 - `DEC-0012` - Tera now uses a minimal support layer: `ProjectControlAgent` for control records and `ExecutionPreparationAgent` for task-package preparation.
+- `DEC-0013` - `QualityReviewCoordinatorAgent` is active for periodic cross-domain quality reviews; it coordinates findings only and does not replace specialist reviewers.
 - `ISSUE-0003` - Secret exposure incident from TASK-0003 was resolved; do not reintroduce secrets into docs or config fallbacks.
 
 ## Available Sub-Agents
@@ -86,6 +90,7 @@ For any new session in this project:
 | `FrontendAgent` | UI/Styling: page.tsx, components, CSS, RTL |
 | `ProjectControlAgent` | Updating task/log/decision/issue records under Tera direction |
 | `ExecutionPreparationAgent` | Preparing task packages before Tera review, gating, and delegation |
+| `QualityReviewCoordinatorAgent` | Coordinating periodic quality reviews across UI, engineering, security, QA, and documentation |
 | `SecurityAgent` | Independent follow-up review for Auth, Secrets, Permissions, Middleware, and Config tasks |
 | `QAAndAcceptanceAgent` | Independent follow-up review for UI, Workflow, and acceptance checks |
 | `BusinessWorkflowAgent` | Workflow review only when business process changes |
@@ -96,6 +101,7 @@ For any new session in this project:
 Activation note:
 - The list above shows the currently active agents only.
 - Tera may activate additional agents later if a real need appears.
+- `QualityReviewCoordinatorAgent` is available now, but no review session should start until Tera or the user explicitly requests one.
 - `PlanningCoordinatorAgent` remains deferred for larger phases or larger projects.
 
 ## Read Next Only If Needed
