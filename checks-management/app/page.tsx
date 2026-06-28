@@ -272,7 +272,8 @@ export default function HomePage() {
           <NavCard
             title="الشيكات"
             description="إدارة الشيكات بأنواعها وحالاتها"
-            active={false}
+            href="/checks"
+            active={true}
           />
           <NavCard
             title="المستخدمين"

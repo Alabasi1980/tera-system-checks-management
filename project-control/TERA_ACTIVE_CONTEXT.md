@@ -25,8 +25,8 @@ For any new session in this project:
 | Size | Small MVP |
 | Runtime | OpenCode |
 | Approved Tech | Next.js + TypeScript + PostgreSQL + Prisma |
-| Current Phase | Phase 4 — validation fix complete; TASK-0011 closed |
-| Next Task | Prepare Checks S02 task package with ExecutionPreparationAgent before implementation |
+| Current Phase | Phase 4 — Checks Screen S02 complete; TASK-0012 submitted |
+| Next Task | Fix ISSUE-0007 (NaN amount validation), then continue with S05 (Users) or roadmap review |
 | Current Lead Agent | `Tera Agent` |
 | Expected Execution Agents | `EngineeringAgent` + `FrontendAgent` |
 
@@ -43,6 +43,7 @@ For any new session in this project:
 - `TASK-0009` - Main Navigation Hub — page.tsx + layout.tsx + actions.ts
 - `TASK-0010` - Periodic Quality Review — QualityReviewCoordinatorAgent report
 - `TASK-0011` - ISSUE-0006 fix — server-side validation/normalization in Banks/Parties actions
+- `TASK-0012` - Checks Screen S02 — actions.ts (9 Server Actions) + page.tsx (full UI) + nav activation
 
 ## Recent System Changes
 
@@ -53,6 +54,7 @@ For any new session in this project:
 - `2026-06-28`: `QualityReviewCoordinatorAgent` added and activated for periodic cross-domain quality reviews before larger phases, before release, or when quality debt signals appear.
 - `2026-06-28`: Tera role refined as `Primary Project Orchestrator / Decision Owner` with explicit helper-agent trigger rules and anti-over-delegation rules.
 - `2026-06-28`: TASK-0011 closed. ISSUE-0006 resolved; `npm run build` PASS. SecurityAgent and QAAndAcceptanceAgent not required for this backend-only validation fix per Tera decision.
+- `2026-06-28`: TASK-0012 (Checks Screen S02) completed. 3 sub-tasks: EngineeringAgent (actions.ts), FrontendAgent (page.tsx + nav). Build PASS. SecurityAgent review found ISSUE-0007 (NaN bypass) and ISSUE-0008 (date crash). QAAndAcceptanceAgent review PASS with minor notes. TASK-0012 submitted, awaiting user acceptance.
 
 ## Active Rules You Must Not Miss
 

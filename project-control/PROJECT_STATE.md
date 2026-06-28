@@ -19,7 +19,7 @@
 | اسم المشروع | تطبيق إدارة الشيكات |
 | نوع المشروع | تطبيق ويب مستقل |
 | حجم المشروع | صغير / MVP |
-| المرحلة الحالية | Phase 4 — TASK-0011 closed ✅. ISSUE-0006 resolved. Next: prepare Checks S02 task package with ExecutionPreparationAgent before implementation. |
+| المرحلة الحالية | Phase 4 — TASK-0012 completed ✅ (Checks Screen S02). Post-Execution Gate PASS. SecurityAgent review: 2 findings (ISSUE-0007, ISSUE-0008). QAAndAcceptanceAgent review: PASS with 3 minor notes. Next: fix ISSUE-0007 (NaN amount validation), then continue with S05 (Users) or roadmap review. |
 | بيئة التشغيل | OpenCode |
 | التقنية المعتمدة | Next.js + TypeScript + PostgreSQL + Prisma |
 | مصدر التفاصيل | `project-preparation/` |
@@ -136,6 +136,7 @@
 | TASK-0009 | Closed ✅ | الصفحة الرئيسية Navigation Hub — بطاقات تنقل للبنوك والجهات + قيد الإنشاء للشيكات والمستخدمين |
 | TASK-0010 | Closed ✅ | مراجعة جودة دورية خفيفة بعد TASK-0009 — QualityReviewCoordinatorAgent |
 | TASK-0011 | Closed ✅ | إصلاح ISSUE-0006 — server-side validation/normalization في Banks/Parties Server Actions. Build PASS. |
+| TASK-0012 | Submitted ⏳ | شاشة إدارة الشيكات S02 — Backend (actions.ts) + Frontend (page.tsx) + Nav activation. Build PASS. Sub-Task 1 ✅ Sub-Task 2 ✅ Sub-Task 3 ✅. Post-Execution Gate PASS. SecurityAgent review completed. QAAndAcceptanceAgent review completed. Awaiting user acceptance. |
 | ISSUE-0006 | Resolved ✅ | Server-side validation gap fixed in TASK-0011 before Checks S02 |
 | ISSUE-0003 | Resolved ✅ | Secret exposure cleaned |
 | ISSUE-0004 | Resolved ✅ | SEC-001 User Enumeration — fixed in TASK-0007 |
@@ -152,11 +153,13 @@
 
 ## 9. آخر ملخص سياق
 
-TASK-0011 مغلق ✅ — ISSUE-0006 تم حله بإضافة server-side validation/normalization في Banks/Parties Server Actions.
-Build verification: `npm run build` PASS.
-Tera قرر أن SecurityAgent غير مطلوب الآن لأن التغيير لم يمس auth/session/JWT/secrets/permissions/middleware/config و`requireAdmin()` بقي أول خطوة.
-Tera قرر أن QAAndAcceptanceAgent غير مطلوب لهذه المهمة لأنها backend-only validation fix.
-الخطوة التالية: تجهيز Task Package لشاشة الشيكات S02 بواسطة ExecutionPreparationAgent قبل التنفيذ.
+TASK-0012 مكتمل ✅ — شاشة إدارة الشيكات S02 (Backend + Frontend + Nav) تم بناؤها بالكامل.
+Build verification: `npm run build` PASS ✅.
+Post-Execution Review Gate: PASS ✅.
+SecurityAgent راجع الكود ووجد findingين: ISSUE-0007 (NaN amount bypass — Medium) وISSUE-0008 (invalid date crash — Low).
+QAAndAcceptanceAgent راجع الشاشة وأقر PASS مع 3 ملاحظات بسيطة غير مانعة.
+TASK-0012 في حالة Submitted بانتظار قبول المستخدم.
+الخطوة التالية: إصلاح ISSUE-0007 (NaN amount validation) أولاً، ثم تقييم هل ننتقل إلى S05 (Users) أو نجري مراجعة خريطة الطريق.
 **إلزامية:** قبل أي TASK جديدة، يجب مراجعة PROJECT_STATE.md و PROJECT_RULES.md.
 
 ---
@@ -166,5 +169,5 @@ Tera قرر أن QAAndAcceptanceAgent غير مطلوب لهذه المهمة ل
 | البند | القيمة |
 |---|---|---|
 | Updated By | ProjectControlAgent under Tera direction |
-| Update Reason | TASK-0011 closed ✅. ISSUE-0006 resolved. Build PASS. |
-| Next Step | Prepare Checks S02 task package with ExecutionPreparationAgent before implementation. |
+| Update Reason | TASK-0012 completed ✅. Post-Execution Gate PASS. SecurityAgent review findings registered (ISSUE-0007, ISSUE-0008). QAAndAcceptanceAgent review PASS. TASK-0012 submitted, awaiting user acceptance. |
+| Next Step | Fix ISSUE-0007 (NaN amount validation), then continue with S05 (Users) or roadmap review. |

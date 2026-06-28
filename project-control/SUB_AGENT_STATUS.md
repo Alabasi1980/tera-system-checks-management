@@ -40,13 +40,13 @@ Later tasks may refine the status, but this file starts from the first stable mu
 
 | Agent | Status | Usage | Load | Quality | Last Used | Current Decision | Notes |
 |---|---|---|---|---|---|---|---|
-| `EngineeringAgent` | Active | High | Medium | Good | `TASK-0011` | Keep as primary execution specialist | نفذ TASK-0001 إلى TASK-0004 ثم TASK-0007 وشارك في TASK-0008 وأنجز TASK-0011. أصلح validation/normalization بشكل صحيح مع الحفاظ على `requireAdmin()`. |
-| `FrontendAgent` | Active | High | Medium | Good | `TASK-0009` | Keep as primary UI execution specialist | استخدم فعليًا في TASK-0008 وTASK-0009 بعد فصل الواجهة عن EngineeringAgent. الأداء جيد، مع حاجة مستقبلية لمراقبة اتساق الواجهة مع زيادة الشاشات. |
+| `EngineeringAgent` | Active | High | Medium | Good | `TASK-0012` | Keep as primary execution specialist | نفذ TASK-0001 إلى TASK-0004 ثم TASK-0007 وشارك في TASK-0008 وأنجز TASK-0011. نفذ Sub-Task 1 من TASK-0012 — 9 Server Actions في `app/checks/actions.ts` (483 سطرًا). Build PASS. |
+| `FrontendAgent` | Active | High | Medium | Good | `TASK-0012` | Keep as primary UI execution specialist | استخدم فعليًا في TASK-0008 وTASK-0009 وTASK-0012 (Sub-Tasks 2+3). نفذ `app/checks/page.tsx` (64530 بايت، full Checks UI مع summary bar, filters, table, badges, modals, print, جميع الحالات) وفعّل كارت الشيكات في الصفحة الرئيسية. الأداء جيد. |
 | `ProjectControlAgent` | Underused | Low | Low | Good | `TASK-0011` | Increase usage in larger execution batches | استخدم في TASK-0011 لتحديث سجلات `project-control` وإغلاق ISSUE-0006 تحت توجيه Tera. |
 | `ExecutionPreparationAgent` | Idle | None | None | Not Evaluated | None | Keep ready for large or multi-agent tasks | مفعّل لكن لم يدخل دورة تنفيذ فعلية بعد. |
 | `QualityReviewCoordinatorAgent` | Conditional | Low | Low | Good | `TASK-0010` | Keep for periodic reviews after phases or quality-drift signals | استخدم فعليًا في TASK-0010 وقدم مراجعة مفيدة بدون تعديل ملفات أو تضخيم نطاق. |
-| `SecurityAgent` | Critical Specialist | Low | Low | Good | `TASK-0005` | Keep as conditional security specialist | استُخدم بوضوح في TASK-0005 وأنتج findings مفيدة بدون تضخم. |
-| `QAAndAcceptanceAgent` | Conditional | None | None | Not Evaluated | None | Introduce before checks screen or workflow-heavy acceptance | موجود لكنه لم يبدأ مراجعة فعلية حتى baseline TASK-0009. |
+| `SecurityAgent` | Critical Specialist | Medium | Low | Good | `TASK-0012` | Keep as conditional security specialist | استُخدم في TASK-0005 (مراجعة Auth) وفي TASK-0012 (مراجعة Checks Server Actions). أنتج findingين مفيدين: ISSUE-0007 (NaN bypass — Medium) وISSUE-0008 (date crash — Low). PASS مع توصيات. |
+| `QAAndAcceptanceAgent` | Conditional | Low | Low | Good | `TASK-0012` | Keep for workflow-heavy and UI acceptance | استُخدم فعليًا في مراجعة قبول TASK-0012 (Checks Screen S02). راجع الشاشة والـ Workflow والحالات. PASS مع 3 ملاحظات بسيطة غير مانعة. |
 | `BusinessWorkflowAgent` | Active | Low | Low | Good | `TASK-0006` | Keep available for workflow-heavy phases | استخدم في TASK-0006 لإنتاج `workflow-rules.md`. |
 | `UIUXStructureAgent` | Active | Low | Low | Good | `TASK-0006` | Keep available before complex screens | استخدم في TASK-0006 لإنتاج مواصفات الشاشة قبل التنفيذ. |
 | `DocumentationHandoverAgent` | Idle | None | None | Not Evaluated | None | Keep idle until a real handoff-ready phase appears | خامل طبيعيًا لأن مرحلة التسليم النهائي أو الداخلي لم تبدأ بعد. |
@@ -62,4 +62,7 @@ Later tasks may refine the status, but this file starts from the first stable mu
 - Keep `QAAndAcceptanceAgent` ready for the checks screen and workflow-heavy phases.
 - Keep idle agents available without forcing activation or unnecessary work.
 - `ISSUE-0006` fix completed in `TASK-0011`; prepare Checks S02 task package with `ExecutionPreparationAgent` before implementation.
+- `TASK-0012` (Checks Screen S02) completed and submitted ✅ awaiting user acceptance.
+- `ISSUE-0007` (NaN amount bypass) and `ISSUE-0008` (invalid date crash) registered from SecurityAgent TASK-0012 review — fix planning pending Tera decision.
+- `QAAndAcceptanceAgent` successfully used for first time — review PASS with 3 minor notes.
 - Keep UI component/style extraction deferred until after S02 or S05 unless duplication causes bugs.
