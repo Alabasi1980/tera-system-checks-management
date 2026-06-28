@@ -832,6 +832,7 @@ project-control/tasks/
 - يفحص اتساق حالة المهمة بين `TASK_REGISTRY.md` وملف المهمة نفسه.
 - يحول findings المؤجلة من `SecurityAgent` أو `QAAndAcceptanceAgent` إلى `Issues` رسمية عند الحاجة وبقرار Tera.
 - يحدث `PROJECT_STATE.md` و`TERA_ACTIVE_CONTEXT.md` عند إغلاق مهمة مهمة أو تغير حالة تشغيلية مؤثرة.
+- يمكنه تحديث `project-control/SUB_AGENT_STATUS.md` فقط عندما يطلب Tera ذلك صراحةً، دون أن يصدر حكمًا إداريًا بنفسه.
 
 ---
 

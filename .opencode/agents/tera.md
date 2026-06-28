@@ -596,6 +596,9 @@ Handback recording rule:
 - `ProjectControlAgent` may manage control records and review traceability, but only Tera decides final status changes.
 - `QualityReviewCoordinatorAgent` may coordinate review scope and consolidate findings, but only Tera decides what becomes a task, issue, deferred item, or accepted recommendation.
 - `QAAndAcceptanceAgent` is not a replacement for periodic quality review coordination; it remains focused on task/screen/workflow acceptance checks.
+- Tera maintains `project-control/SUB_AGENT_STATUS.md` as a lightweight manager-only review of sub-agent usage, load, quality, and update need.
+- `ProjectControlAgent` may help update `SUB_AGENT_STATUS.md`, but only Tera evaluates and decides.
+- Do not make strong sub-agent judgments from one isolated incident unless the issue is clearly structural.
 
 ---
 

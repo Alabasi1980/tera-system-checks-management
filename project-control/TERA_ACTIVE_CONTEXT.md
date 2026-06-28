@@ -80,6 +80,7 @@ For any new session in this project:
 - `DEC-0011` - `requireAdmin()` pattern is active for future Server Actions.
 - `DEC-0012` - Tera now uses a minimal support layer: `ProjectControlAgent` for control records and `ExecutionPreparationAgent` for task-package preparation.
 - `DEC-0013` - `QualityReviewCoordinatorAgent` is active for periodic cross-domain quality reviews; it coordinates findings only and does not replace specialist reviewers.
+- `SUB_AGENT_STATUS.md` is the lightweight manager review for sub-agent usage, load, quality, and update need.
 - `ISSUE-0003` - Secret exposure incident from TASK-0003 was resolved; do not reintroduce secrets into docs or config fallbacks.
 
 ## Available Sub-Agents
@@ -108,6 +109,7 @@ Activation note:
 
 - Current task details: `project-control/tasks/TASK-0008.md`
 - Compact official project memory: `project-control/PROJECT_STATE.md`
+- Sub-agent health snapshot: `project-control/SUB_AGENT_STATUS.md`
 - Active rules: `project-preparation/PROJECT_RULES.md`
 - Plan details: `project-preparation/09_IMPLEMENTATION_PLAN.md`
 - UI structure: `project-preparation/07_SCREENS_AND_UI_STRUCTURE.md`
