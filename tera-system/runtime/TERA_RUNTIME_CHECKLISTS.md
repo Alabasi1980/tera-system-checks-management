@@ -327,3 +327,95 @@ Every recommendation must be classified as:
 ```text
 Include now / Recommended / Defer / Out of Scope / Needs User Decision
 ```
+
+---
+
+## 14. Application Discovery Questions Checklist
+
+Ask in short batches. Do not ask all questions at once.
+
+Core discovery areas:
+
+- What is the application idea?
+- What problem does it solve?
+- Who will use it?
+- What should the first useful version do?
+- What is explicitly not needed now?
+- What workflows, approvals, statuses, or reports are expected?
+- Are there roles or permissions?
+- Are there external systems or integrations?
+- Are there design, language, RTL/LTR, color, or UX preferences?
+- Is there a preferred technology stack?
+- Is the app internal, customer-facing, public, or multi-tenant?
+- Are there reference systems or examples such as SAP, Odoo, Oracle, Dynamics, or screenshots?
+
+Smart domain questions may be asked after the app is sufficiently understood, not before.
+
+---
+
+## 15. Discovery Documentation Checklist
+
+Before leaving Application Discovery, confirm:
+
+- Application idea is documented.
+- Problem / purpose is documented.
+- Target users are documented.
+- Main workflows or expected actions are documented.
+- MVP candidates are documented.
+- Later-phase candidates are documented.
+- Out-of-scope items are documented when known.
+- Technical context is documented or explicitly marked missing.
+- User preferences are documented.
+- Assumptions are documented.
+- Open questions are documented.
+- Materially important chat-only information has been normalized into official `project-inputs` files.
+
+Materially important means information that affects scope, MVP/later phasing, users, workflows, permissions, data, integrations, technical context, constraints, risks, assumptions, open questions, or acceptance.
+
+Do not block discovery just to preserve every minor phrase, aside, preference wording, or non-impactful detail.
+
+If materially important application information remains only in chat, discovery cannot close.
+
+---
+
+## 16. Suggestion Timing Checklist
+
+Before Tera proposes significant improvements, confirm:
+
+- Tera can summarize the application accurately.
+- The user has had a chance to correct the understanding.
+- The suggestion is tied to the user's goals or a real domain risk.
+- The suggestion is classified as MVP / Later / Out of Scope / Needs User Decision.
+- The suggestion is presented as an option, not as automatic scope.
+
+Do not propose major scope expansions before sufficient understanding.
+
+---
+
+## 17. Post-Research Review Checklist
+
+After Domain Intelligence or external research:
+
+- Did the research introduce new useful ideas?
+- Did it reveal missing workflow, role, validation, or integration issues?
+- Did it suggest enterprise features that should be deferred?
+- Did any finding conflict with user intent or `PROJECT_RULES.md`?
+- Did Tera classify findings into Include now / Recommended / Defer / Out of Scope / Needs User Decision?
+- Did Tera return to the user to review meaningful changes before adopting them?
+
+Research findings cannot become approved scope without user/Tera decision.
+
+---
+
+## 18. Phased Roadmap Readiness Checklist
+
+Before execution planning, confirm:
+
+- Phase 1 / MVP is clear and small enough.
+- Later phases are separated from MVP.
+- Enterprise or complex features are deferred unless explicitly approved.
+- Out-of-scope items are listed where relevant.
+- User decisions are captured.
+- The user approved the phased roadmap.
+
+No execution planning before phased roadmap approval.

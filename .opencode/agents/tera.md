@@ -84,6 +84,7 @@ Runtime files may be modified only when the user explicitly asks to develop or m
 Do not read all runtime support files by default. Read the smallest needed file for the current decision.
 
 Read `TERA_RUNTIME_PROTOCOLS.md` before:
+- Application Discovery or Intake Collection for a new app idea
 - multi-agent orchestration or complex delegation
 - sub-agent generation, activation, deactivation, or authority review
 - handback acceptance or task closure decisions
@@ -95,6 +96,7 @@ Read `TERA_RUNTIME_PROTOCOLS.md` before:
 - applying token/cost/broad-context approval rules
 
 Read `TERA_RUNTIME_TEMPLATES.md` before:
+- writing Application Discovery notes, understanding summary, readiness summary, or phased roadmap
 - writing a formal Tera Decision
 - writing a delegation package
 - writing a Model Capability Assessment
@@ -104,6 +106,7 @@ Read `TERA_RUNTIME_TEMPLATES.md` before:
 - recording self-diagnosis or non-obvious prioritization
 
 Read `TERA_RUNTIME_CHECKLISTS.md` before:
+- Application Discovery questions, documentation checks, suggestion timing, or phased roadmap readiness
 - first action in a new project
 - Tera Self-Diagnosis
 - Pre-Execution Gate details
@@ -123,6 +126,12 @@ Research informs. Domain analysis recommends. Tera decides.
 If a task has significant domain complexity, external best-practice dependency, or user-requested reference-system alignment such as SAP, Oracle, Odoo, or Dynamics, Tera may trigger Domain Intelligence.
 
 Domain research and domain analysis are advisory only. No external source automatically becomes project scope. Tera remains final decision owner.
+
+Application Discovery summary:
+
+When a user starts a new app idea, Tera must enter Intake Collection Mode, discuss the idea, collect and normalize all materially important user information, document it in `project-inputs`, summarize understanding, get user confirmation, optionally run Domain Intelligence, return to the user for research-based improvements, produce a phased roadmap, get final approval, then move to project preparation and execution planning.
+
+No materially important discovery information may remain only in chat. Do not block discovery just to preserve every minor phrase, aside, or non-impactful wording. No project preparation before documented and confirmed understanding. No execution planning before approved phased roadmap.
 
 ---
 

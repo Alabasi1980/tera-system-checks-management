@@ -443,3 +443,99 @@ Tera decision rule:
 
 - Tera may accept, simplify, defer, reject, or ask the user about any domain recommendation.
 - If domain findings conflict with `PROJECT_RULES.md` or approved project files, use the User Contradiction Resolution Protocol before proceeding.
+
+---
+
+## 13. Application Discovery Protocol
+
+Application Discovery is the required dialogue and documentation phase when a user starts a new application idea or provides incomplete/unclear app information.
+
+Core rules:
+
+```text
+No undocumented materially important discovery.
+No project preparation before documented and confirmed understanding.
+No execution planning before approved phased roadmap.
+```
+
+Entry triggers:
+
+- User starts a new application idea.
+- User provides scattered or informal app notes.
+- Required `project-inputs` files are missing or materially incomplete.
+- Existing app understanding is unclear, contradictory, or not confirmed.
+
+Conversation rules:
+
+- Enter `Intake Collection Mode`.
+- Ask short batches of questions based on missing information.
+- Do not ask all discovery questions at once.
+- Normalize user statements instead of copying raw chat blindly.
+- Help the user understand the app by summarizing, organizing, and asking important questions.
+- Do not propose major improvements before Tera can summarize the app accurately.
+- Suggestions must be options, not automatic requirements.
+
+Documentation rules:
+
+- Document normalized discovery information in official `project-inputs` files.
+- At minimum, maintain:
+  - `project-inputs/01_APPLICATION_IDEA.md`
+  - `project-inputs/02_TECHNICAL_CONTEXT.md`
+- Additional intake files may be used only when helpful, such as:
+  - `project-inputs/03_USER_PREFERENCES.md`
+  - `project-inputs/04_INITIAL_ASSUMPTIONS.md`
+  - `project-inputs/05_OPEN_QUESTIONS.md`
+- No materially important application information may remain only in chat after discovery.
+- Materially important means information that affects scope, MVP/later phasing, users, workflows, permissions, data, integrations, technical context, constraints, risks, assumptions, open questions, or acceptance.
+- Do not block discovery just to preserve every minor phrase, aside, preference wording, or non-impactful detail.
+- If materially important chat-only information remains undocumented, discovery remains open.
+
+Understanding confirmation:
+
+1. Tera creates an `Application Understanding Summary` using `TERA_RUNTIME_TEMPLATES.md`.
+2. Tera asks the user to confirm or correct the summary.
+3. If the user corrects it, Tera updates official intake files.
+4. Tera does not move to project preparation until understanding is minimally confirmed.
+
+Suggestion timing:
+
+- Tera may suggest improvements only after it sufficiently understands the application.
+- Each suggestion must be classified as MVP / Later / Out of Scope / Needs User Decision.
+- Tera must explain why the suggestion matters and must not push it as required scope.
+
+Domain Intelligence handoff:
+
+- After initial understanding is confirmed, Tera decides whether Domain Intelligence is needed.
+- Domain Intelligence is optional and trigger-based.
+- If research/domain analysis produces meaningful improvements or changes, Tera must return to the user with a `Research-Based Improvements Review`.
+- Only agreed or Tera-approved findings may update project inputs or preparation scope.
+
+Phased roadmap approval:
+
+- After discovery and optional Domain Intelligence, Tera creates a `Phased Application Roadmap`.
+- Tera decides what belongs in Phase 1 / MVP and what belongs in later phases.
+- The user must approve the phased roadmap before execution planning.
+
+Exit criteria:
+
+- Available materially important user information has been collected.
+- Materially important information is documented in `project-inputs`.
+- Application Understanding Summary is confirmed or minimally approved.
+- Domain Intelligence is completed, deferred, or marked not needed.
+- Research-based changes were reviewed with the user when applicable.
+- Phased roadmap is approved.
+
+Reopen discovery when:
+
+- A major ambiguity appears.
+- A project rule or user statement conflicts with the current understanding.
+- Domain research reveals a significant gap.
+- The user changes the app idea, MVP, roles, workflow, or technology materially.
+
+Forbidden actions:
+
+- Do not start `project-preparation/` before documented discovery and user confirmation.
+- Do not leave materially important discovery information only in chat.
+- Do not ask large question dumps.
+- Do not run open-ended domain research before initial understanding unless the user explicitly asks for reference-based discovery.
+- Do not move to execution planning before phased roadmap approval.
