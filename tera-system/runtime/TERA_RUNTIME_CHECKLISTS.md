@@ -12,19 +12,109 @@ If this file conflicts with `.opencode/agents/tera.md`, the active runtime file 
 
 When the user provides a project idea and technical information:
 
+### Phase 1: Project Intake & Client Discovery
 1. Read the required system references in `tera-system/`.
 2. Check `project-inputs/01_APPLICATION_IDEA.md` and `project-inputs/02_TECHNICAL_CONTEXT.md`.
-3. If intake is incomplete, enter `Intake Collection Mode` and complete intake first.
+3. If intake is incomplete, enter `Client Discovery Mode` and complete intake first.
 4. If the user provides project-specific rules, create or update `project-preparation/PROJECT_RULES.md`.
-5. Create or update `project-preparation/00_PROJECT_INPUTS.md` as a normalized summary derived from `project-inputs/`.
-6. Create or update `project-preparation/TERA_PROJECT_DECISION.md`.
-7. Decide which preparation files are required from `tera-system/Tera_Project_Preparation_Files.md`.
-8. Create only the required files inside `project-preparation/`.
-9. Decide which sub-agents are needed now and which are likely needed later.
-10. If needed, generate only required draft sub-agents inside `generated-agents/opencode/`.
-11. Activate inside `.opencode/agents/` only agents needed for the current approved work.
-12. If a new activation happens, ask the user to restart OpenCode.
-13. Wait for user approval before application implementation.
+
+### Phase 2: Project Decision Formation
+1. Create or update `project-preparation/00_PROJECT_INPUTS.md` as a normalized summary derived from `project-inputs/`.
+2. Create or update `project-preparation/TERA_PROJECT_DECISION.md`.
+
+### Phase 3: Project Preparation Planning
+1. Read `TERA_PROJECT_DECISION.md` — verify Decision is `Proceed to Project Preparation`.
+2. Read `tera-system/Tera_Project_Preparation_Files.md` as the file catalog.
+3. Create `project-control/PREPARATION_PLAN.md` using the template in `TERA_RUNTIME_TEMPLATES.md` Section 27:
+   - Classify each file: Required / Conditional / Deferred / Not Required.
+   - Determine creation order and dependencies.
+   - Assign each file to the appropriate sub-agent.
+   - Identify user approval points.
+4. **No file creation. No agent generation.**
+5. Present the plan for user approval.
+
+### Phase 4: Sub-Agent Generation & Preparation Delegation
+1. Verify `PREPARATION_PLAN.md` is approved. If not → do not start Phase 4.
+2. Determine which preparation agents are needed now from the plan.
+3. For each agent, check status: **Use Existing** / **Specialize** / **Generate**.
+4. If generating: create draft in `generated-agents/opencode/` using `AGENT_GENERATION_TEMPLATE.md`.
+5. For each agent, set:
+    - `Allowed Sources` and `Allowed Write Targets`.
+    - `Token Budget` (Light / Medium / Strong) and `Context Rules` (Task / Summary / Full).
+    - `Forbidden Actions` and `Acceptance Criteria`.
+6. Create `project-control/AGENT_DELEGATION_PLAN.md` using template in `TERA_RUNTIME_TEMPLATES.md` Section 28.
+7. Create or update `generated-agents/opencode/GENERATED_AGENTS_MANIFEST.md`.
+8. Present delegation plan for user approval.
+9. After approval: activate agents in `.opencode/agents/` per current preparation batch.
+10. If activation happens, ask user to restart OpenCode.
+11. Delegate **preparation-file creation only**:
+    - Create `TASK-PREP-XXX`.
+    - Apply Pre-Execution Gate for the preparation-file task.
+    - Assign to the approved preparation agent.
+12. Receive **preparation handback only**:
+    - Review generated preparation files.
+    - Accept, reject, or request rework.
+13. **This is not application implementation.**
+
+### Phase 5: Execution Planning
+1. Run **Execution Readiness Check**:
+    - [ ] All required preparation files complete and approved.
+    - [ ] `AGENT_DELEGATION_PLAN.md` approved.
+    - [ ] Active Technology Profile confirmed.
+    - [ ] No blocking Issues.
+    - [ ] Design Source Decision resolved for any incoming UI tasks.
+2. Create `project-control/PROJECT_MASTER_PLAN.md` using template Section 29:
+    - Define execution phases with objectives and dependencies.
+    - Define transition conditions between phases.
+    - Record Design Source Decision per phase.
+3. Create `project-control/PROJECT_DETAILED_EXECUTION_PLAN.md` using template Section 30:
+    - Break each phase into traceable items.
+    - Link each item to a planned TASK-ID.
+4. Define **First Batch** only — not the full project:
+    - Select which items from the detailed plan form the first executable batch.
+5. Create `project-control/EXECUTION_BATCH_PLAN.md` using template Section 31:
+    - List included TASK-IDs with assigned agents and Allowed Write Targets.
+    - List deferred items with reasons.
+    - Record Design Source Decision for this batch.
+6. For each TASK-ID in the batch:
+    - Apply Orchestration Decision Matrix.
+    - Apply Model Capability Gate.
+    - Create task file in `project-control/tasks/TASK-COD-XXX.md`.
+    - Run **Pre-Execution Gate** (20-item checklist from `TeraPreExecutionGate.md`).
+    - Record `Pre-Execution Gate Result: PASS` in the task file.
+7. Present to user: Master Plan + Detailed Plan + Batch Plan + first TASK-IDs.
+8. Wait for user approval before moving to Phase 6.
+9. **No coding. No UI without Design Source Decision. No TASK-ID without Pre-Execution Gate PASS.**
+
+### Phase 6: Implementation
+1. Select one approved `TASK-COD-XXX` from the approved `EXECUTION_BATCH_PLAN.md`.
+2. Confirm:
+   - [ ] Task status is `Approved` or `Assigned`.
+   - [ ] Responsible agent is active and appropriate.
+   - [ ] Active Technology Profile is loaded.
+   - [ ] `Pre-Execution Gate Result: PASS` exists in the task file.
+   - [ ] User approval exists for the batch or task.
+3. Delegate only the current task package:
+   - Task ID.
+   - Objective.
+   - Allowed Sources.
+   - Allowed Write Targets.
+   - Forbidden Actions.
+   - Technology Profile.
+   - Expected Output.
+   - Acceptance Criteria.
+4. Execute only inside `Allowed Write Targets`.
+5. Require structured agent handback:
+   - Task ID, Agent, Status.
+   - Files Created / Modified.
+   - Commands Run.
+   - Summary, Assumptions, Issues, Decisions Needed, Recommendation.
+6. Record handback in `project-control/tasks/TASK-COD-XXX.md`; it must not remain only in chat.
+7. Run `Post-Execution Review Gate` from `TeraPreExecutionGate.md` before any acceptance/closure.
+8. Decide final task status: Accepted / Needs Fix / Blocked / Rework Needed / Deferred / Cancelled.
+9. Update `TASK_REGISTRY.md`, `PROJECT_ACTIVITY_LOG.md`, `PROJECT_STATE.md`, and `ISSUES_AND_GAPS.md` when needed.
+10. Do not open the next task unless the current task is accepted or explicitly handled.
+11. **No implementation without approved TASK-ID. No closure without Post-Execution Review. No scope expansion.**
 
 ---
 

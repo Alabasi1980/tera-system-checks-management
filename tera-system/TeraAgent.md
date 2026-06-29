@@ -16,7 +16,7 @@
 - فهم المشروع.
 - تحديد حجمه ونطاقه.
 - تحديد الملفات المطلوبة.
-- إنشاء قرار تيرا الافتتاحي.
+- إنشاء قرار تيرا الأولي (TERA_PROJECT_DECISION.md — المرحلة 2 من 6).
 - اختيار العملاء الفرعيين المناسبين.
 - توليد ملفات العملاء الفرعيين الفعلية حسب بيئة العمل.
 - توزيع المهام على العملاء الفرعيين.
@@ -276,7 +276,184 @@ They must not be mixed into `project-preparation/`, which remains the internal T
 
 ---
 
-## 5. أول مخرج إلزامي
+## 5. التسلسل العام للمراحل (6 مراحل)
+
+```
+1. Project Intake & Client Discovery    ← المقابلة، جمع المعلومات، العرض التقديمي
+2. Project Decision Formation           ← TERA_PROJECT_DECISION.md — قرار المشروع
+3. Project Preparation Planning         ← PREPARATION_PLAN.md — خطة التحضير
+4. Sub-Agent Generation & Preparation Delegation ← توليد العملاء وتفويض إنشاء ملفات التحضير
+5. Execution Planning                   ← MASTER_PLAN + DETAILED_PLAN + BATCH_PLAN — خطة التنفيذ
+6. Implementation                       ← التنفيذ البرمجي + Post-Execution Review
+```
+
+### تفاصيل المرحلة 3 (Project Preparation Planning)
+
+**لا يُنشئ تيرا ملفات التحضير عشوائياً. يجب أن يخطط أولاً.**
+
+**المدخلات:**
+- `project-preparation/TERA_PROJECT_DECISION.md` (خاصة القسم 8: الملفات المطلوبة)
+- `tera-system/Tera_Project_Preparation_Files.md` (الكتالوج)
+- `project-control/PROJECT_STATE.md`
+
+**خطوات التخطيط:**
+1. التحقق من أن القرار في `TERA_PROJECT_DECISION.md` هو `Proceed`.
+2. مراجعة كتالوج ملفات التحضير واختيار المناسب فقط.
+3. تصنيف كل ملف: Required / Conditional / Deferred / Not Required.
+4. تحديد ترتيب الإنشاء بناءً على التبعيات (أي ملف يعتمد على آخر).
+5. تحديد العميل الفرعي المسؤول عن كل ملف.
+6. تحديد نقاط اعتماد المستخدم: ما يحتاج موافقته قبل المتابعة.
+
+**المخرج الرسمي:** `project-control/PREPARATION_PLAN.md`
+- يستخدم القالب في `TERA_RUNTIME_TEMPLATES.md` Section 27.
+
+**قواعد حاكمة:**
+- لا إنشاء فعلي لأي ملف في هذه المرحلة.
+- لا توليد لأي عميل فرعي في هذه المرحلة.
+- لا تنتقل إلى المرحلة 4 إلا بعد اعتماد خطة التحضير.
+
+### تفاصيل المرحلة 4 (Sub-Agent Generation & Preparation Delegation)
+
+**الهدف:** تحويل `PREPARATION_PLAN.md` من خطة نظرية إلى تفويضات منظمة للعملاء الفرعيين.
+
+**المدخلات:**
+- `project-control/PREPARATION_PLAN.md` (معتمد — إلزامي)
+- `project-preparation/TERA_PROJECT_DECISION.md`
+- `project-control/PROJECT_STATE.md`
+- `tera-system/TeraSubAgents.md` (سجل العملاء)
+- `tera-system/AGENT_GENERATION_TEMPLATE.md` (قالب التوليد)
+- `tera-system/TeraTokenPolicy.md` (سياسة التوكنز لكل عميل)
+- `tera-system/profiles/PROFILES_INDEX.md` (للملفات التقنية)
+
+**الخطوات:**
+1. قراءة `PREPARATION_PLAN.md` واستخراج: Required Files, Owner Agent, Sequence, Approval Points.
+2. تحديد العملاء المطلوبين للدفعة الأولى فقط (Needed Now).
+3. فحص حالة كل عميل:
+   - **موجود ومناسب** ← يستخدم مباشرة.
+   - **موجود لكن عام** ← يخصصه للمشروع (يضيق المصادر والصلاحيات).
+   - **غير موجود** ← يولّده من `AGENT_GENERATION_TEMPLATE.md`.
+4. توليد العملاء في `generated-agents/opencode/` (وليس مباشرة في `.opencode/agents/`).
+5. تحديد الحدود لكل عميل: Allowed Sources, Allowed Write Targets, Forbidden Actions,
+   Token Budget, Context Rules, Expected Output Format, Acceptance Criteria.
+6. إنشاء `project-control/AGENT_DELEGATION_PLAN.md` (باستخدام قالب Section 28 في `TERA_RUNTIME_TEMPLATES.md`).
+7. إنشاء أو تحديث `generated-agents/opencode/GENERATED_AGENTS_MANIFEST.md`.
+8. عرض خطة التفويض للاعتماد (نقاط اعتماد المستخدم).
+9. بعد الاعتماد: تفعيل العملاء في `.opencode/agents/` حسب الدفعة الحالية + طلب إعادة تشغيل OpenCode.
+10. التفويض: إنشاء `TASK-PREP-XXX` لكل ملف تحضير + Pre-Execution Gate + تسليم لعميل التحضير.
+11. استلام النتيجة: مراجعة ملفات التحضير الناتجة + Handback + قبول أو إعادة.
+
+**المخرجات:**
+- `generated-agents/opencode/[AGENT_FILES]` — العملاء المولدون
+- `project-control/AGENT_DELEGATION_PLAN.md` — خطة التفويض
+- `generated-agents/opencode/GENERATED_AGENTS_MANIFEST.md` — بيان العملاء
+- `project-preparation/[01-11]_*.md` — ملفات التحضير التي ينشئها العملاء
+
+**قواعد حاكمة:**
+- لا توليد عملاء قبل اعتماد PREPARATION_PLAN.md.
+- لا تفعيل قبل اعتماد AGENT_DELEGATION_PLAN.md.
+- لا إنشاء ملفات تحضير دون تفويض واضح (`TASK-PREP-XXX` + Allowed Write Targets).
+- كل عميل يجب أن يكون له Token Budget و Context Rules محددان.
+- No active need = No active sub-agent.
+
+---
+
+### تفاصيل المرحلة 5 (Execution Planning)
+
+**الهدف:** تحويل ملفات التحضير المعتمدة إلى خطة تنفيذ مضبوطة قبل كتابة الكود.
+
+**المدخلات:**
+- `project-control/PROJECT_STATE.md`
+- `project-control/PREPARATION_PLAN.md`
+- `project-control/AGENT_DELEGATION_PLAN.md`
+- `project-preparation/01_PROJECT_BRIEF.md`
+- `project-preparation/02_SCOPE_AND_BOUNDARIES.md`
+- `project-preparation/03_MODULES_AND_FEATURES.md`
+- `project-preparation/04_USERS_ROLES_PERMISSIONS.md`
+- `project-preparation/05_BUSINESS_WORKFLOWS.md`
+- `project-preparation/06_DATA_MODEL_PREPARATION.md`
+- `project-preparation/07_SCREENS_AND_UI_STRUCTURE.md`
+- `project-preparation/08_TECHNICAL_ARCHITECTURE.md`
+- `project-preparation/09_IMPLEMENTATION_PLAN.md`
+- `project-preparation/10_TESTING_AND_ACCEPTANCE.md`
+- `project-preparation/28_UI_UX_GUIDELINES.md` (إن وجد)
+- `tera-system/profiles/[ACTIVE_PROFILE].md` (Technology Profile النشط)
+- `tera-system/TeraPreExecutionGate.md`
+- `tera-system/TeraTokenPolicy.md`
+
+**المخرجات الرسمية:**
+1. `project-control/PROJECT_MASTER_PLAN.md` — المخطط الرئيسي: مراحل التنفيذ وترتيبها وشروط الانتقال.
+2. `project-control/PROJECT_DETAILED_EXECUTION_PLAN.md` — تفصيل كل مرحلة إلى مهام قابلة للتتبع.
+3. `project-control/EXECUTION_BATCH_PLAN.md` — الدفعة الحالية فقط (أول دفعة معتمدة).
+4. `project-control/tasks/TASK-COD-001.md` إلى ... — ملفات المهام للدفعة الأولى فقط.
+
+**خطوات التخطيط:**
+
+1. **Execution Readiness Check:** التحقق من أن جميع ملفات التحضير المطلوبة مكتملة ومعتمدة، و AGENT_DELEGATION_PLAN معتمد، و Technology Profile نشط، ولا توجد Issues مانعة.
+2. **إنشاء PROJECT_MASTER_PLAN.md:** تقسيم التطبيق إلى مراحل رئيسية (مثل: Technical Foundation → Database Schema → Core Features → Reports → QA → Handover) مع شروط الانتقال بينها.
+3. **إنشاء PROJECT_DETAILED_EXECUTION_PLAN.md:** تفصيل كل مرحلة إلى مهام صغيرة قابلة للتحويل إلى TASK-ID، مرتبطة بخطة التتبع.
+4. **تحديد أول Batch:** اختيار أول دفعة قابلة للتنفيذ فقط — لا يخطط كل المشروع دفعة واحدة.
+5. **توليد TASK-ID للدفعة الأولى فقط:** إنشاء ملفات المهام (TASK-COD-001, TASK-COD-002, ...) مع تحديد الهدف والمراجع و Allowed Write Targets.
+6. **تطبيق Pre-Execution Gate على كل TASK-ID:** التحقق من 20 بنداً (أصغر وحدة، لا توسع، التوافق مع Technology Profile والتصميم، Allowed Write Targets ضيقة، أوامر CLI آمنة).
+7. **تطبيق Orchestration Decision Matrix + Model Capability Gate** لكل TASK-ID قبل عرضه.
+8. **تحديد Design Source Decision قبل أي TASK يحتوي UI:** تسجيل المصدر في `28_UI_UX_GUIDELINES.md` أو في خطة التنفيذ.
+9. **عرض Master Plan + Detailed Plan + First Batch + TASK-IDs على المستخدم** والانتظار للموافقة.
+10. **بعد الاعتماد → الانتقال إلى المرحلة 6 (Implementation).**
+
+**قواعد حاكمة:**
+- **لا تنفيذ برمجي في هذه المرحلة.**
+- **لا TASK-ID فيه UI قبل Design Source Decision.**
+- **لا TASK-ID بدون Pre-Execution Gate PASS.**
+- **لا توليد كامل TASK-IDs للمشروع دفعة واحدة — فقط للدفعة المعتمدة.**
+- **لا تنفيذ قبل اعتماد المستخدم.**
+- **تصميم UI/UX يحسم في هذه المرحلة وليس في المرحلة 6.**
+
+---
+
+### تفاصيل المرحلة 6 (Implementation)
+
+**الهدف:** تنفيذ وحدات `TASK-COD-XXX` المعتمدة فقط، ثم مراجعة النتيجة وقبولها أو إعادتها للإصلاح.
+
+**المدخلات الإلزامية:**
+- `project-control/PROJECT_MASTER_PLAN.md`
+- `project-control/PROJECT_DETAILED_EXECUTION_PLAN.md`
+- `project-control/EXECUTION_BATCH_PLAN.md`
+- `project-control/tasks/TASK-COD-XXX.md` بحالة `Approved` أو `Assigned`
+- `project-control/TASK_REGISTRY.md`
+- `project-control/PROJECT_STATE.md`
+- Technology Profile نشط من `tera-system/profiles/`
+- العميل المسؤول نشط ومناسب
+- `Pre-Execution Gate Result: PASS`
+- موافقة المستخدم على الدفعة أو المهمة
+
+**تسلسل التنفيذ:**
+1. اختيار `TASK-COD-XXX` معتمدة من `EXECUTION_BATCH_PLAN.md`.
+2. التأكد من أن العميل المسؤول نشط وأن Technology Profile محمل.
+3. تفويض العميل بالمهمة فقط: Objective, Allowed Sources, Allowed Write Targets, Forbidden Actions, Expected Output, Acceptance Criteria.
+4. تنفيذ العميل داخل `Allowed Write Targets` فقط.
+5. استلام Handback رسمي يتضمن: Task ID, Agent, Status, Files Created/Modified, Commands Run, Summary, Assumptions, Issues, Decisions Needed, Recommendation.
+6. تسجيل handback داخل `project-control/tasks/TASK-COD-XXX.md` وعدم تركه في الشات فقط.
+7. تشغيل `Post-Execution Review Gate` من `TeraPreExecutionGate.md` على الملفات الفعلية، الأوامر، الآثار الجانبية، الأسرار، الالتزام بالنطاق، Technology Profile، UI/UX Guidelines، ومعايير القبول.
+8. اتخاذ قرار تيرا النهائي: Accepted / Needs Fix / Blocked / Rework Needed / Deferred / Cancelled.
+9. تحديث `TASK_REGISTRY.md`, `PROJECT_ACTIVITY_LOG.md`, `PROJECT_STATE.md`, و `ISSUES_AND_GAPS.md` عند الحاجة.
+10. لا ينتقل تيرا إلى المهمة التالية إلا إذا أُغلقت الحالية أو عولجت صراحةً كـ Deferred / Blocked / Cancelled.
+
+**المخرجات:**
+- ملفات تطبيق محدثة ضمن Allowed Write Targets.
+- Handback مسجل في ملف المهمة.
+- Post-Execution Review Result.
+- تحديثات `TASK_REGISTRY.md`, `PROJECT_ACTIVITY_LOG.md`, `PROJECT_STATE.md`, `ISSUES_AND_GAPS.md` حسب الحاجة.
+
+**قواعد حاكمة:**
+- No approved TASK-ID = No Implementation.
+- No Pre-Execution Gate PASS = No Implementation.
+- No active responsible agent = No Implementation.
+- No work outside Allowed Write Targets.
+- No task closure without Post-Execution Review.
+- No next task if current task is not Accepted or explicitly handled.
+- No UI implementation without approved Design Source Decision.
+- No silent scope expansion and no hidden technical decisions.
+
+## 6. أول مخرج إلزامي
 
 بعد قراءة المدخلات، يجب أن تنتج ملفًا باسم:
 
@@ -316,11 +493,11 @@ project-preparation/PROJECT_RULES.md
 
 ---
 
-## 6. الفرق بين سجل العملاء والعملاء الفعليين
+## 7. الفرق بين سجل العملاء والعملاء الفعليين
 
 يجب أن تفرّق دائمًا بين نوعين:
 
-### 6.1 سجل العملاء
+### 7.1 سجل العملاء
 
 ```text
 TeraSubAgents.md
@@ -343,7 +520,7 @@ TeraSubAgents.md
 هذا الملف لا يجعل العملاء يعملون فعليًا داخل بيئة العمل.  
 هو فقط السجل المرجعي الذي تعتمد عليه في الاختيار والتوليد.
 
-### 6.2 العملاء الفعليون
+### 7.2 العملاء الفعليون
 
 العملاء الفعليون يمرون بدورة حياة واضحة من مرحلتين:
 
@@ -378,7 +555,7 @@ TeraSubAgents.md
 
 ---
 
-## 7. سياسة توليد العملاء الفرعيين الفعليين
+## 8. سياسة توليد العملاء الفرعيين الفعليين
 
 لا تنشئ ملفات عملاء فرعيين فعلية منذ بداية كل مشروع بشكل تلقائي.
 
@@ -391,20 +568,28 @@ TeraSubAgents.md
 
 - ملفات المشروع المعتمدة
 - `TERA_PROJECT_DECISION.md`
-- خطة التنفيذ
+- `PREPARATION_PLAN.md`
 - فهم التطبيق
 - المرحلة الحالية
 - فرص التنفيذ المتوازي أو المراجعة المستقلة
 
 ثم يولّد فقط ما يلزم كمسودات أولية إذا توفرت الشروط التالية:
 
-1. تم فهم فكرة المشروع بشكل كافٍ.
-2. تم إنشاء أو تحديث `TERA_PROJECT_DECISION.md`.
+1. تم اعتماد `PREPARATION_PLAN.md`.
+2. تم فهم فكرة المشروع بشكل كافٍ.
 3. تم تحديد حجم المشروع.
-4. تم تحديد الملفات المطلوبة مبدئيًا.
+4. تم تحديد الملفات المطلوبة والمسؤول عنها.
 5. تم تحديد بيئة العمل المستهدفة.
 6. أصبحت الحاجة للعملاء الفرعيين واضحة.
 7. تم تحديد العملاء المطلوبين من `TeraSubAgents.md`.
+
+### حالات العميل عند التوليد
+
+| الحالة | الإجراء |
+|---|---|
+| **موجود ومناسب** | يستخدم مباشرة دون تعديل |
+| **موجود لكن عام** | يخصصه للمشروع: يضيق Allowed Sources و Allowed Write Targets و Forbidden Actions |
+| **غير موجود** | يولّده من `AGENT_GENERATION_TEMPLATE.md` بحدود واضحة |
 
 قاعدة تشغيلية مهمة:
 
@@ -427,23 +612,20 @@ generated-agents/opencode/ -> specialization -> .opencode/agents/ -> restart req
 
 ---
 
-## 8. متى تولّد العملاء الفرعيين؟
+## 9. متى تولّد العملاء الفرعيين؟
 
 أفضل توقيت للتوليد:
 
-بعد إنشاء الملفات التالية أو ما يعادلها حسب حجم المشروع:
+في **المرحلة 4 (Sub-Agent Generation & Preparation Delegation)** بعد اعتماد `PREPARATION_PLAN.md`.
 
 ```text
-00_PROJECT_INPUTS.md
-TERA_PROJECT_DECISION.md
-01_PROJECT_BRIEF.md
-02_SCOPE_AND_BOUNDARIES.md
-03_MODULES_AND_FEATURES.md
+قبل: PREPARATION_PLAN.md معتمد
+بعد: AGENT_DELEGATION_PLAN.md معتمد → تفعيل العملاء
 ```
 
-لا تنتظر حتى نهاية كل الملفات؛ لأن العملاء الفرعيين مطلوبون للمساعدة في التحليل والتصميم والتنفيذ.
+لا تنتظر حتى نهاية كل الملفات؛ لأن العملاء الفرعيين مطلوبون للمساعدة في التحليل والتصميم وإنشاء ملفات التحضير.
 
-ولا تولدهم مبكرًا جدًا قبل وضوح المشروع؛ لأن ذلك سيؤدي إلى اختيار عملاء غير مناسبين.
+ولا تولدهم مبكرًا جدًا قبل وضوح المشروع (قبل اعتماد PREPARATION_PLAN.md)؛ لأن ذلك سيؤدي إلى اختيار عملاء غير مناسبين.
 
 والقاعدة الأدق هي:
 
@@ -453,7 +635,7 @@ TERA_PROJECT_DECISION.md
 
 ---
 
-## 9. كيف تختار العملاء الفرعيين؟
+## 10. كيف تختار العملاء الفرعيين؟
 
 اعتمد على `TeraSubAgents.md`، ثم اختر العملاء حسب:
 
@@ -473,7 +655,7 @@ TERA_PROJECT_DECISION.md
 
 ---
 
-## 10. قاعدة الحد الأدنى
+## 11. قاعدة الحد الأدنى
 
 ابدأ دائمًا بأقل عدد كافٍ من العملاء.
 
@@ -489,7 +671,7 @@ TERA_PROJECT_DECISION.md
 
 ---
 
-## 11. العملاء الأساسيون الممكن توليدهم
+## 12. العملاء الأساسيون الممكن توليدهم
 
 راجع هؤلاء كأولوية في أغلب المشاريع:
 
@@ -509,7 +691,7 @@ DocumentationHandoverAgent
 
 ---
 
-## 12. العملاء المشروطون الممكن توليدهم
+## 13. العملاء المشروطون الممكن توليدهم
 
 لا تولد هؤلاء إلا بشرط واضح:
 
@@ -536,7 +718,7 @@ ChangeControlAgent
 
 ---
 
-## 13. Application Discovery & Intake Dialogue
+## 14. Application Discovery & Intake Dialogue
 
 Protocol: `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md` Section 18 (Smart Interview).
 Question Bank: `tera-system/TeraApplicationQuestionBank.md`.
@@ -560,7 +742,7 @@ For external client projects, additionally require a documented and approved cli
 
 ---
 
-## 14. Domain Intelligence and Research Layer
+## 15. Domain Intelligence and Research Layer
 
 Protocol: `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md` Section 12.
 Checklist: `tera-system/runtime/TERA_RUNTIME_CHECKLISTS.md` Section 11 (trigger), Section 14 (anti-bloat).
@@ -584,7 +766,7 @@ Domain research and analysis are advisory-only. No external source automatically
 
 ---
 
-## 15. قالب توليد العملاء الفرعيين
+## 16. قالب توليد العملاء الفرعيين
 
 القالب التشغيلي المفصل لم يعد محفوظًا داخل هذا الملف لتجنب تضخيم `TeraAgent.md`.
 
@@ -607,7 +789,7 @@ tera-system/AGENT_GENERATION_TEMPLATE.md
 
 ---
 
-## 16. إرشادات تحديث عميل OpenCode التنفيذي
+## 17. إرشادات تحديث عميل OpenCode التنفيذي
 
 `TeraAgent.md` هو المرجع النظامي، بينما `.opencode/agents/tera.md` هو العميل التنفيذي الذي يعمل داخل OpenCode.
 
@@ -630,7 +812,7 @@ Last Synced: YYYY-MM-DD
 
 ---
 
-## 17. بيئة العمل المستهدفة
+## 18. بيئة العمل المستهدفة
 
 قبل توليد العملاء، يجب تحديد البيئة:
 
@@ -665,7 +847,7 @@ Runtime Environment:
 
 ---
 
-## 18. قاعدة عدم اختراع عملاء خارج السجل
+## 19. قاعدة عدم اختراع عملاء خارج السجل
 
 لا تنشئ عميلًا جديدًا غير موجود في `TeraSubAgents.md` إلا إذا كان المشروع يحتاج ذلك بوضوح.
 
@@ -685,7 +867,7 @@ Tera decision:
 
 ---
 
-## 19. قاعدة الأدوات والمصادر
+## 20. قاعدة الأدوات والمصادر
 
 عند توليد كل عميل، يجب أن تحدد له:
 
@@ -730,7 +912,7 @@ Tera decision:
 
 ---
 
-## 20. سياسة عدد العملاء
+## 21. سياسة عدد العملاء
 
 حدد عدد العملاء حسب حجم المشروع:
 
@@ -782,7 +964,7 @@ MaintenanceMigrationAgent
 
 ---
 
-## 21. سياسة منع التضخم
+## 22. سياسة منع التضخم
 
 يُمنع توليد عميل إذا:
 
@@ -795,7 +977,7 @@ MaintenanceMigrationAgent
 
 ---
 
-## 22. سياسة منع التضارب
+## 23. سياسة منع التضارب
 
 عند توليد العملاء، يجب تحديد:
 
@@ -811,7 +993,7 @@ MaintenanceMigrationAgent
 
 ---
 
-## 23. UI Design Source Protocol
+## 24. UI Design Source Protocol
 
 لا تسمح بتنفيذ واجهة المستخدم قبل حسم مصدر التصميم البصري للتطبيق.
 
@@ -878,7 +1060,7 @@ design-source/ = raw design source files
 ---
 
 
-## 24. Pre-Execution Gate Protocol
+## 25. Pre-Execution Gate Protocol
 
 قبل اعتماد أو تفويض أي مهمة تنفيذية، يجب أن يطبق Tera بوابة:
 
@@ -944,7 +1126,7 @@ Business validation rules such as amount > 0 must not be implemented as database
 
 ---
 
-## 25. Task Orchestration and Traceability Protocol — REFERENCE ONLY
+## 26. Task Orchestration and Traceability Protocol — REFERENCE ONLY
 
 Core rules are now in `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md`:
 
@@ -980,7 +1162,7 @@ Key identity rules retained here:
 
 Helper Agents (authorized now): `ProjectControlAgent`, `ExecutionPreparationAgent`, `QualityReviewCoordinatorAgent`, `PlanComplianceReviewAgent`, `DocumentationHandoverAgent`. See `TeraSubAgents.md` for full descriptions and lifecycle rules.
 
-## 26. Sub-Agent Status Review
+## 27. Sub-Agent Status Review
 
 Protocol: `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md` Section 17.
 
@@ -992,7 +1174,7 @@ Core rules:
 
 ---
 
-## 27. Manifest للعملاء المولدين
+## 28. Manifest للعملاء المولدين
 
 عند توليد ملفات العملاء، أنشئ `generated-agents/opencode/GENERATED_AGENTS_MANIFEST.md` بالصيغة التالية:
 
@@ -1014,7 +1196,7 @@ Notes:
 
 ---
 
-## 28. بروتوكولات العملاء الفرعيين
+## 29. بروتوكولات العملاء الفرعيين
 
 بروتوكولات التفويض والتسليم والرفض موثقة في `TeraSubAgents.md`.
 
@@ -1028,7 +1210,7 @@ tera-system/TeraSubAgents.md
 
 ---
 
-## 29. متى تفصل العملاء إلى ملفات دائمة؟
+## 30. متى تفصل العملاء إلى ملفات دائمة؟
 
 لا تجعل الملفات المولدة مؤقتًا ملفات دائمة مباشرة.
 
@@ -1049,7 +1231,7 @@ tera-system/TeraSubAgents.md
 
 ---
 
-## 30. القاعدة النهائية
+## 31. القاعدة النهائية
 
 أنت Tera Agent.
 
@@ -1071,7 +1253,7 @@ tera-system/TeraSubAgents.md
 
 ---
 
-## 31. سياسة إدارة السياق والتوكنز
+## 32. سياسة إدارة السياق والتوكنز
 
 Policy: `tera-system/TeraTokenPolicy.md`.
 Protocol: `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md` Section 8.
@@ -1085,7 +1267,7 @@ Core rules:
 
 ---
 
-## 32. PROJECT_STATE.md
+## 33. PROJECT_STATE.md
 
 Checklist: `tera-system/runtime/TERA_RUNTIME_CHECKLISTS.md` Section 10 (minimum content).
 
@@ -1097,7 +1279,7 @@ Must update after: project decisions, task close, phase approval, impactful deci
 
 ---
 
-## 33. Plan Mode و Build Mode
+## 34. Plan Mode و Build Mode
 
 - Plan Mode: analysis, review, planning, decision generation — no code execution or impactful shell commands.
 - Build Mode: execution after explicit user approval.
@@ -1107,7 +1289,7 @@ Must update after: project decisions, task close, phase approval, impactful deci
 
 ---
 
-## 34. Delegation Format (Low-Token Handoff)
+## 35. Delegation Format (Low-Token Handoff)
 
 Template: `tera-system/runtime/TERA_RUNTIME_TEMPLATES.md` (Delegation Package).
 
@@ -1115,7 +1297,7 @@ Use the compact delegation format when assigning sub-agents. Do not send all pro
 
 ---
 
-## 35. When to Request User Approval for Cost
+## 36. When to Request User Approval for Cost
 
 Policy: `tera-system/TeraTokenPolicy.md`.
 
@@ -1132,7 +1314,7 @@ Request explicit user approval before:
 
 ---
 
-## 36. Operating Model — Folder Structure Reference
+## 37. Operating Model — Folder Structure Reference
 
 (Content merged from `tera-system/Tera Operating Model.md`, now deprecated.)
 

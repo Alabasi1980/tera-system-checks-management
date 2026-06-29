@@ -46,6 +46,14 @@ Also create:
 generated-agents/opencode/GENERATED_AGENTS_MANIFEST.md
 ```
 
+For Phase 4 (Sub-Agent Generation & Preparation Delegation), also create:
+
+```text
+project-control/AGENT_DELEGATION_PLAN.md
+```
+
+Phase 4 delegation is for **preparation-file creation only**. It must not be treated as application implementation.
+
 Lifecycle:
 
 | Stage | Location | Condition |
@@ -58,6 +66,7 @@ Generation rules:
 
 - Every generated agent must have a clear reason, input files, output files, and acceptance criteria.
 - Every generated agent must include `MVP Constraints` and `Forbidden Actions` sections.
+- Every generated agent must have a defined **Token Budget** (Light / Medium / Strong) and **Context Rules** (Task Context / Summary Context / Full Context) based on `TeraTokenPolicy.md`.
 - The manifest must document project name, runtime environment, generation date, generated agents, agents not generated with reasons, and deferred/future agents.
 - Do not generate all sub-agents by default.
 - Keep the manifest compact. Do not convert it into a long activity log.
@@ -214,12 +223,14 @@ For medium and large projects, the following files are mandatory operational ref
 ```text
 project-control/PROJECT_MASTER_PLAN.md
 project-control/PROJECT_DETAILED_EXECUTION_PLAN.md
+project-control/EXECUTION_BATCH_PLAN.md
 ```
 
 Rules:
 - Tera must read both files before selecting the next task when they exist.
 - `PROJECT_MASTER_PLAN.md` defines main phases, sub-phases, status per phase, and whether each is within MVP or a later phase.
 - `PROJECT_DETAILED_EXECUTION_PLAN.md` defines traceable execution items linked to tasks, issues, and decisions.
+- `EXECUTION_BATCH_PLAN.md` defines the current approved batch only and prevents executing the whole project at once.
 - Tera or `ProjectControlAgent` must update these files when:
   - creating a new project before the first implementation task
   - creating a major task linked to a plan item

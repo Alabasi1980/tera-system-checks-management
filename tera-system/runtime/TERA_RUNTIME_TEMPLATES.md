@@ -734,3 +734,349 @@ The generated proposal is saved to:
 - `project-inputs/` (internal projects)
 
 See `TERA_RUNTIME_PROTOCOLS.md` Section 18, Phase 7 for the protocol.
+
+---
+
+## 27. Project Preparation Plan (Phase 3 Output)
+
+This template is used for the formal output of Phase 3 (Project Preparation Planning).
+The generated file is saved to `project-control/PREPARATION_PLAN.md`.
+
+```markdown
+# PREPARATION_PLAN.md
+
+## 1. Preparation Decision
+
+Decision: Proceed / Blocked / Needs More Intake
+
+> Reference: `project-preparation/TERA_PROJECT_DECISION.md`
+
+## 2. Required Preparation Files
+
+| File | Required | Reason | Owner Agent | Order |
+|---|---|---|---|---|
+| `01_PROJECT_BRIEF.md` | Yes | Core understanding | RequirementsScopeAgent | 1 |
+| `02_SCOPE_AND_BOUNDARIES.md` | Yes | Scope discipline | RequirementsScopeAgent | 2 |
+| `03_MODULES_AND_FEATURES.md` | Conditional | Medium+ projects | RequirementsScopeAgent | 3 |
+| ... | ... | ... | ... | ... |
+
+### Classification Key
+
+| Label | Meaning |
+|---|---|
+| **Required** | Must be created now |
+| **Conditional** | Create only if the trigger condition is met |
+| **Deferred** | Postponed to a later phase |
+| **Not Required** | Not needed for this project |
+
+## 3. Deferred Files
+
+| File | Reason | Trigger for Activation |
+|---|---|---|
+| `14_INTEGRATIONS_...` | No external services yet | When integration is confirmed |
+| `22_DEPLOYMENT_...` | Deployment not imminent | Before first deployment |
+| ... | ... | ... |
+
+## 4. Not Required Files
+
+| File | Reason |
+|---|---|
+| `23_BACKUP_AND_RECOVERY.md` | Internal prototype, no production data |
+| `34_COMPLIANCE_...` | No regulatory requirements |
+| ... | ... |
+
+## 5. Suggested Sub-Agents
+
+| Agent | Needed Now | Reason |
+|---|---|---|
+| `RequirementsScopeAgent` | Yes | Core scope files (01, 02, 03, 04) |
+| `BusinessWorkflowAgent` | Conditional | Only if workflows are complex |
+| `DataDesignAgent` | Conditional | Only if data model is non-trivial |
+| `UIUXStructureAgent` | Conditional | Only if screens need structured definition |
+| `SolutionArchitectureAgent` | Conditional | Only if architecture decisions are risky |
+| ... | ... | ... |
+
+## 6. Preparation Sequence
+
+```
+Batch A (no dependencies):
+  01_PROJECT_BRIEF.md (RequirementsScopeAgent)
+  08_TECHNICAL_ARCHITECTURE.md (SolutionArchitectureAgent or Tera)
+
+Batch B (depends on Batch A):
+  02_SCOPE_AND_BOUNDARIES.md (RequirementsScopeAgent)
+  04_USERS_ROLES_PERMISSIONS.md (RequirementsScopeAgent)
+
+Batch C (depends on Batch B):
+  05_BUSINESS_WORKFLOWS.md (BusinessWorkflowAgent)
+  07_SCREENS_AND_UI_STRUCTURE.md (UIUXStructureAgent)
+
+Batch D (depends on Batch C):
+  06_DATA_MODEL_PREPARATION.md (DataDesignAgent)
+  09_IMPLEMENTATION_PLAN.md (Tera)
+```
+
+## 7. User Approval Points
+
+| Point | What Needs Approval | Before Moving To |
+|---|---|---|
+| P1 | This plan (Preparation Decision) | Phase 4: Sub-Agent Generation & Preparation Delegation |
+| P2 | Scope and boundaries (02) | File creation for downstream files |
+| P3 | Technical architecture (08) | Implementation planning |
+| P4 | Implementation plan (09) | Phase 5: Execution Planning |
+
+> **Rule:** No file creation happens in Phase 3. No agent generation happens before this plan is approved.
+
+## 8. Approval Status
+
+- [ ] Plan submitted
+- [ ] Plan approved → Proceed to Phase 4
+- [ ] Plan rejected → Revise and resubmit
+- [ ] Plan blocked → Reason: ...
+```
+
+---
+
+## 28. Agent Delegation Plan (Phase 4 Output)
+
+This template is used for the formal output of Phase 4 (Sub-Agent Generation & Preparation Delegation).
+The generated file is saved to `project-control/AGENT_DELEGATION_PLAN.md`.
+
+```markdown
+# AGENT_DELEGATION_PLAN.md
+
+## 1. Delegation Decision
+
+Decision: Proceed / Needs User Approval / Blocked
+
+> Reference: `project-control/PREPARATION_PLAN.md`
+
+## 2. Agents Needed Now
+
+| Agent | Reason | Status | Assigned Files |
+|---|---|---|---|
+| `RequirementsScopeAgent` | Core scope files (01, 02, 03, 04) | Generate / Use Existing / Specialize | `01_PROJECT_BRIEF.md`, `02_SCOPE_...`, ... |
+| `BusinessWorkflowAgent` | Business workflows (05) | Generate / Use Existing / Specialize | `05_BUSINESS_WORKFLOWS.md` |
+| ... | ... | ... | ... |
+
+### Agent Status Key
+
+| Status | Meaning |
+|---|---|
+| **Generate** | Agent does not exist — create from `AGENT_GENERATION_TEMPLATE.md` |
+| **Use Existing** | Agent exists and is suitable — use directly |
+| **Specialize** | Agent exists but is too generic — narrow sources/targets/constraints |
+
+## 3. Agents Not Needed Now
+
+| Agent | Reason | Defer Until |
+|---|---|---|
+| `SecurityAgent` | No sensitive data yet | Phase 5 or when auth is implemented |
+| `DevOpsDeploymentAgent` | No deployment imminent | Before first deployment |
+| ... | ... | ... |
+
+## 4. Agent Generation Actions
+
+| Agent | Action | Output File | Token Budget | Context Rules |
+|---|---|---|---|---|
+| `RequirementsScopeAgent` | Generate | `generated-agents/opencode/RequirementsScopeAgent.md` | Medium | Task Context |
+| `BusinessWorkflowAgent` | Specialize (exists) | Update existing file | Medium | Task Context |
+| ... | ... | ... | ... | ... |
+
+## 5. Delegation Map
+
+| Preparation File | Assigned Agent | Allowed Sources | Allowed Write Targets |
+|---|---|---|---|
+| `01_PROJECT_BRIEF.md` | RequirementsScopeAgent | `00_PROJECT_INPUTS.md`, `01_APPLICATION_IDEA.md` | `project-preparation/01_PROJECT_BRIEF.md` |
+| `02_SCOPE_AND_BOUNDARIES.md` | RequirementsScopeAgent | `01_PROJECT_BRIEF.md` | `project-preparation/02_SCOPE_...` |
+| `05_BUSINESS_WORKFLOWS.md` | BusinessWorkflowAgent | `02_SCOPE_...`, `04_USERS_ROLES_...` | `project-preparation/05_BUSINESS_...` |
+| ... | ... | ... | ... |
+
+## 6. Activation Plan
+
+| Agent | Activate Now? | Reason |
+|---|---|---|
+| `RequirementsScopeAgent` | Yes | Batch A: core scope files |
+| `SolutionArchitectureAgent` | Yes | Batch A: technical architecture (parallel) |
+| `BusinessWorkflowAgent` | No | Deferred until Batch C |
+
+## 7. User Approval Points
+
+| Point | What Needs Approval | Before Moving To |
+|---|---|---|
+| A1 | Agent Generation Plan (this document) | Generating/activating agents |
+| A2 | Activating agents in `.opencode/agents/` | Start of delegation |
+| A3 | Scope files (01, 02) from first delegation batch | Remaining preparation files |
+
+> **Rules:**
+> - No approved PREPARATION_PLAN.md = No Sub-Agent Generation.
+> - No generated/approved agent = No delegated preparation file.
+> - No active need = No active sub-agent.
+
+## 8. Approval Status
+
+- [ ] Plan submitted
+- [ ] Plan approved → Proceed to agent generation
+- [ ] Plan rejected → Revise and resubmit
+- [ ] Plan blocked → Reason: ...
+```
+
+---
+
+## 29. Project Master Plan (Phase 5 — Output)
+
+This template is used for the first formal output of Phase 5 (Execution Planning).
+The generated file is saved to `project-control/PROJECT_MASTER_PLAN.md`.
+
+```markdown
+# PROJECT_MASTER_PLAN.md
+
+## 1. Plan Metadata
+
+| Item | Value |
+|---|---|
+| Project | [NAME] |
+| Version | 1.0 |
+| Status | Draft / Approved / Active |
+| Reference | `project-preparation/09_IMPLEMENTATION_PLAN.md` |
+
+## 2. Execution Phases
+
+| Phase | Name | Objective | Depends On | Status |
+|---|---|---|---|---|
+| 1 | [e.g. Technical Foundation] | [e.g. Scaffold project, init ORM, verify startup] | — | Planned |
+| 2 | [e.g. Database Schema] | [e.g. Define models, create migration, seed] | Phase 1 | Planned |
+| 3 | [e.g. Core Feature] | [e.g. Main workflow implementation] | Phase 1, 2 | Planned |
+| ... | ... | ... | ... | ... |
+
+## 3. Transition Conditions
+
+| From | To | Condition |
+|---|---|---|
+| Phase 1 | Phase 2 | Project starts, dev env works, ORM connects to DB |
+| Phase 2 | Phase 3 | Schema applied, seed data verified |
+| ... | ... | ... |
+
+## 4. Design Source Decisions
+
+| Phase / Batch | Design Source | Decided? |
+|---|---|---|
+| All UI phases | [Tera-Decided / User-Provided / Brand / External / No UI Yet] | Yes / No |
+| Phase 3 (UI) | [source] | Yes / No |
+
+> **Rule:** No UI phase/batch without a Design Source Decision.
+
+## 5. Deferred Items
+
+| Item | Reason | Phase |
+|---|---|---|
+| ... | ... | ... |
+
+## 6. Approval
+
+- [ ] Submitted
+- [ ] Approved → Ready for Detailed Planning
+- [ ] Needs revision
+```
+
+---
+
+## 30. Detailed Execution Plan (Phase 5 — Output)
+
+This template breaks each phase into traceable execution items.
+The generated file is saved to `project-control/PROJECT_DETAILED_EXECUTION_PLAN.md`.
+
+```markdown
+# PROJECT_DETAILED_EXECUTION_PLAN.md
+
+## 1. Source Reference
+
+- Master Plan: `project-control/PROJECT_MASTER_PLAN.md`
+- Implementation Plan: `project-preparation/09_IMPLEMENTATION_PLAN.md`
+
+## 2. Phase Breakdown
+
+### Phase [N]: [Phase Name]
+
+| Item ID | Description | Linked TASK-ID | Depends On | Status | Notes |
+|---|---|---|---|---|---|
+| P1-01 | [e.g. Scaffold Next.js project] | TASK-COD-001 | — | Planned | |
+| P1-02 | [e.g. Init Prisma + connect to DB] | TASK-COD-002 | P1-01 | Planned | See profile: nextjs-prisma |
+| P2-01 | [e.g. Define User model] | TASK-COD-003 | P1-02 | Planned | |
+| P2-02 | [e.g. Create migration + apply] | TASK-COD-004 | P2-01 | Planned | |
+| ... | ... | ... | ... | ... | ... |
+
+### Item Status Legend
+
+| Status | Meaning |
+|---|---|
+| Planned | Defined, not yet assigned |
+| In Progress | Assigned to agent, being executed |
+| Completed | Executed and accepted |
+| Blocked | Cannot proceed without resolution |
+| Deferred | Moved to later phase |
+
+## 3. Approval
+
+- [ ] Submitted
+- [ ] Approved → Ready for batch planning
+- [ ] Needs revision
+```
+
+---
+
+## 31. Execution Batch Plan (Phase 5 — Output)
+
+This template defines the current approved batch only — not the full project.
+The generated file is saved to `project-control/EXECUTION_BATCH_PLAN.md`.
+
+```markdown
+# EXECUTION_BATCH_PLAN.md
+
+## 1. Batch Metadata
+
+| Item | Value |
+|---|---|
+| Batch | [Number / Name] |
+| Phase | [Phase from Master Plan] |
+| Status | Draft / Approved / In Progress / Completed |
+| Source Plan | `project-control/PROJECT_DETAILED_EXECUTION_PLAN.md` |
+
+## 2. Included Tasks
+
+| TASK-ID | Description | Assigned Agent | Allowed Write Targets | Pre-Execution Gate |
+|---|---|---|---|---|
+| TASK-COD-001 | [e.g. Scaffold project] | EngineeringAgent | `.` (project root) | PASS |
+| TASK-COD-002 | [e.g. Init ORM + DB] | EngineeringAgent | `prisma/schema.prisma`, `.env.example` | PASS |
+| ... | ... | ... | ... | ... |
+
+## 3. Not Included (Deferred to Later Batches)
+
+| Item | Reason | Expected Batch |
+|---|---|---|
+| Schema design | Depends on scaffold completion | Batch 2 |
+| UI components | No Design Source Decision yet | Batch 3 |
+
+## 4. Design Source Decision (for this batch)
+
+- [ ] Tera-Decided Design
+- [ ] User-Provided Design Source
+- [ ] Existing Brand Guidelines
+- [ ] External Reference
+- [ ] No UI in this batch
+
+## 5. User Approval
+
+- [ ] Batch plan submitted
+- [ ] Approved → Begin execution (Phase 6)
+- [ ] Rejected → Revise
+- [ ] Blocked → Reason: ...
+
+---
+
+> **Rules:**
+> - No Implementation without Execution Plan.
+> - No UI Task without Design Source Decision.
+> - No TASK-ID without Pre-Execution Gate PASS.
+> - No batch execution without user approval.
+```

@@ -52,7 +52,7 @@ This pre-task step determines:
 - the expected review surfaces
 - the initial security sensitivity
 - whether handoff readiness is relevant at all
-- whether the task maps cleanly to `PROJECT_MASTER_PLAN.md` and `PROJECT_DETAILED_EXECUTION_PLAN.md` when those files exist
+- whether the task maps cleanly to `PROJECT_MASTER_PLAN.md`, `PROJECT_DETAILED_EXECUTION_PLAN.md`, and the current `EXECUTION_BATCH_PLAN.md` when those files exist
 
 Important clarification:
 
@@ -185,7 +185,7 @@ BLOCKED
 
 | # | سؤال التحقق | النتيجة المطلوبة |
 |---|---|---|
-| 1 | هل المهمة مرتبطة مباشرة بمرحلة أو بند معتمد في خطة التنفيذ، وفي `PROJECT_MASTER_PLAN.md` / `PROJECT_DETAILED_EXECUTION_PLAN.md` إن وُجدا؟ | Yes |
+| 1 | هل المهمة مرتبطة مباشرة بمرحلة أو بند معتمد في خطة التنفيذ، وفي `PROJECT_MASTER_PLAN.md` / `PROJECT_DETAILED_EXECUTION_PLAN.md` / `EXECUTION_BATCH_PLAN.md` إن وُجدت؟ | Yes |
 | 2 | هل المهمة أصغر وحدة تنفيذية ممكنة؟ | Yes |
 | 3 | هل تحتوي المهمة على هدف واحد فقط؟ | Yes |
 | 4 | هل يوجد أي عنصر يمكن تأجيله دون كسر المهمة؟ | No |
@@ -502,6 +502,14 @@ BLOCKED
 - `PASS`: المخرجات مطابقة للنطاق ومعايير القبول، ولا توجد آثار جانبية غير مصرح بها.
 - `NEEDS_FIX`: ظهرت مخالفات قابلة للإصلاح ضمن نفس المهمة.
 - `BLOCKED`: ظهرت مشكلة لا يمكن إصلاحها دون قرار من المستخدم أو تعديل نطاق المهمة.
+
+بعد نتيجة البوابة، يسجل Tera قرار المهمة النهائي بشكل منفصل:
+
+```text
+Accepted / Needs Fix / Blocked / Rework Needed / Deferred / Cancelled
+```
+
+لا يجوز استخدام `Accepted` أو `Closed` إلا إذا كانت نتيجة `Post-Execution Review Gate` هي `PASS`.
 
 لا يجوز أن تحصل المهمة على `PASS` إذا ظهر أي secret حقيقي خارج ملفات البيئة المحلية المعتمدة.
 وإذا ظهرت قيمة سرية داخل task file أو log أو report أو handback أو issue record أو decision note، فإن نتيجة `Post-Execution Review Gate` تصبح `NEEDS_FIX` أو `BLOCKED` حتى لو كان الكود نفسه صحيحًا.

@@ -30,6 +30,8 @@ mode:
 صيغة تسليم النتيجة:
 MVP Constraints:
 Forbidden Tools / Actions:
+Token Budget: Light / Medium / Strong
+Context Rules: Task Context / Summary Context / Full Context
 معايير قبول مخرجاته:
 متى يعيد النتيجة إلى تيرا:
 ```
@@ -59,6 +61,16 @@ mode: subagent
 ## Purpose
 
 [اكتب مهمة العميل المحددة بجملة أو جملتين.]
+
+## Token Budget
+
+- Light / Medium / Strong
+- (حدد حسب تعقيد المهمة. Light للمهام البسيطة، Medium للتحليل والتصميم، Strong للمراجعات الشاملة أو الأمان)
+
+## Context Rules
+
+- Task Context / Summary Context / Full Context
+- (Task Context: يقرأ فقط ملفات المهمة. Summary Context: يقرأ ملخص PROJECT_STATE.md. Full Context: يقرأ كل الملفات المرجعية)
 
 ## When Tera Should Use This Agent
 

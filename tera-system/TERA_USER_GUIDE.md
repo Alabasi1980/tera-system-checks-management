@@ -45,7 +45,7 @@ Use a clear prompt:
 - لا تنشئ كل الملفات.
 - لا تولّد كل العملاء الفرعيين.
 - لا تعدّل أي ملف داخل tera-system.
-- ضع مخرجات المشروع داخل project-preparation فقط.
+- ضع ملفات التحضير التحليلية داخل `project-preparation/`، وملفات التحكم والخطط والمهام داخل `project-control/`.
 - إذا احتجت عملاء فرعيين، ولّدهم فقط داخل generated-agents/opencode.
 
 المطلوب منك الآن:

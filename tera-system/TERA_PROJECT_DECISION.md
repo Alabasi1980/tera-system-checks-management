@@ -143,7 +143,7 @@
 | `03_MODULES_AND_FEATURES.md` | `[REASON]` | `RequirementsScopeAgent` |
 | ... | ... | ... |
 
-### اختياري (Optional)
+### مشروط (Conditional)
 
 | الملف | شرط التفعيل |
 |---|---|
@@ -167,14 +167,14 @@
 
 | العميل الفرعي | الحاجة | متى؟ | السبب |
 |---|---|---|---|
-| `RequirementsScopeAgent` | Required / Optional / Not Needed | الإعداد | `[REASON]` |
-| `BusinessWorkflowAgent` | Required / Optional / Not Needed | الإعداد | `[REASON]` |
-| `DataDesignAgent` | Required / Optional / Not Needed | الإعداد | `[REASON]` |
-| `UIUXStructureAgent` | Required / Optional / Not Needed | الإعداد | `[REASON]` |
-| `SolutionArchitectureAgent` | Required / Optional / Not Needed | الإعداد | `[REASON]` |
-| `SecurityAgent` | Required / Optional / Not Needed | حسب الحساسية | `[REASON]` |
-| `IntegrationAgent` | Required / Optional / Not Needed | حسب التكاملات | `[REASON]` |
-| `DevOpsDeploymentAgent` | Required / Optional / Not Needed | حسب الحاجة | `[REASON]` |
+| `RequirementsScopeAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
+| `BusinessWorkflowAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
+| `DataDesignAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
+| `UIUXStructureAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
+| `SolutionArchitectureAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
+| `SecurityAgent` | Required / Conditional / Not Needed | حسب الحساسية | `[REASON]` |
+| `IntegrationAgent` | Required / Conditional / Not Needed | حسب التكاملات | `[REASON]` |
+| `DevOpsDeploymentAgent` | Required / Conditional / Not Needed | حسب الحاجة | `[REASON]` |
 
 ---
 
@@ -256,28 +256,23 @@ Stop / Waiting for User:
 1. يُنشئ Tera `00_PROJECT_INPUTS.md` في `project-preparation/` (إن لم يوجد).
 2. يُسجل قرار المشروع في `project-control/PROJECT_STATE.md`.
 3. يُسجل حدث في `project-control/PROJECT_ACTIVITY_LOG.md`.
-4. يُنشئ أول `TASK-ID` لتفويض `RequirementsScopeAgent` لإنتاج ملفات النطاق الأساسية:
-
-```text
-Task ID: TERA-REQ-001
-Requested Agent: RequirementsScopeAgent
-Stage: Scope Confirmation
-Objective: إنتاج ملفات النطاق الأساسية (01, 02, 04 عند الحاجة)
-Reference Files:
-  - project-preparation/00_PROJECT_INPUTS.md
-  - project-preparation/TERA_PROJECT_DECISION.md
-  - project-preparation/PROJECT_RULES.md (إن وجد)
-Allowed Write Targets:
-  - project-preparation/01_PROJECT_BRIEF.md
-  - project-preparation/02_SCOPE_AND_BOUNDARIES.md
-  - project-preparation/04_USERS_ROLES_PERMISSIONS.md (عند الحاجة)
-Constraints:
-  - الالتزام بنطاق القرار الأولي
-  - لا إضافة ميزات أو شاشات أو عوامل خارج المرحلة المعتمدة
-  - لا بدء تخطيط تنفيذي
-Return Status: Done / Blocked / Needs Clarification / Rework Needed
-```
-
-5. بعد تسليم النتيجة، يراجع Tera ويقرر: قبول / رفض / إعادة / طلب قرار من صاحب المشروع.
-6. لا يُنتقل إلى `03_MODULES_AND_FEATURES.md` أو `09_IMPLEMENTATION_PLAN.md` إلا بعد قبول مخرجات النطاق الأساسية.
+4. **يبدأ المرحلة 3 (Project Preparation Planning):**
+   - يقرأ `tera-system/Tera_Project_Preparation_Files.md` ككتالوج مرجعي.
+   - يراجع قائمة الملفات المطلوبة من القسم 8 أعلاه.
+   - يصنف كل ملف: Required / Conditional / Deferred / Not Required.
+   - يحدد الأولويات والترتيب بناءً على التبعيات بين الملفات.
+   - يحدد العميل الفرعي المسؤول عن كل ملف.
+   - يحدد نقاط اعتماد المستخدم.
+   - يُنتج `project-control/PREPARATION_PLAN.md` (باستخدام قالب Section 27 في `TERA_RUNTIME_TEMPLATES.md`).
+5. **لا يُنشئ أي ملف تحضير ولا يُولّد أي عميل فرعي في هذه المرحلة.**
+6. **بعد اعتماد خطة التحضير → الانتقال إلى المرحلة 4 (Sub-Agent Generation & Preparation Delegation).**
 7. للمشاريع الخارجية: لا يُنتقل إلى التنفيذ البرمجي إلا بعد اكتمال حزمة اعتماد العميل.
+
+### أمثلة على التصنيف في المرحلة 3
+
+| الملف | التصنيف | السبب |
+|---|---|---|
+| `01_PROJECT_BRIEF.md` | Required | أساسي لأي مشروع |
+| `03_MODULES_AND_FEATURES.md` | Conditional | مطلوب للمشاريع المتوسطة والكبيرة |
+| `14_INTEGRATIONS_...` | Deferred | لا يوجد تكامل خارجي مؤكد بعد |
+| `34_COMPLIANCE_...` | Not Required | لا متطلبات تنظيمية

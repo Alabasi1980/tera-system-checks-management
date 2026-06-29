@@ -16,6 +16,30 @@
 
 ## Activity Log
 
+## [2026-06-29] - SYSTEM_VERIFICATION: Full 1-6 phase consistency review
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Performed full consistency review across `.opencode/agents/tera.md`, `TeraAgent.md`, `TERA_RUNTIME_CHECKLISTS.md`, `TERA_RUNTIME_TEMPLATES.md`, `Tera_Project_Preparation_Files.md`, `TERA_PROJECT_DECISION.md`, `TeraPolicyMap.md`, `TERA_RUNTIME_PROTOCOLS.md`, `TeraPreExecutionGate.md`, `TASK_TEMPLATE.md`, and `TERA_USER_GUIDE.md`. Verified final phase order, phase outputs, TASK-PREP/TASK-COD distinction, project-control vs project-preparation output boundaries, execution batch linkage, and Post-Execution Review flow. Fixed remaining boundary wording in `.opencode/agents/tera.md` and `TERA_USER_GUIDE.md` so analysis/preparation content stays in `project-preparation/` while control/planning/task records belong in `project-control/`. Search confirmed no remaining old terms: `Project Preparation Files Generation`, `Sub-Agent Generation & Delegation`, `Required / Optional`, `5-6. Execution`, old default phase order.
+- Decision / Result: Final 1-6 phase workflow is consistent enough for controlled use. Minor future improvement: add optional stress-test scenarios for the final 6-phase workflow.
+- Next Action: If user approves, proceed to system stress test or begin applying the workflow to a real project.
+
+## [2026-06-29] - SYSTEM_STRUCTURE: Phase 6 documented (Implementation Cycle)
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent (with expert review)
+- Summary: Compared expert analysis for Phase 6 with Tera analysis and documented the final Implementation cycle. Updated `TeraAgent.md` with Phase 6 inputs, 10-step execution flow, outputs, and governing rules. Expanded `TERA_RUNTIME_CHECKLISTS.md` Phase 6 from 2 steps to an 11-step implementation checklist. Strengthened `project-control/tasks/TASK_TEMPLATE.md` with Execution Report / Agent Handback, Tera Review, Post-Execution Review Result, and Final Tera Decision sections. Updated `TeraPreExecutionGate.md` to clarify the difference between Post-Execution Gate result (PASS / NEEDS_FIX / BLOCKED) and final Tera task decision (Accepted / Needs Fix / Blocked / Rework Needed / Deferred / Cancelled). Synced `.opencode/agents/tera.md` phase discipline and Last Synced summary.
+- Decision / Result: Phase 6 is now explicitly defined as controlled execution of approved `TASK-COD-*` only, with mandatory handback, Post-Execution Review, registry updates, and no next task until the current one is accepted or explicitly handled.
+- Next Action: Run final full 1-6 phase consistency review before using Build Mode.
+
+## [2026-06-29] - SYSTEM_CORRECTION: Phase 1-4 audit fixes applied
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent (with expert review)
+- Summary: Applied expert review corrections for phases 1-4 and added one runtime-priority correction from Tera audit. Fixed Phase 4 wording in `TERA_RUNTIME_CHECKLISTS.md` to clarify preparation-file delegation only (`TASK-PREP-XXX`) and no application implementation. Renumbered checklist steps so each phase starts from 1. Updated `Tera_Project_Preparation_Files.md` to use `Sub-Agent Generation & Preparation Delegation` and split Phase 5 Execution Planning from Phase 6 Implementation. Updated `TERA_PROJECT_DECISION.md` from Optional to Conditional and corrected Phase 4 name. Updated `TeraAgent.md` Phase 4 task wording to `TASK-PREP-XXX`. Synced `.opencode/agents/tera.md` Phase Discipline to the final 6-phase workflow. Updated `TeraPolicyMap.md`, `TERA_RUNTIME_PROTOCOLS.md`, `TeraPreExecutionGate.md`, and `TASK_TEMPLATE.md` to include execution batch and task-type distinctions. Fixed broken Markdown fences in `TERA_RUNTIME_TEMPLATES.md`.
+- Decision / Result: Phases 1-4 are now aligned and the preparation-vs-implementation boundary is explicit.
+- Next Action: Continue reviewing Phase 5 / Phase 6 only after user approval.
+
 ## [2026-06-29] - SYSTEM_FEATURE: Application Proposal Template + Process
 
 - Related Task: N/A (System Maintenance)
@@ -32,56 +56,53 @@
 - Decision / Result: `tera-system/` remains strictly read-only during project execution. System development files live in `tera-workshop/`.
 - Next Action: All future system-development files go to `tera-workshop/`.
 
+## [2026-06-29] - SYSTEM_TOOLING: Final batch — 5 remaining documents created
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Created 5 remaining workshop documents: CLIENT_INTAKE_FORM.html, PROJECT_CHARTER_TEMPLATE.html, USER_PERSONA_MATRIX_TEMPLATE.html, GAP_ANALYSIS_TEMPLATE.html, RISK_REGISTER_TEMPLATE.html, SLA_TEMPLATE.html, CLIENT_SATISFACTION_SURVEY_TEMPLATE.html, NDA_TEMPLATE.html.
+- Decision / Result: 20 out of 20 workshop documents are now created.
+- Next Action: All documents in tera-workshop/ ready for use.
+
 ## [2026-06-29] - SYSTEM_STRUCTURE: Rewrote TERA_PROJECT_DECISION.md (merged version)
 
 - Related Task: N/A (System Maintenance)
 - Actor: Tera Agent
 - Summary: Rewrote `TERA_PROJECT_DECISION.md` as a merged version combining the expert's 10-section structure with Tera's Model Tier Plan, Token Policy, Client Readiness, and Post-Decision Protocol. Result: 13-section document with clear positioning as "Phase 2: Project Decision Formation" in the 6-phase sequence. Added golden rule, classification system, technology status handling (Found/Missing/Unclear), and concrete decision examples.
 - Decision / Result: The project decision phase is now fully documented as an administrative/analytical phase between intake and preparation. The golden rule is: "لا يملأ التفاصيل بدل الملفات الأخرى."
-- Next Action: Ready to proceed to Phase 3 (Project Preparation Files Generation) when needed.
+- Next Action: Ready to proceed to Phase 3 (Project Preparation Planning) when needed.
+
+## [2026-06-29] - SYSTEM_STRUCTURE: Phase 3 fully documented (Planning + PREPARATION_PLAN.md)
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent (with expert validation)
+- Summary: Completed Phase 3 documentation based on expert review. Changes: (1) Added Section 27 to TERA_RUNTIME_TEMPLATES.md with full PREPARATION_PLAN.md template including Required/Conditional/Deferred/Not Required classification, owner assignment, dependency sequencing, and user approval points. (2) Rewrote TERA_RUNTIME_CHECKLISTS.md Section 1 into 6-phase structure (was old linear flow). (3) Updated Tera_Project_Preparation_Files.md last section to reference the 6-phase system instead of old linear flow. (4) Expanded TeraAgent.md Section 5 with detailed Phase 3 and Phase 4 sub-sections, formal output reference, and governing rules. (5) Expanded TERA_PROJECT_DECISION.md Section 13 with classification examples and PREPARATION_PLAN.md reference.
+- Decision / Result: Phase 3 now has a formal documented output (PREPARATION_PLAN.md), clear classification system, and explicit boundary between planning and execution. All 5 files updated.
+- Next Action: Ready for Phase 4 documentation when needed.
+
+## [2026-06-29] - SYSTEM_STRUCTURE: Phase 5 fully documented (Execution Planning + 3 templates)
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent (with expert validation)
+- Summary: Completed Phase 5 documentation. Changes: (1) Added full Phase 5 section to TeraAgent.md with inputs (16 files), 4 outputs (MASTER_PLAN, DETAILED_PLAN, BATCH_PLAN, TASK-IDs), 10-step planning workflow, and 6 governing rules including "No UI without Design Source Decision". (2) Added Section 29 (PROJECT_MASTER_PLAN.md), Section 30 (PROJECT_DETAILED_EXECUTION_PLAN.md), and Section 31 (EXECUTION_BATCH_PLAN.md) to TERA_RUNTIME_TEMPLATES.md. (3) Rewrote TERA_RUNTIME_CHECKLISTS.md Phase 5 with 9-item checklist including Execution Readiness Check, batch planning, and Pre-Execution Gate per task.
+- Decision / Result: Phase 5 now has full structure: Master Plan → Detailed Plan → First Batch → TASK-IDs → Pre-Execution Gate → User Approval. Design Source Decision is now a mandatory gate before any UI task.
+- Next Action: Ready for Phase 6 documentation when needed.
+
+## [2026-06-29] - SYSTEM_STRUCTURE: Phase 4 fully documented (Generation & Preparation Delegation + AGENT_DELEGATION_PLAN.md)
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent (with expert validation)
+- Summary: Completed Phase 4 documentation. Changes: (1) Renamed Phase 4 to "Sub-Agent Generation & Preparation Delegation" in TeraAgent.md Section 5 with full 11-step workflow. (2) Added AGENT_DELEGATION_PLAN.md template as Section 28 in TERA_RUNTIME_TEMPLATES.md. (3) Updated TeraAgent.md Section 8 with three agent states (Use Existing / Specialize / Generate). (4) Updated TeraAgent.md Section 9 to reference PREPARATION_PLAN.md instead of old "after creating 01, 02, 03". (5) Added Token Budget (Light/Medium/Strong) + Context Rules to AGENT_GENERATION_TEMPLATE.md Required Sections and General Template. (6) Expanded TERA_RUNTIME_PROTOCOLS.md Section 2 with Token Budget generation rules. (7) Added "4.1 Token Budget لكل عميل فرعي" to TeraTokenPolicy.md. (8) Updated TERA_RUNTIME_CHECKLISTS.md Phase 4 with detailed 12-step checklist.
+- Decision / Result: Phase 4 now has formal output (AGENT_DELEGATION_PLAN.md), three agent states for generation decisions, token budget per agent, and clear 12-step execution checklist.
+- Next Action: Ready for Phase 5 documentation when needed.
+
+## [2026-06-29] - SYSTEM_VERIFICATION: Phase 2 full documentation audit
 
 - Related Task: N/A (System Maintenance)
 - Actor: Tera Agent
-- Summary: Created the last 5 client-facing documents completing the full Tera toolkit:
-  1. `GAP_ANALYSIS_TEMPLATE.html` — As-is vs to-be with gap identification and recommendations
-  2. `RISK_REGISTER_TEMPLATE.html` — Risk tracking (impact, probability, mitigation, owner, status)
-  3. `SLA_TEMPLATE.html` — Service Level Agreement (support hours, response times, priority tiers, exclusions)
-  4. `CLIENT_SATISFACTION_SURVEY_TEMPLATE.html` — Post-project feedback (7 rating questions + open feedback)
-  5. `NDA_TEMPLATE.html` — Non-Disclosure Agreement (confidentiality, exclusions, governing law)
-- Decision / Result: Tera system now has 18 HTML templates covering every stage of client engagement.
-- Next Action: Ready for verification phase and moving to project execution.
-
-- Related Task: N/A (System Maintenance)
-- Actor: Tera Agent
-- Summary: Finalized the Client Interview phase toolkit by adding 3 missing components:
-  1. `CLIENT_INTAKE_FORM.html` — Pre-interview questionnaire (company info, project overview, goals, budget, technical preferences, references)
-  2. `PROJECT_CHARTER_TEMPLATE.html` — Project initiation document (charter with objectives, scope, stakeholders, team, budget, timeline, risks, success criteria)
-  3. `USER_PERSONA_MATRIX_TEMPLATE.html` — User persona cards (roles summary table + detailed persona cards with goals, challenges, permissions, devices, features)
-- Decision / Result: Tera system now has 13 HTML templates covering the entire project lifecycle from pre-sale to completion. The Client Interview phase is fully covered with protocol, question bank, intake form, persona tool, and proposal output.
-- Next Action: Verify readiness before moving to next phase.
-
-- Related Task: N/A (System Maintenance)
-- Actor: Tera Agent
-- Summary: Created 5 HTML templates completing the full project lifecycle documentation:
-  1. `QUOTATION_TEMPLATE.html` — Formal price quotation with items, totals, payment terms
-  2. `MEETING_REPORT_TEMPLATE.html` — Meeting minutes with attendees, agenda, action items
-  3. `STATUS_REPORT_TEMPLATE.html` — Periodic status report with KPIs, achievements, risks
-  4. `HANDOVER_REPORT_TEMPLATE.html` — Delivery and acceptance with checklist and sign-off
-  5. `COMPLETION_CERTIFICATE_TEMPLATE.html` — Award-style completion certificate with seal
-- Decision / Result: Full 10-template toolkit now spans the entire project lifecycle from pre-sale to completion.
-- Next Action: Ready for real client projects.
-
-- Related Task: N/A (System Maintenance)
-- Actor: Tera Agent
-- Summary: Created `SOFTWARE_SERVICES_AGREEMENT_TEMPLATE.html` in `tera-workshop/` — 18-section software services agreement preserving the full legal content from the existing reference contract. Added Quranic verse design treatment, party info tables, signature cards with name/title/signature/date fields. Same design system as other templates.
-- Decision / Result: Fifth and final HTML template in the initial workshop batch. The agreement ties together the proposal, SOW, and change requests into a single legal framework.
-- Next Action: Workshop templates complete. Ready for use in client projects.
-
-- Related Task: N/A (System Maintenance)
-- Actor: Tera Agent
-- Summary: Created `CHANGE_REQUEST_FORM.html` in `tera-workshop/` — Change Request form with 6 sections: description, impact analysis (scope/schedule/cost/resources/risk/quality), revised estimates, attachments, decision, and sign-off. Compact design optimized for printing.
-- Decision / Result: Fourth HTML template in the workshop series. Used during execution when scope changes arise.
-- Next Action: Documents are ready for use in client projects.
+- Summary: Full audit of Phase 2 (Project Decision Formation) documentation across the system. Verified 11 files for cross-reference consistency. Found and fixed: renumbered TeraAgent.md sections 6→7→...→37 (was duplicate #6 from inserting new section 5), updated 4 references from "opening decision" to "Phase 2: Project Decision Formation", updated project-preparation/README.md description, updated .opencode/agents/tera.md anchored summary. Result: 40 sections in TeraAgent.md with clean sequential numbering, consistent "المرحلة 2 من 6" phrasing across all 11 referencing files.
+- Decision / Result: Phase 2 is fully documented and consistent across the system.
+- Next Action: Proceeded to Phase 3 redefinition.
 
 ## [2026-06-29] - SYSTEM_TOOLING: Created TECHNICAL_PROPOSAL_TEMPLATE.html
 

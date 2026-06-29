@@ -30,6 +30,10 @@ Project files record project-specific decisions.
 | Client policy (unified) | `tera-system/TeraClientPolicy.md` | `.opencode/agents/tera.md`, `TERA_RUNTIME_PROTOCOLS.md`, `TERA_RUNTIME_TEMPLATES.md` | Merged from 4 separate client files (now deprecated). Covers engagement, approval, change control, and facing content. |
 | Preparation file catalog | `tera-system/Tera_Project_Preparation_Files.md` | `TERA_PROJECT_DECISION.md` | Catalog only; avoid copying full templates. |
 | Project decision template | `tera-system/TERA_PROJECT_DECISION.md` | Not applicable | 13-section merged structure: intake readiness, classification, initial scope, tech, client readiness, files, sub-agents, risks, model tier, token policy, final decision, post-decision protocol. |
+| 6-phase Tera workflow | `tera-system/TeraAgent.md` Section 5 | `.opencode/agents/tera.md`, `TERA_RUNTIME_CHECKLISTS.md` | Runtime must stay synced because `.opencode/agents/tera.md` has higher active priority. |
+| Phase 3 preparation planning output | `tera-system/runtime/TERA_RUNTIME_TEMPLATES.md` Section 27 | `TeraAgent.md`, `TERA_RUNTIME_CHECKLISTS.md` | Produces `project-control/PREPARATION_PLAN.md`; no file creation or agent generation in Phase 3. |
+| Phase 4 agent delegation output | `tera-system/runtime/TERA_RUNTIME_TEMPLATES.md` Section 28 | `TeraAgent.md`, `TERA_RUNTIME_CHECKLISTS.md` | Produces `project-control/AGENT_DELEGATION_PLAN.md`; preparation-file delegation only. |
+| Phase 5 execution planning outputs | `tera-system/runtime/TERA_RUNTIME_TEMPLATES.md` Sections 29-31 | `TeraAgent.md`, `TERA_RUNTIME_CHECKLISTS.md`, `TeraPreExecutionGate.md` | Produces `PROJECT_MASTER_PLAN.md`, `PROJECT_DETAILED_EXECUTION_PLAN.md`, and `EXECUTION_BATCH_PLAN.md`. |
 | Sub-agent registry | `tera-system/TeraSubAgents.md` | `.opencode/agents/tera.md` | Runtime names triggers only. |
 | Agent generation template | `tera-system/AGENT_GENERATION_TEMPLATE.md` | `TERA_RUNTIME_PROTOCOLS.md` | Draft agents use this source. |
 | Pre/Post execution gates | `tera-system/TeraPreExecutionGate.md` | `.opencode/agents/tera.md`, `TERA_RUNTIME_PROTOCOLS.md` | Gate details stay in the policy file. |
