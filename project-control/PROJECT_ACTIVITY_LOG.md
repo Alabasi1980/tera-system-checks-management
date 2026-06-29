@@ -16,6 +16,81 @@
 
 ## Activity Log
 
+## [2026-06-29] - SYSTEM_FEATURE: Application Proposal Template + Process
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Created APPLICATION_PROPOSAL_TEMPLATE.html — a professional, self-contained HTML proposal with RTL support, print optimization, and 8 sections (Understanding, Users/Roles, Scope, Requirements, Assumptions, Roadmap, Notes, Approval). Added Phase 7 (Proposal Generation) to the Client Discovery protocol (TERA_RUNTIME_PROTOCOLS.md Section 18). Added proposal reference to TERA_RUNTIME_TEMPLATES.md (Section 26). Updated TeraClientPolicy.md, TeraAgent.md Section 13, TeraPolicyMap.md, and .opencode/agents/tera.md. The proposal must be approved by the client before formal preparation begins.
+- Decision / Result: Full client-ready proposal pipeline: interview → generate proposal → client approval → formal preparation. The proposal becomes the official scope reference.
+- Next Action: Moved to tera-workshop/ folder as part of system-tooling reorganization.
+
+## [2026-06-29] - SYSTEM_STRUCTURE: Created tera-workshop/ folder
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Created `tera-workshop/` as the dedicated folder for Tera system development files. Moved `APPLICATION_PROPOSAL_TEMPLATE.html` out of `tera-system/` into `tera-workshop/`. Updated 7 reference files (TeraPolicyMap.md, TERA_RUNTIME_TEMPLATES.md, TERA_RUNTIME_PROTOCOLS.md, TeraClientPolicy.md, TeraAgent.md, .opencode/agents/tera.md, TeraArchitectureMap.md).
+- Decision / Result: `tera-system/` remains strictly read-only during project execution. System development files live in `tera-workshop/`.
+- Next Action: All future system-development files go to `tera-workshop/`.
+
+## [2026-06-29] - SYSTEM_STRUCTURE: Rewrote TERA_PROJECT_DECISION.md (merged version)
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Rewrote `TERA_PROJECT_DECISION.md` as a merged version combining the expert's 10-section structure with Tera's Model Tier Plan, Token Policy, Client Readiness, and Post-Decision Protocol. Result: 13-section document with clear positioning as "Phase 2: Project Decision Formation" in the 6-phase sequence. Added golden rule, classification system, technology status handling (Found/Missing/Unclear), and concrete decision examples.
+- Decision / Result: The project decision phase is now fully documented as an administrative/analytical phase between intake and preparation. The golden rule is: "لا يملأ التفاصيل بدل الملفات الأخرى."
+- Next Action: Ready to proceed to Phase 3 (Project Preparation Files Generation) when needed.
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Created the last 5 client-facing documents completing the full Tera toolkit:
+  1. `GAP_ANALYSIS_TEMPLATE.html` — As-is vs to-be with gap identification and recommendations
+  2. `RISK_REGISTER_TEMPLATE.html` — Risk tracking (impact, probability, mitigation, owner, status)
+  3. `SLA_TEMPLATE.html` — Service Level Agreement (support hours, response times, priority tiers, exclusions)
+  4. `CLIENT_SATISFACTION_SURVEY_TEMPLATE.html` — Post-project feedback (7 rating questions + open feedback)
+  5. `NDA_TEMPLATE.html` — Non-Disclosure Agreement (confidentiality, exclusions, governing law)
+- Decision / Result: Tera system now has 18 HTML templates covering every stage of client engagement.
+- Next Action: Ready for verification phase and moving to project execution.
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Finalized the Client Interview phase toolkit by adding 3 missing components:
+  1. `CLIENT_INTAKE_FORM.html` — Pre-interview questionnaire (company info, project overview, goals, budget, technical preferences, references)
+  2. `PROJECT_CHARTER_TEMPLATE.html` — Project initiation document (charter with objectives, scope, stakeholders, team, budget, timeline, risks, success criteria)
+  3. `USER_PERSONA_MATRIX_TEMPLATE.html` — User persona cards (roles summary table + detailed persona cards with goals, challenges, permissions, devices, features)
+- Decision / Result: Tera system now has 13 HTML templates covering the entire project lifecycle from pre-sale to completion. The Client Interview phase is fully covered with protocol, question bank, intake form, persona tool, and proposal output.
+- Next Action: Verify readiness before moving to next phase.
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Created 5 HTML templates completing the full project lifecycle documentation:
+  1. `QUOTATION_TEMPLATE.html` — Formal price quotation with items, totals, payment terms
+  2. `MEETING_REPORT_TEMPLATE.html` — Meeting minutes with attendees, agenda, action items
+  3. `STATUS_REPORT_TEMPLATE.html` — Periodic status report with KPIs, achievements, risks
+  4. `HANDOVER_REPORT_TEMPLATE.html` — Delivery and acceptance with checklist and sign-off
+  5. `COMPLETION_CERTIFICATE_TEMPLATE.html` — Award-style completion certificate with seal
+- Decision / Result: Full 10-template toolkit now spans the entire project lifecycle from pre-sale to completion.
+- Next Action: Ready for real client projects.
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Created `SOFTWARE_SERVICES_AGREEMENT_TEMPLATE.html` in `tera-workshop/` — 18-section software services agreement preserving the full legal content from the existing reference contract. Added Quranic verse design treatment, party info tables, signature cards with name/title/signature/date fields. Same design system as other templates.
+- Decision / Result: Fifth and final HTML template in the initial workshop batch. The agreement ties together the proposal, SOW, and change requests into a single legal framework.
+- Next Action: Workshop templates complete. Ready for use in client projects.
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Created `CHANGE_REQUEST_FORM.html` in `tera-workshop/` — Change Request form with 6 sections: description, impact analysis (scope/schedule/cost/resources/risk/quality), revised estimates, attachments, decision, and sign-off. Compact design optimized for printing.
+- Decision / Result: Fourth HTML template in the workshop series. Used during execution when scope changes arise.
+- Next Action: Documents are ready for use in client projects.
+
+## [2026-06-29] - SYSTEM_TOOLING: Created TECHNICAL_PROPOSAL_TEMPLATE.html
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent
+- Summary: Created `TECHNICAL_PROPOSAL_TEMPLATE.html` in `tera-workshop/` — Technical proposal with 12 sections: overview, architecture, frontend stack, backend stack, hosting/infrastructure, security, performance/scalability, testing, CI/CD, technical exclusions, assumptions, and sign-off. Same design system.
+- Decision / Result: Third HTML template in the workshop series. Bridges the SOW with technical execution.
+- Next Action: Created CHANGE_REQUEST_FORM.html in same batch.
+
 ## [2026-06-29] - SYSTEM_FEATURE: Domain Intelligence Expansion + No-Guessing Rule
 
 - Related Task: N/A (System Maintenance)

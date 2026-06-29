@@ -710,3 +710,27 @@ Use these outlines when creating files under `clients/.../client-approval/`. Cli
 
 ملاحظات عامة:
 ```
+
+---
+
+## 26. Client-Facing Application Proposal
+
+This is not a text template but an **HTML document**. The proposal is generated as a self-contained HTML page with embedded CSS for professional presentation, RTL support, and print optimization.
+
+Reference file: `tera-workshop/APPLICATION_PROPOSAL_TEMPLATE.html`
+
+After the Client Discovery + Smart Interview process completes, Tera populates the template with:
+- Application name, date, client name
+- Problem and solution description
+- Users, roles, and permissions
+- Core MVP features and out-of-scope items
+- Requirements by domain (functional, technical, data, design, security, ops)
+- Assumptions table with status
+- Proposed roadmap phases
+- Approval section
+
+The generated proposal is saved to:
+- `clients/.../client-approval/` (external clients)
+- `project-inputs/` (internal projects)
+
+See `TERA_RUNTIME_PROTOCOLS.md` Section 18, Phase 7 for the protocol.

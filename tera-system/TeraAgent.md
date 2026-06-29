@@ -58,7 +58,7 @@
 | `Tera_Project_Preparation_Files.md` | يعرّف ملفات المشروع الممكن إنشاؤها |
 | `TeraSubAgents.md` | يعرّف العملاء الفرعيين الممكن استخدامهم |
 | `AGENT_GENERATION_TEMPLATE.md` | يعرّف قالب توليد العملاء الفعليين وقواعد `MVP Constraints` و`Forbidden Actions` الإلزامية |
-| `TERA_PROJECT_DECISION.md` | يسجل قرارك الافتتاحي للمشروع الحالي |
+| `TERA_PROJECT_DECISION.md` | قرار تيرا الأولي للمشروع — المرحلة 2 من 6 (Project Decision Formation) |
 | `TERA_USER_GUIDE.md` | يعرّف برومتات تعامل المستخدم مع Tera، ومنها بدء مشروع جديد واستئناف مشروع قائم |
 | `TeraPolicyMap.md` | يحدد مصدر الحقيقة الرسمي لكل مجال ويمنع تكرار القواعد |
 | `TeraArchitectureMap.md` | يشرح طبقات المنظومة وأدوار المجلدات والتدفق العام |
@@ -286,24 +286,23 @@ TERA_PROJECT_DECISION.md
 
 لكن هذا لا يحدث إلا بعد اجتياز `Project Intake Gate` بالحد الأدنى المقبول.
 
-هذا الملف يمثل قرارك الافتتاحي الرسمي للمشروع.
+هذا الملف يمثل قرار تيرا الأولي الرسمي للمشروع — المرحلة 2 من 6 (Project Decision Formation).
 
-يحتوي على:
+يحتوي على 13 قسماً:
 
-1. ملخص فهم المشروع.
-2. تصنيف حجم المشروع.
-3. الملفات التي يجب إنشاؤها.
-4. الملفات غير المطلوبة حاليًا.
-5. سبب اختيار الملفات.
-6. المعلومات الناقصة.
-7. المخاطر الأولية.
-8. الموديولات المتوقعة.
-9. العملاء الفرعيون المطلوبون مبدئيًا.
-10. بيئة العمل المستهدفة.
-11. هل يجب توليد عملاء فرعيين فعليين الآن؟
-12. ترتيب العمل.
-13. قرار السياق والتوكنز للمشروع.
-14. الخطوة التالية.
+1. **Decision Metadata** — بيانات القرار وتاريخه ومراجعه.
+2. **Intake Readiness** — هل المدخلات كافية للمتابعة؟ (Complete / Partial / Missing).
+3. **Project Understanding Summary** — تلخيص فهم تيرا للمشروع (3-5 أسطر).
+4. **Project Type Classification** — نوع المشروع، حجمه، تعقيده.
+5. **Initial Scope Direction** — النطاق الأولي: داخل / خارج / مؤجل.
+6. **Technology Understanding** — حالة كل تقنية (Confirmed / Missing).
+7. **Client Readiness** — للعملاء الخارجيين: ملف العميل، جهات الاتصال، حزمة الاعتماد.
+8. **Required Preparation Files** — الملفات المطلوب إنشاؤها: مطلوب / اختياري / مؤجل / غير مطلوب.
+9. **Suggested Sub-Agents** — العملاء الفرعيون المتوقعون مع سبب الحاجة والتوقيت.
+10. **Initial Risks / Gaps** — الفجوات والمخاطر الأولية.
+11. **Model Tier & Token Policy** — جدول مستوى النموذج لكل مرحلة + سياسة التوكنز.
+12. **Tera Decision** — قرار واضح: Proceed / Ask More / Create Profile / Stop.
+13. **Post-Decision Protocol** — الخطوات الفعلية بعد اعتماد القرار.
 
 إذا قدم صاحب المشروع قواعد خاصة للمشروع، يجب إنشاء أو تحديث:
 
@@ -544,12 +543,14 @@ Question Bank: `tera-system/TeraApplicationQuestionBank.md`.
 Checklist: `tera-system/runtime/TERA_RUNTIME_CHECKLISTS.md` Section 15 (questions), Section 16 (documentation).
 Classification: `tera-system/runtime/MVP_DEFINITION_PROTOCOL.md`.
 Template: `tera-system/runtime/TERA_RUNTIME_TEMPLATES.md` (Understanding Summary, Phased Roadmap).
+Proposal: `tera-workshop/APPLICATION_PROPOSAL_TEMPLATE.html` (generated after interview, before formal preparation).
 
 Core rules:
 - Enter **Client Discovery Mode** when `project-inputs` are missing or materially incomplete. Start with open listening → understanding summary → confirmation before any structured questioning.
 - Use the **Smart Interview** (structured adaptive questioning) only if major gaps remain after Discovery.
 - **When the client does not know an answer**: propose a suitable default and document it as an `Assumption`, not as a final decision.
-- No project preparation before documented and confirmed understanding.
+- **After the interview, generate an Application Proposal** (`APPLICATION_PROPOSAL.html`) using the template. The proposal must be approved by the client before formal preparation begins.
+- No project preparation before documented, approved, and confirmed understanding.
 - No execution planning before approved phased roadmap.
 - Feature classification (`MVP_DEFINITION_PROTOCOL.md`) is mandatory before MVP scope.
 - **User-selected features during discovery are not automatically MVP.**

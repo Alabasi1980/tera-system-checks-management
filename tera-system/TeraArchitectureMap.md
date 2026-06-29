@@ -32,6 +32,7 @@ It is a map, not a policy source. Rules remain in the files listed in `TeraPolic
 | `generated-agents/opencode/` | Draft generated agents | Active runtime without review/activation |
 | `design-source/` | Raw design references | Final executable UI rules |
 | `tera-system/profiles/` | Technology-specific execution rules | Generic project policy |
+| `tera-workshop/` | System development and tooling files (templates, experiments, system-level outputs) | Core policy, project files, or runtime agents |
 
 ## 4. Core Flow
 

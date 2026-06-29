@@ -1254,6 +1254,32 @@ Each suggestion must be classified as:
 
 Suggestions must be clearly separated from confirmed requirements and documented as suggestions, not scope.
 
+#### Phase 7: Proposal Generation (Client Output)
+
+After all phases complete and understanding is confirmed, generate the **Application Proposal** — a professional client-facing document that captures everything agreed upon.
+
+Template: `tera-workshop/APPLICATION_PROPOSAL_TEMPLATE.html`
+
+The proposal is a single self-contained HTML page that is:
+- Professional and presentable
+- RTL (Arabic) by default
+- Printable with clean formatting
+
+The proposal captures:
+1. **Understanding** — problem, solution, description
+2. **Users & Roles** — who uses it and their permissions
+3. **Scope** — Core MVP features + Out of Scope explicitly
+4. **Requirements** — functional, technical, data, design, security, operational
+5. **Assumptions** — all documented assumptions with status
+6. **Roadmap** — proposed phases (Phase 1 / Phase 2 / Later)
+7. **Approval section** — signature fields for client acceptance
+
+Generate the proposal as a `.html` file under:
+- `clients/.../client-approval/` for external client projects
+- `project-inputs/` for internal projects
+
+**Do not proceed to formal preparation until the client approves this proposal.** After approval, the proposal becomes the official reference for scope — any change request is measured against it.
+
 ---
 
 ### Assumption Handling (All Phases)
@@ -1343,6 +1369,7 @@ Assumptions that are marked `Needs confirmation` must be reviewed:
 
 - `Client Discovery Mode` (Stage 1) is the **pre-intake conversation** — it happens before the formal intake gate.
 - `Smart Interview` (Stage 2) is the **structured follow-up** when the Discovery reveals gaps.
-- After both stages complete, `TeraProjectIntakePolicy.md` readiness checks apply.
-- The `Application Discovery Protocol` (Section 13) is now a downstream step — run after the interview confirms a complete picture.
-- `Client Approval Workflow Protocol` (Section 14) remains unchanged for external clients.
+- **Phase 7 (Proposal Generation)** produces the client-facing `APPLICATION_PROPOSAL.html` using the template at `tera-workshop/APPLICATION_PROPOSAL_TEMPLATE.html`. The proposal must be approved before formal preparation begins.
+- After the proposal is approved, `TeraProjectIntakePolicy.md` readiness checks apply.
+- The `Application Discovery Protocol` (Section 13) is now a downstream step — run after the proposal is approved.
+- `Client Approval Workflow Protocol` (Section 14) remains unchanged for external clients — the proposal feeds into Gate 2 (Scope Approval).

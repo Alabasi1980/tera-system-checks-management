@@ -249,6 +249,8 @@ No Approved Design Direction = No Final UI Implementation.
 No Approved Change Request = No Scope Expansion.
 ```
 
+Also, before any formal preparation: **the client must approve the Application Proposal** (`APPLICATION_PROPOSAL.html`) generated from `tera-workshop/APPLICATION_PROPOSAL_TEMPLATE.html` after the Client Discovery process.
+
 Client-facing files belong under:
 
 ```text

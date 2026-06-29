@@ -96,6 +96,14 @@ Minimum content per contact:
 
 Tera must not treat approval from a contact as final unless that contact has documented approval authority or the user explicitly confirms it.
 
+### Client Discovery Output — Application Proposal
+
+After the Client Discovery + Smart Interview process completes (see `TERA_RUNTIME_PROTOCOLS.md` Section 18), Tera generates a **professional client-facing Application Proposal** as an HTML page using `tera-workshop/APPLICATION_PROPOSAL_TEMPLATE.html`.
+
+The proposal captures: understanding, users & roles, scope (MVP + out-of-scope), requirements by domain, assumptions, and proposed roadmap. Generated from `tera-workshop/APPLICATION_PROPOSAL_TEMPLATE.html`.
+
+The proposal is saved under `clients/.../client-approval/` and **must be approved by the client** before formal preparation begins. The approved proposal becomes the official scope reference for all subsequent gates.
+
 ---
 
 ## 6. Client Discovery
