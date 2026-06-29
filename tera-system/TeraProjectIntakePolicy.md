@@ -2,7 +2,18 @@
 
 ## 1. Purpose
 
-This policy defines the required intake gate before Tera starts formal project preparation for any new project.
+This policy defines the intake process before Tera starts formal project preparation for any new project.
+
+The intake process has two sequential stages:
+
+```
+Stage 1: Client Discovery Mode  ← Open conversation + understanding summary
+Stage 2: Smart Interview         ← Structured adaptive questioning (only if gaps remain)
+```
+
+These are defined in `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md` Section 18, with the question bank at `tera-system/TeraApplicationQuestionBank.md`.
+
+The **Project Intake Gate** checks whether the information collected during these stages is ready for formal preparation.
 
 ## 2. Required Intake Files
 
@@ -11,7 +22,7 @@ The minimum intake package is:
 - `project-inputs/01_APPLICATION_IDEA.md`
 - `project-inputs/02_TECHNICAL_CONTEXT.md`
 
-For external client projects, Tera must also collect or create the client workspace records defined in `tera-system/TeraClientEngagementPolicy.md`:
+For external client projects, Tera must also collect or create the client workspace records defined in `tera-system/TeraClientPolicy.md`:
 
 - `clients/CLIENT-[client-name-or-id]/CLIENT_PROFILE.md`
 - `clients/CLIENT-[client-name-or-id]/CONTACTS.md`
@@ -57,25 +68,39 @@ Use these statuses:
 - `Partial`
 - `Complete`
 
-## 6. Intake Collection Mode
+## 6. Intake Collection via Client Discovery + Smart Interview
 
 If one or both intake files are missing or materially incomplete, Tera must enter:
 
 ```text
-Intake Collection Mode
+Client Discovery Mode
 ```
 
-Rules in this mode:
+This is a **two-stage process** defined in `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md` (Section 18):
+
+### Stage 1: Client Discovery (mandatory first step)
+1. **Open Listening** — Let the client explain freely without interruption.
+2. **Understanding Summary** — Summarize Tera's understanding and ask: "هل هذا الفهم صحيح؟"
+3. **Confirmation** — Do not proceed until the client confirms or corrects.
+4. **Decision** — If the picture is clear enough, proceed to Intake Gate. If major gaps remain, proceed to Stage 2.
+
+### Stage 2: Smart Interview (if gaps remain)
+1. **Opening Round** — Essential questions from Domains 1, 2, 4 (5–7 questions).
+2. **Analysis** — Identify gaps and select next domain.
+3. **Adaptive Rounds** — Continue in small batches until picture is complete.
+4. **Final Understanding Summary** — Confirm with the user.
+5. **Suggestions and Improvements** — Propose improvements, classified separately from scope.
+
+### Rules for both stages
 
 - Do not start formal `project-preparation/` output.
 - Do not create `TERA_PROJECT_DECISION.md`.
 - Do not choose a final active Technology Profile.
 - Do not generate sub-agents for implementation work.
 - Do not create implementation `TASK-ID`s.
-- Ask short, direct questions only to close missing intake gaps.
-- Document the answers inside the intake files.
-- For external client projects, ask short client-facing questions that Majed can forward to the client.
-- Do not treat any client approval as final unless the approving contact and authority are documented.
+- Document each answer immediately in `project-inputs/`.
+- For external client projects, phrase questions for Majed to forward to the client.
+- **When the client does not know**: propose a suitable default, document it as an `Assumption` (not as a final decision). See Question Bank for assumption documentation format.
 
 ## 7. Minimum Questions
 
@@ -115,7 +140,7 @@ For external client projects, Tera may proceed only to client approval preparati
 - the client application folder under `clients/` is identified.
 - Tera has enough information to produce a client-facing approval package.
 
-Tera may not proceed to implementation until `tera-system/TeraClientApprovalPolicy.md` is satisfied.
+Tera may not proceed to implementation until `tera-system/TeraClientPolicy.md` (Section 7: Client Approval Package) is satisfied.
 
 ## 9. Relationship with 00_PROJECT_INPUTS.md
 

@@ -68,7 +68,7 @@ clients/CLIENT-[client-name-or-id]/applications/APP-[app-name-or-id]/client-appr
 الملفات الافتراضية، بوابات الاعتماد، وقواعد الاستثناء المحدود موثقة رسميًا في:
 
 ```text
-tera-system/TeraClientApprovalPolicy.md
+tera-system/TeraClientPolicy.md (Section 7)
 tera-system/runtime/TERA_RUNTIME_TEMPLATES.md
 ```
 

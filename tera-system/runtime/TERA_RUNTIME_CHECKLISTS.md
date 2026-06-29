@@ -265,9 +265,11 @@ Rules:
 
 ---
 
-## 11. Domain Intelligence Trigger Checklist
+## 11. Domain Intelligence and Research Trigger Checklist
 
-Tera may trigger Domain Intelligence when one or more conditions exist:
+### When to trigger formal Domain Intelligence
+
+Tera may trigger full Domain Intelligence (Research Brief + agents) when one or more conditions exist:
 
 - ERP module or deep business domain.
 - Screen or feature has workflow, approval, permissions, or cross-module integration.
@@ -278,13 +280,28 @@ Tera may trigger Domain Intelligence when one or more conditions exist:
 - Feature depends on current or source-grounded external knowledge.
 
 Do not trigger Domain Intelligence for:
-
 - simple CRUD
 - small UI edits
 - bug fixes
 - adding a filter or button
 - purely technical tasks
 - domains already sufficiently documented in official project files
+
+### When to trigger Quick Search (during Client Discovery)
+
+A Quick Search (real-time, no formal brief) is triggered when:
+- The client mentions an integration, API, or third-party service.
+- The client asks about hosting providers, pricing, or regional availability.
+- The question in the Question Bank is marked `🔍 Research recommended` and the client defers or asks for a recommendation.
+- Majed explicitly says "ابحث عن [موضوع]" during the conversation.
+- Tera does not have source-grounded knowledge about a specific technology, library, or approach relevant to the client's context.
+
+### When to trigger Focused Research (between discovery and preparation)
+
+Focused Research is triggered when:
+- A specific decision needs comparison (e.g., which payment gateway, which cloud provider).
+- The user requests a comparison with sources.
+- The topic is bounded and can be resolved in one research round.
 
 ---
 

@@ -21,13 +21,13 @@ Project files record project-specific decisions.
 |---|---|---|---|
 | Tera identity and authority | `tera-system/TeraAgent.md` | `.opencode/agents/tera.md` | Runtime must stay compact. |
 | Runtime authority order | `.opencode/agents/tera.md` | Not applicable | Active runtime wins until conflict is corrected. |
-| Operating model overview | `tera-system/Tera Operating Model.md` | Not applicable | Conceptual overview only; not a detailed policy source. |
+| Operating model overview | `tera-system/TeraAgent.md` (Section 36) | Not applicable | Merged from Tera Operating Model.md (now deprecated). |
 | System architecture | `tera-system/TeraArchitectureMap.md` | `.opencode/agents/tera.md` | Runtime should only link or summarize. |
 | Project intake | `tera-system/TeraProjectIntakePolicy.md` | `.opencode/agents/tera.md`, `TERA_RUNTIME_PROTOCOLS.md` | Do not duplicate full intake rules elsewhere. |
-| Client engagement | `tera-system/TeraClientEngagementPolicy.md` | `.opencode/agents/tera.md`, `TERA_RUNTIME_PROTOCOLS.md` | Covers client profile, contacts, and discovery. |
-| Client approval | `tera-system/TeraClientApprovalPolicy.md` | `.opencode/agents/tera.md`, `TERA_RUNTIME_PROTOCOLS.md` | Mandatory for external client projects. |
-| Client change control | `tera-system/TeraClientChangeControlPolicy.md` | `TERA_RUNTIME_PROTOCOLS.md` | Change records live under `clients/.../client-approval/`. |
-| Client-facing content | `tera-system/TeraClientFacingContentPolicy.md` | `TERA_RUNTIME_TEMPLATES.md` | Arabic by default. |
+| Application question bank | `tera-system/TeraApplicationQuestionBank.md` | `TERA_RUNTIME_PROTOCOLS.md` (Section 18) | Reference bank of categorized questions for Client Discovery + Smart Interview. Includes assumption handling rules. |
+| Client discovery + smart interview | `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md` (Section 18) | `.opencode/agents/tera.md` | Two-stage intake: open conversation → structured questioning if needed. |
+| Domain intelligence + research | `tera-system/runtime/TERA_RUNTIME_PROTOCOLS.md` (Section 12) | `.opencode/agents/tera.md`, `TERA_RUNTIME_CHECKLISTS.md` | Covers real-time search during discovery, on-demand research, and the No-Guessing Rule. |
+| Client policy (unified) | `tera-system/TeraClientPolicy.md` | `.opencode/agents/tera.md`, `TERA_RUNTIME_PROTOCOLS.md`, `TERA_RUNTIME_TEMPLATES.md` | Merged from 4 separate client files (now deprecated). Covers engagement, approval, change control, and facing content. |
 | Preparation file catalog | `tera-system/Tera_Project_Preparation_Files.md` | `TERA_PROJECT_DECISION.md` | Catalog only; avoid copying full templates. |
 | Project decision template | `tera-system/TERA_PROJECT_DECISION.md` | Not applicable | Template for project-level decision. |
 | Sub-agent registry | `tera-system/TeraSubAgents.md` | `.opencode/agents/tera.md` | Runtime names triggers only. |

@@ -4,58 +4,23 @@
 
 ---
 
-## 1. هدف هذه الوثيقة
-
-هذه الوثيقة تشرح كيف يتعامل المستخدم مع Tera بشكل صحيح.
-
-الهدف أن يعرف المستخدم:
-
-* ماذا يرسل لتيرا في بداية المشروع.
-* كيف يراقب قراراته.
-* متى يوافق أو يرفض.
-* كيف يضيف قواعد خاصة.
-* كيف يمنع السلوك غير المقبول.
-* كيف ينتقل من التحليل إلى التنفيذ بدون أن يتحول المستخدم إلى مدير مهام يومية.
+> **Target audience:** Human users of the Tera system.
+> **Purpose:** Practical prompts and guidance for interacting with Tera effectively.
+> **Note:** This guide focuses on usage, not system internals. For Tera's identity and rules, see `tera-system/TeraAgent.md`.
 
 ---
 
-## 2. دور المستخدم ودور Tera
+## 1. Role Summary
 
-### دور المستخدم
+**Your role:** Decision owner. You explain the idea, set constraints, approve/reject decisions, monitor for bloat, and approve phase transitions.
 
-المستخدم هو صاحب القرار.
-
-مسؤوليته:
-
-* شرح فكرة المشروع.
-* تحديد القيود المهمة.
-* اعتماد أو رفض قرارات تيرا.
-* مراقبة التضخيم.
-* توضيح الحالات الحساسة.
-* الموافقة على الانتقال بين المراحل.
-* إيقاف التنفيذ عند وجود خلل.
-
-### دور Tera
-
-تيرا هو مدير المشروع والمنسق.
-
-مسؤوليته:
-
-* فهم المشروع.
-* إنشاء ملفات التحضير.
-* اختيار الملفات المطلوبة.
-* توليد العملاء عند الحاجة.
-* منع التضخيم.
-* تقسيم التنفيذ إلى دفعات.
-* تكليف العملاء الفرعيين.
-* مراجعة مخرجاتهم.
-* تقديم تقارير للمستخدم.
+**Tera's role:** Project orchestrator. Tera understands the project, prepares files, selects sub-agents, prevents bloat, splits execution into batches, reviews outputs, and reports to you.
 
 ---
 
-## 3. أول برومت لبدء مشروع جديد
+## 2. Starting a New Project
 
-عند بدء مشروع جديد، أرسل لتيرا برومت واضح مثل:
+Use a clear prompt:
 
 ```text
 سنبدأ مشروعًا جديدًا باستخدام منظومة Tera.
@@ -98,67 +63,24 @@
 8. لا تنشئ باقي الملفات ولا العملاء بعد، فقط اكتب قرارك وانتظر موافقتي.
 ```
 
----
-
-## Starting a New Project
-
-أنت لا تحتاج أن تكتب كل شيء بصياغة احترافية كاملة من البداية.
-
-إذا كانت معلوماتك ناقصة، يجب أن يبدأ Tera بمرحلة:
-
-```text
-Project Intake
-```
-
-ويفحص أو ينشئ:
-
-```text
-project-inputs/01_APPLICATION_IDEA.md
-project-inputs/02_TECHNICAL_CONTEXT.md
-```
-
-إذا كانت المعلومات ناقصة، يدخل Tera في:
-
-```text
-Intake Collection Mode
-```
-
-وفي هذه الحالة:
-
-- لا يبدأ التحضير الرسمي بعد
-- لا ينشئ `TERA_PROJECT_DECISION.md`
-- لا يختار `Active Technology Profile` نهائيًا
-- يسأل أسئلة قصيرة فقط حتى يغلق نقص الـ intake
-
-مثال بداية مناسبة:
+### Quick start (minimal)
 
 ```text
 أريد بدء مشروع جديد.
 
 فكرة التطبيق:
-[اكتب وصفًا بسيطًا]
+[وصف بسيط]
 
 المعلومات التقنية المتوفرة:
-[اكتب ما تعرفه، أو قل: غير محددة وأريد من Tera أن يقترح لاحقًا]
+[ما تعرفه، أو قل: غير محددة]
 
 ابدأ فقط بمرحلة Project Intake.
 إذا كانت المعلومات ناقصة، اسألني ثم أنشئ ملفات project-inputs.
 ```
 
-القاعدة النهائية:
-
-```text
-No Intake = No Project Preparation
-```
-
 ---
 
-## 3.1 بدء مشروع عميل خارجي
-
-
-عندما يكون المشروع لعميل خارجي، استخدم برومت يوضح أن المطلوب ليس فقط تحليل التطبيق، بل أيضًا إدارة علاقة العميل وحزمة الاعتماد.
-
-مثال:
+## 3. Starting an External Client Project
 
 ```text
 سنبدأ مشروع عميل خارجي باستخدام منظومة Tera.
@@ -182,10 +104,10 @@ No Intake = No Project Preparation
 - هل يملك صلاحية اعتماد؟ نعم / لا / غير معروف
 
 فكرة التطبيق:
-[اكتب فكرة العميل كما وصلت لك]
+[فكرة العميل]
 
 المعلومات التقنية المتوفرة:
-[اكتب ما تعرفه، أو قل: غير محددة]
+[ما تعرفه، أو قل: غير محددة]
 
 المراجع أو الذوق:
 - شعار أو ألوان:
@@ -208,22 +130,9 @@ No Intake = No Project Preparation
 6. انتظر موافقتي قبل أي تنفيذ برمجي.
 ```
 
-القواعد النهائية لمشاريع العملاء:
-
-```text
-No documented client context = No client project preparation
-No Client Approval Package = No Implementation
-No Approved Scope = No Build Mode
-No Approved Design Direction = No Final UI Implementation
-No Approved Change Request = No Scope Expansion
-```
-
 ---
 
-## 4. برومت استئناف المشروع
-
-عند العودة إلى مشروع قائم بعد انقطاع، لا تبدأ مشروعًا جديدًا ولا تطلب من Tera إعادة التحليل من الصفر.
-استخدم برومت استئناف واضح يجعل Tera يقرأ سجل التحكم والقرارات أولًا.
+## 4. Resuming an Existing Project
 
 ```text
 المشروع قائم ومستمر.
@@ -253,15 +162,10 @@ No Approved Change Request = No Scope Expansion
 
 ---
 
-## 5. إذا كان المشروع حساسًا أو كبيرًا
-
-إذا كان المشروع مهمًا أو حساسًا أو يحتاج دقة أعلى، أخبر تيرا من البداية.
-
-مثال:
+## 5. Sensitive or Large Projects
 
 ```text
 هذا مشروع حساس ويحتاج دقة عالية.
-
 تعامل معه كـ High-Risk Project.
 
 المطلوب:
@@ -274,7 +178,7 @@ No Approved Change Request = No Scope Expansion
 - أي قرار متعلق بالأمان أو البيانات أو الصلاحيات يجب عرضه علي أولًا.
 ```
 
-للمشاريع الكبيرة، أضف:
+For large projects, add:
 
 ```text
 هذا مشروع متوسط/كبير، لذلك:
@@ -287,119 +191,25 @@ No Approved Change Request = No Scope Expansion
 
 ---
 
-## 6. ما الذي تراقبه في تقرير تيرا؟
+## 6. What to Monitor in Tera's Reports
 
-عند كل تقرير من تيرا، راقب هذه النقاط:
-
-### 5.1 هل عدّل `tera-system`؟
-
-إذا عدّل ملفات النظام أثناء مشروع عادي، فهذا خطأ.
-
-المسموح عادة:
-
-```text
-project-preparation/
-clients/
-generated-agents/opencode/
-design-source/
-```
-
-غير مسموح إلا بقرار نظامي:
-
-```text
-tera-system/
-```
+- **Did Tera modify `tera-system/`?** Not allowed during normal project execution.
+- **Did Tera create too many files?** Check for unnecessary, mergeable, or phase-3 files.
+- **Did Tera generate too many sub-agents?** Agents should match the current phase only.
+- **Did Tera start code without approval?** This is unacceptable — stop immediately.
+- **Did Tera invent random design?** UI must follow the approved `28_UI_UX_GUIDELINES.md`.
+- **Did Tera split execution into small batches?** No full-app builds in one command.
 
 ---
 
-### 5.2 هل أنشأ ملفات أكثر من اللازم؟
+## 7. If Tera Misbehaves
 
-راقب:
-
-* هل أنشأ كل الملفات من 00 إلى 35؟
-* هل أنشأ ملفات مرحلة لاحقة؟
-* هل أنشأ ملفًا يمكن دمجه؟
-* هل أنشأ ملفات تنفيذ قبل الموافقة؟
-
-إذا حدث ذلك، أوقفه واطلب Reduction Pass.
-
----
-
-### 5.3 هل ولّد عملاء أكثر من اللازم؟
-
-يجب أن يولّد العملاء حسب المرحلة فقط.
-
-مثال:
-
-* في التحليل لا نحتاج EngineeringAgent.
-* في التنفيذ لا نحتاج كل عملاء التحليل.
-* QAAgent لا يلزم إذا كان المشروع صغيرًا والاختبارات واضحة.
-
----
-
-### 5.4 هل بدأ كود قبل الموافقة؟
-
-هذا سلوك غير مقبول.
-
-تيرا يجب أن ينتظر اعتماد:
-
-* التحليل.
-* المعمارية.
-* خطة التنفيذ.
-* الاختبار.
-* التصميم عند وجود واجهة.
-
----
-
-### 5.5 هل اخترع تصميمًا عشوائيًا؟
-
-قبل تنفيذ الواجهة يجب أن يوجد قرار تصميم.
-
-يجب أن يكون موثقًا في:
-
-```text
-project-preparation/28_UI_UX_GUIDELINES.md
-```
-
-إذا بدأ EngineeringAgent بتصميم عشوائي، أوقفه.
-
----
-
-### 5.6 هل يقسم التنفيذ إلى دفعات؟
-
-عند التنفيذ، لا يسمح بأمر مثل:
-
-```text
-ابنِ التطبيق كاملًا.
-```
-
-يجب أن يعمل بدفعات صغيرة.
-
-كل دفعة يجب أن تحتوي على:
-
-* اسم الدفعة.
-* الهدف.
-* العميل المكلف.
-* الملفات المرجعية.
-* المسموح تعديله.
-* الممنوع لمسه.
-* معايير القبول.
-* فحص Anti-Bloat.
-* فحص التصميم إن وجدت واجهة.
-
----
-
-## 7. ماذا تفعل إذا كان سلوك تيرا غير مقبول؟
-
-### الحالة 1: بدأ يضخم الملفات
-
-أرسل:
+### Over-generating files
 
 ```text
 أوقف التوسع.
 
 المطلوب الآن Reduction Pass فقط.
-
 راجع ما أنشأته وحدد:
 1. ما الملفات التي يمكن دمجها؟
 2. ما الملفات التي يمكن تأجيلها؟
@@ -410,11 +220,7 @@ project-preparation/28_UI_UX_GUIDELINES.md
 لا تبدأ تنفيذًا.
 ```
 
----
-
-### الحالة 2: اقترح شاشات كثيرة
-
-أرسل:
+### Proposing too many screens
 
 ```text
 عدد الشاشات المقترح كبير بالنسبة لحجم المشروع.
@@ -426,11 +232,7 @@ project-preparation/28_UI_UX_GUIDELINES.md
 - لا تعدّل ملفات أخرى إلا ملفات UI المعنية.
 ```
 
----
-
-### الحالة 3: ولّد عملاء أكثر من اللازم
-
-أرسل:
+### Generating too many agents
 
 ```text
 راجع العملاء المولدين.
@@ -443,15 +245,10 @@ project-preparation/28_UI_UX_GUIDELINES.md
 - حدّث Manifest فقط إذا لزم.
 ```
 
----
-
-### الحالة 4: بدأ التنفيذ قبل الوقت
-
-أرسل:
+### Started code too early
 
 ```text
 توقف فورًا.
-
 لا نبدأ التنفيذ البرمجي قبل اعتماد المرحلة الحالية.
 
 المطلوب:
@@ -461,15 +258,10 @@ project-preparation/28_UI_UX_GUIDELINES.md
 4. لا تتابع إلا بعد موافقتي.
 ```
 
----
-
-### الحالة 5: خرج عن التصميم
-
-أرسل:
+### Deviated from approved design
 
 ```text
 توقف عن تنفيذ الواجهة.
-
 راجع project-preparation/28_UI_UX_GUIDELINES.md.
 
 المطلوب:
@@ -481,103 +273,52 @@ project-preparation/28_UI_UX_GUIDELINES.md
 
 ---
 
-## 8. الملف المشترك للقواعد الإضافية
+## 8. Project-Specific Rules
 
-إذا كان لديك قواعد خاصة تريد أن يلتزم بها تيرا في مشروع معين، الأفضل إنشاء ملف داخل:
+For custom rules per project, use:
 
 ```text
 project-preparation/PROJECT_RULES.md
 ```
 
-هذا الملف يمثل القواعد الخاصة بالمشروع الحالي.
+If you have general rules for all Tera projects, they belong in `tera-system/` instead.
 
-أمثلة لما يوضع فيه:
+| Rule type | Location |
+|---|---|
+| Single-project rule | `project-preparation/PROJECT_RULES.md` |
+| System-wide rule | `tera-system/` |
+| Design/style rule | `project-preparation/28_UI_UX_GUIDELINES.md` or `design-source/` |
+| Sub-agent rule | Agent file + Manifest |
 
-```text
-- لا تستخدم مكتبات مدفوعة.
-- لا تستخدم أي API خارجي.
-- لا تخزن كلمات المرور كنص صريح.
-- لا تستخدم ألوان خارج هوية الشركة.
-- لا تنشئ Dashboard.
-- لا تنفذ Export Excel في النسخة الأولى.
-- يجب دعم اللغة العربية RTL.
-- يجب أن يكون المشروع قابلًا للتشغيل محليًا فقط.
-```
-
-إذا كانت القواعد عامة لكل مشاريع تيرا، يجب نقلها لاحقًا إلى:
-
-```text
-tera-system/TeraAgent.md
-```
-
-أو الملف المناسب داخل `tera-system`.
-
-الفرق:
-
-| نوع القاعدة            | مكانها                                                           |
-| ---------------------- | ---------------------------------------------------------------- |
-| قاعدة خاصة بمشروع واحد | `project-preparation/PROJECT_RULES.md`                           |
-| قاعدة عامة للمنظومة    | `tera-system/`                                                   |
-| قاعدة تصميم أو ستايل   | `project-preparation/28_UI_UX_GUIDELINES.md` أو `design-source/` |
-| قاعدة عميل فرعي        | ملف العميل + Manifest                                            |
-
----
-
-## 9. برومت إنشاء ملف القواعد المشتركة
-
-يمكنك استخدام هذا البرومت:
+### Prompt to create rules
 
 ```text
 أريد إضافة قواعد خاصة بهذا المشروع.
 
 المطلوب:
-1. أنشئ أو حدّث:
-   project-preparation/PROJECT_RULES.md
-
+1. أنشئ أو حدّث: project-preparation/PROJECT_RULES.md
 2. لا تعدّل tera-system.
 3. لا تبدأ تنفيذًا.
 4. وثق القواعد التالية كقواعد ملزمة لهذا المشروع:
 [اكتب القواعد هنا]
-
 5. بعد التحديث، أخبرني كيف ستؤثر هذه القواعد على التحليل والتنفيذ.
 ```
 
 ---
 
-## 10. برومت اعتماد مرحلة التحليل
+## 9. Phase Transition Prompts
 
-بعد أن ينشئ تيرا ملفات التحليل، استخدم:
-
-```text
-أريد مراجعة مرحلة التحليل قبل الانتقال.
-
-المطلوب:
-1. راجع ملفات التحليل الحالية.
-2. طبّق Anti-Bloat Review.
-3. قلّل الملفات أو الشاشات أو الجداول إن أمكن.
-4. لا تنشئ ملفات مرحلة لاحقة.
-5. أعطني تقريرًا:
-   - ما الذي بقي؟
-   - ما الذي تم دمجه؟
-   - ما الذي تم تأجيله؟
-   - هل المشروع ما زال مناسبًا لحجمه؟
-```
-
----
-
-## 11. برومت اعتماد المعمارية
+### Approve analysis → move to architecture
 
 ```text
 أعتمد مرحلة التحليل.
-
 انتقل فقط إلى Technical Architecture.
 
 المطلوب:
 1. لا تبدأ كود.
 2. لا تنشئ ملفات تطبيق.
 3. لا تولّد EngineeringAgent.
-4. أنشئ فقط:
-   project-preparation/08_TECHNICAL_ARCHITECTURE.md
+4. أنشئ فقط: project-preparation/08_TECHNICAL_ARCHITECTURE.md
 
 يجب أن يحتوي الملف على:
 - التقنية المقترحة.
@@ -588,95 +329,47 @@ tera-system/TeraAgent.md
 - ما هو خارج المعمارية الآن.
 ```
 
----
-
-## 12. برومت اعتماد خطة التنفيذ
+### Approve architecture → move to planning
 
 ```text
-أعتمد ملف:
-project-preparation/08_TECHNICAL_ARCHITECTURE.md
-
+أعتمد ملف: project-preparation/08_TECHNICAL_ARCHITECTURE.md
 انتقل فقط إلى Implementation Planning.
 
 المطلوب:
 1. لا تبدأ كود.
 2. لا تنشئ ملفات تطبيق.
 3. لا تولّد EngineeringAgent الآن.
-4. أنشئ فقط:
-   project-preparation/09_IMPLEMENTATION_PLAN.md
-
-يجب أن يحتوي الملف على:
-- خطة تنفيذ بسيطة.
-- مراحل صغيرة.
-- أول ما يجب بناؤه.
-- ترتيب قاعدة البيانات والمصادقة والشاشات.
-- ما لا يجب تنفيذه الآن.
-- متى يمكن توليد EngineeringAgent لاحقًا.
+4. أنشئ فقط: project-preparation/09_IMPLEMENTATION_PLAN.md
 ```
 
----
-
-## 13. برومت إنشاء الاختبار والقبول
+### Approve plan → move to testing/acceptance
 
 ```text
 أعتمد خطة التنفيذ.
-
 انتقل فقط إلى Testing and Acceptance Preparation.
 
 المطلوب:
 1. لا تبدأ كود.
 2. لا تولّد EngineeringAgent.
 3. لا تولّد QAAgent إلا إذا كان ضروريًا.
-4. أنشئ فقط:
-   project-preparation/10_TESTING_AND_ACCEPTANCE.md
-
-يجب أن يحتوي الملف على:
-- معايير قبول MVP.
-- اختبارات الصلاحيات.
-- اختبارات CRUD.
-- اختبارات الحالات.
-- اختبارات الفلاتر والطباعة.
-- اختبارات منع الأخطاء.
-- ما هو خارج الاختبار الآن.
+4. أنشئ فقط: project-preparation/10_TESTING_AND_ACCEPTANCE.md
 ```
 
----
-
-## 14. برومت حسم التصميم
+### Approve design direction
 
 ```text
 قبل تنفيذ الواجهة، يجب حسم مصدر التصميم.
 
 قرار التصميم:
-[اكتب أحد الخيارات]
-- Tera-Decided Design
-- CSS أو قالب من المستخدم
-- getdesign.md
-- ألوان وهوية محددة
+[ Tera-Decided Design / CSS أو قالب / getdesign.md / ألوان وهوية محددة ]
 
 المطلوب:
 1. لا تبدأ كود.
 2. لا تولّد EngineeringAgent.
-3. أنشئ أو حدّث فقط:
-   project-preparation/28_UI_UX_GUIDELINES.md
-
-يجب أن يحتوي على:
-- مصدر التصميم.
-- الألوان.
-- Typography.
-- الجداول.
-- النماذج.
-- الأزرار.
-- Layout.
-- الممنوعات.
-- ما يجب أن يلتزم به EngineeringAgent.
+3. أنشئ أو حدّث فقط: project-preparation/28_UI_UX_GUIDELINES.md
 ```
 
----
-
-## 15. برومت بدء التنفيذ المنضبط
-
-بعد اعتماد التحليل والمعمارية والخطة والاختبار والتصميم، استخدم:
+### Start controlled implementation
 
 ```text
 أعتمد ملفات التحضير الحالية، وأوافق على بدء مرحلة التنفيذ البرمجي المنضبط تحت إدارة Tera.
@@ -684,43 +377,13 @@ project-preparation/08_TECHNICAL_ARCHITECTURE.md
 المطلوب الآن:
 1. لا تنفذ التطبيق كاملًا دفعة واحدة.
 2. لا تطلب مني تحديد كل مهمة برمجية يدويًا.
-3. طبّق Execution Orchestration Protocol و Controlled Implementation Batch Rule.
-4. ولّد EngineeringAgent فقط إذا كان مطلوبًا لبدء التنفيذ.
-5. حدّث GENERATED_AGENTS_MANIFEST.md إذا تم توليد EngineeringAgent.
-6. لا تنقل عملاء التحليل الحاليين إلى .opencode/agents إلا عند الحاجة وبعد تقييدهم.
-7. يجب أن يقرأ EngineeringAgent ملفات التحضير المعتمدة.
-8. إذا كانت هناك واجهة، يجب أن يقرأ 28_UI_UX_GUIDELINES.md.
-
-قبل تنفيذ الدفعة الأولى، اعرض علي:
-- اسم الدفعة.
-- الهدف.
-- العميل المكلف.
-- الملفات المرجعية.
-- الملفات أو المجلدات المسموح إنشاؤها/تعديلها.
-- ما هو ممنوع لمسه.
-- معايير القبول.
-- فحص Anti-Bloat.
-- فحص الالتزام بالتصميم.
-- هل يحتاج العميل إلى النقل إلى .opencode/agents أم لا.
-
-لا تبدأ تنفيذ الدفعة الأولى إلا بعد موافقتي عليها.
+3. طبّق Execution Orchestration Protocol.
+4. ولّد EngineeringAgent فقط إذا كان مطلوبًا.
+5. قبل الدفعة الأولى، اعرض علي: الاسم، الهدف، العميل، الملفات المرجعية، المسموح/الممنوع، معايير القبول، فحص التصميم.
+6. لا تبدأ قبل موافقتي.
 ```
 
----
-
-## 16. برومت مراجعة ما بعد التنفيذ
-
-بعد تنفيذ أي مهمة برمجية أو أي دفعة تنفيذية، لا تعتمد النتيجة النهائية مباشرة من تقرير العميل الفرعي فقط.
-
-اطلب من Tera تنفيذ:
-
-```text
-Post-Execution Review Gate
-```
-
-على الناتج الفعلي للمهمة.
-
-يمكنك استخدام البرومت التالي:
+### Post-execution review
 
 ```text
 نفّذ Post-Execution Review Gate على المهمة المنفذة.
@@ -728,100 +391,36 @@ Post-Execution Review Gate
 المطلوب:
 1. راجع الناتج الفعلي، وليس تقرير Sub-Agent فقط.
 2. افحص الملفات المتغيرة، الحزم، الأوامر المنفذة، والآثار الجانبية.
-3. طبّق Checklist بوابة المراجعة بعد التنفيذ.
-4. أضف داخل ملف المهمة قسم:
-   Post-Execution Review Result
-5. أعطني النتيجة النهائية:
-   - PASS
-   - NEEDS_FIX
-   - BLOCKED
-6. إذا كانت النتيجة NEEDS_FIX أو BLOCKED:
-   - لا تقبل المهمة
-   - حدد المخالفات
-   - اذكر Root Cause
-   - وضح الإجراء المطلوب
-
-لا تغيّر حالة المهمة إلى Accepted أو Closed قبل اجتياز البوابة.
-```
-
-استخدم هذا البرومت خصوصًا عندما تحتوي المهمة على:
-
-* Scaffold
-* أوامر CLI
-* تثبيت حزم
-* تعديل إعدادات
-* UI/CSS
-* ORM / database setup according to the active Technology Profile
-* API/Auth
-
-القاعدة النهائية:
-
-```text
-تنفيذ المهمة لا يعني قبولها.
-القبول يأتي فقط بعد Post-Execution Review Gate: PASS
+3. أعطني النتيجة: PASS / NEEDS_FIX / BLOCKED
+4. لا تغيّر حالة المهمة إلى Accepted أو Closed قبل اجتياز البوابة.
 ```
 
 ---
 
-## Active Technology Profile
+## 10. How to Know Tera Is Working Correctly
 
-قبل أي تنفيذ تقني، اطلب من Tera أن يحدد `Active Technology Profile`.
+Tera is working correctly when:
 
-القاعدة:
-
-```text
-Tera must load technology-specific rules from tera-system/profiles/[active-profile].md
-instead of assuming one default stack.
-```
-
-الترتيب الصحيح:
-
-1. `project-control/PROJECT_STATE.md` إذا كان يحدد `Active Technology Profile`
-2. `project-preparation/08_TECHNICAL_ARCHITECTURE.md`
-3. سؤال المستخدم إذا بقيت التقنية غير محسومة
-
-هذا يمنع أن يتصرف Tera وكأن كل مشروع يستخدم نفس الـ stack الافتراضي.
+- Does not start coding too early.
+- Asks for approval at phase gates.
+- Chooses the minimum sufficient file set.
+- Reduces screens when possible.
+- Does not generate agents without reason.
+- Documents the reason for each decision.
+- Distinguishes between generated agents and active agents.
+- Follows approved design.
+- Splits execution into small batches.
+- Reviews after each batch.
+- Runs `Post-Execution Review Gate` before accepting any task.
 
 ---
 
-## 17. كيف تعرف أن تيرا يعمل بشكل صحيح؟
+## 11. Conclusion
 
-تيرا يعمل بشكل صحيح إذا كان:
+Treat Tera as a technical project manager, not a command executor.
 
-* لا يبدأ بالكود مبكرًا.
-* يطلب موافقة عند بوابات المرحلة.
-* يختار أقل عدد ملفات مناسب.
-* يقلل الشاشات عند الحاجة.
-* لا يولّد عملاء بلا سبب.
-* يوثق سبب كل قرار.
-* يفرّق بين العملاء المولدين والعملاء الفعالين.
-* يلتزم بالتصميم المعتمد.
-* يقسم التنفيذ إلى دفعات.
-* يراجع بعد كل دفعة.
-* ينفذ Post-Execution Review Gate قبل قبول أي مهمة تنفيذية.
+You provide: ideas, constraints, approvals, and corrections.
 
----
+Tera provides: decisions, preparation files, plans, sub-agents, execution batches, and review reports.
 
-## 18. الخلاصة
-
-لا تتعامل مع تيرا كمنفذ أوامر فقط.
-
-تعامل معه كمدير مشروع تقني.
-
-أنت تعطيه:
-
-* الفكرة.
-* القيود.
-* الموافقات.
-* التصحيحات عند الانحراف.
-
-وهو يعطيك:
-
-* قرارات.
-* ملفات تحضير.
-* خطة.
-* عملاء فرعيين.
-* دفعات تنفيذ.
-* تقارير مراجعة.
-
-إذا التزم بهذا، فقد نجحت منظومة تيرا.
+When Tera follows this pattern, the system is working correctly.
