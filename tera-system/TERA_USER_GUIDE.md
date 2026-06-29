@@ -84,12 +84,71 @@
 - إذا احتجت عملاء فرعيين، ولّدهم فقط داخل generated-agents/opencode.
 
 المطلوب منك الآن:
-1. إنشاء project-preparation/00_PROJECT_INPUTS.md
-2. إنشاء project-preparation/TERA_PROJECT_DECISION.md
-3. تحديد الملفات التحضيرية المطلوبة فقط.
-4. تحديد الملفات غير المطلوبة الآن مع السبب.
-5. تحديد العملاء الفرعيين المطلوبين مبدئيًا.
-6. لا تنشئ باقي الملفات ولا العملاء بعد، فقط اكتب قرارك وانتظر موافقتي.
+1. ابدأ أولًا بمرحلة Project Intake.
+2. أنشئ أو حدّث:
+   - project-inputs/01_APPLICATION_IDEA.md
+   - project-inputs/02_TECHNICAL_CONTEXT.md
+3. إذا كانت المعلومات ناقصة، اسألني ثم أكمل ملفات project-inputs.
+4. بعد اكتمال الحد الأدنى من الـ intake فقط:
+   - أنشئ project-preparation/00_PROJECT_INPUTS.md
+   - أنشئ project-preparation/TERA_PROJECT_DECISION.md
+5. ثم حدّد الملفات التحضيرية المطلوبة فقط.
+6. حدّد الملفات غير المطلوبة الآن مع السبب.
+7. حدّد العملاء الفرعيين المطلوبين مبدئيًا.
+8. لا تنشئ باقي الملفات ولا العملاء بعد، فقط اكتب قرارك وانتظر موافقتي.
+```
+
+---
+
+## Starting a New Project
+
+أنت لا تحتاج أن تكتب كل شيء بصياغة احترافية كاملة من البداية.
+
+إذا كانت معلوماتك ناقصة، يجب أن يبدأ Tera بمرحلة:
+
+```text
+Project Intake
+```
+
+ويفحص أو ينشئ:
+
+```text
+project-inputs/01_APPLICATION_IDEA.md
+project-inputs/02_TECHNICAL_CONTEXT.md
+```
+
+إذا كانت المعلومات ناقصة، يدخل Tera في:
+
+```text
+Intake Collection Mode
+```
+
+وفي هذه الحالة:
+
+- لا يبدأ التحضير الرسمي بعد
+- لا ينشئ `TERA_PROJECT_DECISION.md`
+- لا يختار `Active Technology Profile` نهائيًا
+- يسأل أسئلة قصيرة فقط حتى يغلق نقص الـ intake
+
+مثال بداية مناسبة:
+
+```text
+أريد بدء مشروع جديد.
+
+فكرة التطبيق:
+[اكتب وصفًا بسيطًا]
+
+المعلومات التقنية المتوفرة:
+[اكتب ما تعرفه، أو قل: غير محددة وأريد من Tera أن يقترح لاحقًا]
+
+ابدأ فقط بمرحلة Project Intake.
+إذا كانت المعلومات ناقصة، اسألني ثم أنشئ ملفات project-inputs.
+```
+
+القاعدة النهائية:
+
+```text
+No Intake = No Project Preparation
 ```
 
 ---

@@ -25,6 +25,15 @@ a# Tera Agent — Project Preparation Files Guide
 
 ---
 
+## Relationship Between project-inputs and project-preparation
+
+- `project-inputs/` contains the user's initial raw project inputs.
+- `project-preparation/` contains the formal preparation files produced by Tera after understanding those inputs.
+- `00_PROJECT_INPUTS.md` does not replace `project-inputs/`; it summarizes and normalizes them.
+- Tera must not start formal preparation files before minimum `Project Intake Gate` completion.
+
+---
+
 # Project Control Files
 
 هذه الملفات ليست ملفات تحليل أو تصميم للتطبيق.
@@ -77,12 +86,17 @@ project-control/tasks/
 ## 00_PROJECT_INPUTS.md
 
 ### الغرض
-تجميع كل المدخلات التي استلمها العميل تيرا قبل التحليل.
+ملف منظم ينتجه Tera من:
+
+- `project-inputs/01_APPLICATION_IDEA.md`
+- `project-inputs/02_TECHNICAL_CONTEXT.md`
+
+ويجمع فكرة التطبيق، والسياق التقني، والقيود الأولية في صيغة موحدة قبل بقية ملفات التحضير.
 
 ### ماذا يحتوي؟
 - اسم المشروع.
 - وصف الفكرة العامة.
-- الملفات المستلمة.
+- ملفات الـ intake المستلمة.
 - المعلومات التقنية المتوفرة.
 - الصور أو المراجع أو الألوان إن وجدت.
 - الافتراضات الأولية.

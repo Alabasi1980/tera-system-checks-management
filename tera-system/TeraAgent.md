@@ -38,6 +38,7 @@
 | `AGENT_GENERATION_TEMPLATE.md` | يعرّف قالب توليد العملاء الفعليين وقواعد `MVP Constraints` و`Forbidden Actions` الإلزامية |
 | `TERA_PROJECT_DECISION.md` | يسجل قرارك الافتتاحي للمشروع الحالي |
 | `TERA_USER_GUIDE.md` | يعرّف برومتات تعامل المستخدم مع Tera، ومنها بدء مشروع جديد واستئناف مشروع قائم |
+| `TeraProjectIntakePolicy.md` | يعرّف بوابة بداية المشروع وقواعد Project Intake الإلزامية |
 | `TeraTokenPolicy.md` | يعرّف سياسة إدارة السياق، تقليل التوكنز، وقراءة الملفات |
 | `TeraPreExecutionGate.md` | يعرّف بوابة مراجعة إلزامية قبل اعتماد أو تفويض أي مهمة تنفيذية |
 | `project-control/TERA_ACTIVE_CONTEXT.md` | نقطة بداية الجلسات الجارية إن وجدت، وتلخص الحالة التشغيلية الحالية للمشروع |
@@ -110,8 +111,9 @@ For every project, Tera must determine and load the active Technology Profile be
 Profile loading order:
 
 1. `project-control/PROJECT_STATE.md` if it defines `Active Technology Profile`
-2. `project-preparation/08_TECHNICAL_ARCHITECTURE.md`
-3. user confirmation if the stack is still unclear
+2. `project-inputs/02_TECHNICAL_CONTEXT.md`
+3. `project-preparation/08_TECHNICAL_ARCHITECTURE.md`
+4. user confirmation if the stack is still unclear
 
 If no matching profile exists, Tera must create a draft from:
 
@@ -120,6 +122,39 @@ tera-system/profiles/TEMPLATE.md
 ```
 
 and ask the user to approve it before execution.
+
+---
+
+## 2.3 Project Intake Gate
+
+Before any new project moves into formal preparation, Tera must inspect:
+
+```text
+project-inputs/01_APPLICATION_IDEA.md
+project-inputs/02_TECHNICAL_CONTEXT.md
+```
+
+If either file is missing or materially incomplete, Tera must enter:
+
+```text
+Intake Collection Mode
+```
+
+Rules:
+
+- Do not start `project-preparation/` before minimum intake is complete.
+- Do not create `TERA_PROJECT_DECISION.md` before intake is minimally ready.
+- Do not determine an `Active Technology Profile` before reviewing `02_TECHNICAL_CONTEXT.md`.
+- If the stack is not decided yet, document that clearly instead of inventing it.
+- Use `tera-system/TeraProjectIntakePolicy.md` as the mandatory reference for intake readiness.
+
+Final intake rule:
+
+```text
+No Intake = No Project Preparation.
+No Technical Context = No Active Technology Profile.
+No Active Technology Profile = No Implementation.
+```
 
 ---
 
@@ -183,6 +218,8 @@ and ask the user to approve it before execution.
 ```text
 TERA_PROJECT_DECISION.md
 ```
+
+لكن هذا لا يحدث إلا بعد اجتياز `Project Intake Gate` بالحد الأدنى المقبول.
 
 هذا الملف يمثل قرارك الافتتاحي الرسمي للمشروع.
 
