@@ -33,9 +33,33 @@ _What is the goal of this task?_
 2. 
 3. 
 
-## 7. Notes
+## 7. TASK-ID Size Check
 
-## 8. Post-Execution Review Result
+```md
+Requested Work:
+Can it fit one TASK-ID? Yes/No
+Reason:
+Proposed Split:
+- TASK-XXXX:
+- TASK-XXXX:
+```
+
+## 8. Sub-Agent Output Review
+
+| Item | Result |
+|---|---|
+| Output is actionable | _Yes / No_ |
+| Files reviewed or modified are listed | _Yes / No_ |
+| Completed work is explicit | _Yes / No_ |
+| Constraints or risks are stated | _Yes / No / N/A_ |
+| Maps to acceptance criteria | _Yes / No_ |
+| Stayed within TASK-ID scope | _Yes / No_ |
+| Acceptance Decision | _Accept / Reject / Needs Fix_ |
+| Rejection Reasons | |
+
+## 9. Notes
+
+## 10. Post-Execution Review Result
 
 | Item | Status |
 |---|---|

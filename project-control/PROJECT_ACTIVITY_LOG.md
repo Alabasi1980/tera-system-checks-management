@@ -2,6 +2,16 @@
 
 > **Purpose:** Chronological log of major project activities.
 
-| Date | Activity | Details | Actor |
-|---|---|---|---|
-| | | | |
+## Required Entry Format
+
+```md
+## [YYYY-MM-DD HH:mm] - [EVENT_TYPE]
+
+- Related Task: TASK-XXXX / N/A
+- Actor: Tera / Sub-Agent Name / User
+- Summary:
+- Decision / Result:
+- Next Action:
+```
+
+## Activity Log

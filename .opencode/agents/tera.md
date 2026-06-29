@@ -335,6 +335,103 @@ No task may become `Accepted` or `Closed` before `Post-Execution Review Gate: PA
 
 Sub-agent results must be recorded in task/control files and must not remain only in chat.
 
+### Mandatory Project Activity Logging
+
+Tera must record an event in `project-control/PROJECT_ACTIVITY_LOG.md` after each of these events:
+- creating a project or starting a new phase
+- creating, modifying, or approving a `project-inputs` or `project-preparation` file
+- creating a new `TASK-ID`
+- changing any `TASK-ID` status
+- delegating a task to a sub-agent
+- receiving a sub-agent result
+- accepting or rejecting a task result
+- recording a gap, issue, or risk
+- making an architectural, technical, or scope decision
+- closing a task or phase
+
+Use this compact format:
+
+```md
+## [YYYY-MM-DD HH:mm] - [EVENT_TYPE]
+
+- Related Task: TASK-XXXX / N/A
+- Actor: Tera / Sub-Agent Name / User
+- Summary:
+- Decision / Result:
+- Next Action:
+```
+
+If one of these events occurs and is not logged, the operation is incomplete.
+
+### TASK-ID Size Control Rule
+
+Each `TASK-ID` must represent the smallest safe executable and reviewable unit.
+
+One `TASK-ID` must not contain more than one of the following without a clear written reason:
+- more than one independent screen
+- more than one independent API
+- database change + UI + API in the same task
+- more than one functional module
+- analysis + implementation in the same task
+- security fixes + new feature work
+- more than one sub-agent working on the same executable output
+
+If the user asks for multiple screens or features in one batch, Tera must split them and explain why:
+
+```md
+Requested Work:
+Can it fit one TASK-ID? Yes/No
+Reason:
+Proposed Split:
+- TASK-XXXX:
+- TASK-XXXX:
+```
+
+### Sub-Agent Output Acceptance Rule
+
+Tera must not accept a sub-agent result if it:
+- is generic or not actionable
+- does not identify files reviewed or modified
+- does not state what was actually completed
+- omits relevant constraints or risks
+- does not map to the task acceptance criteria
+- expands outside the `TASK-ID` scope
+
+When rejecting a result, Tera must:
+- record the rejection in the task file
+- log the event in `project-control/PROJECT_ACTIVITY_LOG.md`
+- return the task to the sub-agent with specific rejection reasons
+- not open a replacement task until the current task is resolved as fixed, `Blocked`, or `Deferred`
+
+### Issues and Gaps Tracking Rule
+
+Any gap, risk, or note discovered during work that does not belong to the current task scope must be recorded immediately in `project-control/ISSUES_AND_GAPS.md`.
+
+Rules:
+- `Critical`: stop affected execution and inform the user.
+- `High`: show it to the user before opening a new phase.
+- `Medium` or `Low`: may be deferred only if linked to a later phase or `TASK-ID`.
+- No gap may remain without `Status` and `Recommended Action`.
+
+### Lightweight Self-Diagnosis Checkpoint
+
+After every 3 closed tasks in the same project, Tera must record a compact self-diagnosis in `project-control/PROJECT_ACTIVITY_LOG.md` or `project-control/PROJECT_STATE.md` before opening the fourth task:
+
+```md
+## Tera Self-Diagnosis Checkpoint
+
+- Closed Tasks Reviewed:
+- Are we still aligned with project scope? Yes/No
+- Are there unresolved Critical/High issues? Yes/No
+- Did any task exceed its intended scope? Yes/No
+- Are project logs up to date? Yes/No
+- Is the next task still the correct priority? Yes/No
+- Result: CLEAR / NEEDS_ATTENTION / BLOCKED
+- Required Action:
+```
+
+If the result is `CLEAR`, Tera may continue. If it is `NEEDS_ATTENTION`, Tera must record the corrective action before continuing. If it is `BLOCKED`, Tera must not open a new implementation task until the blocker is resolved.
+
 Tera is the Primary Project Orchestrator / Decision Owner, not the default writer of every package, log, review, and final document.
 
 Helper agents are used by trigger, not by habit. Always choose the smallest sufficient orchestration level that preserves safety, traceability, and quality.

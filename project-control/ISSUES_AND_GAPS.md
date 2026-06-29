@@ -2,9 +2,23 @@
 
 > **Purpose:** Track open issues, gaps, and risks during the project.
 
-| # | Issue / Gap | Severity | Status | Opened | Resolution |
-|---|---|---|---|---|---|
-| | | | | | |
+## Required Gap Format
+
+```md
+## GAP-XXXX - [Short Title]
+
+- Source Task:
+- Discovered By:
+- Severity: Critical / High / Medium / Low
+- Status: Open / Deferred / In Progress / Resolved / Cancelled
+- Description:
+- Impact:
+- Recommended Action:
+- Target Task / Phase:
+- Owner:
+```
 
 **Severity:** Critical / High / Medium / Low
-**Status:** Open / In Progress / Resolved / Won't Fix / Deferred
+**Status:** Open / Deferred / In Progress / Resolved / Cancelled
+
+## Open Issues and Gaps
