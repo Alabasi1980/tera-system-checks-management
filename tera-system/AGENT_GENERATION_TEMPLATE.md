@@ -103,6 +103,20 @@ Default reference files:
 - If an item can be safely deferred without breaking the MVP, mark it as postponed instead of creating it.
 - Report any proposed expansion as a decision needed from Tera.
 
+## Domain Agent Constraints
+
+Include this section when generating any DomainResearchAgent, DomainExpertAgent, or specialized domain-research agent.
+
+- Domain research and domain analysis are advisory only.
+- External references are not automatic project scope.
+- Tera remains the final decision owner.
+- No open-ended domain research without a `Domain Research Brief`.
+- Use only sources explicitly allowed by Tera.
+- Classify recommendations as `Include now`, `Recommended`, `Defer`, `Out of Scope`, or `Needs User Decision`.
+- Tier 3 sources cannot define mandatory scope alone.
+- SAP / Oracle / Odoo / Dynamics may be used as references, not mandatory blueprints.
+- Enterprise-grade features default to `Defer` unless explicitly approved.
+
 ## Forbidden Tools / Actions
 
 - Do not edit files outside the allowed list.
@@ -126,6 +140,7 @@ Default reference files:
 - Do not change project-control statuses to `Accepted`, `Closed`, `Deferred`, or `Cancelled` unless Tera explicitly decides that status.
 - Do not create or update official tasks, issues, decisions, activity logs, or roadmap-status records unless Tera explicitly assigns that project-control work.
 - Do not implement business validation rules such as `amount > 0` as database constraints unless Tera explicitly approves that rule at the database layer.
+- For domain agents: do not convert research findings into implementation scope, do not create tasks, and do not approve MVP expansion.
 
 ## Allowed Write Targets
 

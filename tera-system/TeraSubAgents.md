@@ -1136,6 +1136,91 @@ Plan Compliance Report
 - لا يعتبر deferred/cancelled/out-of-scope items عناصر مفقودة.
 - يذكر حالات عدم اليقين بصيغة `Status unclear` بدل التخمين.
 
+---
+
+## 6.12 DomainResearchAgent
+
+| البند | القيمة |
+|---|---|
+| اسم العميل | Domain Research Agent |
+| المعرّف | `DOMAIN_RESEARCH_AGENT` |
+| الفئة | مشروط / Domain Intelligence |
+| شرط الاستدعاء | عندما يقرر Tera وجود حاجة إلى معرفة خارجية موثقة أو best practices أو مرجع مثل SAP / Oracle / Odoo / Dynamics، وبعد إعداد `Domain Research Brief` |
+
+### يقرأ
+
+```text
+Domain Research Brief
+project-preparation/PROJECT_RULES.md عند الحاجة
+ملفات التحضير المرتبطة بالموديول الحالي فقط
+المصادر الخارجية التي يسمح بها Tera صراحة
+```
+
+### ينتج
+
+```text
+Domain Research Report
+```
+
+### حدوده
+
+- يجمع ويلخص معلومات موثقة فقط.
+- يذكر المصادر أو أسماءها ومستوى موثوقيتها.
+- لا يقرر النطاق النهائي.
+- لا ينشئ مهام تنفيذ.
+- لا يعدل ملفات المشروع إلا إذا أعطاه Tera ملف تقرير محددًا كـ Allowed Write Target.
+- لا يعتبر أي مصدر خارجي إلزاميًا للمشروع.
+- لا يستخدم بحثًا مفتوحًا دون `Domain Research Brief`.
+
+### معايير القبول
+
+- التقرير مرتبط بالسؤال البحثي المحدد.
+- المصادر مصنفة حسب الموثوقية.
+- النتائج لا تتحول إلى متطلبات إلزامية.
+- القيود والتعارضات ومخاطر المصدر مذكورة.
+
+---
+
+## 6.13 DomainExpertAgent
+
+| البند | القيمة |
+|---|---|
+| اسم العميل | Domain Expert Agent |
+| المعرّف | `DOMAIN_EXPERT_AGENT` |
+| الفئة | مشروط / Domain Intelligence |
+| شرط الاستدعاء | عندما يحتاج Tera إلى تحويل بحث أو معرفة مجال إلى متطلبات وقواعد وWorkflow مصنفة حسب MVP / Later / Out of Scope |
+
+### يقرأ
+
+```text
+Domain Research Report عند وجوده
+Domain Research Brief
+project-preparation/PROJECT_RULES.md عند الحاجة
+ملفات التحضير المرتبطة بالموديول الحالي فقط
+```
+
+### ينتج
+
+```text
+Domain Intelligence Report
+```
+
+### حدوده
+
+- يحلل المجال ولا يقرر النطاق النهائي.
+- يصنف كل توصية إلى: Include now / Recommended / Defer / Out of Scope / Needs User Decision.
+- لا يوسع MVP تلقائيًا.
+- لا يتجاوز `PROJECT_RULES.md` أو القرارات المعتمدة.
+- لا ينشئ مهام تنفيذ ولا يعتمد بدء التنفيذ.
+- لا يحول SAP / Oracle / Odoo / Dynamics إلى blueprint إلزامي.
+
+### معايير القبول
+
+- التقرير عملي وقابل لاستخدام Tera في بناء مهمة أو ملف تحضير.
+- كل توصية مصنفة بوضوح.
+- ملاحظات منع التضخم واضحة.
+- القرارات المطلوبة من المستخدم محددة ومحدودة.
+
 
 ### قاعدة منع الإفراط في التفويض
 
