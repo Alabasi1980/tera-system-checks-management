@@ -7,7 +7,7 @@
 
 | Field | Value |
 |---|---|
-| Design Source Mode | INTERNAL_TERA_KIT / GETDESIGN_MD / USER_PROVIDED_REFERENCE / EXTERNAL_URL_ANALYSIS / HYBRID / NO_UI |
+| Design Source Mode | INTERNAL_TERA_KIT / GETDESIGN_MD / USER_PROVIDED_REFERENCE / EXTERNAL_URL_ANALYSIS / HYBRID / NO_UI / N/A |
 | Selected Source | TBD |
 | Source Status | Draft / Approved / Needs Decision / N/A |
 | Design Governance Level | None / Compact / Full |

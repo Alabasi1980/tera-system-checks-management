@@ -21,6 +21,7 @@ No UI Implementation without project-preparation/28_UI_UX_GUIDELINES.md when vis
 | `EXTERNAL_URL_ANALYSIS` | Client provides reference website and analysis is available/approved | Analysis report + executable rules |
 | `HYBRID` | Combine internal kit with client colors or external reference | Explicit precedence rules |
 | `NO_UI` | API/backend-only or no visual UI in current phase | Record `No UI` in plan/task |
+| `N/A` | Design decision does not apply to the current record | Record reason |
 
 ## Activation by Phase
 

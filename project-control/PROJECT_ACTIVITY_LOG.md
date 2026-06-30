@@ -16,6 +16,14 @@
 
 ## Activity Log
 
+## [2026-06-30] - SYSTEM_FIX: Design Governance expert refinements
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent (per Majed expert review)
+- Summary: Applied expert refinements to the Full Tera Design Governance Layer. Unified Design Source Mode labels across templates and runtime references to: `INTERNAL_TERA_KIT`, `GETDESIGN_MD`, `USER_PROVIDED_REFERENCE`, `EXTERNAL_URL_ANALYSIS`, `HYBRID`, `NO_UI`, `N/A`. Replaced old labels in `TASK_TEMPLATE.md` and runtime templates. Added `UI Acceptance Gate Result` template to `tera-system/design-system/UI_ACCEPTANCE_GATE.md` with Check, Result, Evidence, Notes, Gate Status, Design Gaps, Required Fixes, and Reviewer.
+- Decision / Result: Naming is now consistent; no new files were added; design logic unchanged.
+- Next Action: None.
+
 ## [2026-06-30] - SYSTEM_FEATURE: Full Tera Design Governance Layer
 
 - Related Task: N/A (System Maintenance)

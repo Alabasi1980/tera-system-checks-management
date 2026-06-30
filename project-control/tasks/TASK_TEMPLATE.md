@@ -14,7 +14,7 @@
 | **Linked Plan Item** | PROJECT_DETAILED_EXECUTION_PLAN item / N/A |
 | **Linked Batch** | EXECUTION_BATCH_PLAN batch / N/A |
 | **Active Technology Profile** | Profile name / N/A |
-| **Design Source Decision** | Tera-Decided / User-Provided / Existing Brand / External Reference / No UI / N/A |
+| **Design Source Decision** | INTERNAL_TERA_KIT / GETDESIGN_MD / USER_PROVIDED_REFERENCE / EXTERNAL_URL_ANALYSIS / HYBRID / NO_UI / N/A |
 | **UI Acceptance Gate Required** | Yes / No / N/A |
 
 ## 2. Objective

@@ -21,7 +21,7 @@ Tera chooses the design level by project type:
 | Simple internal CRUD | Internal Kit + compact `28_UI_UX_GUIDELINES.md` |
 | ERP / CRM / dashboard | Full Design Governance |
 | SaaS / public UI / design-sensitive app | Full Design Governance + `getdesign.md` when useful |
-| Client screenshots / reference website / Figma | User Reference or External Reference Analysis Mode |
+| Client screenshots / reference website / Figma | `USER_PROVIDED_REFERENCE` or `EXTERNAL_URL_ANALYSIS` |
 
 ## Source to Execution Flow
 

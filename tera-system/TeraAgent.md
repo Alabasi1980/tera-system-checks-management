@@ -1034,7 +1034,7 @@ EngineeringAgent must not invent UI styling.
 | CRUD داخلي بسيط | Internal Kit مختصر + `28_UI_UX_GUIDELINES.md` مختصر |
 | ERP / CRM / Dashboard | Full Design Governance |
 | SaaS / واجهة مهمة | Full Design Governance + `getdesign.md` عند الحاجة |
-| صور / موقع / Figma من العميل | User Reference أو External Reference Analysis |
+| صور / موقع / Figma من العميل | `USER_PROVIDED_REFERENCE` أو `EXTERNAL_URL_ANALYSIS` |
 
 ### 24.3 أوضاع مصدر التصميم
 
@@ -1047,6 +1047,7 @@ USER_PROVIDED_REFERENCE
 EXTERNAL_URL_ANALYSIS
 HYBRID
 NO_UI
+N/A
 ```
 
 ### 24.4 متى يطلب Tera مصدر تصميم؟

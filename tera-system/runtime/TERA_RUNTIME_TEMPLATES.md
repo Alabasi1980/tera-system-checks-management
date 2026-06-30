@@ -983,7 +983,7 @@ The generated file is saved to `project-control/PROJECT_MASTER_PLAN.md`.
 
 | Phase / Batch | Design Source | Decided? |
 |---|---|---|
-| All UI phases | [Tera-Decided / User-Provided / Brand / External / No UI Yet] | Yes / No |
+| All UI phases | [INTERNAL_TERA_KIT / GETDESIGN_MD / USER_PROVIDED_REFERENCE / EXTERNAL_URL_ANALYSIS / HYBRID / NO_UI / N/A] | Yes / No |
 | Phase 3 (UI) | [source] | Yes / No |
 
 > **Rule:** No UI phase/batch without a Design Source Decision.
@@ -1086,7 +1086,8 @@ The generated file is saved to `project-control/EXECUTION_BATCH_PLAN.md`.
 - [ ] USER_PROVIDED_REFERENCE
 - [ ] EXTERNAL_URL_ANALYSIS
 - [ ] HYBRID
-- [ ] No UI in this batch
+- [ ] NO_UI
+- [ ] N/A
 
 ## 5. User Approval
 

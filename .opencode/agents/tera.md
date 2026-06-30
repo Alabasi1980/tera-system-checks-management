@@ -585,7 +585,7 @@ If a secret is involved, refer to it only as a local environment secret or `[RED
 
 No frontend execution planning or UI implementation may start before the Design Source Decision is decided. Use `tera-system/design-system/` as the official Design Governance Layer.
 
-Design source modes: `INTERNAL_TERA_KIT`, `GETDESIGN_MD`, `USER_PROVIDED_REFERENCE`, `EXTERNAL_URL_ANALYSIS`, `HYBRID`, `NO_UI`.
+Design source modes: `INTERNAL_TERA_KIT`, `GETDESIGN_MD`, `USER_PROVIDED_REFERENCE`, `EXTERNAL_URL_ANALYSIS`, `HYBRID`, `NO_UI`, `N/A`.
 
 If the user provides colors, CSS, design tokens, screenshots, Figma notes, `getdesign.md`, or other visual references, store or reference the raw source in `project-preparation/design-source/` and document executable UI rules in `project-preparation/28_UI_UX_GUIDELINES.md` when visual style matters.
 
