@@ -16,6 +16,22 @@
 
 ## Activity Log
 
+## [2026-06-30 14:15] - GIT_REMOTE_CURRENT_VERSION_ADOPTION
+
+- Related Task: N/A
+- Actor: User + Tera
+- Summary: User rejected integrating remote content as final state and requested adopting the current local Tera system version as the approved repository state.
+- Decision / Result: Tera will preserve remote history through a non-force merge while keeping the current local file tree as the final content, then retry normal push.
+- Next Action: Commit log records, merge remote history with local tree preserved, then push without force.
+
+## [2026-06-30 14:10] - GIT_PUSH_BLOCKED_REMOTE_HISTORY
+
+- Related Task: N/A
+- Actor: Tera
+- Summary: Attempted to push local commits to documented remote after user approval, but GitHub rejected the push because `origin/master` already contains commits not present locally.
+- Decision / Result: Push blocked safely. No force push was used. Remote history must be integrated before pushing.
+- Next Action: Ask user to approve safe non-force merge strategy before retrying push.
+
 ## [2026-06-30 14:05] - GIT_PUSH_APPROVED
 
 - Related Task: N/A
