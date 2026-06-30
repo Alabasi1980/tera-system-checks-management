@@ -399,10 +399,10 @@ They must not be mixed into `project-preparation/`, which remains the internal T
 2. **إنشاء PROJECT_MASTER_PLAN.md:** تقسيم التطبيق إلى مراحل رئيسية (مثل: Technical Foundation → Database Schema → Core Features → Reports → QA → Handover)، وتثبيت الـ Phased Roadmap الرسمي وشروط الانتقال بينها.
 3. **إنشاء PROJECT_DETAILED_EXECUTION_PLAN.md:** تفصيل كل مرحلة إلى مهام صغيرة قابلة للتحويل إلى TASK-ID، مرتبطة بخطة التتبع.
 4. **تحديد أول Batch:** اختيار أول دفعة قابلة للتنفيذ فقط — لا يخطط كل المشروع دفعة واحدة.
-5. **توليد TASK-ID للدفعة الأولى فقط:** إنشاء ملفات المهام (TASK-COD-001, TASK-COD-002, ...) مع تحديد الهدف والمراجع و Allowed Write Targets.
-6. **تطبيق Pre-Execution Gate على كل TASK-ID:** التحقق من 20 بنداً (أصغر وحدة، لا توسع، التوافق مع Technology Profile والتصميم، Allowed Write Targets ضيقة، أوامر CLI آمنة).
-7. **تطبيق Orchestration Decision Matrix + Model Capability Gate** لكل TASK-ID قبل عرضه.
-8. **تحديد Design Source Decision قبل أي TASK يحتوي UI:** تسجيل المصدر في `28_UI_UX_GUIDELINES.md` أو في خطة التنفيذ.
+5. **تحديد Design Source Decision لكل TASK-ID في الدفعة:** تسجيل المصدر في `28_UI_UX_GUIDELINES.md` أو في خطة التنفيذ قبل إنشاء مهام UI.
+6. **تطبيق Orchestration Decision Matrix + Model Capability Gate** لكل TASK-ID (يُقرر أي العملاء ونوع النموذج قبل إنشاء المهمة).
+7. **إنشاء ملف المهمة** `TASK-COD-XXX.md` في `project-control/tasks/` باستخدام `TASK_TEMPLATE.md` مع الهدف والمراجع و Allowed Write Targets و Acceptance Criteria.
+8. **تطبيق Pre-Execution Gate على كل TASK-ID:** التحقق من 12 بنداً (أصغر وحدة، لا توسع، التوافق مع Technology Profile والتصميم، Allowed Write Targets ضيقة، أوامر CLI آمنة) وتسجيل `PASS` في ملف المهمة.
 9. **عرض Master Plan + Detailed Plan + First Batch + TASK-IDs على المستخدم** والانتظار للموافقة.
 10. **بعد الاعتماد → الانتقال إلى المرحلة 6 (Implementation).**
 

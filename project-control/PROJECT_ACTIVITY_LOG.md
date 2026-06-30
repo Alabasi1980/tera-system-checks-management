@@ -167,3 +167,11 @@
 - Summary: Fixed 4 identified gaps in Phase 6 (Implementation) across the system. (1) Added Build Mode approval step as step 0 in Phase 6 flow — TeraAgent.md §5 Phase 6, TERA_RUNTIME_CHECKLISTS.md Phase 6, .opencode/agents/tera.md §11 and §12. (2) Added OpenCode delegation mechanism note in TeraSubAgents.md §9. (3) Added Emergency ↔ Task Lifecycle integration table in TERA_RUNTIME_PROTOCOLS.md §8 with exact task status per emergency level. (4) Added Self-Diagnosis Checkpoint as step 11 in Phase 6 checklist and step 11 in TeraAgent.md Phase 6 sequence.
 - Decision / Result: All 4 gaps closed with minimal edits (3 lines added max per file). Build Mode, delegation mechanism, emergency-task integration, and self-diagnosis checkpoint now explicitly documented in Phase 6 flow.
 - Next Action: None. Phase 6 is now fully documented with no identified gaps.
+
+## [2026-06-30] - SYSTEM_FIX: Phase 5 gate ordering corrected
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent (per Majed request)
+- Summary: Fixed inconsistent gate ordering in TeraAgent.md §5 Phase 5. The old order applied Pre-Execution Gate (step 6) before Orchestration Decision Matrix + Model Capability Gate (step 7). Corrected to: Design Source Decision → Orchestration + Model Capability → Create task file → Pre-Execution Gate. Renumbered steps 5-8 cleanly. The correct order now matches TERA_RUNTIME_PROTOCOLS.md §4 and TERA_RUNTIME_CHECKLISTS.md Phase 5.
+- Decision / Result: Consistent gate ordering across all system files. Pre-Execution Gate is now the final check after orchestration, model assessment, and task file creation.
+- Next Action: None. Phase 5 reviewed and corrected.
