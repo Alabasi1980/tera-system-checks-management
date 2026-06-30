@@ -1170,7 +1170,7 @@ project-preparation/design-source/ = raw design sources
 tera-system/design-system/ = system design governance and fallback kits
 ```
 
-### 24.9 ربط التصميم بالمراحل الست
+### 24.9 ربط التصميم بمراحل المشروع
 
 | المرحلة | قاعدة التصميم |
 |---|---|
