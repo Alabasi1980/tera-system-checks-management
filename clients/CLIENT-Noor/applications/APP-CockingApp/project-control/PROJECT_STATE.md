@@ -12,6 +12,7 @@
 | **Deployment** | On-premise (client server) |
 | **Project Size** | Medium |
 | **Last Updated** | 2026-06-30 |
+| **Preparation Files** | 22 files ✅ (7 batches, 0 deferred) |
 
 ---
 
@@ -21,8 +22,8 @@
 |-------|--------|----------------|-------|
 | **1 — Intake & Client Discovery** | ✅ Complete | 2026-06-30 | Client Discovery, Application Idea, Technical Context, Domain Research, Proposal, Client Approval |
 | **2 — Project Decision Formation** | ✅ Complete | 2026-06-30 | `TERA_PROJECT_DECISION.md` approved |
-| **3 — Preparation Planning** | ✅ Complete | 2026-06-30 | `PREPARATION_PLAN.md` v2 approved by Majed |
-| **4 — Agent Delegation Planning** | ✅ Complete | 2026-06-30 | `AGENT_DELEGATION_PLAN.md` — no sub-agents needed |
+| **3 — Preparation Planning** | ✅ Complete | 2026-06-30 | `PREPARATION_PLAN.md` v2 approved by Majed. All 22 preparation files created across 7 batches |
+| **4 — Agent Delegation Planning** | ✅ Complete | 2026-06-30 | `AGENT_DELEGATION_PLAN.md` — no sub-agents needed for preparation |
 | **5 — Execution Planning** | ⬜ Not Started | — | Next: `PROJECT_MASTER_PLAN.md`, `PROJECT_DETAILED_EXECUTION_PLAN.md`, `EXECUTION_BATCH_PLAN.md` |
 | **6 — Implementation** | ⬜ Not Started | — | Requires Build Mode approval |
 | **7 — Delivery, Handover & Closure** | ⬜ Not Started | — | |
@@ -41,6 +42,28 @@
 | File | Status | Notes |
 |------|--------|-------|
 | `design-source/DESIGN.md` | ✅ Saved | Claude design system from getdesign.md |
+| `PROJECT_RULES.md` | ✅ Active | Default Tera rules |
+| `00_PROJECT_INPUTS.md` | ✅ Draft v1 | Consolidated intake |
+| `01_PROJECT_BRIEF.md` | ✅ Draft v1 | Executive summary |
+| `02_SCOPE_AND_BOUNDARIES.md` | ✅ Draft v1 | Scope + MVP classification |
+| `03_MODULES_AND_FEATURES.md` | ✅ Draft v1 | 5 modules, 19 features |
+| `04_USERS_ROLES_PERMISSIONS.md` | ✅ Draft v1 | Admin + Visitor roles |
+| `05_BUSINESS_WORKFLOWS.md` | ✅ Draft v1 | All workflows + navigation map |
+| `06_DATA_MODEL_PREPARATION.md` | ✅ Draft v1 | 8 entities with field specs |
+| `07_SCREENS_AND_UI_STRUCTURE.md` | ✅ Draft v1 | 17 screens + layouts + API routes |
+| `08_TECHNICAL_ARCHITECTURE.md` | ✅ Draft v1 | Full folder structure + data flow |
+| `09_IMPLEMENTATION_PLAN.md` | ✅ Draft v1 | 18 TASK-IDs, ~24 hours |
+| `10_TESTING_AND_ACCEPTANCE.md` | ✅ Draft v1 | Test strategy + acceptance criteria |
+| `11_DELIVERY_AND_HANDOVER.md` | ✅ Draft v1 | Handover + deployment plan |
+| `12_BUSINESS_RULES.md` | ✅ Draft v1 | 38 business rules |
+| `13_REPORTS_AND_DASHBOARDS.md` | ✅ Draft v1 | Dashboard with stats + tables |
+| `15_SECURITY_AND_ACCESS_CONTROL.md` | ✅ Draft v1 | JWT auth + middleware + API protection |
+| `18_IMPORT_EXPORT_DATA.md` | ✅ Draft v1 | PDF export |
+| `19_DATABASE_DESIGN.md` | ✅ Draft v1 | Complete Prisma schema |
+| `21_VALIDATION_AND_ERROR_HANDLING.md` | ✅ Draft v1 | Field validation + error handling |
+| `22_DEPLOYMENT_AND_ENVIRONMENTS.md` | ✅ Draft v1 | On-premise deployment |
+| `28_UI_UX_GUIDELINES.md` | ✅ Draft v1 | Claude design system + design gaps |
+| `35_ROADMAP_AND_FUTURE_PHASES.md` | ✅ Draft v1 | 6-phase roadmap |
 
 ### project-control/
 | File | Status | Notes |
@@ -103,9 +126,9 @@
 
 | # | Action | Phase |
 |---|--------|-------|
-| 1 | Create preparation files: Batch 1 (C1–C4: PROJECT_RULES, 00_INPUTS, 01_BRIEF, 02_SCOPE) | Phase 3 (Active) |
-| 2 | Continue through Batches 2–7 | Phase 3 |
-| 3 | Move to Phase 5 — Execution Planning | After preparation complete |
+| 1 | ~~Create preparation files: Batch 1 (C1–C4)~~ ✅ | Phase 3 Complete |
+| 2 | ~~Continue through Batches 2–7~~ ✅ All 22 files created | Phase 3 Complete |
+| 3 | **Start Phase 5 — Execution Planning** (`PROJECT_MASTER_PLAN.md`, `PROJECT_DETAILED_EXECUTION_PLAN.md`, `EXECUTION_BATCH_PLAN.md`) | **Next** |
 | 4 | Request Build Mode approval | Before Phase 6 |
 
 ---
@@ -115,3 +138,4 @@
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | v1 | 2026-06-30 | Tera | Initial state — Phases 1–4 complete |
+| v2 | 2026-06-30 | Tera | Phase 3 execution complete — 22 preparation files created across 7 batches |
