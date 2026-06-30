@@ -287,7 +287,7 @@ If you have general rules for all Tera projects, they belong in `tera-system/` i
 |---|---|
 | Single-project rule | `project-preparation/PROJECT_RULES.md` |
 | System-wide rule | `tera-system/` |
-| Design/style rule | `project-preparation/28_UI_UX_GUIDELINES.md` or `design-source/` |
+| Design/style rule | `project-preparation/28_UI_UX_GUIDELINES.md` and raw sources in `project-preparation/design-source/` |
 | Sub-agent rule | Agent file + Manifest |
 
 ### Prompt to create rules
@@ -361,7 +361,7 @@ If you have general rules for all Tera projects, they belong in `tera-system/` i
 قبل تنفيذ الواجهة، يجب حسم مصدر التصميم.
 
 قرار التصميم:
-[ Tera-Decided Design / CSS أو قالب / getdesign.md / ألوان وهوية محددة ]
+[ INTERNAL_TERA_KIT / getdesign.md DESIGN.md / صور أو Figma أو CSS / موقع مرجعي / ألوان وهوية محددة ]
 
 المطلوب:
 1. لا تبدأ كود.

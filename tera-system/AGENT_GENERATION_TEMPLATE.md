@@ -101,7 +101,7 @@ Default reference files:
 - Files explicitly attached in the task.
 - Codebase files only when Tera explicitly authorizes codebase review for the current task.
 - `project-preparation/28_UI_UX_GUIDELINES.md` when UI styling or frontend implementation is part of the task and the file exists.
-- `design-source/` when Tera explicitly provides it as the approved visual design source.
+- `project-preparation/design-source/` when Tera explicitly provides it as the approved raw visual design source.
 - `project-control/` files only when Tera explicitly assigns project-control record work.
 - Technical docs only if Tera allows external lookup.
 - Previous outputs only if they are saved in official project files.
@@ -153,7 +153,7 @@ Include this section when generating any DomainResearchAgent, DomainExpertAgent,
 - Do not delete files unless explicitly allowed.
 - Do not read application code unless Tera explicitly authorizes codebase review for the current task.
 - Do not treat notes in `GENERATED_AGENTS_MANIFEST.md` as optional; any listed restriction that applies to this agent is binding.
-- Do not invent UI styling if `project-preparation/28_UI_UX_GUIDELINES.md` or `design-source/` exists.
+- Do not invent UI styling. For UI tasks, follow `project-preparation/28_UI_UX_GUIDELINES.md`; use `project-preparation/design-source/` only when referenced by Tera. If design rules are missing, raise `Design Gap` instead of guessing.
 - Do not assume stack-specific scaffold, ORM, migration, or database rules unless Tera explicitly provides the active Technology Profile.
 - Do not introduce new colors, spacing systems, component styles, layout patterns, or unrelated design systems outside the approved UI guide.
 - Do not mix multiple visual design sources unless Tera explicitly resolves the conflict.

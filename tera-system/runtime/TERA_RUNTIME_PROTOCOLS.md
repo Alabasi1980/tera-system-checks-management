@@ -21,6 +21,7 @@ Sync `.opencode/agents/tera.md` when the system reference changes rules about:
 - Orchestration lifecycle, Decision Matrix, gates.
 - Model Capability Gate or Security Sensitivity Levels.
 - Roadmap tracking or PlanComplianceReviewAgent.
+- Design Governance Layer or UI Acceptance Gate.
 - Delegation format, handback protocol, or Tera authority.
 - Policy map, architecture map, maintenance checklist, or source-of-truth rules.
 
@@ -126,6 +127,9 @@ Sub-agent authority safety:
 Allowed sources:
 
 - Official project preparation files (`project-preparation/`).
+- Final UI design rules (`project-preparation/28_UI_UX_GUIDELINES.md`) for UI tasks.
+- Raw design sources under `project-preparation/design-source/` only when selected by Tera.
+- System design governance files under `tera-system/design-system/` when the task involves UI design rules.
 - `PROJECT_RULES.md` when it exists.
 - Plan and control files inside `project-control/`.
 - Code files directly related to the current task only.
@@ -256,6 +260,7 @@ Rules:
 | Updates project-control records, closes/creates Issues, adds Decisions, modifies PROJECT_STATE.md / TERA_ACTIVE_CONTEXT.md, or involves multiple agents | `ProjectControlAgent` |
 | Touches Auth, JWT, Cookies, Middleware, Proxy, API Routes, Server Actions, Permissions, Role checks, Data Mutations, Secrets, or Config | Determine Security Sensitivity Level before delegation |
 | Contains UI, Workflow, main-screen behavior, or important acceptance criteria | Run `QAAndAcceptanceAgent` |
+| Creates or changes UI visual styling, design tokens, layout rules, or component styles | Use `UIVisualDesignerAgent` during preparation/planning when rules are not already clear; require `UI_ACCEPTANCE_GATE` after implementation |
 | Comes after 3-5 tasks, phase end, before release, or with quality drift / debt / duplication signals | Run `QualityReviewCoordinatorAgent` |
 | Phase closes, major batch ends, MVP acceptance, or roadmap drift suspected | Run `PlanComplianceReviewAgent` |
 | Phase is stable and needs internal handoff / release / user / run documentation | Run Handoff Readiness Gate, then run `DocumentationHandoverAgent` |
@@ -311,6 +316,19 @@ Helper agent authority limits:
 - `PlanComplianceReviewAgent`: reviews roadmap compliance. Does not open tasks/issues/decisions. Does not change status.
 - `QAAndAcceptanceAgent`: task/screen/workflow acceptance checks. Does not replace periodic quality review.
 - `DocumentationHandoverAgent`: prepares documentation only after Handoff Readiness Gate. Does not decide final acceptance.
+
+### 5.1 Design Governance Runtime Protocol
+
+For any UI / Frontend / visual style task:
+
+1. Tera determines Design Governance Level: None / Compact / Full.
+2. Tera records Design Source Mode: `INTERNAL_TERA_KIT`, `GETDESIGN_MD`, `USER_PROVIDED_REFERENCE`, `EXTERNAL_URL_ANALYSIS`, `HYBRID`, or `NO_UI`.
+3. Raw sources are saved in `project-preparation/design-source/` when applicable.
+4. Final executable rules are written to `project-preparation/28_UI_UX_GUIDELINES.md`.
+5. `EngineeringAgent` must implement from `28_UI_UX_GUIDELINES.md`; if a rule is missing, it raises `Design Gap` instead of guessing.
+6. UI implementation tasks must pass `tera-system/design-system/UI_ACCEPTANCE_GATE.md` before acceptance or closure.
+
+`getdesign.md` is an approved external design-system source, not a mandatory or exclusive source.
 
 ---
 

@@ -209,6 +209,8 @@ When the client's answer to this question is unclear, uncertain, or the client d
 - Q5.13: Describe the desired layout or navigation style. (sidebar, top nav, tabbed)
 - Q5.14: Are there form-heavy screens or content-heavy screens?
 - Q5.15: What is the tone of the interface? (professional, casual, educational)
+- Q5.16: Should Tera propose 2-3 design directions using internal kits or `getdesign.md` references?
+- Q5.17: Does the client approve using an external DESIGN.md as inspiration, with project-specific branding overrides?
 
 ---
 

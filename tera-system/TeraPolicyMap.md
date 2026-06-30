@@ -44,6 +44,8 @@ Project files record project-specific decisions.
 | Runtime checklists | `tera-system/runtime/TERA_RUNTIME_CHECKLISTS.md` | `.opencode/agents/tera.md` | Checklists stay outside runtime. |
 | MVP classification | `tera-system/runtime/MVP_DEFINITION_PROTOCOL.md` | `.opencode/agents/tera.md` | Runtime references when to load it. |
 | Technology profiles | `tera-system/profiles/` | `.opencode/agents/tera.md` | Stack-specific rules stay in profiles. |
+| Design governance layer | `tera-system/design-system/` | `.opencode/agents/tera.md`, `TERA_RUNTIME_CHECKLISTS.md`, `TERA_RUNTIME_PROTOCOLS.md` | Governs Design Source Decision, DESIGN.md integration, internal kits, design tokens, component rules, and UI Acceptance Gate. |
+| Project UI/UX executable guide | `project-preparation/28_UI_UX_GUIDELINES.md` using `TERA_RUNTIME_TEMPLATES.md` Section 33 | `TASK_TEMPLATE.md`, `TeraPreExecutionGate.md` | Final executable visual design rules for EngineeringAgent; raw sources stay in `project-preparation/design-source/`. |
 | Application proposal template | `tera-workshop/APPLICATION_PROPOSAL_TEMPLATE.html` | `TERA_RUNTIME_TEMPLATES.md` (Section 26) | Self-contained HTML page, RTL, printable. Generated after Client Discovery before formal preparation. |
 | Scope of Work template | `tera-workshop/SCOPE_OF_WORK_TEMPLATE.html` | — | Formal SOW document — scope, deliverables, timeline, payment, assumptions, sign-off. Generated after proposal approval. |
 | Technical Proposal template | `tera-workshop/TECHNICAL_PROPOSAL_TEMPLATE.html` | — | Technical architecture, stack, hosting, security, testing, CI/CD. Generated after SOW approval. |

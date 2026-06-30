@@ -702,32 +702,26 @@ EXECUTION_BATCH_PLAN.md
 ## 28_UI_UX_GUIDELINES.md
 
 ### الغرض
-تحديد قواعد التصميم وتجربة المستخدم ومصدر الستايل البصري المعتمد قبل تنفيذ واجهة المستخدم.
+تحديد القواعد التنفيذية النهائية للتصميم والستايل البصري قبل أي تخطيط أو تنفيذ Frontend.
 
-هذا الملف ليس مطلوبًا دائمًا في كل مشروع صغير، لكنه يصبح مطلوبًا إذا كان هناك تصميم محدد، ألوان، CSS، قالب، Design Tokens، مرجع بصري، أو إذا كان خطر اختلاف الستايل بين العملاء أو دفعات التنفيذ واردًا.
+هذا الملف ليس مطلوبًا في مشاريع API/backend فقط، لكنه يصبح مطلوبًا عند وجود أي واجهة ذات ستايل بصري، أو عند استخدام Internal Kit، أو `getdesign.md`، أو صور/موقع/Figma/CSS/Design Tokens من العميل.
 
 ### ماذا يحتوي؟
-- وضع مصدر التصميم:
-  - `Tera-Decided Design`
-  - `User-Provided Style Files`
-  - `External Design Spec`
-- مصدر التصميم الخام إن وجد:
-  - `design-source/`
-  - CSS / Theme / Tokens
-  - `getdesign.md`
-  - Figma notes أو screenshots
-- الألوان.
-- الخطوط.
-- قواعد RTL / LTR.
-- مبادئ التخطيط والمسافات.
-- شكل النماذج.
-- شكل الجداول.
-- قواعد الأزرار.
-- قواعد الرسائل والتنبيهات.
-- قواعد المكونات الأساسية.
-- ما هو ممنوع بصريًا.
-- تعليمات تطبيق الدليل بواسطة عملاء التنفيذ.
-- أمثلة تصميمية.
+- Design Source Decision: `INTERNAL_TERA_KIT` / `GETDESIGN_MD` / `USER_PROVIDED_REFERENCE` / `EXTERNAL_URL_ANALYSIS` / `HYBRID` / `NO_UI`.
+- Approved Design Direction.
+- Raw Design Sources داخل `project-preparation/design-source/`.
+- Client Branding Overrides.
+- Design Tokens.
+- Layout System.
+- Component Rules.
+- RTL/LTR Rules.
+- Responsive Rules.
+- Accessibility Rules.
+- Motion Rules.
+- Forbidden Styling.
+- Engineering Implementation Instructions.
+- UI Acceptance Checklist.
+- Open Design Gaps.
 
 ### متى يُنشأ؟
 
@@ -738,11 +732,18 @@ EXECUTION_BATCH_PLAN.md
 - أعطى المستخدم `getdesign.md` أو مرجعًا بصريًا خارجيًا.
 - احتاج التطبيق إلى واجهة موحدة قبل التنفيذ.
 - كان هناك أكثر من عميل أو دفعة تنفيذ ستعمل على الواجهة.
+- استخدم Tera أي Internal Kit من `tera-system/design-system/kits/`.
 
 ### أهميته
 يمنع الستايل العشوائي، ويجعل التنفيذ ملتزمًا بمصدر تصميم واضح.
 
-لا يجوز لعميل التنفيذ اختراع ألوان أو spacing أو components أو visual patterns خارج هذا الملف إذا كان موجودًا، إلا بتفويض صريح من Tera.
+لا يجوز لعميل التنفيذ اختراع ألوان أو spacing أو typography أو component styles أو layout patterns. إذا نقصت قاعدة تصميم، يرفع `Design Gap` بدل التخمين.
+
+المرجع النظامي:
+
+```text
+tera-system/design-system/
+```
 
 ---
 

@@ -14,6 +14,7 @@ It is a map, not a policy source. Rules remain in the files listed in `TeraPolic
 | Project intake | Captures raw idea, technical context, missing information, and readiness | `TeraProjectIntakePolicy.md`, `project-inputs/` |
 | Client engagement and approval | Manages client profile, contacts, approval package, and change control | `TeraClient*.md`, `clients/` |
 | Preparation and analysis | Converts intake into internal project planning and execution-ready files | `Tera_Project_Preparation_Files.md`, `project-preparation/` |
+| Design governance | Controls design source decisions, design tokens, component rules, internal kits, and UI acceptance | `tera-system/design-system/`, `project-preparation/28_UI_UX_GUIDELINES.md`, `project-preparation/design-source/` |
 | Orchestration and gates | Controls delegation, task readiness, pre/post execution review, and build mode | `TeraPreExecutionGate.md`, `runtime/`, `project-control/` |
 | Technical specialization | Keeps stack-specific behavior outside the generic Tera system | `tera-system/profiles/` |
 | Sub-agent lifecycle | Defines, generates, narrows, activates, and reviews specialized agents | `TeraSubAgents.md`, `AGENT_GENERATION_TEMPLATE.md`, `generated-agents/`, `.opencode/agents/` |
@@ -27,10 +28,11 @@ It is a map, not a policy source. Rules remain in the files listed in `TeraPolic
 | `.opencode/agents/` | Active runtime agents | Long policy details or generated drafts |
 | `project-inputs/` | Raw or normalized intake inputs | Formal preparation replacements |
 | `project-preparation/` | Internal Tera preparation outputs | Client-facing approval package |
+| `project-preparation/design-source/` | Raw project design references selected by Tera | Final executable UI rules |
 | `clients/` | Client records, approval packages, assets, communications, delivery | Internal-only execution planning |
 | `project-control/` | Task, issue, decision, activity, and state tracking | Requirements or design source of truth |
 | `generated-agents/opencode/` | Draft generated agents | Active runtime without review/activation |
-| `design-source/` | Raw design references | Final executable UI rules |
+| `tera-system/design-system/` | System design governance, schemas, gates, and internal kits | Project-specific design decisions or client raw assets |
 | `tera-system/profiles/` | Technology-specific execution rules | Generic project policy |
 | `tera-workshop/` | System development and tooling files (templates, experiments, system-level outputs) | Core policy, project files, or runtime agents |
 

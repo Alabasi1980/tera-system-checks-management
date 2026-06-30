@@ -15,6 +15,7 @@
 | **Linked Batch** | EXECUTION_BATCH_PLAN batch / N/A |
 | **Active Technology Profile** | Profile name / N/A |
 | **Design Source Decision** | Tera-Decided / User-Provided / Existing Brand / External Reference / No UI / N/A |
+| **UI Acceptance Gate Required** | Yes / No / N/A |
 
 ## 2. Objective
 
@@ -52,6 +53,17 @@ _What is the goal of this task?_
 | Command / Tool | Allowed? | Expected Side Effects | Approval Needed? |
 |---|---|---|---|
 |  | _Yes / No / N/A_ |  | _Yes / No_ |
+
+## 6.3 UI / Frontend Requirements
+
+Required for any UI, Frontend, layout, style, or component task.
+
+| Item | Value |
+|---|---|
+| UI Source | `28_UI_UX_GUIDELINES.md` / DESIGN.md reference / Internal Kit / No UI |
+| UI Rules | Tokens / Layout / Component Rules / RTL-LTR / Accessibility |
+| UI Acceptance | `tera-system/design-system/UI_ACCEPTANCE_GATE.md` required? Yes / No |
+| Design Gap Handling | Raise Design Gap / Ask Tera / N/A |
 
 ## 7. TASK-ID Size Check
 
@@ -107,6 +119,7 @@ Recommendation:
 | No secrets or real `.env`? | PASS / FAIL | |
 | Technology Profile respected? | PASS / FAIL | |
 | UI/UX rules respected if UI exists? | PASS / FAIL / N/A | |
+| UI Acceptance Gate passed if UI exists? | PASS / FAIL / N/A | |
 | Acceptance Criteria passed? | PASS / FAIL | |
 | Rollback needed? | Yes / No | |
 

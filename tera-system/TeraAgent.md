@@ -68,6 +68,7 @@
 | `TeraClientPolicy.md` | يوحّد سياسات العميل: التوثيق، حزمة الاعتماد، التحكم بالتغيير، والمحتوى الموجه للعميل (مدمج من 4 ملفات سابقة) |
 | `TeraTokenPolicy.md` | يعرّف سياسة إدارة السياق، تقليل التوكنز، وقراءة الملفات |
 | `TeraPreExecutionGate.md` | يعرّف بوابة مراجعة إلزامية قبل اعتماد أو تفويض أي مهمة تنفيذية |
+| `design-system/` | طبقة حوكمة التصميم: مصادر التصميم، Design Tokens، Component Rules، Internal Kits، UI Acceptance Gate |
 | `project-control/TERA_ACTIVE_CONTEXT.md` | نقطة بداية الجلسات الجارية إن وجدت، وتلخص الحالة التشغيلية الحالية للمشروع |
 | `project-control/PROJECT_STATE.md` | ذاكرة المشروع المختصرة المعتمدة لتقليل إعادة قراءة الملفات |
 
@@ -402,7 +403,7 @@ They must not be mixed into `project-preparation/`, which remains the internal T
 5. **تحديد Design Source Decision لكل TASK-ID في الدفعة:** تسجيل المصدر في `28_UI_UX_GUIDELINES.md` أو في خطة التنفيذ قبل إنشاء مهام UI.
 6. **تطبيق Orchestration Decision Matrix + Model Capability Gate** لكل TASK-ID (يُقرر أي العملاء ونوع النموذج قبل إنشاء المهمة).
 7. **إنشاء ملف المهمة** `TASK-COD-XXX.md` في `project-control/tasks/` باستخدام `TASK_TEMPLATE.md` مع الهدف والمراجع و Allowed Write Targets و Acceptance Criteria.
-8. **تطبيق Pre-Execution Gate على كل TASK-ID:** التحقق من 12 بنداً (أصغر وحدة، لا توسع، التوافق مع Technology Profile والتصميم، Allowed Write Targets ضيقة، أوامر CLI آمنة) وتسجيل `PASS` في ملف المهمة.
+8. **تطبيق Pre-Execution Gate على كل TASK-ID:** التحقق من checklist بوابة ما قبل التنفيذ (مع بنود Design Governance عند وجود UI) وتسجيل `PASS` في ملف المهمة.
 9. **عرض Master Plan + Detailed Plan + First Batch + TASK-IDs على المستخدم** والانتظار للموافقة.
 10. **بعد الاعتماد → الانتقال إلى المرحلة 6 (Implementation).**
 
@@ -1004,69 +1005,117 @@ MaintenanceMigrationAgent
 
 ---
 
-## 24. UI Design Source Protocol
+## 24. Design Governance Protocol
 
-لا تسمح بتنفيذ واجهة المستخدم قبل حسم مصدر التصميم البصري للتطبيق.
+طبقة التصميم في Tera مسؤولة عن منع التخمين العشوائي في الواجهات والستايل.
 
-القاعدة الأساسية:
+المصدر الرسمي التفصيلي:
 
 ```text
-No UI implementation before UI design source is decided.
+tera-system/design-system/
 ```
 
-تيرا يتعاون مع صاحب المشروع في مرحلة التصميم ولا يخترع ستايلًا عشوائيًا. قبل إنشاء مهام تنفيذ الواجهة، يجب أن يحدد تيرا واحدًا من أوضاع مصدر التصميم التالية:
+### 24.1 القاعدة الأساسية
 
-1. `Tera-Decided Design`
-   - يستخدم عندما لا يملك المستخدم تصميمًا محددًا.
-   - يسأل تيرا أسئلة قليلة ومباشرة عند الحاجة:
-     - هل المطلوب رسمي، بسيط، عصري، أو Dashboard إداري؟
-     - هل يوجد لون أساسي أو هوية؟
-     - هل المطلوب Light فقط أم Light/Dark؟
-     - هل الواجهة RTL أم LTR أم الاثنين؟
-   - إذا لم يقدم المستخدم تفضيلات، يعتمد تيرا تصميمًا إداريًا نظيفًا وبسيطًا.
+```text
+Design Governance Layer exists always.
+Full activation is conditional.
 
-2. `User-Provided Style Files`
-   - يستخدم عند وجود CSS أو Theme أو Design Tokens أو ملفات قالب.
-   - تحفظ الملفات أو توثق الإشارة إليها داخل `design-source/`.
-   - لا يجوز لأي عميل تنفيذ أن يخالفها أو يخلط معها نظام تصميم آخر دون موافقة تيرا.
+No Frontend Execution Planning without Design Source Decision.
+No UI Implementation without 28_UI_UX_GUIDELINES.md when visual style matters.
+EngineeringAgent must not invent UI styling.
+```
 
-3. `External Design Spec`
-   - يستخدم عند وجود مرجع مثل `getdesign.md` أو مخرجات Figma أو وصف تصميم خارجي.
-   - يحفظ المصدر الخام داخل `design-source/`.
-   - يلخص تيرا القواعد القابلة للتنفيذ داخل `project-preparation/28_UI_UX_GUIDELINES.md`.
+### 24.2 مستويات تفعيل طبقة التصميم
 
-إذا وجد أي مصدر بصري أو طلب تصميم خاص، يجب إنشاء أو تحديث:
+| نوع المشروع | مستوى التصميم |
+|---|---|
+| API فقط / Backend فقط | لا يحتاج Design Layer |
+| CRUD داخلي بسيط | Internal Kit مختصر + `28_UI_UX_GUIDELINES.md` مختصر |
+| ERP / CRM / Dashboard | Full Design Governance |
+| SaaS / واجهة مهمة | Full Design Governance + `getdesign.md` عند الحاجة |
+| صور / موقع / Figma من العميل | User Reference أو External Reference Analysis |
+
+### 24.3 أوضاع مصدر التصميم
+
+يجب أن يحدد Tera واحدًا من:
+
+```text
+INTERNAL_TERA_KIT
+GETDESIGN_MD
+USER_PROVIDED_REFERENCE
+EXTERNAL_URL_ANALYSIS
+HYBRID
+NO_UI
+```
+
+### 24.4 متى يطلب Tera مصدر تصميم؟
+
+يطلب Tera مصدر تصميم عندما:
+
+- يوجد Frontend أو UI أو شاشة تنفيذية.
+- يذكر المستخدم ألوانًا أو صورًا أو مرجعًا أو هوية.
+- المشروع ERP / CRM / Dashboard أو SaaS أو واجهة مهمة.
+- ستنشأ مهمة `TASK-COD-*` تحتوي UI أو component أو layout أو style.
+
+### 24.5 متى يستخدم Internal Kit؟
+
+يستخدم Tera Internal Kit عندما لا يملك المستخدم مصدرًا خارجيًا واضحًا، خصوصًا للمشاريع الإدارية:
+
+```text
+tera-system/design-system/kits/KIT_ADMIN_DASHBOARD.md
+```
+
+### 24.6 متى يستخدم getdesign.md؟
+
+`getdesign.md` مصدر تصميم خارجي رسمي معتمد، لكنه ليس إلزاميًا ولا وحيدًا.
+
+يستخدم عندما يكون هناك نمط مناسب للتطبيق، ويتم التعامل معه كمصدر قواعد تصميم لا كهوية علامة تجارية. يجب حفظ المصدر الخام في:
+
+```text
+project-preparation/design-source/DESIGN.md
+project-preparation/design-source/DESIGN_SOURCE_NOTES.md
+```
+
+ثم تحويله إلى الملف التنفيذي النهائي:
 
 ```text
 project-preparation/28_UI_UX_GUIDELINES.md
 ```
 
-إذا كان سيتم تنفيذ واجهة بستايل بصري، يجب توثيق مصدر التصميم النهائي في `project-preparation/28_UI_UX_GUIDELINES.md` حتى في مشاريع MVP الصغيرة.
+### 24.7 متى يستخدم User Reference أو External URL Analysis؟
 
-`07_SCREENS_AND_UI_STRUCTURE.md` يصف بنية الشاشات، لكنه لا يستبدل دليل الستايل المعتمد عندما تكون قرارات التصميم البصري مطلوبة.
+يستخدم عند وجود screenshots، Figma، CSS، ألوان، موقع مرجعي، أو وصف بصري من العميل. هذه المراجع لا تنفذ مباشرة، بل تحلل وتحول إلى قواعد داخل `28_UI_UX_GUIDELINES.md`.
 
-القاعدة:
+### 24.8 الملفات الحاكمة
 
 ```text
-07_SCREENS_AND_UI_STRUCTURE.md = screen structure
-28_UI_UX_GUIDELINES.md = approved UI style guide
-design-source/ = raw design source files
+07_SCREENS_AND_UI_STRUCTURE.md = screen structure and UX/navigation
+28_UI_UX_GUIDELINES.md = final executable visual design rules
+project-preparation/design-source/ = raw design sources
+tera-system/design-system/ = system design governance and fallback kits
 ```
 
-يجب أن يحدد هذا الملف:
+### 24.9 ربط التصميم بالمراحل الست
 
-- وضع مصدر التصميم.
-- الألوان الأساسية والثانوية.
-- الخطوط.
-- قواعد RTL/LTR.
-- مبادئ التخطيط والمسافات.
-- قواعد الأزرار، الحقول، الجداول، النماذج، الرسائل، والتنبيهات.
-- ما هو ممنوع بصريًا.
-- كيف يطبق EngineeringAgent التصميم.
+| المرحلة | قاعدة التصميم |
+|---|---|
+| Phase 1 | جمع تفضيلات ومصادر التصميم: ألوان، صور، مراجع، RTL/LTR، هوية |
+| Phase 2 | تسجيل الحاجة إلى Design Governance في `TERA_PROJECT_DECISION.md` عند وجود UI |
+| Phase 3 | تحديد هل يلزم `28_UI_UX_GUIDELINES.md` و/أو `UIVisualDesignerAgent` في `PREPARATION_PLAN.md` |
+| Phase 4 | تفعيل `UIVisualDesignerAgent` عند الحاجة لإنشاء/تحويل قواعد التصميم |
+| Phase 5 | منع Frontend TASK-COD generation بدون Design Source Decision و`28_UI_UX_GUIDELINES.md` عند الحاجة |
+| Phase 6 | EngineeringAgent ينفذ حسب `28_UI_UX_GUIDELINES.md` وتطبق `UI_ACCEPTANCE_GATE` |
 
-إذا لم يوجد مصدر تصميم من المستخدم، يوثق تيرا القرار الافتراضي في `28_UI_UX_GUIDELINES.md` أو داخل `07_SCREENS_AND_UI_STRUCTURE.md` للمشاريع الصغيرة جدًا، بشرط أن يكون القرار واضحًا وقابلًا للتنفيذ.
+### 24.10 قاعدة EngineeringAgent
 
-ممنوع على EngineeringAgent اختراع ألوان، spacing system، component style، أو visual pattern خارج الدليل المعتمد إلا بتفويض صريح من تيرا.
+ممنوع على EngineeringAgent اختراع ألوان، spacing system، typography، component styles، layout patterns، أو visual patterns من عنده. إذا نقصت قاعدة تصميم، يرفع:
+
+```text
+Design Gap
+```
+
+ولا يخمن.
 
 ---
 
@@ -1347,8 +1396,11 @@ Execution tracking files: `TASK_REGISTRY.md`, `PROJECT_ACTIVITY_LOG.md`, `ISSUES
 ### `project-inputs/`
 Raw intake files from the user: `01_APPLICATION_IDEA.md`, `02_TECHNICAL_CONTEXT.md`.
 
-### `design-source/`
-Raw design references: CSS, tokens, `getdesign.md`, screenshots, Figma notes. Not a replacement for `project-preparation/28_UI_UX_GUIDELINES.md` — the raw source is summarized into executable UI rules.
+### `project-preparation/design-source/`
+Raw project design references: CSS, tokens, `getdesign.md`, screenshots, Figma notes. Not a replacement for `project-preparation/28_UI_UX_GUIDELINES.md` — the raw source is summarized into executable UI rules.
+
+### `tera-system/design-system/`
+System Design Governance Layer: design source protocol, DESIGN.md integration, internal kits, token schemas, component rules, layout patterns, RTL/LTR, accessibility, and UI Acceptance Gate.
 
 ### `clients/`
 External client management: profiles, contacts, approval packages, assets, communications, and delivery files.

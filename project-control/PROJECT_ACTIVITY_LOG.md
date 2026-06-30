@@ -16,6 +16,14 @@
 
 ## Activity Log
 
+## [2026-06-30] - SYSTEM_FEATURE: Full Tera Design Governance Layer
+
+- Related Task: N/A (System Maintenance)
+- Actor: Tera Agent (per Majed request)
+- Summary: Added the Full Tera Design Governance Layer to prevent random UI styling and formalize design source decisions. Created `tera-system/design-system/` with overview, source protocol, DESIGN.md integration, external reference analysis, internal kits index, token/component/layout/RTL/accessibility schemas, UI Acceptance Gate, and `kits/KIT_ADMIN_DASHBOARD.md`. Created `project-preparation/28_UI_UX_GUIDELINES.md` as the final executable UI design guide. Updated TeraAgent, TeraSubAgents, EngineeringAgent rules, Pre/Post Execution Gates, runtime protocols/checklists/templates, preparation catalog, question bank, policy/architecture maps, task template, agent generation template, user guide, and active OpenCode runtime summary.
+- Decision / Result: Design governance is now a full system layer but activation is conditional by project type. `getdesign.md` is an approved external source, not mandatory. EngineeringAgent must not invent UI styling and must raise Design Gap when design rules are missing. UI/Frontend tasks must pass `UI_ACCEPTANCE_GATE`.
+- Next Action: Use the new layer in the next UI-bearing project; future optional kits: SaaS, Public Website, Mobile First, Data Dense ERP.
+
 ## [2026-06-29] - SYSTEM_CORRECTION: Expert 1-6 consistency refinements applied
 
 - Related Task: N/A (System Maintenance)

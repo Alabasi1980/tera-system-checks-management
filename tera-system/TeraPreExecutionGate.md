@@ -137,6 +137,18 @@ Before evaluating any implementation task for an external client project, Tera m
 
 If any required client approval item is missing, the Pre-Execution Gate result must be `BLOCKED`.
 
+## 3.4.1 Design Governance Gate
+
+Before evaluating any UI / Frontend / layout / style / component task, Tera must verify:
+
+- Design Source Decision exists using `tera-system/design-system/DESIGN_SOURCE_PROTOCOL.md`.
+- `project-preparation/28_UI_UX_GUIDELINES.md` exists when visual styling matters.
+- Raw design sources are saved or referenced in `project-preparation/design-source/` when applicable.
+- The task file includes: `UI Source`, `UI Rules`, `UI Acceptance`, and `Design Gap Handling`.
+- The task is linked to `tera-system/design-system/UI_ACCEPTANCE_GATE.md`.
+
+If any required design item is missing, the Pre-Execution Gate result must be `BLOCKED` with reason `Design Source Decision missing` or `Design Gap`.
+
 ## 3.5 Direct Execution Exception Policy
 
 الأصل أن Tera لا ينفذ كود التطبيق مباشرة، بل يدير العملاء الفرعيين ويراجع نتائجهم.
@@ -205,6 +217,8 @@ BLOCKED
 | 18 | هل يوجد تناقض بين القيود والمخرجات أو Allowed Write Targets؟ | No |
 | 19 | هل معايير القبول قابلة للاختبار بوضوح؟ | Yes |
 | 20 | هل يوجد مسار تراجع آمن إذا فشل التنفيذ؟ | Yes |
+| 21 | إذا كانت المهمة UI/Frontend، هل يوجد Design Source Decision و`28_UI_UX_GUIDELINES.md` عند الحاجة؟ | Yes / N/A |
+| 22 | إذا كانت المهمة UI/Frontend، هل ترتبط بـ `UI_ACCEPTANCE_GATE.md` وتتضمن UI Source / UI Rules / UI Acceptance / Design Gap Handling؟ | Yes / N/A |
 
 إذا فشل أي بند، يجب على Tera تصحيح المهمة قبل عرضها.
 
@@ -473,6 +487,7 @@ tera-system/runtime/TERA_RUNTIME_TEMPLATES.md Section 32
 | 28 | هل تمت مراجعة `project-control/TERA_ACTIVE_CONTEXT.md` إذا كان موجودًا؟ | Yes / N/A |
 | 29 | هل تم تصنيف أي تعديل خارج Allowed Write Targets إلى `Approved deviation` أو `Needs user approval` أو `Reverted`؟ | Yes / N/A |
 | 30 | هل قرر Tera بوضوح إن كانت المهمة تحتاج مراجعة مستقلة من `ProjectControlAgent` أو `SecurityAgent` أو `QAAndAcceptanceAgent`؟ | Yes |
+| 31 | إذا كانت المهمة UI/Frontend، هل اجتازت `tera-system/design-system/UI_ACCEPTANCE_GATE.md`؟ | Yes / N/A |
 
 ### Control Files Review Rule
 
@@ -639,6 +654,7 @@ Cleanup required
 | No unauthorized files deleted | PASS / FAIL | ... |
 | No unauthorized packages added | PASS / FAIL | ... |
 | No unauthorized UI/CSS/theme changes | PASS / FAIL | ... |
+| UI Acceptance Gate passed for UI tasks | PASS / FAIL / N/A | ... |
 | No real secrets outside approved local environment files | PASS / FAIL | ... |
 | Secrets redacted in docs/logs/config references | PASS / FAIL | ... |
 | No unauthorized ORM models/entities/migrations | PASS / FAIL | ... |

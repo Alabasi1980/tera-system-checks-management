@@ -17,6 +17,7 @@ When the user provides a project idea and technical information:
 2. Check `project-inputs/01_APPLICATION_IDEA.md` and `project-inputs/02_TECHNICAL_CONTEXT.md`.
 3. If intake is incomplete, enter `Client Discovery Mode` and complete intake first.
 4. If the user provides project-specific rules, create or update `project-preparation/PROJECT_RULES.md`.
+5. If the project has UI, collect design preferences and sources: colors, screenshots, Figma, CSS, reference sites, RTL/LTR, brand notes.
 
 ### Phase 2: Project Decision Formation
 1. Create or update `project-preparation/00_PROJECT_INPUTS.md` as a normalized summary derived from `project-inputs/`.
@@ -29,13 +30,15 @@ When the user provides a project idea and technical information:
    - Classify each file: Required / Conditional / Deferred / Not Required.
    - Determine creation order and dependencies.
    - Assign each file to the appropriate sub-agent.
-   - Identify user approval points.
+    - Identify user approval points.
+    - If UI exists, decide whether `28_UI_UX_GUIDELINES.md`, `project-preparation/design-source/`, or `UIVisualDesignerAgent` are required.
 4. **No file creation. No agent generation.**
 5. Present the plan for user approval.
 
 ### Phase 4: Sub-Agent Generation & Preparation Delegation
 1. Verify `PREPARATION_PLAN.md` is approved. If not → do not start Phase 4.
 2. Determine which preparation agents are needed now from the plan.
+   - Include `UIVisualDesignerAgent` when visual design tokens/component rules must be prepared now.
 3. For each agent, check status: **Use Existing** / **Specialize** / **Generate**.
 4. If generating: create draft in `generated-agents/opencode/` using `AGENT_GENERATION_TEMPLATE.md`.
 5. For each agent, set:
@@ -63,6 +66,7 @@ When the user provides a project idea and technical information:
     - [ ] Active Technology Profile confirmed.
     - [ ] No blocking Issues.
     - [ ] Design Source Decision resolved for any incoming UI tasks.
+    - [ ] `28_UI_UX_GUIDELINES.md` exists for incoming visual UI tasks.
 2. Create `project-control/PROJECT_MASTER_PLAN.md` using template Section 29:
     - Define execution phases with objectives and dependencies.
     - Include the formal phased roadmap (Core MVP / Extended MVP / Phase 2 / Later / Out of Scope).
@@ -81,8 +85,9 @@ When the user provides a project idea and technical information:
     - Apply Orchestration Decision Matrix.
     - Apply Model Capability Gate.
     - Create task file in `project-control/tasks/TASK-COD-XXX.md`.
-    - Run **Pre-Execution Gate** (20-item checklist from `TeraPreExecutionGate.md`).
+    - Run **Pre-Execution Gate** (checklist from `TeraPreExecutionGate.md`, including Design Governance items for UI tasks).
     - Record `Pre-Execution Gate Result: PASS` in the task file.
+    - For UI tasks, include UI Source / UI Rules / UI Acceptance / Design Gap Handling and link `UI_ACCEPTANCE_GATE.md`.
 7. Present to user: Master Plan + Detailed Plan + Batch Plan + first TASK-IDs.
 8. Wait for user approval before moving to Phase 6.
 9. **No coding. No UI without Design Source Decision. No TASK-ID without Pre-Execution Gate PASS.**
@@ -222,41 +227,46 @@ Reference: `tera-system/runtime/MVP_DEFINITION_PROTOCOL.md`
 
 ---
 
-## 6. UI Design Source Protocol
+## 6. Design Governance Checklist
 
 Tera must not allow random or inconsistent UI styling.
 
-Before any UI implementation, decide the UI design source with the user.
-
-Supported modes:
-
-| Mode | When Used | Output |
-|---|---|---|
-| `Tera-Decided Design` | User has no specific design. Tera asks: formal/simple/modern? Primary color? Light/Dark? RTL/LTR? | Uses clean minimal administrative UI if no preferences given |
-| `User-Provided Style Files` | User provides CSS, theme files, design tokens, screenshots, or UI guidelines | Files stored under `design-source/`; agents must follow them |
-| `External Design Spec` | User provides `getdesign.md`, Figma analysis, or external spec | Raw spec stored under `design-source/`; Tera summarizes rules in `28_UI_UX_GUIDELINES.md` |
-
-If any visual design source exists or the user asks for a specific look, create or update:
+Official reference:
 
 ```text
-project-preparation/28_UI_UX_GUIDELINES.md
+tera-system/design-system/
 ```
+
+Before any frontend execution planning or UI implementation, decide the design source mode:
+
+```text
+INTERNAL_TERA_KIT / GETDESIGN_MD / USER_PROVIDED_REFERENCE / EXTERNAL_URL_ANALYSIS / HYBRID / NO_UI
+```
+
+Checklist:
+
+- [ ] Project design level selected: None / Compact / Full.
+- [ ] Design Source Decision recorded.
+- [ ] Raw sources saved in `project-preparation/design-source/` when applicable.
+- [ ] `project-preparation/28_UI_UX_GUIDELINES.md` created for visual UI work.
+- [ ] `28_UI_UX_GUIDELINES.md` includes tokens, layout rules, component rules, RTL/LTR, accessibility, forbidden styling, and implementation instructions.
+- [ ] UI tasks include UI Source / UI Rules / UI Acceptance / Design Gap Handling.
+- [ ] UI tasks link `tera-system/design-system/UI_ACCEPTANCE_GATE.md`.
+- [ ] EngineeringAgent is instructed to raise Design Gap instead of guessing.
 
 Separation rule:
 
 ```text
-07_SCREENS_AND_UI_STRUCTURE.md = screen structure
-28_UI_UX_GUIDELINES.md = approved UI style guide
+07_SCREENS_AND_UI_STRUCTURE.md = screen structure and UX/navigation
+28_UI_UX_GUIDELINES.md = final executable visual design rules
+project-preparation/design-source/ = raw design sources
 ```
-
-`28_UI_UX_GUIDELINES.md` must define: design source mode, colors, typography, layout/spacing principles, component style rules, RTL/LTR rules, forbidden styling, and how implementation agents must apply the design.
-
-Engineering agents must not invent new colors, spacing systems, component styles, or visual patterns unless Tera explicitly approves them.
 
 Default rule:
 
 ```text
-No UI implementation before UI design source is decided.
+No Frontend Execution Planning without Design Source Decision.
+No UI Implementation without 28_UI_UX_GUIDELINES.md when visual style matters.
 ```
 
 ---

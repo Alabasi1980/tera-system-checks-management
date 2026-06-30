@@ -258,7 +258,7 @@ TERA_PROJECT_DECISION.md
 | اسم العميل | UI/UX Structure Agent |
 | المعرّف | `UI_UX_STRUCTURE_AGENT` |
 | الفئة | أساسي |
-| الدور | تحديد هيكل الشاشات، التنقل، ومحتوى الواجهة وظيفيًا، والتنبيه إلى الحاجة لدليل UI عند وجود مصدر تصميم |
+| الدور | تحديد هيكل الشاشات، التنقل، ومحتوى الواجهة وظيفيًا، والتنبيه إلى الحاجة لدليل UI عند وجود مصدر تصميم. لا يملك القرار البصري النهائي. |
 
 ### متى يستدعيه تيرا؟
 
@@ -276,8 +276,8 @@ TERA_PROJECT_DECISION.md
 04_USERS_ROLES_PERMISSIONS.md
 05_BUSINESS_WORKFLOWS.md
 06_DATA_MODEL_PREPARATION.md عند الحاجة
-28_UI_UX_GUIDELINES.md عند الحاجة
-design-source/ عند توفيره من Tera
+28_UI_UX_GUIDELINES.md كمصدر قراءة أو مساهمة هيكلية فقط عند الحاجة
+project-preparation/design-source/ عند توفيره من Tera
 ```
 
 ### ينتج أو يساهم في
@@ -295,6 +295,7 @@ design-source/ عند توفيره من Tera
 - لا يغير قواعد العمل.
 - لا يحسم قرارات تقنية.
 - لا يخترع ستايل بصري نهائي دون اعتماد مصدر التصميم من Tera.
+- لا يحل محل `UIVisualDesignerAgent` في Design Tokens أو Component Rules أو Layout Rules البصرية.
 
 ### معايير القبول
 
@@ -302,6 +303,74 @@ design-source/ عند توفيره من Tera
 - كل شاشة مرتبطة بموديول أو مسار عمل.
 - الحقول والإجراءات الرئيسية مذكورة.
 - حالات الخطأ والفراغ مذكورة عند الحاجة.
+
+---
+
+## 5.3.1 UIVisualDesignerAgent
+
+| البند | القيمة |
+|---|---|
+| اسم العميل | UI Visual Designer Agent |
+| المعرّف | `UI_VISUAL_DESIGNER_AGENT` |
+| الفئة | أساسي عند وجود واجهات مهمة / مشروط للمشاريع البسيطة |
+| الدور | تحويل مصدر التصميم إلى Design Tokens وComponent Rules وLayout Rules وقواعد تنفيذ بصرية داخل `28_UI_UX_GUIDELINES.md` |
+
+### الفرق بينه وبين UIUXStructureAgent
+
+| العميل | المسؤولية |
+|---|---|
+| `UIUXStructureAgent` | هيكل الشاشات، التنقل، تجربة الاستخدام، محتوى الشاشة وظيفيًا |
+| `UIVisualDesignerAgent` | الستايل، Design Tokens، Component Rules، Layout Rules، RTL/LTR visual behavior، والمراجعة البصرية |
+
+### متى يستدعيه Tera؟
+
+- عند وجود Frontend أو UI مهم.
+- عند استخدام `getdesign.md` أو DESIGN.md.
+- عند وجود صور، Figma، CSS، ألوان، أو موقع مرجعي من العميل.
+- عند مشروع ERP / CRM / Dashboard يحتاج هوية بصرية منضبطة.
+- عندما يجب إنشاء أو تحديث `project-preparation/28_UI_UX_GUIDELINES.md`.
+
+### يقرأ
+
+```text
+project-preparation/07_SCREENS_AND_UI_STRUCTURE.md
+project-preparation/design-source/ عند وجوده
+tera-system/design-system/DESIGN_SOURCE_PROTOCOL.md
+tera-system/design-system/DESIGN_MD_INTEGRATION.md
+tera-system/design-system/EXTERNAL_REFERENCE_ANALYSIS.md
+tera-system/design-system/DESIGN_TOKENS_SCHEMA.md
+tera-system/design-system/COMPONENT_LIBRARY_SCHEMA.md
+tera-system/design-system/LAYOUT_PATTERNS.md
+tera-system/design-system/RTL_LTR_RULES.md
+tera-system/design-system/ACCESSIBILITY_RULES.md
+tera-system/design-system/kits/KIT_ADMIN_DASHBOARD.md عند استخدام Internal Kit
+```
+
+### ينتج أو يساهم في
+
+```text
+project-preparation/28_UI_UX_GUIDELINES.md
+project-preparation/design-source/DESIGN_SOURCE_NOTES.md عند الحاجة
+```
+
+### حدوده
+
+- لا يكتب Frontend code.
+- لا يغير هيكل الشاشات أو النطاق الوظيفي.
+- لا ينسخ علامة تجارية حرفيًا.
+- لا يجعل `getdesign.md` مصدرًا إلزاميًا.
+- لا يتجاوز قرار Tera أو تفضيلات العميل المعتمدة.
+- لا يعتمد الواجهة كمنفذة؛ يرفع قواعد التصميم فقط إلى Tera.
+
+### معايير القبول
+
+- `28_UI_UX_GUIDELINES.md` يحتوي Design Source Decision واضحًا.
+- Design Tokens مكتملة أو gaps موثقة.
+- Component Rules قابلة للتنفيذ.
+- Layout Rules واضحة.
+- RTL/LTR وAccessibility مذكورة.
+- Forbidden Styling واضح.
+- Engineering Implementation Instructions تمنع التخمين.
 
 ---
 
@@ -434,8 +503,10 @@ design-source/ عند توفيره من Tera
 08_TECHNICAL_ARCHITECTURE.md
 09_IMPLEMENTATION_PLAN.md
 10_TESTING_AND_ACCEPTANCE.md
-28_UI_UX_GUIDELINES.md عند وجوده
-design-source/ عند توفيره من Tera
+28_UI_UX_GUIDELINES.md إلزامي لأي مهمة UI/Frontend ذات ستايل بصري
+project-preparation/design-source/DESIGN.md عند الإشارة إليه داخل 28_UI_UX_GUIDELINES.md
+أنماط المكونات المنفذة سابقًا عند تحديدها في المهمة
+tera-system/design-system/ كمرجع fallback يحدده Tera فقط
 ```
 
 ### ينتج أو يساهم في
@@ -460,8 +531,11 @@ design-source/ عند توفيره من Tera
 - لا يغير المعمارية دون إذن.
 - لا يتجاوز خطة التنفيذ.
 - لا يعتمد نفسه كمكتمل دون اختبار.
-- لا يخترع ألوانًا أو spacing أو component styles إذا وجد `28_UI_UX_GUIDELINES.md` أو `design-source/`.
+- لا يخترع ألوانًا أو spacing أو typography أو component styles أو layout patterns من عنده مطلقًا في أي مهمة UI.
+- إذا نقصت قواعد التصميم، يجب أن يرفع `Design Gap` بدل التخمين.
+- لا ينفذ مباشرة من `DESIGN.md` الخام؛ ينفذ من `28_UI_UX_GUIDELINES.md` أولًا.
 - لا يخلط أكثر من نظام تصميم دون قرار واضح من Tera.
+- يجب أن يمر أي تنفيذ UI عبر `UI_ACCEPTANCE_GATE` قبل القبول.
 
 ### معايير القبول
 
@@ -1271,6 +1345,7 @@ Domain Intelligence Report
 | `05_BUSINESS_WORKFLOWS.md` | `BUSINESS_WORKFLOW_AGENT` |
 | `06_DATA_MODEL_PREPARATION.md` | `DATA_DESIGN_AGENT` |
 | `07_SCREENS_AND_UI_STRUCTURE.md` | `UI_UX_STRUCTURE_AGENT` |
+| `28_UI_UX_GUIDELINES.md` | `UI_VISUAL_DESIGNER_AGENT` أو `Tera Agent` للمشاريع الصغيرة |
 | `08_TECHNICAL_ARCHITECTURE.md` | `SOLUTION_ARCH_AGENT` |
 | `09_IMPLEMENTATION_PLAN.md` | `Tera Agent` |
 | `10_TESTING_AND_ACCEPTANCE.md` | `QA_ACCEPTANCE_AGENT` |
@@ -1289,7 +1364,8 @@ Domain Intelligence Report
 | التداخل المحتمل | القاعدة |
 |---|---|
 | Requirements vs Workflow | Requirements يحدد ماذا ولماذا. Workflow يحدد كيف تسير العملية |
-| UI/UX vs Engineering | UI/UX يحدد ماذا يظهر. Engineering يحدد كيف يُبنى |
+| UI/UX Structure vs UI Visual Design | UIUXStructure يحدد الشاشات والتنقل. UIVisualDesigner يحدد التوكينز والستايل والمكونات البصرية |
+| UI Visual Design vs Engineering | UIVisualDesigner يحدد القواعد البصرية. Engineering ينفذ ولا يخترع الستايل |
 | Data Design vs Architecture | Data يحدد ماذا نخزن. Architecture تحدد كيف تُبنى الطبقات |
 | QA vs Security | QA يختبر الوظيفة. Security يراجع الحماية |
 | Documentation vs Tera | Documentation يوثق. تيرا يقرر الجاهزية والتسليم |

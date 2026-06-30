@@ -147,6 +147,7 @@
 
 | الملف | شرط التفعيل |
 |---|---|
+| `28_UI_UX_GUIDELINES.md` | عند وجود UI/Frontend أو مصدر تصميم أو حاجة Design Governance |
 | `...` | `...` |
 
 ### مؤجل (Deferred)
@@ -171,6 +172,7 @@
 | `BusinessWorkflowAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
 | `DataDesignAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
 | `UIUXStructureAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
+| `UIVisualDesignerAgent` | Required / Conditional / Not Needed | عند وجود واجهة أو مصدر تصميم يحتاج تحويل إلى Tokens/Component Rules | `[REASON]` |
 | `SolutionArchitectureAgent` | Required / Conditional / Not Needed | الإعداد | `[REASON]` |
 | `SecurityAgent` | Required / Conditional / Not Needed | حسب الحساسية | `[REASON]` |
 | `IntegrationAgent` | Required / Conditional / Not Needed | حسب التكاملات | `[REASON]` |

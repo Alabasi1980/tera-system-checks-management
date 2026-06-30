@@ -793,6 +793,7 @@ Decision: Proceed / Blocked / Needs More Intake
 | `BusinessWorkflowAgent` | Conditional | Only if workflows are complex |
 | `DataDesignAgent` | Conditional | Only if data model is non-trivial |
 | `UIUXStructureAgent` | Conditional | Only if screens need structured definition |
+| `UIVisualDesignerAgent` | Conditional | Only if visual design tokens/component rules are needed |
 | `SolutionArchitectureAgent` | Conditional | Only if architecture decisions are risky |
 | ... | ... | ... |
 
@@ -1080,10 +1081,11 @@ The generated file is saved to `project-control/EXECUTION_BATCH_PLAN.md`.
 
 ## 4. Design Source Decision (for this batch)
 
-- [ ] Tera-Decided Design
-- [ ] User-Provided Design Source
-- [ ] Existing Brand Guidelines
-- [ ] External Reference
+- [ ] INTERNAL_TERA_KIT
+- [ ] GETDESIGN_MD
+- [ ] USER_PROVIDED_REFERENCE
+- [ ] EXTERNAL_URL_ANALYSIS
+- [ ] HYBRID
 - [ ] No UI in this batch
 
 ## 5. User Approval
@@ -1098,6 +1100,8 @@ The generated file is saved to `project-control/EXECUTION_BATCH_PLAN.md`.
 > **Rules:**
 > - No Implementation without Execution Plan.
 > - No UI Task without Design Source Decision.
+> - No UI Task without `28_UI_UX_GUIDELINES.md` when visual style matters.
+> - UI tasks must link `tera-system/design-system/UI_ACCEPTANCE_GATE.md`.
 > - No TASK-ID without Pre-Execution Gate PASS.
 > - No batch execution without user approval.
 ```
@@ -1121,6 +1125,7 @@ This template is used inside `project-control/tasks/TASK-COD-XXX.md` after an ag
 | No secrets, tokens, passwords, or real `.env` values? | PASS / FAIL | ... |
 | Technology Profile respected? | PASS / FAIL | ... |
 | UI/UX rules respected if UI exists? | PASS / FAIL / N/A | ... |
+| UI Acceptance Gate passed if UI exists? | PASS / FAIL / N/A | ... |
 | Acceptance Criteria passed? | PASS / FAIL | ... |
 | CLI / tool side effects reviewed? | PASS / FAIL / N/A | ... |
 | Rollback needed? | Yes / No | ... |
@@ -1137,4 +1142,38 @@ Required Record Updates:
 - [ ] `project-control/PROJECT_ACTIVITY_LOG.md`
 - [ ] `project-control/PROJECT_STATE.md`
 - [ ] `project-control/ISSUES_AND_GAPS.md` if needed
+```
+
+---
+
+## 33. UI/UX Guidelines Template (Design Governance Output)
+
+This template defines the required structure of `project-preparation/28_UI_UX_GUIDELINES.md`.
+
+Required sections:
+
+```markdown
+# 28_UI_UX_GUIDELINES.md
+
+## 1. Design Source Decision
+## 2. Approved Design Direction
+## 3. Raw Design Sources
+## 4. Client Branding Overrides
+## 5. Design Tokens
+## 6. Layout System
+## 7. Component Rules
+## 8. RTL/LTR Rules
+## 9. Responsive Rules
+## 10. Accessibility Rules
+## 11. Motion Rules
+## 12. Forbidden Styling
+## 13. Engineering Implementation Instructions
+## 14. UI Acceptance Checklist
+## 15. Open Design Gaps
+```
+
+Rule:
+
+```text
+EngineeringAgent implements UI from this file first. Missing rules become Design Gaps, not guesses.
 ```
