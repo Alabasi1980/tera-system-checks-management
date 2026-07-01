@@ -1,6 +1,7 @@
 ---
 description: Executes approved CockingApp implementation TASK-COD items only after Tera records Pre-Execution Gate PASS.
 mode: subagent
+disable: true
 permission:
   edit: ask
   bash: ask

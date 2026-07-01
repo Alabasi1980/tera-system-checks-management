@@ -53,21 +53,21 @@ Rationale:
 
 ### 3.1 Core Files — Always Required
 
-| ID | File Name | Priority | Purpose | Dependencies |
-|----|-----------|----------|---------|-------------|
-| C1 | `PROJECT_RULES.md` | **Critical** | Captures any project-specific rules from Majed/Noor before any other work | None |
-| C2 | `00_PROJECT_INPUTS.md` | **Critical** | Consolidated intake from `01_APPLICATION_IDEA.md` + `02_TECHNICAL_CONTEXT.md` | C1 |
-| C3 | `01_PROJECT_BRIEF.md` | **Critical** | One-page executive summary for all stakeholders | C2 |
-| C4 | `02_SCOPE_AND_BOUNDARIES.md` | **Critical** | Clear in-scope vs out-of-scope with MVP classification per `MVP_DEFINITION_PROTOCOL.md` | C2 |
-| C5 | `03_MODULES_AND_FEATURES.md` | **Critical** | Full module decomposition with feature-level detail and phase mapping | C3, C4 |
-| C6 | `04_USERS_ROLES_PERMISSIONS.md` | **Critical** | User types: Visitor (anonymous) + Admin (Noor). Permission matrix. | C5 |
-| C7 | `05_BUSINESS_WORKFLOWS.md` | **Critical** | End-to-end workflows: recipe CRUD, comment moderation, ingredient management | C5, C6 |
-| C8 | `06_DATA_MODEL_PREPARATION.md` | **Critical** | Entity-relationship overview, field descriptions, validation rules | C7 |
-| C9 | `07_SCREENS_AND_UI_STRUCTURE.md` | **Critical** | Screen inventory, layout structure, navigation flow, RTL considerations | C5, C6 |
-| C10 | `08_TECHNICAL_ARCHITECTURE.md` | **Critical** | Final architecture decisions: folder structure, component tree, data flow | C2 |
-| C11 | `09_IMPLEMENTATION_PLAN.md` | **Critical** | High-level implementation sequence, task grouping, milestone mapping | All above |
-| C12 | `10_TESTING_AND_ACCEPTANCE.md` | **Critical** | Test strategy, acceptance criteria per module, QA gates | C5, C8 |
-| C13 | `11_DELIVERY_AND_HANDOVER.md` | **Critical** | Deployment checklist, handover documentation requirements | C10 |
+| ID  | File Name                        | Priority     | Purpose                                                                                 | Dependencies |
+| --- | -------------------------------- | ------------ | --------------------------------------------------------------------------------------- | ------------ |
+| C1  | `PROJECT_RULES.md`               | **Critical** | Captures any project-specific rules from Majed/Noor before any other work               | None         |
+| C2  | `00_PROJECT_INPUTS.md`           | **Critical** | Consolidated intake from `01_APPLICATION_IDEA.md` + `02_TECHNICAL_CONTEXT.md`           | C1           |
+| C3  | `01_PROJECT_BRIEF.md`            | **Critical** | One-page executive summary for all stakeholders                                         | C2           |
+| C4  | `02_SCOPE_AND_BOUNDARIES.md`     | **Critical** | Clear in-scope vs out-of-scope with MVP classification per `MVP_DEFINITION_PROTOCOL.md` | C2           |
+| C5  | `03_MODULES_AND_FEATURES.md`     | **Critical** | Full module decomposition with feature-level detail and phase mapping                   | C3, C4       |
+| C6  | `04_USERS_ROLES_PERMISSIONS.md`  | **Critical** | User types: Visitor (anonymous) + Admin (Noor). Permission matrix.                      | C5           |
+| C7  | `05_BUSINESS_WORKFLOWS.md`       | **Critical** | End-to-end workflows: recipe CRUD, comment moderation, ingredient management            | C5, C6       |
+| C8  | `06_DATA_MODEL_PREPARATION.md`   | **Critical** | Entity-relationship overview, field descriptions, validation rules                      | C7           |
+| C9  | `07_SCREENS_AND_UI_STRUCTURE.md` | **Critical** | Screen inventory, layout structure, navigation flow, RTL considerations                 | C5, C6       |
+| C10 | `08_TECHNICAL_ARCHITECTURE.md`   | **Critical** | Final architecture decisions: folder structure, component tree, data flow               | C2           |
+| C11 | `09_IMPLEMENTATION_PLAN.md`      | **Critical** | High-level implementation sequence, task grouping, milestone mapping                    | All above    |
+| C12 | `10_TESTING_AND_ACCEPTANCE.md`   | **Critical** | Test strategy, acceptance criteria per module, QA gates                                 | C5, C8       |
+| C13 | `11_DELIVERY_AND_HANDOVER.md`    | **Critical** | Deployment checklist, handover documentation requirements                               | C10          |
 
 ### 3.2 Conditional Files — Required for This Project
 

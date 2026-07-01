@@ -7,9 +7,9 @@
 | **Client** | CLIENT-Noor |
 | **Session Date** | 2026-06-30 |
 | **Last Phase** | Phase 5 Complete — Execution Planning ready |
-| **Next Phase** | Phase 6 — Implementation (requires Build Mode approval) |
+| **Next Phase** | Phase 6 — TASK-COD-001 after OpenCode restart |
 | **User** | Majed (Owner) |
-| **Status** | ⏳ Waiting for explicit Build Mode approval |
+| **Status** | 🟡 Strategy approved; OpenCode restart required before delegation |
 
 ---
 
@@ -19,7 +19,10 @@
 - **Phase 3 Execution**: ✅ Complete — All 22 preparation files created across 7 batches
 - **Phase 4 Delegation**: ✅ Complete — No sub-agents needed for preparation
 - **Phase 5 Execution Planning**: ✅ Complete — Master, detailed, and batch plans created
-- **Next**: Phase 6 — Implementation, pending explicit Build Mode approval
+- **Phase 5.1 Implementation Agent Strategy**: ✅ Approved — Option B
+- **Active B1 Agent**: `cockingapp-foundation-engineering`
+- **Disabled Agent**: `cockingapp-engineering`
+- **Next**: Restart OpenCode, then create/gate/delegate `TASK-COD-001`
 
 ---
 
@@ -61,13 +64,13 @@
 
 ## 4.1 Next Action
 
-**Request explicit Build Mode approval**
+**Restart OpenCode first**
 
-If approved, start Phase 6 with:
-1. `TASK-COD-001` task file creation
-2. Pre-Execution Gate for TASK-COD-001
-3. Scaffold Next.js + TypeScript + Prisma basic setup only
-4. Post-Execution Review Gate
+Before Build Mode resumes:
+1. Restart OpenCode so `.opencode/agents/cockingapp-foundation-engineering.md` is loaded
+2. Create `project-control/tasks/TASK-COD-001.md`
+3. Run Pre-Execution Gate for `TASK-COD-001`
+4. Delegate B1 to `cockingapp-foundation-engineering`
 
 ---
 
@@ -78,6 +81,8 @@ If approved, start Phase 6 with:
 - Tech: Next.js App Router + TypeScript + Prisma + PostgreSQL
 - MVP: 18 TASK-IDs — Core 1A (12 tasks) + Extended 1B (6 tasks)
 - Phase 5 is complete
-- Build Mode approval required before Phase 6
+- `IMPLEMENTATION_AGENT_STRATEGY.md` approved with Option B
 - First implementation batch: B1 / `TASK-COD-001` only
+- Use only `cockingapp-foundation-engineering` for B1
+- Do not use disabled `cockingapp-engineering`
 - `nextjs-prisma` profile rule: first task must not add Prisma models, migrations, db push, UI, API, or Auth

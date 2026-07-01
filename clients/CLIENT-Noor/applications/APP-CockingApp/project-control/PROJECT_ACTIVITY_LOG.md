@@ -188,6 +188,26 @@
 
 ---
 
+### [2026-06-30 15:40] — IMPLEMENTATION_AGENT_STRATEGY_CREATED
+
+- Related Task: N/A
+- Actor: Tera Agent
+- Summary: User reported updated system rules requiring `IMPLEMENTATION_AGENT_STRATEGY.md` between Phase 5 and Phase 6. Tera read updated `TeraAgent.md`, `TERA_RUNTIME_CHECKLISTS.md`, and `TERA_RUNTIME_PROTOCOLS.md`, then created the required strategy.
+- Decision / Result: `IMPLEMENTATION_AGENT_STRATEGY.md` created as Draft v1. Previous Build Mode approval is suspended until the strategy is approved. Existing `cockingapp-engineering` agent must not be used until the strategy chooses whether to narrow it or replace it.
+- Next Action: Present strategy to user for approval and choose Option A or Option B.
+
+---
+
+### [2026-06-30 15:50] — IMPLEMENTATION_AGENT_STRATEGY_APPROVED_OPTION_B
+
+- Related Task: TASK-COD-001
+- Actor: User + Tera Agent
+- Summary: User approved Tera recommendation Option B: create a dedicated `cockingapp-foundation-engineering` agent and do not use the generic `cockingapp-engineering` agent.
+- Decision / Result: `IMPLEMENTATION_AGENT_STRATEGY.md` updated to Approved v1. `cockingapp-foundation-engineering` generated and activated. Generic `cockingapp-engineering` disabled in generated and active copies.
+- Next Action: User must restart OpenCode before Tera creates/gates/delegates `TASK-COD-001`.
+
+---
+
 ## Log Format
 
 ```md

@@ -25,7 +25,7 @@
 | **3 — Preparation Planning** | ✅ Complete | 2026-06-30 | `PREPARATION_PLAN.md` v2 approved by Majed. All 22 preparation files created across 7 batches |
 | **4 — Agent Delegation Planning** | ✅ Complete | 2026-06-30 | `AGENT_DELEGATION_PLAN.md` — no sub-agents needed for preparation |
 | **5 — Execution Planning** | ✅ Complete | 2026-06-30 | `PROJECT_MASTER_PLAN.md`, `PROJECT_DETAILED_EXECUTION_PLAN.md`, `EXECUTION_BATCH_PLAN.md` |
-| **6 — Implementation** | 🟡 Build Mode Approved / Pending Agent Restart | 2026-06-30 | EngineeringAgent activated; OpenCode restart required before delegation |
+| **6 — Implementation** | 🟡 Strategy Approved / Agent Restart Required | 2026-06-30 | Option B approved; `cockingapp-foundation-engineering` activated; OpenCode restart required before TASK-COD-001 delegation |
 | **7 — Delivery, Handover & Closure** | ⬜ Not Started | — | |
 
 ---
@@ -74,13 +74,16 @@
 | `PROJECT_STATE.md` | ✅ Active | This file |
 | `PROJECT_ACTIVITY_LOG.md` | ✅ Active | Activity log |
 | `TERA_ACTIVE_CONTEXT.md` | ✅ Active | Session handoff |
+| `IMPLEMENTATION_AGENT_STRATEGY.md` | ✅ Approved v1 | Option B approved |
 
 ### generated-agents / opencode
 | File | Status | Notes |
 |------|--------|-------|
-| `generated-agents/opencode/cockingapp-engineering.md` | ✅ Generated | Phase 6 implementation agent draft |
+| `generated-agents/opencode/cockingapp-engineering.md` | ⛔ Disabled | Superseded by Option B |
+| `generated-agents/opencode/cockingapp-foundation-engineering.md` | ✅ Generated | B1 / TASK-COD-001 foundation scaffold agent |
 | `generated-agents/opencode/GENERATED_AGENTS_MANIFEST.md` | ✅ Generated | Activation/deferral rationale |
-| `.opencode/agents/cockingapp-engineering.md` | ✅ Activated | Requires OpenCode restart |
+| `.opencode/agents/cockingapp-engineering.md` | ⛔ Disabled | Do not use |
+| `.opencode/agents/cockingapp-foundation-engineering.md` | ✅ Activated | Requires OpenCode restart |
 
 ### client-approval/
 | File | Status | Notes |
@@ -136,11 +139,12 @@
 | 1 | ~~Preparation files (Batches 1–7)~~ ✅ | Phase 3 Complete |
 | 2 | ~~Agent Delegation Plan~~ ✅ | Phase 4 Complete |
 | 3 | ~~Execution Plan (Master + Detailed + Batch)~~ ✅ | Phase 5 Complete |
-| 4 | ~~Request Build Mode approval~~ ✅ | Approved |
-| 5 | **Restart OpenCode to load EngineeringAgent** | 🟡 Required |
-| 6 | Create and gate `TASK-COD-001` | 🔜 After restart |
-| 7 | Start Implementation (B1–B15) | 🔜 Phase 6 |
-| 8 | Delivery, Handover & Closure | 📅 Phase 7 |
+| 4 | ~~Approve `IMPLEMENTATION_AGENT_STRATEGY.md`~~ ✅ | Option B approved |
+| 5 | ~~Decide Option A or B for FoundationEngineeringAgent~~ ✅ | Option B |
+| 6 | **Restart OpenCode after agent activation** | 🟡 Required |
+| 7 | Create and gate `TASK-COD-001` | 🔜 After restart |
+| 8 | Start Implementation (B1–B15) | 🔜 Phase 6 |
+| 9 | Delivery, Handover & Closure | 📅 Phase 7 |
 
 ---
 
@@ -151,3 +155,5 @@
 | v1 | 2026-06-30 | Tera | Initial state — Phases 1–4 complete |
 | v2 | 2026-06-30 | Tera | Phase 3 execution complete — 22 preparation files created across 7 batches |
 | v3 | 2026-06-30 | Tera | Build Mode approved; CockingApp EngineeringAgent generated and activated; restart required |
+| v4 | 2026-06-30 | Tera | Updated system rule applied: Implementation Agent Strategy created; Phase 6 blocked until strategy approval |
+| v5 | 2026-06-30 | Tera | Implementation Agent Strategy approved with Option B; foundation engineering agent activated; generic engineering agent disabled |

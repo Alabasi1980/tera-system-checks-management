@@ -19,7 +19,7 @@
 | **النطاق** | Core 1A (12 مهمة) + Extended 1B (6 مهام) |
 | **إجمالي TASK-IDs** | 18 |
 | **المدة المقدرة** | ~24 ساعة تنفيذ |
-| **طريقة التنفيذ** | مباشر بواسطة Tera (بدون Sub-Agents) |
+| **طريقة التنفيذ** | عبر عملاء تنفيذ متخصصين حسب `IMPLEMENTATION_AGENT_STRATEGY.md` المعتمدة؛ Tera يدير ويراجع ولا ينفذ كود التطبيق مباشرة |
 | **حجم الدفعة** | 1-3 TASK-IDs لكل دفعة (قابلة للمراجعة) |
 
 ---
@@ -122,3 +122,4 @@ TASK-COD-001: Scaffold Next.js + TypeScript + Prisma + basic schema + .env.examp
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | v1 | 2026-06-30 | Tera | خطة التنفيذ الرئيسية — 18 TASK-ID عبر 8 Milestones |
+| v2 | 2026-06-30 | Tera | Updated execution mode to comply with Implementation Agent Strategy gate |

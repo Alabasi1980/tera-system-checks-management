@@ -18,22 +18,23 @@
 | **المرحلة** | M1 — Foundation |
 | **التقدير** | 30 min |
 | **التبعية** | — (أول مهمة) |
-| **Sub-Agent** | Tera مباشر |
+| **Sub-Agent** | `cockingapp-foundation-engineering` |
 
 ### الوصف
 إنشاء مشروع Next.js مع TypeScript، إعداد Prisma مع PostgreSQL، تثبيت الاعتماديات الأساسية.
 
 ### الملفات المستهدفة
-- `package.json`, `tsconfig.json`, `next.config.ts`, `tailwind.config.ts`
+- `package.json`, `package-lock.json`, `tsconfig.json`, `next.config.*`, scaffold defaults
 - `prisma/schema.prisma` (basic: generator + datasource فقط)
 - `src/app/layout.tsx` (RTL setup)
-- `src/lib/prisma.ts` (singleton)
+- `src/lib/prisma.ts` (singleton; no database connection test)
 - `.env.example`
 
 ### الممنوع في هذه المهمة (حسب `nextjs-prisma` profile)
 - ❌ Prisma models
 - ❌ `db push` / migrations
 - ❌ UI components
+- ❌ Tailwind setup (deferred to TASK-COD-003)
 - ❌ API routes
 - ❌ Auth
 - ❌ `.env` بقيم حقيقية
@@ -41,7 +42,7 @@
 ### معايير القبول
 - [ ] `npm run dev` يعمل بدون أخطاء
 - [ ] RTL مضبوط في layout.tsx
-- [ ] Prisma client ينشئ بدون مشاكل
+- [ ] Prisma dependency installed and basic `schema.prisma` exists without running `prisma generate`
 - [ ] `.env.example` مع DATABASE_URL placeholder
 
 ### أمر الـ Scaffold
